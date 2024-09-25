@@ -1,0 +1,203 @@
+.wrapper-footer {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-top: 1px solid rgb(255, 255, 255, .2);
+    margin-top: 64px;
+
+    .footer-row {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: space-between;
+
+        .footer-element {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            ul {
+                list-style: none;
+
+                li {
+                    display: block;
+
+                    a {
+                        text-decoration: none;
+                        display: block;
+                        font-size: 14px;
+                        padding: 0px 0px 8px 0px;
+                        transition: all 0.75s ease;
+                        font-size: 14px;
+                        font-weight: 200;
+                        transition: 0.75s ease;
+                    }
+
+                    a:hover {
+                        color: $color-white;
+
+                        transition: 0.75s ease;
+                    }
+                }
+            }
+
+            .brit-logo {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+
+                p {
+                    max-width: 300px;
+                    font-weight: 300;
+                }
+            }
+
+        }
+
+    }
+
+    .social {
+        display: flex;
+        width: 100%;
+        max-width: 1100px;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: center;
+        color: $color-white;
+        padding-top: 16px;
+        cursor: pointer;
+
+        a {
+            text-decoration: none;
+            transition: all .75s ease;
+
+            &:hover {
+                i {
+                    transition: all .75s ease;
+
+                    &:hover {
+                        color: white;
+                        transform: scale(130%);
+                        transition: all .75s ease;
+                    }
+                }
+
+                color: white;
+                transform: scale(130%);
+                transition: all .75s ease;
+
+            }
+        }
+    }
+
+    .copy {
+        a {
+            text-decoration: none;
+
+            &:hover {
+                color: white;
+                transition: .75s ease;
+            }
+        }
+    }
+
+    .branding {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        margin: 0 auto;
+        padding: 0px 0px 0px 16px;
+
+        img {
+
+            width: 60px;
+            height: auto;
+        }
+    }
+
+    .copy {
+        text-align: center;
+    }
+
+}
+
+@media screen and (max-width: 1081px) {
+    .wrapper-footer {
+
+        width: 100%;
+
+
+
+        .footer-row {
+            flex-wrap: wrap;
+
+
+            .footer-element {
+
+
+
+                &.branding-brit {
+                    width: 100%;
+                    padding-top: 32px;
+                    align-items: center
+                }
+            }
+
+        }
+
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .wrapper-footer {
+        .footer-row {
+            flex-wrap: wrap;
+            gap: 16px;
+
+            .footer-element {
+                min-width: 300px;
+                width: 100%;
+                padding-left: 32px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .wrapper-footer {
+        .footer-row {
+            .footer-element {
+                img {
+                    display: block;
+                }
+                p {
+                    display: block;
+                }
+
+                &.branding-brit {
+                    .brit-logo {
+                        flex-direction: column;
+                        align-items: start;
+                        width: 100%;
+
+                        img {
+                            width: 100px;
+                            height: auto;
+                        }
+
+                        p {
+                            padding-left: 0px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+}
