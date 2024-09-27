@@ -1,0 +1,482 @@
+.container-sve-epizode {
+
+    width: 100%;
+    height: 100%;
+    padding: 32px 0px;
+
+    .cards-container {
+
+        max-width: 1100px;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 16px;
+        justify-content: space-between;
+
+        .cardHomeOne {
+            width: calc(25% - 16px);
+            height: 350px;
+            display: flex;
+            flex: wrap;
+            flex-direction: column;
+            gap: 14px;
+            cursor: pointer;
+        // max-width: 260px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            border: 2px solid $color-black;
+            background-color: $color-black;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+
+            video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                transition: all .65s ease;
+            }
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                z-index: 1;
+                transition: all .65s ease;
+
+                &.active {
+
+                    opacity: 0;
+                    transition: all .65s ease;
+
+                }
+            }
+
+            .cardContent {
+
+                position: absolute;
+                width: 100%;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                height: 100%;
+                padding-bottom: 32px;
+                gap: 8px;
+                pointer-events: none;
+
+                &.active {
+                    opacity: 0;
+                }
+
+
+                p {
+                    font-size: 16px;
+                    display: block;
+                    width: 100%;
+                    margin: 0px 20px;
+                    text-align: center;
+                    padding: 0px 20px;
+                    color: white;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                }
+
+                .card-btns {
+
+                    display: flex;
+                    flex-direction: row;
+                    gap: 16px;
+                    width: 100%;
+                    justify-content: center;
+                    z-index: 300;
+                    pointer-events: all;
+
+                }
+
+                h1 {
+                    font-size: 32px;
+                    display: block;
+                    line-height: 2.2rem;
+                    margin: 0 auto;
+                    width: 100%;
+                    text-align: center;
+                    padding: 0px 20px;
+                    color: white;
+
+                }
+
+            }
+        }
+
+    }
+
+}
+
+#trailer-overlay {
+
+    position: relative;
+
+    .wraper {
+        width: 80%;
+        height: 80%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(0, 0, 0, .8);
+        z-index: 200;
+        padding-top: 64px;
+        overflow: scroll;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .75s ease;
+
+        .content-container {
+            margin: 0 auto;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            height: fit-content;
+            background-color: black;
+            border-radius: 16px;
+            overflow: hidden;
+
+            .wraper-body {
+                width: 100%;
+                height: auto;
+                display: block;
+                position: relative;
+
+                .contentoverlay {
+                    position: absolute;
+                    top: 16px;
+                    left: 32px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+
+                    .title {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+
+                        p {
+                            color: white;
+                            font-size: 18px;
+                        }
+
+                        h1 {
+                            font-size: 32px;
+                            font-weight: 800;
+                            text-transform: uppercase;
+                            color: white;
+                        }
+
+
+                    }
+
+
+                }
+
+                .modal-close {
+
+                    position: absolute;
+                    top: 6px;
+                    right: 60px;
+
+                    span {
+                        color: white;
+                        cursor: pointer;
+
+                        i {
+                            font-size: 16px;
+                        }
+
+                        :hover {
+                            transform: scale(110%);
+
+                        }
+
+                    }
+
+                }
+
+                video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+
+                }
+            }
+
+            .wraper-footer {
+                padding: 32px 16px 8px 32x;
+                background-color: black;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                padding: 0px 16px;
+                padding-bottom: 32px;
+            }
+
+            .header-info {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                color: $color-white;
+
+                .stars {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 4px;
+                }
+
+            }
+
+            .chapter-list {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: 0px;
+                align-content: center;
+
+                .chapter-el {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 32px;
+                    padding: 16px 16px;
+                    transition: all 0.75s ease;
+
+                    &:hover {
+                        background-color: rgb(255, 255, 255, 0.2);
+                        transition: all 0.75s ease;
+                    }
+
+                    .no {
+
+                        padding: 0px 16px;
+
+                        h1 {
+
+                            font-size: 32px;
+
+                        }
+                    }
+
+                    .slika {
+                        width: 130px;
+                        height: auto;
+                        align-self: center;
+
+                        img {
+                            width: 100%;
+                            height: auto;
+                            object-fit: cover;
+                            object-position: center;
+                        }
+                    }
+
+                    .body {
+                        .info {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            padding: 4px 0px;
+
+                            h2 {
+                                font-size: 22px;
+                            }
+
+                            p {
+                                padding: 0 0;
+                            }
+
+
+                        }
+
+                        p {
+                            padding: 4px 0;
+                        }
+                    }
+
+
+                }
+
+
+            }
+
+            @media screen and (max-width: 800px) {
+                .chapter-el {
+                    .slika {
+                        display: none;
+                    }
+
+
+                }
+            }
+
+        }
+
+    }
+
+    .wraper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .more-episodes {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: end;
+
+        .btn-secondary {
+
+
+            display: flex;
+            justify-content: center;
+
+        }
+
+    }
+
+    @media screen and (max-width: 1081px) {
+        .more-episodes {
+            justify-content: center;
+        }
+    }
+
+    @media screen and (max-width: 1081px) {
+
+        .cards-container {
+            justify-content: left;
+        }
+
+        .cardHomeOne {
+            width: calc(33% - 16px);
+        }
+
+        .wraper {
+            width: 100%;
+
+            .content-container {
+                .wraper-body {
+                    .contentoverlay {
+                        .title {
+
+
+
+                            h1 {
+                                font-size: 28px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+
+        .cards-container {
+            width: 80%;
+        }
+
+        .cardHomeOne {
+            width: calc(50% - 16px);
+            height: 400px;
+        }
+
+        .wraper {
+            padding-top: 32px;
+
+            .content-container {
+                width: 85%;
+
+                .wraper-body {
+                    .contentoverlay {
+                        .title {
+
+
+
+                            h1 {
+                                font-size: 28px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+
+        .cards-container {
+            width: 100%;
+            padding: 16px 16px;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .cards-container {
+            width: 80%;
+        }
+
+        .cardHomeOne {
+            width: 100%;
+        }
+
+        .wraper {
+            padding: 16px 16px;
+
+            .content-container {
+                width: 100%;
+
+                .wraper-body {
+                    .contentoverlay {
+                        .title {
+
+
+
+                            h1 {
+                                font-size: 22px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .cards-container {
+            width: 100%;
+            padding: auto 16px;
+        }
+
+
+    }
+
+}
+
+
+@import "player";

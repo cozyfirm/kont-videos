@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Core\KeywordsController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Other\FAQsController;
 use App\Http\Controllers\Admin\Users\UsersController;
+use App\Http\Controllers\PublicPart\Episodes\EpisodesController;
 use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,9 @@ Route::prefix('/')->group(function () {
      *  Episodes
      */
     Route::prefix('/episodes')->group(function () {
-        Route::get ('/',                              [PublicHomeController::class, 'home'])->name('public.episodes');
+        Route::get ('/',                              [EpisodesController::class, 'episodes'])->name('public.episodes');
+
+        Route::get ('/preview-video',                 [EpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
     });
 });
 
