@@ -22,6 +22,8 @@ Route::prefix('/')->group(function () {
         Route::get ('/',                              [EpisodesController::class, 'episodes'])->name('public.episodes');
 
         Route::get ('/preview-video',                 [EpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
+
+        Route::get ('/test-video',                    [EpisodesController::class, 'testVideo'])->name('public.episodes.test-video');
     });
 });
 

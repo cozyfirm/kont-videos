@@ -16,4 +16,8 @@ class EpisodesController extends Controller{
     public function previewVideo(): View{
         return view($this->_path . 'preview');
     }
+
+    public function testVideo(): View{
+        return view($this->_path . 'test-video');
+    }
 }
