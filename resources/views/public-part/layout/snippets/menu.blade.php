@@ -1,5 +1,4 @@
 <div class="container-menu" id="container-menu">
-
     <div class="menu">
         <div class="logo">
             <a href="{{ route('public.home') }}" class="Logo"><img src="{{ asset('files/images/logo.svg') }}"></a>
@@ -21,7 +20,6 @@
             <form action="#" method="get">
                 <button class="btn-primary">Registruj se</button>
             </form>
-
         </div>
 
         <div class="toggle" id="toggle">
@@ -29,7 +27,6 @@
             <div class="two"></div>
             <div class="three"></div>
         </div>
-
     </div>
     <div class="mobile-menu" id="mobile-menu">
         <div class="list">
@@ -47,5 +44,4 @@
             <button class="btn-primary">Registruj se</button>
         </div>
     </div>
-
 </div>

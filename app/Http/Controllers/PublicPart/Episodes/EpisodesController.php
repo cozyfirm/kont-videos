@@ -13,8 +13,12 @@ class EpisodesController extends Controller{
         return view($this->_path . 'preview-all');
     }
 
-    public function previewVideo(): View{
+    public function preview(): View{
         return view($this->_path . 'preview');
+    }
+
+    public function previewVideo(): View{
+        return view($this->_path . 'preview-video');
     }
 
     public function testVideo(): View{

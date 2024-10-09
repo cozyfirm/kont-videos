@@ -7,7 +7,9 @@
         <div class="news-cards-conteiner">
 
             <div class="news-card">
-                <div class="header"><img src="{{ asset('img/hero/Kaftan.jpg') }}" alt=""></div>
+                <div class="header">
+                    <img src="{{ asset('files/images/episodes/Kaftan.jpg') }}" alt="">
+                </div>
                 <div class="content">
                     <div class="body">
                         <h2>Lorem ipsum dolor sit.</h2>
@@ -20,7 +22,7 @@
                 <a href="#"></a>
             </div>
             <div class="news-card">
-                <div class="header"><img src="{{ asset('img/hero/Kaftan.jpg') }}" alt=""></div>
+                <div class="header"><img src="{{ asset('files/images/episodes/Kaftan.jpg') }}" alt=""></div>
                 <div class="content">
                     <div class="body">
                         <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
@@ -35,10 +37,10 @@
                 <a href="#"></a>
             </div>
             <div class="news-card">
-                <div class="header"><img src="{{ asset('img/hero/Kaftan.jpg') }}" alt=""></div>
+                <div class="header"><img src="{{ asset('files/images/episodes/Kaftan.jpg') }}" alt=""></div>
                 <div class="content">
                     <div class="body">
-                        <h2>Lorem ipsum dolor sit amet consectetur.</h2>
+                        <h2>Lorem ipsum dolor sit</h2>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe nemo tempora harum nobis,
                             non
                             sequi commodi, nisi, cum beatae consectetur quos provident! Sapiente, voluptatibus itaque

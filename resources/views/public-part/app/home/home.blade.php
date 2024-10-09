@@ -43,8 +43,10 @@
         </div>
     </div>
 
-    @include('public-part.app.home.includes.video-grid')
-    @include('public-part.app.home.includes.news')
+    @include('public-part.app.shared.episodes')
+    @include('public-part.app.shared.news')
+
+{{--    @include('public-part.app.home.includes.news')--}}
 
     @include('public-part.app.shared.accordion')
 

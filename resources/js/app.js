@@ -17,9 +17,14 @@ import "./style/submit.js";
 /**
  *  Import public scripts such as:
  *      1. Auth scripts
+ *      2. Layout scripts
+ *      3. App scripts
  */
 
 import './public-part/auth/auth.js';
+import './public-part/app/layout/menu.js';
+import './public-part/app/layout/accordion.js';
+import './public-part/app/shared/episodes.js';
 
 $(document).ready(function() {
     $(".datepicker").datepicker({

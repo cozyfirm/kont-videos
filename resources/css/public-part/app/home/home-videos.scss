@@ -17,7 +17,7 @@
             width: calc(33.33%);
             height: 400px;
             display: flex;
-            flex: wrap;
+            flex-wrap: wrap;
             flex-direction: column;
             gap: 14px;
             cursor: pointer;
@@ -27,7 +27,6 @@
             border: 2px solid $color-black;
             background-color: $color-black;
             position: relative;
-            overflow: hidden;
             border-radius: 16px;
 
             video {
@@ -53,15 +52,12 @@
                 transition: all .65s ease;
 
                 &.active {
-
                     opacity: 0;
                     transition: all .65s ease;
-
                 }
             }
 
             .cardContent {
-
                 position: absolute;
                 width: 100%;
                 z-index: 2;
@@ -78,7 +74,6 @@
                     opacity: 0;
                 }
 
-
                 p {
                     font-size: 16px;
                     display: block;
@@ -92,7 +87,6 @@
                 }
 
                 .card-btns {
-
                     display: flex;
                     flex-direction: row;
                     gap: 16px;
@@ -100,7 +94,6 @@
                     justify-content: center;
                     z-index: 300;
                     pointer-events: all;
-
                 }
 
                 h1 {
@@ -112,14 +105,10 @@
                     text-align: center;
                     padding: 0px 20px;
                     color: white;
-
                 }
-
             }
         }
-
     }
-
 }
 
 #trailer-overlay {
@@ -214,7 +203,7 @@
             }
 
             .wraper-footer {
-                padding: 32px 16px 8px 32x;
+                // padding: 32px 16px 8px 32x;
                 background-color: black;
                 display: flex;
                 flex-direction: column;
