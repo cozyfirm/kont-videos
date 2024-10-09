@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 16px;
     padding-top: 32px;
-    max-width: 1100px;
+    max-width: $d-width;
     margin: 0 auto;
     border-top: 1px solid rgb(255, 255, 255, .2);
     margin-top: 64px;
@@ -13,7 +13,7 @@
     .footer-row {
         display: flex;
         flex-direction: row;
-        gap: 15px;
+        gap: 16px;
         justify-content: space-between;
 
         .footer-element {
@@ -30,17 +30,14 @@
                     a {
                         text-decoration: none;
                         display: block;
-                        font-size: 14px;
                         padding: 0px 0px 8px 0px;
                         transition: all 0.75s ease;
                         font-size: 14px;
                         font-weight: 200;
-                        transition: 0.75s ease;
                     }
 
                     a:hover {
                         color: $color-white;
-
                         transition: 0.75s ease;
                     }
                 }
@@ -56,15 +53,12 @@
                     font-weight: 300;
                 }
             }
-
         }
-
     }
 
     .social {
         display: flex;
         width: 100%;
-        max-width: 1100px;
         flex-direction: row;
         gap: 16px;
         justify-content: center;
@@ -94,18 +88,19 @@
             }
         }
     }
-
     .copy {
-        a {
-            text-decoration: none;
+        text-align: center;
+        p{
+            a {
+                text-decoration: none;
 
-            &:hover {
-                color: white;
-                transition: .75s ease;
+                &:hover {
+                    color: white;
+                    transition: .75s ease;
+                }
             }
         }
     }
-
     .branding {
         display: flex;
         flex-direction: row;
@@ -114,90 +109,87 @@
         padding: 0px 0px 0px 16px;
 
         img {
-
             width: 60px;
             height: auto;
         }
     }
-
-    .copy {
-        text-align: center;
-    }
-
 }
 
-@media screen and (max-width: 1081px) {
+@media screen and (max-width: $d-width) {
     .wrapper-footer {
+        width: $ds-width;
+    }
+}
 
-        width: 100%;
-
-
+@media screen and (max-width: $ds-width) {
+    .wrapper-footer {
+        left: 30px; width: calc(100% - 60px);
 
         .footer-row {
-            flex-wrap: wrap;
-
-
+            // flex-wrap: wrap;
             .footer-element {
-
-
-
                 &.branding-brit {
-                    width: 100%;
+                    width: 50%;
                     padding-top: 32px;
                     align-items: center
                 }
             }
-
         }
-
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .wrapper-footer {
+        left: 20px; width: calc(100% - 40px);
+
         .footer-row {
             flex-wrap: wrap;
             gap: 16px;
 
             .footer-element {
-                min-width: 300px;
                 width: 100%;
-                padding-left: 32px;
+                &.branding-brit{
+                    width: 100%;
+                }
             }
+        }
+
+        .copy{
+            p{padding: 20px 0px;}
         }
     }
 }
 
-@media screen and (max-width: 400px) {
-    .wrapper-footer {
-        .footer-row {
-            .footer-element {
-                img {
-                    display: block;
-                }
-                p {
-                    display: block;
-                }
-
-                &.branding-brit {
-                    .brit-logo {
-                        flex-direction: column;
-                        align-items: start;
-                        width: 100%;
-
-                        img {
-                            width: 100px;
-                            height: auto;
-                        }
-
-                        p {
-                            padding-left: 0px;
-                        }
-                    }
-                }
-            }
-
-        }
-
-    }
-}
+//@media screen and (max-width: 400px) {
+//    .wrapper-footer {
+//        .footer-row {
+//            .footer-element {
+//                img {
+//                    display: block;
+//                }
+//                p {
+//                    display: block;
+//                }
+//
+//                &.branding-brit {
+//                    .brit-logo {
+//                        flex-direction: column;
+//                        align-items: start;
+//                        width: 100%;
+//
+//                        img {
+//                            width: 100px;
+//                            height: auto;
+//                        }
+//
+//                        p {
+//                            padding-left: 0px;
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//    }
+//}

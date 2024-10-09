@@ -1,8 +1,8 @@
-<section class="footer">
+<footer>
     <div class="wrapper-footer">
         <div class="footer-row">
             <div class="footer-element">
-                <h2>Uslovi korištenja</h2>
+                <h2>{{ __('Uslovi korištenja') }}</h2>
                 <ul>
                     <li>
                         <a href="">Fondacija Ekipa</a>
@@ -13,7 +13,7 @@
                 </ul>
             </div>
             <div class="footer-element">
-                <h2>Program</h2>
+                <h2>{{ __('Program') }}</h2>
                 <ul>
                     <li>
                         <a href="">Teme</a>
@@ -24,7 +24,7 @@
                 </ul>
             </div>
             <div class="footer-element">
-                <h2>Kontakt</h2>
+                <h2>{{ __('Kontakt') }}</h2>
                 <ul>
                     <li>
                         <a href="">Registriraj se</a>
@@ -37,8 +37,9 @@
             <div class="footer-element branding-brit">
                 <div class="brit-logo">
                     <img src="{{ asset('files/images/embassy.svg')}}" alt="">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum blanditiis, repudiandae
-                        consequatur fugiat tempora debitis placeat.</p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum blanditiis, repudiandae consequatur fugiat tempora debitis placeat.
+                    </p>
                 </div>
             </div>
         </div>
@@ -51,8 +52,8 @@
         </div>
         <div class="copy">
             <p>
-                {{ date('Y') }} &copy; <a href="https://fondacijaekipa.ba">fondacijaekipa.ba</a>
+                {{ date('Y') }} &copy; <a href="https://fondacijaekipa.ba">{{ __('fondacijaekipa.ba') }}</a>
             </p>
         </div>
     </div>
-</section>
+</footer>

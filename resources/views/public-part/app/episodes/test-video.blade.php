@@ -144,8 +144,10 @@
 <script type="text/javascript" src="https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js"></script>
 
 <!-- Bunny SThe iframe element for embedding the video player -->
-<iframe id="bunny-stream-embed" src="https://iframe.mediadelivery.net/embed/197133/dc48a09e-d9bb-420a-83d7-72dc2304c034" width="720" height="400" frameborder="0" allow="autoplay"></iframe>
 
+<iframe id="bunny-stream-embed" src="https://iframe.mediadelivery.net/embed/61480/c7cf806c-eac4-4e2e-a200-6f35ce1cf9a3?autoplay=true&loop=false&muted=false&preload=true&responsive=true" width="720" height="400" frameborder="0" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"  allowfullscreen="true"></iframe>
+
+{{--<div style="position:relative;padding-top:56.25%;"><iframe src="" loading="lazy" style="border:0;position:absolute;top:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>--}}
 <!-- Buttons for video playback control -->
 <div>
     <button id="play">Play</button>
