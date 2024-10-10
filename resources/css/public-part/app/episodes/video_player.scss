@@ -1,5 +1,5 @@
 .video__player{
-    position: relative; width: 100%; height: calc(100vh - 300px); display: flex; justify-content: space-between;
+    position: relative; width: 100%; height: calc(100vh - 300px); display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.2);
 
     $ew_h_h : 50px;
     $ew_f_h : 66px;
@@ -11,7 +11,7 @@
     }
 
     .player__wrapper{
-        position: relative; width: calc(100% - 453px); background: $color-black; border-top: 1px solid rgba(255,255,255,0.2);
+        position: relative; width: calc(100% - 453px); background: $color-black;
     }
     .episodes__wrapper{
         position: relative; width: 420px; height: 100%; background: $color-white; display: flex; align-content: space-between;
@@ -137,4 +137,99 @@
         p{margin:0px; padding:0px;}
     }
     .right_arrow:hover{ right:-1px; cursor: pointer; }
+}
+
+/**
+ *  Other specifications of course
+ */
+
+.other__specs{
+    position: relative; width: 100%; background: $color-white; padding: 64px 0px; border-top:1px solid rgba(0,0,0,0.2);
+    .inner__w{
+        position: relative; left: calc(50% - ($d-width / 2)); width: $d-width; min-height: 120px; display: flex; flex-wrap: wrap; gap: 32px;
+
+        .inner__header{
+            position: relative; width: 100%; display: flex; gap: 16px; padding: 8px 0px;
+            .inner__tab{
+                &.active{
+                    border-bottom: 1px solid $color-black;
+                }
+                transition: 0.75s all; border-bottom:1px solid $color-white;
+                p{
+                    margin: 0px; color: $color-black; padding: 0px; font-weight: bold; font-size: 16px;
+                }
+            }
+            .inner__tab:hover{
+                border-bottom: 1px solid $color-black; cursor: pointer;
+            }
+        }
+        .inner__body{
+            position: relative; width: 100%; min-height: 120px;
+            .inner__element{
+                &.active{
+                    display: flex;
+                }
+                position: relative; width: 100%; display: none;
+                p{ color: $color-black; margin: 0px; padding: 0px; }
+            }
+            .overview__wrapper{
+                gap: 24px; flex-wrap: wrap;
+                h1{
+                    color: $color-black; width: 100%; margin: 0px; padding: 0px;
+                }
+                .numbers__w{
+                    position: relative; width: 100%; display: flex; gap: 32px;
+                    .number{
+                        position: relative;
+
+                        .number__header{
+                            position: relative; width: 100%; display: flex; justify-content: flex-start; align-items: center; gap: 8px;
+                            h4{
+                                color: $color-black; margin: 0px; padding: 0px; font-weight: bold; padding-top: 1px;
+                                font-size: 18px;
+                            }
+                            img{
+                                height: 16px; margin:0px; padding:0px;
+                            }
+                        }
+                        p{
+                            color: $color-black; margin: 0px; padding: 0px; font-size: 14px; margin-top:4px;
+                        }
+                    }
+                }
+                .o-row{
+                    position: relative; width: 100%; display: flex; align-items: flex-start; gap: 8px;
+                    img{
+                        height: 16px;
+                    }
+                    p{ color: $color-black; margin: 0px; padding: 0px; }
+                }
+                .description{
+                    position: relative; width: 100%; padding: 24px; border:1px solid rgba(0,0,0,0.1);
+                    p{ color: $color-black; margin: 0px; padding: 0px; }
+                }
+            }
+
+            .presenter{
+                gap: 32px;
+                .img__wrapper{
+                    position: relative; width: 300px;
+                    img{ width: 100%; }
+                    a{
+                        text-decoration: none; color:$color-black;
+                        h2{ margin: 0px; padding: 0px; color: $color-black; font-size:26px; margin-top:16px; }
+                    }
+                }
+                .text__wrapper{
+                    position: relative; width: calc(100% - 332px);
+                }
+            }
+
+            .rest_of_episodes{
+                position: relative; justify-content: space-between; gap: 24px;
+
+                @import "../shared/single__episode";
+            }
+        }
+    }
 }

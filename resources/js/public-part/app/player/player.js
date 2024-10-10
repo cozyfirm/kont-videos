@@ -14,11 +14,20 @@ $(document).ready(function (){
     /**
      *  Short description of video
      */
-    let toggleShortDescription = function (){
-
-    };
-
     $(".toggle_short_description").click(function (){
         $(this).parent().parent().parent().toggleClass('short__desc');
     });
+
+    /**
+     *  Rest of info show / hide
+     */
+    $(".inner__tab").click(function (){
+        $(".inner__tab").removeClass('active');
+        $(".inner__element").removeClass('active');
+
+        $(this).addClass('active');
+        $("." + $(this).attr('ref-tag')).addClass('active');
+
+        console.log($(this).attr('ref-tag'));
+    })
 });
