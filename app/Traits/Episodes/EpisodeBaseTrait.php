@@ -1,14 +1,15 @@
 <?php
-namespace App\Traits\Users;
+namespace App\Traits\Episodes;
 
-use App\Models\User;
+
+use App\Models\Episodes\Episode;
 use App\Traits\Common\CommonTrait;
 
-trait UserBaseTrait{
+trait EpisodeBaseTrait{
     use CommonTrait;
-    protected function usersByUsername($username) : string{
+    protected function episodesBySlug($slug) : string{
         try{
-            $total = User::where('username', '=', $username)->count();
+            $total = Episode::where('slug', '=', $slug)->count();
             if($total == 0) return '';
             else return $total;
         }catch (\Exception $e){ return ''; }
@@ -16,6 +17,6 @@ trait UserBaseTrait{
     public function getSlug($slug): string{
         $string = $this->generateSlug($slug);
 
-        return ($string . ($this->usersByUsername($string)));
+        return ($string . ($this->episodesBySlug($string)));
     }
 }

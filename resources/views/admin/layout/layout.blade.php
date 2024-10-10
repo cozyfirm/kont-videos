@@ -35,8 +35,8 @@
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['table', ['table']],
                     ['insert', ['link', ]], // 'picture', 'video'
-                    ['view', ['help']],
-                    ['height', ['height']],
+                    // ['view', ['help']],
+                    // ['height', ['height']],
                 ],
                 placeholder: 'Unesite vaš tekst ovdje ..',
                 height : 300

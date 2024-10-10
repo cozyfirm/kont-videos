@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\Core\KeywordsController;
+use App\Http\Controllers\Admin\Episodes\EpisodesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Other\FAQsController;
 use App\Http\Controllers\Admin\Users\UsersController;
-use App\Http\Controllers\PublicPart\Episodes\EpisodesController;
+use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisodesController;
 use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +20,12 @@ Route::prefix('/')->group(function () {
      *  Episodes
      */
     Route::prefix('/episodes')->group(function () {
-        Route::get ('/',                              [EpisodesController::class, 'episodes'])->name('public.episodes');
+        Route::get ('/',                              [PublicEpisodesController::class, 'episodes'])->name('public.episodes');
 
-        Route::get ('/preview',                       [EpisodesController::class, 'preview'])->name('public.episodes.preview');
-        Route::get ('/preview-video',                 [EpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
+        Route::get ('/preview',                       [PublicEpisodesController::class, 'preview'])->name('public.episodes.preview');
+        Route::get ('/preview-video',                 [PublicEpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
 
-        Route::get ('/test-video',                    [EpisodesController::class, 'testVideo'])->name('public.episodes.test-video');
+        Route::get ('/test-video',                    [PublicEpisodesController::class, 'testVideo'])->name('public.episodes.test-video');
     });
 });
 
@@ -69,6 +70,21 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/edit/{username}',           [UsersController::class, 'edit'])->name('system.admin.users.edit');
             Route::post('/update',                    [UsersController::class, 'update'])->name('system.admin.users.update');
             Route::post('/update-profile-image',      [UsersController::class, 'updateProfileImage'])->name('system.admin.users.update-profile-image');
+        });
+
+        /**
+         *  Episodes
+         *  1. Episodes
+         *  2. Add remove lectures
+         */
+        Route::prefix('episodes')->group(function () {
+            Route::get ('/',                          [EpisodesController::class, 'index'])->name('system.admin.episodes');
+            Route::get ('/create',                    [EpisodesController::class, 'create'])->name('system.admin.episodes.create');
+            Route::post('/save',                      [EpisodesController::class, 'save'])->name('system.admin.episodes.save');
+            Route::get ('/preview/{slug}',            [EpisodesController::class, 'preview'])->name('system.admin.episodes.preview');
+            Route::get ('/edit/{slug}',               [EpisodesController::class, 'edit'])->name('system.admin.episodes.edit');
+            Route::post('/update',                    [EpisodesController::class, 'update'])->name('system.admin.episodes.update');
+            Route::get ('/delete/{slug}',             [EpisodesController::class, 'delete'])->name('system.admin.episodes.delete');
         });
 
         /**

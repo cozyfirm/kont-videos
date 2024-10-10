@@ -129,16 +129,16 @@
                     <div class="s-lms-e-img">
                         <i class="far fa-file-alt"></i>
                     </div>
-                    <p>{{__('Something')}}</p>
+                    <p>{{__('Epizode')}}</p>
                     <div class="extra-elements">
                         <div class="rotate-element"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
                 <div class="inside-links active-links">
-                    <a href="#">
+                    <a href="{{ route('system.admin.episodes') }}">
                         <div class="inside-lm-link">
                             <div class="ilm-l"></div><div class="ilm-c"></div>
-                            <p>{{__('Preview all')}}</p>
+                            <p>{{__('Sve epizode')}}</p>
                         </div>
                     </a>
                     <a href="#">
