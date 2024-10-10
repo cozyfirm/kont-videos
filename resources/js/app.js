@@ -26,6 +26,9 @@ import './public-part/app/layout/menu.js';
 import './public-part/app/layout/accordion.js';
 import './public-part/app/shared/episodes.js';
 
+import './public-part/app/player/player.js';
+
+
 $(document).ready(function() {
     $(".datepicker").datepicker({
         format: 'mm.dd.yyyy',

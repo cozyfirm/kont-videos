@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 96" width="176" height="96">
+	<title>Novi Projekt</title>
+	<defs>
+		<image  width="176" height="96" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAABgAQMAAACHR2oyAAAAAXNSR0IB2cksfwAAAAZQTFRFAAAA////pdmf3QAAAAJ0Uk5TAP9bkSK1AAAB/UlEQVR4nGWWTU7DQAyF3wMk2JUbhB3HKBIHCz0YEhyDHb0B7EACgufPz+NUatV89dhfJp7pkOsT8osrD+fbHT6cubzd7PDyxuPz1Q4fn7muFzu8rlaRO7xthk9ZhX8bN7w+JHz5A8Pnu4Svv8z86TOLHz5K7u8svrwX/JvFjy8b7Z3FLZLLO7L4hm8ePpDE+YdPmk0SN+0zy8csXgJZhsziJS1LgVm8SBA78aJM7MRLHLETL1mJLF4diCxejYksXsOILF6TElm8KhBZvAoTWbxGEVm85iSSeDMgknjzJZJ4CyKSeEtJJPEmQCTxpksk8RZDJPGWkZjFe31iFu+2xCzeQ4hZvCekygTthoN4l2X4HiIYRoZ8DHVCdQar4Mp4oQDGoUrHWEjFGbWkyunKf+c01rNxrjRqc/JyU0534ffF6Z59FjjNkJfmNJ8u2nG/9tvquI/2Sei4N6RPWcfNTBPccQN6HB234eHhIYjrUQ9c1dQYA1eiNhq4jlfTDVyqndSiAxe3RzX0wEX8Xu0/cBFftFh8LVm5e3WoY5N7VD87NvGTut+xiUNrxbGJQyvLsYlD69CxiUOr1rGJI6zxgU08Bjm2P1/tH8LHF2i3ETZx7U3CJq6dTNjEXTtgE9cuKWzi2lPDprvFGOH41x5wPAgEHI8NAcdDRsDxSPIP9rM0yhjPVRkAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>
