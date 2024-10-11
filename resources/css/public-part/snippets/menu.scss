@@ -3,8 +3,9 @@
     margin: 0px 0px;
     width: 100%;
     background-color: $color-black;
-    height: 56px;
+    height: 72px;
     min-width: 180px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 
     .menu {
         position: relative;
@@ -33,7 +34,7 @@
             height: 100%;
 
             img {
-                height: 90%;
+                height: 60%;
             }
         }
 

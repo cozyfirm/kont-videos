@@ -4,6 +4,8 @@ namespace App\Traits\Episodes;
 
 use App\Models\Episodes\Episode;
 use App\Traits\Common\CommonTrait;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 trait EpisodeBaseTrait{
     use CommonTrait;
@@ -18,5 +20,23 @@ trait EpisodeBaseTrait{
         $string = $this->generateSlug($slug);
 
         return ($string . ($this->episodesBySlug($string)));
+    }
+
+    public function getVideoInfo($libraryID, $videoID): object | bool{
+        $client = new Client();
+
+        try {
+            $response = $client->request('GET', 'https://video.bunnycdn.com/library/'.$libraryID.'/videos/' . $videoID, [
+                'headers' => [
+                    'AccessKey' => env('BUNNY_TOKEN'),
+                    'accept' => 'application/json',
+                ],
+            ]);
+        } catch (GuzzleException $e) {
+            return false;
+        }
+
+        if($response->getStatusCode() == 200) return json_decode($response->getBody());
+        else return false;
     }
 }

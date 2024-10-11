@@ -55,7 +55,7 @@ Route::prefix('auth')->group(function () {
  *  Admin routes
  */
 
-Route::prefix('system')->middleware('auth')->group(function () {
+Route::prefix('system')->group(function () {
     Route::prefix('admin')->middleware('isAdmin')->group(function (){
         Route::get('/dashboard',                 [HomeController::class, 'index'])->name('system.home');
 
@@ -85,6 +85,15 @@ Route::prefix('system')->middleware('auth')->group(function () {
             Route::get ('/edit/{slug}',               [EpisodesController::class, 'edit'])->name('system.admin.episodes.edit');
             Route::post('/update',                    [EpisodesController::class, 'update'])->name('system.admin.episodes.update');
             Route::get ('/delete/{slug}',             [EpisodesController::class, 'delete'])->name('system.admin.episodes.delete');
+
+            Route::prefix('video-content')->group(function () {
+                Route::get ('/add/{slug}',                    [EpisodesController::class, 'addVideo'])->name('system.admin.episodes.video-content.add');
+                Route::post('/save',                          [EpisodesController::class, 'saveVideo'])->name('system.admin.episodes.video-content.save');
+                Route::get ('/preview/{id}',                  [EpisodesController::class, 'previewVideo'])->name('system.admin.episodes.video-content.preview');
+                Route::get ('/edit/{id}',                     [EpisodesController::class, 'editVideo'])->name('system.admin.episodes.video-content.edit');
+                Route::post('/update',                        [EpisodesController::class, 'updateVideo'])->name('system.admin.episodes.video-content.update');
+                Route::get ('/delete/{id}',                   [EpisodesController::class, 'deleteVideo'])->name('system.admin.episodes.video-content.delete');
+            });
         });
 
         /**

@@ -6,6 +6,12 @@ import './bootstrap';
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.css';
 import 'bootstrap-datepicker';
 
+import { Player } from 'player.js';
+
+// Set playerjs globally
+window.playerjs = { Player };
+
+
 /* Import Admin JavaScript data */
 import './admin/layout/menu.js';
 import './admin/layout/filters.js';

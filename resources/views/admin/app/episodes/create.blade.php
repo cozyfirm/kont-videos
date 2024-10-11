@@ -3,7 +3,7 @@
 @section('c-title') {{ __('Epizode') }} @endsection
 @section('c-breadcrumbs')
     <a href="#"> <i class="fas fa-home"></i> <p>{{ __('Dashboard') }}</p> </a> /
-    <a href="{{ route('system.admin.episodes') }}">{{ __('Pregled svih korisnika') }}</a> /
+    <a href="{{ route('system.admin.episodes') }}">{{ __('Pregled svih epizoda') }}</a> /
     @if(!isset($episode))
         <a href="#">{{ __('Unos') }}</a>
     @else
@@ -109,34 +109,7 @@
             </div>
 
             @if(isset($preview))
-                <div class="col-md-3 border-left">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card p-0 m-0" title="#">
-                                <div class="card-body d-flex justify-content-between">
-                                    <h5 class="p-0 m-0"> {{ __('Ostale informacije') }} </h5>
-                                    <i class="fas fa-info mt-1 mr-1"></i>
-                                </div>
-                            </div>
-
-                            <div class="card p-0 mt-3" title="#">
-                                <a href="#">
-                                    <div class="card-body d-flex justify-content-between">
-                                        <h6 class="p-0 m-0"> {{ __('Video sadržaj') }} </h6>
-                                        <i class="fas fa-plus mt-1 mr-1"></i>
-                                    </div>
-                                </a>
-
-                                <div class="card-body d-flex justify-content-between m-0">
-                                    <ul class="m-0 pl-3">
-                                        <li><a href="#">1. Prva epizoda </a> </li>
-                                        <li><a href="#">1. Druga epizoda </a> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('admin.app.episodes.snippets.right-menu')
             @endif
         </div>
     </div>

@@ -52,7 +52,7 @@
         </div>
         <div class="copy">
             <p>
-                {{ date('Y') }} &copy; <a href="https://fondacijaekipa.ba">{{ __('fondacijaekipa.ba') }}</a>
+                {{ date('Y') }} - Crafted by <a href="https://fondacijaekipa.ba">{{ __('fondacijaekipa.ba') }}</a> & <a href="https://cozyfirm.com">{{ __('Cozy Firm') }}</a>
             </p>
         </div>
     </div>

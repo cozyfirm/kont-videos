@@ -30,4 +30,29 @@ $(document).ready(function (){
 
         console.log($(this).attr('ref-tag'));
     })
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     *  Player work
+     */
+    // $("#video_id").keyup(function (){
+    //     let value = $(this).val();
+    //     console.log(value);
+    //
+    //     const player = new playerjs.Player(document.getElementById("bunny-stream-embed"));
+    //
+    //     player.on('ready', () => {
+    //         console.log("ready");
+    //     });
+    //
+    //     // Event handler when the player is played
+    //     player.on('play', () => {
+    //         console.log("play");
+    //     });
+    //
+    //     // Event handler when the player is paused
+    //     player.on('pause', () => {
+    //         console.log("pause");
+    //     });
+    // });
 });

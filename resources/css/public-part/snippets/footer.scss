@@ -1,137 +1,143 @@
-.wrapper-footer {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-top: 32px;
-    max-width: $d-width;
-    margin: 0 auto;
-    border-top: 1px solid rgb(255, 255, 255, .2);
+footer{
+    border-top: 1px solid rgb(255, 255, 255, 0.2);
     margin-top: 64px;
-
-    .footer-row {
+    .wrapper-footer {
+        width: 100%;
+        height: 300px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         gap: 16px;
-        justify-content: space-between;
+        padding-top: 32px;
+        max-width: $d-width;
+        margin: 0 auto;
 
-        .footer-element {
+        .footer-row {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 16px;
+            justify-content: space-between;
 
-            ul {
-                list-style: none;
-
-                li {
-                    display: block;
-
-                    a {
-                        text-decoration: none;
-                        display: block;
-                        padding: 0px 0px 8px 0px;
-                        transition: all 0.75s ease;
-                        font-size: 14px;
-                        font-weight: 200;
-                    }
-
-                    a:hover {
-                        color: $color-white;
-                        transition: 0.75s ease;
-                    }
-                }
-            }
-
-            .brit-logo {
+            .footer-element {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 gap: 16px;
 
-                p {
-                    max-width: 300px;
-                    font-weight: 300;
+                ul {
+                    list-style: none;
+
+                    li {
+                        display: block;
+
+                        a {
+                            text-decoration: none;
+                            display: block;
+                            padding: 0px 0px 8px 0px;
+                            transition: all 0.75s ease;
+                            font-size: 14px;
+                            font-weight: 200;
+                        }
+
+                        a:hover {
+                            color: $color-white;
+                            transition: 0.75s ease;
+                        }
+                    }
+                }
+
+                .brit-logo {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 16px;
+
+                    p {
+                        max-width: 300px;
+                        font-weight: 300;
+                    }
                 }
             }
         }
-    }
 
-    .social {
-        display: flex;
-        width: 100%;
-        flex-direction: row;
-        gap: 16px;
-        justify-content: center;
-        color: $color-white;
-        padding-top: 16px;
-        cursor: pointer;
+        .social {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: center;
+            color: $color-white;
+            padding-top: 16px;
+            cursor: pointer;
 
-        a {
-            text-decoration: none;
-            transition: all .75s ease;
+            a {
+                text-decoration: none;
+                transition: all .75s ease;
 
-            &:hover {
-                i {
+                &:hover {
+                    i {
+                        transition: all .75s ease;
+
+                        &:hover {
+                            color: white;
+                            transform: scale(130%);
+                            transition: all .75s ease;
+                        }
+                    }
+
+                    color: white;
+                    transform: scale(130%);
                     transition: all .75s ease;
+
+                }
+            }
+        }
+        .copy {
+            text-align: center;
+            p{
+                a {
+                    text-decoration: none;
 
                     &:hover {
                         color: white;
-                        transform: scale(130%);
-                        transition: all .75s ease;
+                        transition: .75s ease;
                     }
                 }
-
-                color: white;
-                transform: scale(130%);
-                transition: all .75s ease;
-
             }
         }
-    }
-    .copy {
-        text-align: center;
-        p{
-            a {
-                text-decoration: none;
+        .branding {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            margin: 0 auto;
+            padding: 0px 0px 0px 16px;
 
-                &:hover {
-                    color: white;
-                    transition: .75s ease;
-                }
+            img {
+                width: 60px;
+                height: auto;
             }
-        }
-    }
-    .branding {
-        display: flex;
-        flex-direction: row;
-        gap: 16px;
-        margin: 0 auto;
-        padding: 0px 0px 0px 16px;
-
-        img {
-            width: 60px;
-            height: auto;
         }
     }
 }
 
 @media screen and (max-width: $d-width) {
-    .wrapper-footer {
-        width: $ds-width;
+    footer{
+        .wrapper-footer {
+            width: $ds-width;
+        }
     }
 }
 
 @media screen and (max-width: $ds-width) {
-    .wrapper-footer {
-        left: 30px; width: calc(100% - 60px);
+    footer{
+        .wrapper-footer {
+            left: 30px; width: calc(100% - 60px);
 
-        .footer-row {
-            // flex-wrap: wrap;
-            .footer-element {
-                &.branding-brit {
-                    width: 50%;
-                    padding-top: 32px;
-                    align-items: center
+            .footer-row {
+                // flex-wrap: wrap;
+                .footer-element {
+                    &.branding-brit {
+                        width: 50%;
+                        padding-top: 32px;
+                        align-items: center
+                    }
                 }
             }
         }
@@ -139,23 +145,25 @@
 }
 
 @media screen and (max-width: 800px) {
-    .wrapper-footer {
-        left: 20px; width: calc(100% - 40px);
+    footer{
+        .wrapper-footer {
+            left: 20px; width: calc(100% - 40px);
 
-        .footer-row {
-            flex-wrap: wrap;
-            gap: 16px;
+            .footer-row {
+                flex-wrap: wrap;
+                gap: 16px;
 
-            .footer-element {
-                width: 100%;
-                &.branding-brit{
+                .footer-element {
                     width: 100%;
+                    &.branding-brit{
+                        width: 100%;
+                    }
                 }
             }
-        }
 
-        .copy{
-            p{padding: 20px 0px;}
+            .copy{
+                p{padding: 20px 0px;}
+            }
         }
     }
 }

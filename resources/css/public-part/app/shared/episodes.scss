@@ -1,7 +1,18 @@
 .episodes{
     position: relative; width: 100%; min-height: 120px; background: $color-black; display: flex; justify-content: center;
     .inner__wrapper{
-        position: relative; width: $d-min-width; display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding: 64px 0px;
+        position: relative; width: $d-min-width; display: flex; justify-content: flex-start; gap: 24px; flex-wrap: wrap; padding: 64px 0px;
+
+        &.all-episodes{
+            width: $d-width;
+            @media screen and (max-width: $d-width){
+                width: calc(100% - 60px);
+            }
+            @media screen and (max-width: 800px){
+                width: calc(100% - 40px);
+                padding: 32px 0px;
+            }
+        }
 
         @media screen and (max-width: $d-min-width){
             width: calc(100% - 60px);
@@ -14,6 +25,30 @@
         @import "single__episode";
         .all__episodes{
             position: relative; width: 100%; display: flex; justify-content: flex-end;
+            a{
+                text-decoration: none;
+            }
+        }
+        .load__more{
+            position: relative; width: 100%; display: flex; justify-content: center;
+            a{
+                text-decoration: none;
+                button{
+                    background: $color-secondary; padding: 8px 32px;
+                    &:hover {
+                        background-color: $color-primary !important;
+                        border: 1px $color-primary solid;
+                        transition: 0.75s;
+                    }
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                        background-color: $color-primary !important;
+                        border: 1px $color-primary solid;
+                    }
+                }
+            }
         }
     }
 }

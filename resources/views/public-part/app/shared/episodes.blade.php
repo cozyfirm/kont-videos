@@ -1,12 +1,12 @@
 <section class="episodes">
-    <div class="inner__wrapper">
-        @for($i=0; $i<6; $i++)
+    <div class="inner__wrapper @isset($all_episodes) all-episodes @endisset">
+        @foreach($episodes as $episode)
             <div class="single__episode">
-                <img src="{{ asset('files/images/episodes/Kaftan.jpg') }}" class="episode-img">
-                <video loop muted preload src=" {{ asset('files/images/episodes/novi.mp4')}}"></video>
+                <img src="{{ asset($episode->imageRel->getFile()) }}" class="episode-img">
+                <video loop muted preload src="{{ asset($episode->videoRel->getFile()) }}"></video>
 
                 <div class="card__content">
-                    <h1>Kaftan moda</h1>
+                    <h1> {{ $episode->title ?? '' }} </h1>
                     <p>Sanja Delić</p>
                     <div class="card-btns">
                         <button type="submit" class="btn-primary modaloppener"><i class="fi fi-bs-play-circle"></i>Trailer</button>
@@ -16,13 +16,25 @@
                     </div>
                 </div>
             </div>
-        @endfor
+        @endforeach
 
-        <div class="all__episodes">
-            <button class="btn-secondary">
-                {{ __('Sve epizode') }}
-                <i class="fi fi-br-arrow-small-right"></i>
-            </button>
-        </div>
+        @if(!isset($all_episodes))
+            <div class="all__episodes">
+                <a href="{{ route('public.episodes') }}">
+                    <button class="btn-secondary">
+                        {{ __('Sve epizode') }}
+                        <i class="fi fi-br-arrow-small-right"></i>
+                    </button>
+                </a>
+            </div>
+        @else
+            <div class="load__more">
+                <a href="{{ route('public.episodes') }}">
+                    <button class="btn-secondary">
+                        {{ __('Učitajte još') }}
+                    </button>
+                </a>
+            </div>
+        @endif
     </div>
 </section>
