@@ -10,9 +10,9 @@
                     <p>Sanja Delić</p>
                     <div class="card-btns">
                         <button type="submit" class="btn-primary modaloppener"><i class="fi fi-bs-play-circle"></i>Trailer</button>
-                        <form action="#" method="get">
+                        <a href="{{ route('public.episodes.preview', ['slug' => $episode->slug]) }}">
                             <button class="btn-primary"><i class="fi fi-bs-play-circle"></i>Video</button>
-                        </form>
+                        </a>
                     </div>
                 </div>
             </div>

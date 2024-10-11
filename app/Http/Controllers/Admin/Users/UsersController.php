@@ -66,7 +66,7 @@ class UsersController extends Controller{
             if (isset($request->birth_date)) $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
 
             /* Update user */
-            $user = User::create($request->except(['id']));
+            $user = User::create($request->except(['id', 'undefined', 'files']));
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.users.preview', ['username' => $user->username]));
         }catch (\Exception $e){
@@ -97,7 +97,7 @@ class UsersController extends Controller{
                 $user = User::where('id', '=', $request->id)->first();
 
                 /* Update user */
-                $user->update($request->except(['id']));
+                $user->update($request->except(['id', 'undefined', 'files']));
             }
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.users.preview', ['username' => $user->username]));

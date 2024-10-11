@@ -17,8 +17,10 @@ class EpisodesController extends Controller{
         ]);
     }
 
-    public function preview(): View{
-        return view($this->_path . 'preview');
+    public function preview($slug): View{
+        return view($this->_path . 'preview', [
+            'episode' => Episode::where('slug', '=', $slug)->first()
+        ]);
     }
 
     public function previewVideo(): View{

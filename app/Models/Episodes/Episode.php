@@ -3,6 +3,7 @@
 namespace App\Models\Episodes;
 
 use App\Models\Core\File;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -21,6 +22,9 @@ class Episode extends Model{
     protected $table = 'episodes';
     protected $guarded = ['id'];
 
+    public function presenterRel(): HasOne{
+        return $this->hasOne(User::class, 'id', 'presenter_id');
+    }
     public function imageRel(): HasOne{
         return $this->hasOne(File::class, 'id', 'image_id');
     }
@@ -29,5 +33,12 @@ class Episode extends Model{
     }
     public function videoContentRel(): HasMany{
         return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id');
+    }
+    public function totalDuration(): string{
+        $duration = 0;
+        foreach ($this->videoContentRel as $video){
+            $duration += $video->duration_sec;
+        }
+        return gmdate("H:i:s", $duration);
     }
 }

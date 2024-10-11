@@ -22,7 +22,7 @@ Route::prefix('/')->group(function () {
     Route::prefix('/episodes')->group(function () {
         Route::get ('/',                              [PublicEpisodesController::class, 'episodes'])->name('public.episodes');
 
-        Route::get ('/preview',                       [PublicEpisodesController::class, 'preview'])->name('public.episodes.preview');
+        Route::get ('/preview/{slug}',                [PublicEpisodesController::class, 'preview'])->name('public.episodes.preview');
         Route::get ('/preview-video',                 [PublicEpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
 
         Route::get ('/test-video',                    [PublicEpisodesController::class, 'testVideo'])->name('public.episodes.test-video');

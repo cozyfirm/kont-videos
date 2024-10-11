@@ -121,6 +121,15 @@
                         </div>
                     </div>
 
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ html()->label(__('Kratka biografija'))->for('about')->class('bold') }}
+                                {{ html()->textarea('about')->class('form-control form-control-sm mt-2 textarea-240 summernote')->value(isset($user) ? $user->about : '')->isReadonly(isset($preview)) }}
+                            </div>
+                        </div>
+                    </div>
+
                     @if(!isset($preview))
                         <div class="row mt-4">
                             <div class="col-md-12 d-flex justify-content-end">

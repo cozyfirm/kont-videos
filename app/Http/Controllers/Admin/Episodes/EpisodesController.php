@@ -39,7 +39,7 @@ class EpisodesController extends Controller{
     public function create (): View{
         return view($this->_path . 'create', [
             'create' => true,
-            'users' => User::pluck('name', 'id')
+            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id')
         ]);
     }
     public function save(Request $request): RedirectResponse{
@@ -75,14 +75,14 @@ class EpisodesController extends Controller{
         return view($this->_path . 'create', [
             'preview' => true,
             'episode' => Episode::where('slug', '=', $slug)->first(),
-            'users' => User::pluck('name', 'id')
+            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id')
         ]);
     }
     public function edit ($slug): View{
         return view($this->_path . 'create', [
             'edit' => true,
             'episode' => Episode::where('slug', '=', $slug)->first(),
-            'users' => User::pluck('name', 'id')
+            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id')
         ]);
     }
     public function update(Request $request): RedirectResponse{
@@ -102,6 +102,7 @@ class EpisodesController extends Controller{
 
             $episode->update([
                 'title' => $request->title,
+                'presenter_id' => $request->presenter_id,
                 'description' => $request->description,
                 'image_id' => isset($image) ? $image->id : $episode->image_id,
                 'video_id' => isset($video) ? $video->id : $episode->video_id
@@ -173,7 +174,7 @@ class EpisodesController extends Controller{
                 return $this->jsonError('2200', __('Greška prilikom čitanja podataka o videu. Jeste li unijeli dobre podatke?'));
             }
 
-            $request['duration'] = gmdate("H:i:s", $video->length);;
+            $request['duration'] = gmdate("H:i:s", $video->length);
             $request['duration_sec'] = $video->length;
             $request['views'] = $video->views;
             $request['average_watch_time'] = $video->averageWatchTime;
