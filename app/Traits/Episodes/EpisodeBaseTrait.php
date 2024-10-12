@@ -39,4 +39,15 @@ trait EpisodeBaseTrait{
         if($response->getStatusCode() == 200) return json_decode($response->getBody());
         else return false;
     }
+
+    public function getDurationHelper($seconds): string{
+        $hours = gmdate("H", $seconds);
+        $minutes = gmdate("i", $seconds);
+        $seconds = gmdate("s", $seconds);
+        if($hours != "00"){
+            return (int) $hours . "h " . (int) $minutes . " min ";
+        }else{
+            return (int) $minutes . " min ";
+        }
+    }
 }

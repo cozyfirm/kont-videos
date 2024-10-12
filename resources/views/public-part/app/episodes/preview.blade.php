@@ -3,7 +3,26 @@
 @section('public-content')
     <div class="video__player">
         <div class="player__wrapper">
+            <iframe id="active-video" current-time="{{ $video->activityRel->time ?? 0 }}" finished="{{ $video->finished }}" video-id="{{ $video->id }}" episode-id="{{ $episode->id }}" src="https://iframe.mediadelivery.net/embed/{{ $video->library_id }}/{{ $video->video_id }}?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
 
+            <div class="next__video d-none">
+                <div class="next__video__btn">
+                    <div class="up__next">
+                        <p>{{ __('Sljedeće') }}</p>
+                        <h1 id="shadow-video-title"> 2. Izbori 2024 - Part four </h1>
+                    </div>
+                    <div class="progress-circle p0">
+                        <span> <img src="{{ asset('files/images/default/icons/play.svg') }}" alt=""> </span>
+                        <div class="left-half-clipper">
+                            <div class="first50-bar"></div>
+                            <div class="value-bar"></div>
+                        </div>
+                    </div>
+                    <div class="cancel_id">
+                        <p>{{ __('Odustani') }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="episodes__wrapper">
             <div class="ew__header">
@@ -11,33 +30,34 @@
                 <i class="fas fa-times toggle-player"></i>
             </div>
             <div class="ew__body">
-                @for($i=0; $i<6; $i++)
-                    <div class="se__wrapper">
+                @php $counter = 1; @endphp
+                @foreach($episode->videoContentRel as $content)
+                    <div class="se__wrapper @if($video->id == $content->id) current @endif" video-id="{{ $content->id }}">
                         <div class="se__w__no">
-                            <div class="checkbox_w @if($i%2 == 0) checked @endif">
+                            <div class="checkbox_w @if($content->activityRel->finished ?? 0) checked @endif">
                                 <img src="{{ asset('files/images/default/icons/check.svg') }}" alt="">
                             </div>
                         </div>
                         <div class="se__w__data">
                             <div class="header__">
-                                <p> {{ $i + 1 }}. Check our first KONT video </p>
+                                <p> {{ $counter ++ }}. {{ $content->title ?? '' }} </p>
                                 <img class="toggle_short_description" src="{{ asset('files/images/default/icons/arrow_down_b.svg') }}" alt="">
                             </div>
                             <div class="short__description">
-                                <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book </p>
+                                {!! nl2br($content->description ?? '') !!}
                             </div>
                             <div class="rest__of_data">
                                 <div class="duration_w">
                                     <img src="{{ asset('files/images/default/icons/video.svg') }}" alt="">
-                                    <span>12 min</span>
+                                    <span>{{ $content->getDuration() }}</span>
                                 </div>
                                 <div class="play_w">
-                                    <span>Play</span>
+                                    <span>{{ __('Play') }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
             <div class="ew__footer">
                 <button class="btn-secondary">
@@ -93,7 +113,7 @@
                         </div>
                         <div class="number">
                             <div class="number__header">
-                                <h4> 1789 </h4>
+                                <h4> {{ $episode->totalViews() }} </h4>
                             </div>
                             <p> {{ __('Pregleda') }} </p>
                         </div>

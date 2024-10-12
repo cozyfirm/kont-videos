@@ -1,3 +1,5 @@
+import {Notify} from "../../../style/layout/notify.ts";
+
 $(document).ready(function (){
 
     /**
@@ -35,24 +37,191 @@ $(document).ready(function (){
     /*
      *  Player work
      */
-    // $("#video_id").keyup(function (){
-    //     let value = $(this).val();
-    //     console.log(value);
-    //
-    //     const player = new playerjs.Player(document.getElementById("bunny-stream-embed"));
-    //
-    //     player.on('ready', () => {
-    //         console.log("ready");
-    //     });
-    //
-    //     // Event handler when the player is played
-    //     player.on('play', () => {
-    //         console.log("play");
-    //     });
-    //
-    //     // Event handler when the player is paused
-    //     player.on('pause', () => {
-    //         console.log("pause");
-    //     });
-    // });
+
+    if($("#active-video").length){
+        /* We are currently at active player */
+
+        let player;
+        let currentVideoID = 0; let mainDataResponse = null;
+        let currentTime = 0, finishedVideo = false;
+        let updateActivityUri = '/episodes/activity/update-activity';
+
+        let iframeUri = "https://iframe.mediadelivery.net/embed/";
+        let iframeGetParams = "?autoplay=false&loop=false&muted=false&preload=true&responsive=true";
+
+        let clockCounter = 0;
+        let continueNewVideo = true;
+        let intervalId;
+        /**
+         * Start new video
+         * @param interval
+         * @param isTerminate
+         * @param proceed
+         * @param increase
+         */
+        function clocked(interval, isTerminate, proceed, increase) {
+            intervalId = setInterval(() => {
+
+                // proceed.call();
+                increase(clockCounter);
+
+                if (isTerminate(++clockCounter)) {
+                    clearInterval(intervalId);
+                }
+            }, interval);
+        }
+        const circle = {
+            object : $(".progress-circle"),
+            increase(counter){
+                console.log(counter);
+            }
+        };
+
+        let playNewVideo = function (){
+            let videoWrapper = $("#active-video");
+
+            videoWrapper.attr('src', iframeUri + mainDataResponse['nextVideo']['library_id'] + "/" + mainDataResponse['nextVideo']['video_id'] + iframeGetParams);
+            videoWrapper.attr('video-id', mainDataResponse['nextVideo']['id']);
+
+            $(".se__wrapper").removeClass('current');
+            $(".se__wrapper[video-id='" + mainDataResponse['nextVideo']['id'] +"']").addClass('current');
+
+            resetPercentage();
+
+            handleVideo();
+        }
+        let finishEpisode = function (){
+            $(".se__wrapper[video-id='" + $("#active-video").attr('video-id') +"']").find('.checkbox_w').addClass('checked');
+        }
+
+        let resetPercentage = function (){
+            /* Hide shadow and reset it */
+            $(".next__video").addClass('d-none');
+            circle.object.removeClass('over50');
+            circle.object.removeClass('p100').addClass('p0');
+        };
+        function increasePercentage(percentage){
+            if(percentage < 50) circle.object.removeClass('over50');
+            else circle.object.addClass('over50');
+
+            circle.object.removeClass('p' + percentage).addClass('p' + (percentage + 1));
+        }
+
+        function doTerminateWhen(counter) {
+            if(counter >= 100){
+                playNewVideo();
+
+                clockCounter = 0;
+                return true;
+            }
+            return false;
+        }
+
+        /* Force start or cancel new video */
+        $(".cancel_id").click(function (){
+            continueNewVideo = false;
+
+            clearInterval(intervalId);
+            clockCounter = 0;
+
+            resetPercentage();
+        });
+        circle.object.click(function (){
+            clockCounter = 100;
+        });
+
+        /**
+         *  Video handler
+         */
+        let handleVideo = function (){
+            let videoWrapper = $("#active-video");
+            currentVideoID = videoWrapper.attr('video-id');
+
+            /* Set wrapper as not finished */
+            videoWrapper.attr('finished', 0);
+
+            player = new playerjs.Player(document.getElementById("active-video"));
+
+            player.on('ready', () => {
+                /* Video that is loaded after previous video */
+                if(mainDataResponse !== null) player.play();
+                else{
+                    /* Initial load */
+                    const currentTime = parseFloat($("#active-video").attr('current-time'));
+                    setTimeout(() => {
+                        player.setCurrentTime(currentTime);
+                    }, 200); // Adjust delay if necessary
+                }
+            });
+
+            // Event handler when the player is played
+            player.on('play', () => {
+
+            });
+
+            // Event handler when the player is paused
+            player.on('pause', () => {
+                // console.log("pause");
+            });
+
+            // Event handler when time is updated
+            player.on('timeupdate', (data) => {
+                /* Update every second, not more often */
+                if(currentTime !== parseInt(data['seconds'])){
+                    currentTime = parseInt(data['seconds']);
+
+                    videoWrapper.attr('current-time', parseInt(data['seconds']));
+
+                    if(currentTime === parseInt(data['duration'])){
+                        /* End of the video, go to another video */
+                        finishedVideo = true;
+                    }else{
+                        finishedVideo = false;
+                    }
+
+                    $.ajax({
+                        url: updateActivityUri,
+                        method: "POST",
+                        dataType: "json",
+                        data: {
+                            time : currentTime,
+                            duration: parseInt(data['duration']),
+                            finished: finishedVideo,
+                            video_id: videoWrapper.attr('video-id'),
+                            episode_id: videoWrapper.attr('episode-id')
+                        },
+                        success: function success(response) {
+                            let code = response['code'];
+
+                            if(code === '0000'){
+                                let data = response['data'];
+
+                                if(data['nextVideo'] !== null){
+                                    mainDataResponse = data;
+
+                                    /* Mark previous video as finished */
+                                    $(".se__wrapper[video-id='" + currentVideoID +"']").find('.checkbox_w').addClass('checked');
+                                    videoWrapper.attr('finished', 1);
+
+                                    /* Set title of new video */
+                                    $("#shadow-video-title").text(data['nextVideo']['title']);
+
+                                    $(".next__video").removeClass('d-none');
+                                    clocked(50, doTerminateWhen, circle.increase, increasePercentage);
+                                }
+
+                                if(data['episodeFinished'] === true){
+                                    finishEpisode();
+                                }
+                            }else{
+                                Notify.Me([response['message'], "warn"]);
+                            }
+                        }
+                    });
+                }
+            });
+        };
+
+        handleVideo();
+    }
 });

@@ -4,6 +4,7 @@ namespace App\Models\Episodes;
 
 use App\Models\Core\File;
 use App\Models\User;
+use App\Traits\Episodes\EpisodeBaseTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static orderBy(string $string, string $string1)
  */
 class Episode extends Model{
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, EpisodeBaseTrait;
 
     protected $table = 'episodes';
     protected $guarded = ['id'];
@@ -39,6 +40,9 @@ class Episode extends Model{
         foreach ($this->videoContentRel as $video){
             $duration += $video->duration_sec;
         }
-        return gmdate("H:i:s", $duration);
+        return $this->getDurationHelper($duration);
+    }
+    public function totalViews(): int{
+        return EpisodeVideo::where('episode_id', '=', $this->id)->sum('views');
     }
 }

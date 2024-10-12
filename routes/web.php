@@ -23,6 +23,14 @@ Route::prefix('/')->group(function () {
         Route::get ('/',                              [PublicEpisodesController::class, 'episodes'])->name('public.episodes');
 
         Route::get ('/preview/{slug}',                [PublicEpisodesController::class, 'preview'])->name('public.episodes.preview');
+
+        /**
+         *  Post request as user activity
+         */
+        Route::prefix('/activity')->group(function () {
+            Route::post('/update-activity',               [PublicEpisodesController::class, 'updateActivity'])->name('public.episodes.update-activity');
+        });
+
         Route::get ('/preview-video',                 [PublicEpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
 
         Route::get ('/test-video',                    [PublicEpisodesController::class, 'testVideo'])->name('public.episodes.test-video');

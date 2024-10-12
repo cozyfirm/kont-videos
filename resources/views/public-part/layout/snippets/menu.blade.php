@@ -14,12 +14,18 @@
             </ul>
         </div>
         <div class="action-btn">
-            <form action="#" method="get">
-                <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>Log in</button>
-            </form>
-            <form action="#" method="get">
-                <button class="btn-primary">Registruj se</button>
-            </form>
+            @if(Auth()->check())
+                <a href="{{ route('auth.create-account') }}">
+                    <button class="btn-primary">{{ Auth()->user()->name }}</button>
+                </a>
+            @else
+                <a href="{{ route('auth') }}">
+                    <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>Log in</button>
+                </a>
+                <a href="{{ route('auth.create-account') }}">
+                    <button class="btn-primary">Registruj se</button>
+                </a>
+            @endif
         </div>
 
         <div class="toggle" id="toggle">
@@ -40,8 +46,18 @@
             </ul>
         </div>
         <div class="action-btn">
-            <button class="btn-secondary"><i class="fi fi-br-sign-in-alt"></i>Log in</button>
-            <button class="btn-primary">Registruj se</button>
+            @if(Auth()->check())
+                <a href="{{ route('auth.create-account') }}">
+                    <button class="btn-primary">{{ Auth()->user()->name }}</button>
+                </a>
+            @else
+                <a href="{{ route('auth') }}">
+                    <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>Log in</button>
+                </a>
+                <a href="{{ route('auth.create-account') }}">
+                    <button class="btn-primary">Registruj se</button>
+                </a>
+            @endif
         </div>
     </div>
 </div>

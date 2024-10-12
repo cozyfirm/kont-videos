@@ -40,6 +40,8 @@ $color-disabled: rgba(189, 192, 197, .5);
 @import "snippets/accordion";
 @import "snippets/wyswyg";
 
+@import "snippets/circle.css";
+
 @import "app/home/home";
 @import "app/episodes/episodes";
 @import "app/episodes/video_player";
