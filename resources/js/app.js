@@ -34,7 +34,10 @@ import './public-part/app/layout/accordion.js';
 import './public-part/app/shared/episodes.js';
 
 import './public-part/app/player/player.js';
+import './admin/blog/blog.js';
 
+/* Public app */
+import './public-part/app/blog/blog.js';
 
 $(document).ready(function() {
     $(".datepicker").datepicker({

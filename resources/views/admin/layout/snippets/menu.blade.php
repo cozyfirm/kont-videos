@@ -165,11 +165,11 @@
             </div>
         </a>
 
-        <a href="#" class="menu-a-link">
+        <a href="{{ route('system.admin.blog') }}" class="menu-a-link">
             <div class="s-lm-wrapper">
                 <div class="s-lm-s-elements">
                     <div class="s-lms-e-img">
-                        <i class="fas fa-wind"></i>
+                        <i class="fas fa-blog"></i>
                     </div>
                     <p>{{__('Blog')}}</p>
                     <div class="extra-elements">

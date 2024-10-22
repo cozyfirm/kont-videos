@@ -47,6 +47,7 @@ $color-disabled: rgba(189, 192, 197, .5);
 @import "app/episodes/video_player";
 @import "app/shared/episodes";
 @import "app/shared/news";
+@import "app/blog/blog";
 
 html {
     font-family: Josefin Sans, sans-serif;

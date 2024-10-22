@@ -20,7 +20,8 @@ class Keyword extends Model{
     protected static $_keywords = [
         /* Questions keywords */
         'yes_no' => 'Da / Ne',
-        'video_category' => 'Kategorija videa'
+        'video_category' => 'Kategorija videa',
+        'blog_category' => 'Kategorija bloga'
     ];
 
     /* Return all types of keywords */

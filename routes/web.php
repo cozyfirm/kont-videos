@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\Core\KeywordsController;
 use App\Http\Controllers\Admin\Episodes\EpisodesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Other\FAQsController;
+use App\Http\Controllers\Admin\Other\Blog\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisodesController;
+use App\Http\Controllers\PublicPart\Blog\BlogController as PublicBlogController;
 use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -17,11 +19,20 @@ Route::prefix('/')->group(function () {
     Route::get ('/',                              [PublicHomeController::class, 'home'])->name('public.home');
 
     /**
+     *  Blog posts
+     */
+    Route::prefix('/blog')->group(function () {
+        Route::get ('/',                              [PublicBlogController::class, 'index'])->name('public.blog');
+        Route::get ('/preview',                       [PublicBlogController::class, 'preview'])->name('public.blog.preview');
+
+        /* Fetch images */
+        Route::post ('/fetch-images',                 [PublicBlogController::class, 'fetchImages'])->name('public-part.blog.fetch-images');
+    });
+    /**
      *  Episodes
      */
     Route::prefix('/episodes')->group(function () {
         Route::get ('/',                              [PublicEpisodesController::class, 'episodes'])->name('public.episodes');
-
         Route::get ('/preview/{slug}',                [PublicEpisodesController::class, 'preview'])->name('public.episodes.preview');
 
         /**
@@ -32,7 +43,6 @@ Route::prefix('/')->group(function () {
         });
 
         Route::get ('/preview-video',                 [PublicEpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
-
         Route::get ('/test-video',                    [PublicEpisodesController::class, 'testVideo'])->name('public.episodes.test-video');
     });
 });
