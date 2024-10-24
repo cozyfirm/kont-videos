@@ -21,6 +21,9 @@
                 <a href="{{ route('public.my-profile.progress') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>
                 </a>
+                <a href="{{ route('auth.logout') }}">
+                    <button target class="btn-tertiary"><i class="fi fi-bs-sign-out-alt"></i></button>
+                </a>
             @else
                 <a href="{{ route('auth') }}">
                     <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>{{ __('Prijavi se') }}</button>

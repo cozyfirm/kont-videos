@@ -69,7 +69,7 @@
             </a>
         </div>
         <div class="inner__menu_links">
-            <a href="#">
+            <a href="{{ route('public.my-profile.progress') }}">
                 <div class="inner__menu_links_link @if(Route::is('public.my-profile.progress')) active @endif">
                     <img class="silhouette" src="{{ asset('files/images/public-part/users/video.svg') }}" alt="">
                     <p>{{ __('Moj progres') }}</p>

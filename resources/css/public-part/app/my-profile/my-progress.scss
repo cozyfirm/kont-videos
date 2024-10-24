@@ -1,0 +1,33 @@
+.last__watched{
+    position: relative; width: 100%; display: flex; justify-content: space-between; gap: 32px;
+
+    .episode__image{
+        position: relative; width: 40%; background: grey; border-radius: 16px; overflow: hidden;
+        img{
+            width: 100%;
+        }
+    }
+    .episode__details{
+        position: relative; width: calc(60% - 32px); display: flex; align-items: center;
+        .text__wrapper{
+            position: relative; width: 100%; display: flex; flex-wrap: wrap; gap: 16px;
+
+            .width-100{
+                position: relative; width: 100%;
+            }
+            .episode__title{
+                h1{ color: $color-black; font-size: 40px; }
+            }
+            .video__title{
+                h2{ color: $color-black; font-size: 28px; }
+            }
+            .description{
+                // max-height: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+                p{ color: $color_black;  margin: 0px; padding: 0px; }
+            }
+            .tags{
+                display: flex; gap: 16px;
+            }
+        }
+    }
+}

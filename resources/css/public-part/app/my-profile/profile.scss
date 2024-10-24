@@ -576,6 +576,11 @@
                 }
             }
         }
+
+        /**
+         *  Other scripts included in profile wrapper
+         */
+        @import "my-progress";
     }
 }
 @media only screen and (max-width: $d-width) {
