@@ -80,11 +80,18 @@ class EpisodesController extends Controller{
                     ->first();
 
                 if($nextVideo){
-                    EpisodeActivity::create([
-                        'user_id' => Auth::user()->id,
-                        'episode_id' => $request->episode_id,
-                        'video_id' => $nextVideo->id
-                    ]);
+                    $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)
+                        ->where('episode_id', '=', $request->episode_id)
+                        ->where('video_id', '=', $nextVideo->id)
+                        ->first();
+
+                    if(!$activity){
+                        EpisodeActivity::create([
+                            'user_id' => Auth::user()->id,
+                            'episode_id' => $request->episode_id,
+                            'video_id' => $nextVideo->id
+                        ]);
+                    }
                 }else{
                     $episodeFinished = true;
                 }
@@ -99,12 +106,17 @@ class EpisodesController extends Controller{
             return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
         }
     }
+    public function playVideo(Request $request): JsonResponse{
+        try{
+            $nextVideo = EpisodeVideo::where('id', '=', $request->video_id)->first();
 
-    public function previewVideo(): View{
-        return view($this->_path . 'preview-video');
-    }
-
-    public function testVideo(): View{
-        return view($this->_path . 'test-video');
+            return $this->apiResponse('0000', __('Success'), [
+                'progress' => 0,
+                'nextVideo' => $nextVideo,
+                'episodeFinished' => false
+            ]);
+        }catch (\Exception $e){
+            return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
+        }
     }
 }

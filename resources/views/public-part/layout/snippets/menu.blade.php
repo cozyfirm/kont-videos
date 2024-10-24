@@ -7,7 +7,7 @@
             <ul>
                 <li><a href="{{ route('public.episodes') }}">Epizode</a></li>
                 <li><a href="#">Predavači</a></li>
-                <li><a href="#">Teme</a></li>
+{{--                <li><a href="#">Teme</a></li>--}}
                 <li><a href="{{ route('public.blog') }}">Vijesti</a></li>
                 <li><a href="#">O nama</a></li>
                 <li><a href="#">Kontakt</a></li>
@@ -15,15 +15,18 @@
         </div>
         <div class="action-btn">
             @if(Auth()->check())
-                <a href="{{ route('auth.create-account') }}">
+                <a href="{{ route('auth.logout') }}">
+                    <button target class="btn-secondary"><i class="fi fi-bs-sign-out-alt"></i>{{ __('Odjavi se') }}</button>
+                </a>
+                <a href="{{ route('public.my-profile.progress') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>
                 </a>
             @else
                 <a href="{{ route('auth') }}">
-                    <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>Log in</button>
+                    <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>{{ __('Prijavi se') }}</button>
                 </a>
                 <a href="{{ route('auth.create-account') }}">
-                    <button class="btn-primary">Registruj se</button>
+                    <button class="btn-primary">{{ __('Registruj se') }}</button>
                 </a>
             @endif
         </div>
@@ -39,7 +42,7 @@
             <ul>
                 <li><a href="#">Epizode</a></li>
                 <li><a href="#">Predavači</a></li>
-                <li><a href="#">Teme</a></li>
+{{--                <li><a href="#">Teme</a></li>--}}
                 <li><a href="#">Vijesti</a></li>
                 <li><a href="#">O nama</a></li>
                 <li><a href="#">Kontakt</a></li>
@@ -47,6 +50,9 @@
         </div>
         <div class="action-btn">
             @if(Auth()->check())
+                <a href="{{ route('auth') }}">
+                    <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>{{ __('Odjavi se') }}</button>
+                </a>
                 <a href="{{ route('auth.create-account') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>
                 </a>
@@ -55,7 +61,7 @@
                     <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>Log in</button>
                 </a>
                 <a href="{{ route('auth.create-account') }}">
-                    <button class="btn-primary">Registruj se</button>
+                    <button class="btn-primary">{{ __('Registruj se') }}</button>
                 </a>
             @endif
         </div>

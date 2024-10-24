@@ -75,7 +75,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{ html()->label(__('Broj telefona'))->for('phone')->class('bold') }}
-                                    {{ html()->number('phone')->class('form-control form-control-sm mt-2')->maxlength(13)->value('') }}
+                                    {{ html()->text('phone')->class('form-control form-control-sm mt-2')->value("+387 ") }}
                                     <small id="prefixHelp" class="form-text text-muted"> {{ __('Unesite Vaš broj telefona') }} </small>
                                 </div>
                             </div>

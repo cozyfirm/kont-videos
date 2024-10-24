@@ -51,7 +51,7 @@
                                     <img src="{{ asset('files/images/default/icons/video.svg') }}" alt="">
                                     <span>{{ $content->getDuration() }}</span>
                                 </div>
-                                <div class="play_w">
+                                <div class="play_w" video-id="{{ $content->id }}">
                                     <span>{{ __('Play') }}</span>
                                 </div>
                             </div>

@@ -44,7 +44,7 @@ class AuthController extends Controller{
             }
 
             $uri = route('system.home');
-            if($user->role == 'user') $uri = route('dashboard.welcome');
+            if($user->role == 'user') $uri = route('public.my-profile.progress');
 
             return json_encode([
                 'code' => '0000',

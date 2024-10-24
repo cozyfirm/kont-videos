@@ -49,6 +49,10 @@ $color-disabled: rgba(189, 192, 197, .5);
 @import "app/shared/news";
 @import "app/blog/blog";
 
+/* My Profile */
+@import "app/my-profile/shared/inner-menu";
+@import "app/my-profile/profile";
+
 html {
     font-family: Josefin Sans, sans-serif;
 }

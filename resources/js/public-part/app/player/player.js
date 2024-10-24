@@ -45,6 +45,7 @@ $(document).ready(function (){
         let currentVideoID = 0; let mainDataResponse = null;
         let currentTime = 0, finishedVideo = false;
         let updateActivityUri = '/episodes/activity/update-activity';
+        let playVideoUri = '/episodes/activity/play-video';
 
         let iframeUri = "https://iframe.mediadelivery.net/embed/";
         let iframeGetParams = "?autoplay=false&loop=false&muted=false&preload=true&responsive=true";
@@ -222,6 +223,35 @@ $(document).ready(function (){
             });
         };
 
+        /**
+         *  When user press button "Play", load exact video
+         */
+        $(".play_w").click(function (){
+            let videoID = $(this).attr('video-id');
+
+            $.ajax({
+                url: playVideoUri,
+                method: "POST",
+                dataType: "json",
+                data: {
+                    video_id : videoID
+                },
+                success: function success(response) {
+                    let code = response['code'];
+
+                    if(code === '0000'){
+                        mainDataResponse = response['data'];
+                        $(".se__wrapper[video-id='" + videoID +"']").find('.checkbox_w').removeClass('checked');
+
+                        playNewVideo();
+                    }else{
+                        Notify.Me([response['message'], "warn"]);
+                    }
+                }
+            });
+        });
+
+        /* On GET request, set initial data */
         handleVideo();
     }
 });

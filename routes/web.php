@@ -10,6 +10,8 @@ use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisode
 use App\Http\Controllers\PublicPart\Blog\BlogController as PublicBlogController;
 use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PublicPart\MyProfile\MyProfileController;
+use App\Http\Controllers\PublicPart\MyProfile\MyProgressController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -40,10 +42,27 @@ Route::prefix('/')->group(function () {
          */
         Route::prefix('/activity')->group(function () {
             Route::post('/update-activity',               [PublicEpisodesController::class, 'updateActivity'])->name('public.episodes.update-activity');
-        });
 
-        Route::get ('/preview-video',                 [PublicEpisodesController::class, 'previewVideo'])->name('public.episodes.preview-video');
-        Route::get ('/test-video',                    [PublicEpisodesController::class, 'testVideo'])->name('public.episodes.test-video');
+            /* Play specific video */
+            Route::post('/play-video',                    [PublicEpisodesController::class, 'playVideo'])->name('public.episodes.play-video');
+        });
+    });
+
+    /**
+     *  My profile:
+     *      1. Preview / Edit data
+     *      2. My progress
+     *      3. Notes, etc
+     */
+    Route::prefix('/my-profile')->group(function () {
+        Route::get ('/',                              [MyProfileController::class, 'profile'])->name('public.my-profile');
+
+        /**
+         *  My progress
+         */
+        Route::prefix('/progress')->group(function () {
+            Route::get ('/',                              [MyProgressController::class, 'myProgress'])->name('public.my-profile.progress');
+        });
     });
 });
 
@@ -153,7 +172,7 @@ Route::prefix('system')->group(function () {
         });
 
         /**
-         *  Blog:: ToDo
+         *  Blog
          */
         Route::prefix('blog')->middleware('auth')->group(function () {
             Route::get ('/',                               [AdminBlogController::class, 'index'])->name('system.admin.blog');
