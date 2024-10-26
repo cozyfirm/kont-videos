@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static where(string $string, string $string1, int $int)
+ * @method static take(int $int)
  */
 class Blog extends Model{
     use HasFactory, SoftDeletes;
@@ -21,6 +22,9 @@ class Blog extends Model{
 
     public function categoryRel(): HasOne{
         return $this->hasOne(Keyword::class, 'id', 'category');
+    }
+    public function smallImgRel(): HasOne{
+        return $this->hasOne(File::class, 'id', 'small_img');
     }
     public function mainImgRel(): HasOne{
         return $this->hasOne(File::class, 'id', 'main_img');

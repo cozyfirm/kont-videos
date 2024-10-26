@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PublicPart\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Core\Keyword;
 use App\Models\Other\Blog\Blog;
 use App\Models\Other\Blog\BlogGallery;
 use App\Traits\Http\ResponseTrait;
@@ -15,11 +16,16 @@ class BlogController extends Controller{
     protected string $_path = 'public-part.app.blog.';
 
     public function index(): View{
-        return view($this->_path . 'index');
+        return view($this->_path . 'index', [
+            'categories' => Keyword::where('type', 'blog_category')->get(),
+            'popular' => Blog::take(4)->get()
+        ]);
     }
     public function preview(): View{
         return view($this->_path . 'preview', [
-            'post' => Blog::where('id', '=', 1)->first()
+            'post' => Blog::where('id', '=', 1)->first(),
+            'categories' => Keyword::where('type', 'blog_category')->get(),
+            'popular' => Blog::take(4)->get()
         ]);
     }
     public function fetchImages(Request $request): JsonResponse | bool | string{

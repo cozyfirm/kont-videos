@@ -2,6 +2,7 @@
 
 namespace App\Models\Core;
 
+use App\Models\Other\Blog\Blog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -38,4 +39,7 @@ class Keyword extends Model{
     /**
      *  Keyword relationships
      */
+    public function postsRel(): HasMany{
+        return $this->hasMany(Blog::class, 'category', 'id');
+    }
 }

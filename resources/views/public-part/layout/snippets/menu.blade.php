@@ -8,7 +8,7 @@
                 <li><a href="{{ route('public.episodes') }}">Epizode</a></li>
                 <li><a href="#">Predavači</a></li>
 {{--                <li><a href="#">Teme</a></li>--}}
-                <li><a href="{{ route('public.blog') }}">Vijesti</a></li>
+                <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
                 <li><a href="#">O nama</a></li>
                 <li><a href="#">Kontakt</a></li>
             </ul>
@@ -46,7 +46,7 @@
                 <li><a href="#">Epizode</a></li>
                 <li><a href="#">Predavači</a></li>
 {{--                <li><a href="#">Teme</a></li>--}}
-                <li><a href="#">Vijesti</a></li>
+                <li><a href="#">{{ __('Vijesti') }}</a></li>
                 <li><a href="#">O nama</a></li>
                 <li><a href="#">Kontakt</a></li>
             </ul>

@@ -2,7 +2,7 @@
 
 @section('public-content')
     <div class="hero-video">
-        <video autoplay loop muted preload src="{{ asset('files/videos/hero-video.mp4')}}"></video>
+        <video autoplay loop muted preload src="{{ asset('files/videos/main-vdeo.mp4')}}"></video>
 
         <div class="hero-bunner">
             <div class="hero-bunner-content">
