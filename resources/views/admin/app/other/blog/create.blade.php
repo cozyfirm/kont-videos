@@ -73,7 +73,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Kratki opis'))->for('short_desc')->class('bold') }}
-                                {{ html()->text('short_desc', $post->short_desc ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->short_desc : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->text('short_desc', $post->short_desc ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->short_desc : ''))->isReadonly(isset($preview))->maxlength('250') }}
                             </div>
                         </div>
                     </div>

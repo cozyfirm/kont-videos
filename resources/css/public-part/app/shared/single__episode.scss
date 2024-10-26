@@ -1,6 +1,9 @@
 .single__episode{
     position: relative; width: calc(33% - 16px); min-height: 120px;
 
+    &.se__small{
+        width: calc(25% - 18px);
+    }
     height: 400px;
     display: flex;
     flex-wrap: wrap;

@@ -26,10 +26,13 @@ Route::prefix('/')->group(function () {
     Route::prefix('/blog')->group(function () {
         Route::get ('/',                              [PublicBlogController::class, 'index'])->name('public.blog');
         Route::get ('/category/{id}',                 [PublicBlogController::class, 'indexWithCategories'])->name('public.blog.with-categories');
-        Route::get ('/preview',                       [PublicBlogController::class, 'preview'])->name('public.blog.preview');
+        Route::get ('/preview/{slug}',                [PublicBlogController::class, 'preview'])->name('public.blog.preview');
 
         /* Fetch images */
-        Route::post ('/fetch-images',                 [PublicBlogController::class, 'fetchImages'])->name('public-part.blog.fetch-images');
+        Route::post('/fetch-images',                  [PublicBlogController::class, 'fetchImages'])->name('public-part.blog.fetch-images');
+
+        /* Load more posts */
+        Route::post('/load-more',                     [PublicBlogController::class, 'loadMore'])->name('public-part.blog.load-more');
     });
     /**
      *  Episodes

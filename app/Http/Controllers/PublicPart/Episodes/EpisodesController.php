@@ -19,7 +19,7 @@ class EpisodesController extends Controller{
 
     public function episodes(): View{
         return view($this->_path . 'preview-all', [
-            'episodes' => Episode::orderBy('id', 'DESC')->take(6)->get(),
+            'episodes' => Episode::orderBy('id', 'DESC')->take(8)->get(),
             'all_episodes' => true
         ]);
     }

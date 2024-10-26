@@ -1,7 +1,7 @@
 <section class="episodes">
     <div class="inner__wrapper @isset($all_episodes) all-episodes @endisset">
         @foreach($episodes as $episode)
-            <div class="single__episode">
+            <div class="single__episode @isset($all_episodes) se__small @endisset">
                 <img src="{{ asset($episode->imageRel->getFile()) }}" class="episode-img">
                 <video loop muted preload src="{{ asset($episode->videoRel->getFile()) }}"></video>
 

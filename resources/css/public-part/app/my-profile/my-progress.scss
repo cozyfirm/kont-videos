@@ -10,7 +10,7 @@
     .episode__details{
         position: relative; width: calc(60% - 32px); display: flex; align-items: center;
         .text__wrapper{
-            position: relative; width: 100%; display: flex; flex-wrap: wrap; gap: 16px;
+            position: relative; width: 100%; display: flex; flex-wrap: wrap; gap: 24px;
 
             .width-100{
                 position: relative; width: 100%;
@@ -27,7 +27,136 @@
             }
             .tags{
                 display: flex; gap: 16px;
+                .btn-dark-grey{
+                    border-radius: 10px;
+                }
             }
+            .details{
+                display: flex;
+                .details__inner{
+                    display: flex; gap: 16px; background: #464545; width: auto; padding: 6px 16px; align-items: center;
+                    p, span{
+                        color: $color-white; margin: 0px; padding: 0px;
+                    }
+                    .icon_btn{
+                        display: flex; gap: 8px; align-items: center;
+                        i{
+                            color:$color-white; font-size: 14px;
+                        }
+                    }
+                }
+            }
+            .more-info{
+                display: flex; justify-content: flex-end;
+                a{
+                    display: flex; color: $color-black; text-decoration: none; transition: 0.75s all;
+                }
+                a:hover{
+                    color: $color-secondary;
+                }
+            }
+        }
+    }
+}
+
+.my__learnings__line{
+    width: 100%; height: 2px; background-color: $color-black !important; opacity: 1;
+}
+
+.my__learnings{
+    position: relative; width: 100%; display: flex; gap: 24px; flex-wrap: wrap;
+
+    .learning_wrapper{
+        position:relative; width: calc(25% - 18px); border: 2px solid $color-primary; flex-direction: column; display: flex;
+
+        @media screen and (max-width: 1100px){
+            width: calc(33.33% - 16px);
+        }
+        @media screen and (max-width: 900px){
+            width: calc(50% - 12px);
+        }
+        @media screen and (max-width: 800px){
+            width: 100%;
+        }
+        /* Link all over the item */
+        a::before {
+            content: ""; position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px;
+        }
+
+        .image__wrapper{
+            transition: all .1s ease; position: relative; overflow: hidden; width: 100%; height: 220px;
+
+            img {
+                width: 100%; height: auto; object-fit: cover; transition: all 2s ease;
+            }
+
+            &::after {
+                content: ""; background-color: $color-black; opacity: .4; position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: all 2s ease;
+            }
+        }
+        .text__wrapper{
+            position: relative; width: 100%; height: calc(100% - 220px); display: flex; justify-content: space-between;
+            flex-direction: column;
+            .text__content{
+                position: relative; width: 100%; padding: 16px;
+                h2{
+                    font-size: 32px; font-weight: bold; margin: 0px; padding: 0px; color: $color-black;
+                }
+            }
+            .progress{
+                position: relative; width: 100%; height: 120px; background: $color-white; padding: 0px 16px 16px; display: flex; flex-wrap: wrap;
+                align-items: flex-start;
+                p{
+                    color: $color-black; padding: 0px; margin: 0px; font-weight: bold;
+                }
+
+                .progress_line{
+                    width: 100%; position: relative; height: 10px; background: $color-primary; margin: 0px; padding: 0px;
+                    .real__progress{
+                        position: relative; width: 40%; background: $color-secondary; height: 10px;
+                    }
+                }
+
+                .statistics{
+                    position: relative; width: 100%; display: flex; justify-content: space-between; align-items: center;
+                    h2{
+                        color: $color-black; font-size: 30px; margin: 0px; padding: 0px; font-weight: bold;
+                    }
+                    .stars{
+                        position: relative; width: calc(100% - 100px); display: flex; justify-content: flex-end; flex-wrap: wrap;
+                        align-items: center;
+                        .svg__wrapper{
+                            position: relative; width: 100%; display: flex; justify-content: flex-end;
+                            svg{
+                                height: 24px;
+                            }
+                        }
+                        p{
+                            margin: 0px; padding: 0px; color: $color-black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.load__more{
+    position: relative; width: 100%; display: flex; justify-content: center;
+    button{
+        background: $color-secondary; padding: 8px 32px;
+        &:hover {
+            background-color: $color-primary !important;
+            border: 1px $color-primary solid;
+            transition: 0.75s;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            background-color: $color-primary !important;
+            border: 1px $color-primary solid;
         }
     }
 }

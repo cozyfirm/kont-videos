@@ -7,6 +7,10 @@
         position: relative; left: calc(50% - ($d-width / 2)); width: $d-width; display: inline-flex; justify-content: space-between;
         margin-top: 32px; margin-bottom: 32px;
 
+        &.profile__wrapper_wrap{
+            flex-wrap: wrap; gap: 32px;
+        }
+
         .profile__wrapper_left{
             position: relative; width: 320px;
 

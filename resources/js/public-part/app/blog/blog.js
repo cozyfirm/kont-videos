@@ -9,69 +9,87 @@ $(document).ready(function (){
 
     let loadMoreUri = '/blog/load-more';
     let previewUri  = '/blog/preview/';
-    //
-    // $(".load__more_btn").click(function (){
-    //     let lastID = 0;
-    //     $(".blog__item").each(function (){
-    //         lastID = $(this).attr('itemid');
-    //     });
-    //
-    //     $.ajax({
-    //         url: loadMoreUri,
-    //         method: 'POST',
-    //         dataType: "json",
-    //         data: {
-    //             lastID: lastID
-    //         },
-    //         success: function success(response) {
-    //             let code = response['code'];
-    //
-    //             if(code === '0000'){
-    //                 let posts = response['data']['posts'];
-    //
-    //                 /* Remove load more btn and return */
-    //                 if(posts.length === 0){
-    //                     $(".blog__load_more_w").addClass('d-none');
-    //                     return;
-    //                 }
-    //
-    //                 for(let i=0; i<posts.length; i++){
-    //                     $(".blog__items").append(function (){
-    //                         return $("<div>").attr('class', 'blog__item').attr('itemid', posts[i]['id']).attr('uri', previewUri + posts[i]['id'])
-    //                             .append(function (){
-    //                                 return $("<img>").attr('src', posts[i]['img']).attr('class', 'blog__item-image')
-    //                                     .attr('alt', 'Blog image');
-    //                             })
-    //                             .append(function (){
-    //                                 return $("<div>").attr('class', 'blog__item-content')
-    //                                     .append(function (){
-    //                                         return $("<div>").attr('class', 'blog__item-content-box')
-    //                                             // .append(function (){
-    //                                             //     return $("<div>").attr('class', 'blog__item-content-box-category')
-    //                                             //         .text(posts[i]['categoryVal']);
-    //                                             // })
-    //                                             .append(function (){
-    //                                                 return $("<div>").attr('class', 'blog__item-content-box-read-time')
-    //                                                     .text(posts[i]['createdAt']);
-    //                                             });
-    //                                     })
-    //                                     .append(function (){
-    //                                         return $("<div>").attr('class', 'blog__item-content-title')
-    //                                             .text(posts[i]['title']);
-    //                                     })
-    //                                     .append(function (){
-    //                                         return $("<div>").attr('class', 'blog__item-content-description')
-    //                                             .text(posts[i]['short_desc']);
-    //                                     });
-    //                             });
-    //                     })
-    //                 }
-    //             }else{
-    //                 Notify.Me([response['message'], "warn"]);
-    //             }
-    //         }
-    //     });
-    // });
+
+    $(".blog__load_more").click(function (){
+        let lastID = 0;
+        let category = $(".posts__wrapper").attr('category');
+
+        $(".single__post").each(function (){
+            lastID = $(this).attr('post-id');
+        });
+
+        $.ajax({
+            url: loadMoreUri,
+            method: 'POST',
+            dataType: "json",
+            data: {
+                lastID: lastID,
+                category: category
+            },
+            success: function success(response) {
+                let code = response['code'];
+
+                if(code === '0000'){
+                    let posts = response['data']['posts'];
+
+                    /* Remove load more btn and return */
+                    if(posts.length === 0){
+                        $(".blog__load_more_w").addClass('d-none');
+                        return;
+                    }
+
+                    for(let i=0; i<posts.length; i++){
+                        let post = posts[i];
+
+                        $(".posts__wrapper").append(function (){
+                            return $("<div>").attr('class', 'single_new single__post').attr('post-id', post['id'])
+                                .append(function (){
+                                    return $("<div>").attr('class', 'image__wrapper')
+                                        .append(function (){
+                                            return $("<img>").attr('src', post['img']).attr('alt', 'Post image')
+                                        });
+                                })
+                                .append(function (){
+                                    return $("<div>").attr('class', 'text__wrapper')
+                                        .append(function (){
+                                            return $("<div>").attr('class', 'text__content')
+                                                .append(function (){
+                                                    return $("<h2>").text(post['title'])
+                                                })
+                                                .append(function (){
+                                                    return $("<p>").text(post['short_desc'])
+                                                })
+                                        })
+                                        .append(function (){
+                                            return $("<div>").attr('class', 'hashtags')
+                                                .append(function (){
+                                                    return $("<div>").attr('class', 'hashtag').text("HASH")
+                                                })
+                                                .append(function (){
+                                                    return $("<div>").attr('class', 'hashtag').text("TAG")
+                                                })
+                                        })
+                                })
+                                .append(function (){
+                                    return $("<a>").attr('href', '/blog/preview/' + post['slug'])
+                                })
+                        })
+                    }
+
+                    /**
+                     *  Hide load more btn
+                     */
+                    if(response['data']['leftPosts'] === 0){
+                        $(".blog__load_more").addClass('d-none');
+                        /* Remove margin */
+                        $(".posts__wrapper").addClass('margin_bottom_none');
+                    }
+                }else{
+                    Notify.Me([response['message'], "warn"]);
+                }
+            }
+        });
+    });
 
 
     /**

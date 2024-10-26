@@ -21,7 +21,7 @@
 
     <div class="recent-posts">
         @foreach($popular as $post)
-            <a href="{{route('public.blog.preview')}}">
+            <a href="{{ route('public.blog.preview', ['slug' => $post->slug ]) }}">
                 <div class="recent-post">
                     <div class="image-part">
                         <img src="{{ asset($post->smallImgRel->getFile()) }}" alt="">

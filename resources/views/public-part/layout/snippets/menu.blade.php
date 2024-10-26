@@ -15,14 +15,14 @@
         </div>
         <div class="action-btn">
             @if(Auth()->check())
-                <a href="{{ route('auth.logout') }}">
-                    <button target class="btn-secondary"><i class="fi fi-bs-sign-out-alt"></i>{{ __('Odjavi se') }}</button>
-                </a>
                 <a href="{{ route('public.my-profile.progress') }}">
+                    <button target class="btn-secondary"> <i class="fi fi-br-video-duration"></i> {{ __('Moj progres') }}</button>
+                </a>
+                <a href="{{ route('public.my-profile') }}" title="{{ __('Moj profil') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>
                 </a>
-                <a href="{{ route('auth.logout') }}">
-                    <button target class="btn-tertiary"><i class="fi fi-bs-sign-out-alt"></i></button>
+                <a href="{{ route('auth.logout') }}" title="{{ __('Odjavi se') }}">
+                    <button target class="btn-primary btn-tertiary-color"><i class="fi fi-bs-sign-out-alt"></i></button>
                 </a>
             @else
                 <a href="{{ route('auth') }}">
