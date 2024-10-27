@@ -1,4 +1,4 @@
-<section class="Accordion" id="Acoordion">
+<section class="Accordion accordion-wrapper @isset($all_episodes) accordion-wrapper-dark @endisset" id="Acoordion">
     <div class="accordion-container">
         <div class="faq-heading">
             <h1>FAQ</h1>
