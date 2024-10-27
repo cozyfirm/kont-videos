@@ -1,6 +1,9 @@
 @extends('public-part.layout.layout')
 
 @section('public-content')
+    <!-- Review options -->
+    @include('public-part.app.episodes.includes.add-review')
+
     <div class="video__player">
         <div class="player__wrapper">
             <iframe id="active-video" current-time="{{ $video->activityRel->time ?? 0 }}" finished="{{ $video->finished }}" video-id="{{ $video->id }}" episode-id="{{ $episode->id }}" src="https://iframe.mediadelivery.net/embed/{{ $video->library_id }}/{{ $video->video_id }}?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>

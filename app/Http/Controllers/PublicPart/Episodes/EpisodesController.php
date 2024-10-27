@@ -45,7 +45,9 @@ class EpisodesController extends Controller{
 
         return view($this->_path . 'preview', [
             'episode' => $episode,
-            'video' => $video
+            'video' => $video,
+            /* Replace menu links with episode title */
+            'previewEpisode' => true
         ]);
     }
     public function updateActivity(Request $request): JsonResponse{

@@ -5,19 +5,38 @@
         </div>
         <div class="list">
             <ul>
-                <li><a href="{{ route('public.episodes') }}">Epizode</a></li>
-                <li><a href="#">Predavači</a></li>
-{{--                <li><a href="#">Teme</a></li>--}}
-                <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
-                <li><a href="#">O nama</a></li>
-                <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
+                @isset($previewEpisode)
+                    <li class="episode-title">
+                        <a href="{{ route('public.episodes') }}" title="{{ __('Epizoda') }}">{{ $episode->title ?? '' }}</a>
+                        <i class="fi fi-br-angle-small-right"></i>
+                        <a class="menu-video-title" title="{{ __('Video') }}">{{ $video->title ?? '' }}</a>
+                    </li>
+                @else
+                    <li><a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a></li>
+                    <li><a href="#">Predavači</a></li>
+                    {{--                <li><a href="#">Teme</a></li>--}}
+                    <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
+                    <li><a href="#">O nama</a></li>
+                    <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
+                @endisset
             </ul>
         </div>
         <div class="action-btn">
             @if(Auth()->check())
-                <a href="{{ route('public.my-profile.progress') }}">
-                    <button target class="btn-secondary"> <i class="fi fi-br-video-duration"></i> {{ __('Moj progres') }}</button>
-                </a>
+                @isset($previewEpisode)
+                    <a href="{{ route('public.my-profile.progress') }}">
+                        <button target class="btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                                <path fill="#FFFFFF" d="M19.467,23.316,12,17.828,4.533,23.316,7.4,14.453-.063,9H9.151L12,.122,14.849,9h9.213L16.6,14.453Z"/>
+                            </svg>
+                            <p>{{ __('Ostavite ocjenu') }}</p>
+                        </button>
+                    </a>
+                @else
+                    <a href="{{ route('public.my-profile.progress') }}">
+                        <button target class="btn-secondary"> <i class="fi fi-br-video-duration"></i> {{ __('Moj progres') }}</button>
+                    </a>
+                @endisset
                 <a href="{{ route('public.my-profile') }}" title="{{ __('Moj profil') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>
                 </a>
@@ -43,10 +62,10 @@
     <div class="mobile-menu" id="mobile-menu">
         <div class="list">
             <ul>
-                <li><a href="#">Epizode</a></li>
+                <li><a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a></li>
                 <li><a href="#">Predavači</a></li>
 {{--                <li><a href="#">Teme</a></li>--}}
-                <li><a href="#">{{ __('Vijesti') }}</a></li>
+                <li><a href="#">{{ __('Teme') }}</a></li>
                 <li><a href="#">O nama</a></li>
                 <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
             </ul>

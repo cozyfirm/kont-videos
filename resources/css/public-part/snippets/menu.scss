@@ -65,8 +65,16 @@
                         }
                     }
                 }
+                .episode-title{
+                    display: flex; height: 40px; gap: 8px;
+                    a{
+                        margin: 0px; padding: 0px;
+                    }
+                    i{
+                        transform: rotate(90deg); margin: 0px; padding: 0px;
+                    }
+                }
             }
-
         }
 
         .action-btn {
@@ -79,8 +87,30 @@
 
             .btn-secondary {
                 height: 32px;
+                padding: 6px 16px;
+                display: flex; align-items: center;
 
+                &:hover {
+                    background-color: $color-dark-grey-hover !important;
+                    border: 1px $color-dark-grey-hover solid;
+                    transition: 0.75s;
+                    color: $color-white;
+                }
 
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                    background-color: $color-dark-grey-hover !important;
+                    border: 1px $color-dark-grey-hover solid;
+                    color: $color-white;
+                }
+
+                p{
+                    margin: 0px; padding: 0px; font-size: 14px; margin-top: 2px;
+                }
+                svg{
+                    height: 14px; margin: 0px; padding: 0px;
+                }
             }
 
             .btn-primary {
