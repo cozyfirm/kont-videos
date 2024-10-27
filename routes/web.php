@@ -12,6 +12,7 @@ use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicPart\MyProfile\MyProfileController;
 use App\Http\Controllers\PublicPart\MyProfile\MyProgressController;
+use App\Http\Controllers\PublicPart\Pages\ContactController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -50,6 +51,18 @@ Route::prefix('/')->group(function () {
             /* Play specific video */
             Route::post('/play-video',                    [PublicEpisodesController::class, 'playVideo'])->name('public.episodes.play-video');
         });
+    });
+
+    /**
+     *  Contact us:
+     *      1. Contact page
+     *      2. Send an email
+     */
+    Route::prefix('/contact')->group(function () {
+        Route::get ('/',                                  [ContactController::class, 'contact'])->name('public.contact');
+
+        /* Send email to admins */
+        Route::post('/send-an-email' ,                    [ContactController::class, 'sendAnEmail'])->name('public.contact.send-an-email');
     });
 
     /**

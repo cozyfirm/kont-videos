@@ -10,7 +10,7 @@
 {{--                <li><a href="#">Teme</a></li>--}}
                 <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
                 <li><a href="#">O nama</a></li>
-                <li><a href="#">Kontakt</a></li>
+                <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
             </ul>
         </div>
         <div class="action-btn">
@@ -48,7 +48,7 @@
 {{--                <li><a href="#">Teme</a></li>--}}
                 <li><a href="#">{{ __('Vijesti') }}</a></li>
                 <li><a href="#">O nama</a></li>
-                <li><a href="#">Kontakt</a></li>
+                <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
             </ul>
         </div>
         <div class="action-btn">

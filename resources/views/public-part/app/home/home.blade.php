@@ -46,9 +46,9 @@
     @include('public-part.app.shared.episodes')
     @include('public-part.app.shared.news')
 
-{{--    @include('public-part.app.home.includes.news')--}}
+    {{--    @include('public-part.app.home.includes.news')--}}
 
     @include('public-part.app.shared.accordion')
 
-    @include('public-part.app.home.includes.contact')
+    @include('public-part.app.shared.contact')
 @endsection

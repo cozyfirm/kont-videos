@@ -20,15 +20,10 @@ html{
     }
 }
 
-$color-white: #E4E2DF;
-$color-ten: #E4E2DF;
-$color-black: #1E1C1C;
-$color-primary: #63764C;
-$color-primary-hover: #8d9c7a;
-$color-secondary: #73394A;
-$color-disabled: rgba(189, 192, 197, .5);
-$color-dark-grey: #2F2D2D;
-$color-dark-grey-hover: #666262;
+/**
+ *  Import colors
+ */
+@import "../style/layout/colors";
 
 
 @import url('https://cdn-uicons.flaticon.com/2.2.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
@@ -42,6 +37,7 @@ $color-dark-grey-hover: #666262;
 @import "snippets/footer";
 @import "snippets/accordion";
 @import "snippets/wyswyg";
+@import "../style/layout/notify";
 
 @import "snippets/circle.css";
 

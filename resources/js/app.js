@@ -38,7 +38,7 @@ import './admin/blog/blog.js';
 
 /* Public app */
 import './public-part/app/blog/blog.js';
-
+import './public-part/app/pages/contact/contact-us.js';
 $(document).ready(function() {
     $(".datepicker").datepicker({
         format: 'mm.dd.yyyy',

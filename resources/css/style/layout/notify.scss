@@ -8,22 +8,22 @@
 
 
     .notifyMe{
-        position: relative; left:0px; top:0px; margin-bottom: 15px; padding:5px 15px; border-radius: 8px;
+        position: relative; left:0px; top:0px; margin-bottom: 15px; padding:5px 15px; border-radius: 4px;
 
         .nt-inline{
-            display: inline-flex;
+            display: inline-flex; align-items: center;
             .nt-icon{
-                margin-right:10px; font-size:15px; padding-top:4px;
+                margin-right:10px; font-size:15px;
             }
             p{
-                margin:0px; font-weight: bold;
+                margin:0px; font-weight: bold; padding: 0px;
             }
         }
     }
     .nt-success{
         background: #DFF0D8;
         .nt-inline{
-            p, i{color:#508F51; }
+            p, i{color:$color-primary; }
         }
     }
     .nt-warn{
@@ -35,7 +35,7 @@
     .nt-danger{
         background: #F2DEDE;
         .nt-inline{
-            p, i{color:#C84040; }
+            p, i{color:$color-secondary; }
         }
     }
     .nt-chat{
