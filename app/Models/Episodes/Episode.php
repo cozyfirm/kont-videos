@@ -37,7 +37,7 @@ class Episode extends Model{
         return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id');
     }
     public function reviewsRel(): HasMany{
-        return $this->hasMany(Review::class, 'id', 'episode_id');
+        return $this->hasMany(Review::class, 'episode_id', 'id');
     }
 
     /**
@@ -52,6 +52,12 @@ class Episode extends Model{
     }
     public function totalViews(): int{
         return EpisodeVideo::where('episode_id', '=', $this->id)->sum('views');
+    }
+    public function averageRating(): string {
+        return number_format(4, 1, '.', '');
+    }
+    public function totalReviews(): string{
+        return "0.1K";
     }
 
     /**

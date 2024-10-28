@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeActivity;
 use App\Models\Episodes\EpisodeVideo;
+use App\Traits\Episodes\EpisodeBaseTrait;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class EpisodesController extends Controller{
-    use ResponseTrait;
+    use ResponseTrait, EpisodeBaseTrait;
     protected string $_path = 'public-part.app.episodes.';
 
     public function episodes(): View{
@@ -47,7 +48,8 @@ class EpisodesController extends Controller{
             'episode' => $episode,
             'video' => $video,
             /* Replace menu links with episode title */
-            'previewEpisode' => true
+            'previewEpisode' => true,
+            'reviewsByNumber' => $this->getEpisodeReviewsByNumber($episode->id)
         ]);
     }
     public function updateActivity(Request $request): JsonResponse{

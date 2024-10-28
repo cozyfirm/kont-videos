@@ -95,7 +95,7 @@
                 <div class="inner__tab" ref-tag="overview__wrapper">
                     <p> {{ __('Zabilješke') }} </p>
                 </div>
-                <div class="inner__tab" ref-tag="overview__wrapper">
+                <div class="inner__tab" ref-tag="reviews">
                     <p> {{ __('Recenzije') }} </p>
                 </div>
                 <div class="inner__tab" ref-tag="rest_of_episodes">
@@ -110,7 +110,7 @@
                         <div class="number">
                             <div class="number__header">
                                 <h4> 4.2 </h4>
-                                <img src="{{ asset('files/images/default/icons/green_star.svg') }}" alt="">
+                                <img src="{{ asset('files/images/default/icons/star-yellow.svg') }}" alt="">
                             </div>
                             <p> 156 recenzija </p>
                         </div>
@@ -172,6 +172,72 @@
                             </div>
                         </div>
                     @endfor
+                </div>
+
+                <div class="inner__element reviews">
+                    <div class="reviews__global">
+                        <div class="rg__wrapper rg__wrapper__small">
+                            <p class="description">{{ __('Ukupno ocjena') }}</p>
+                            <div class="heading__wrapper">
+                                <h1>{{ $episode->totalReviews() }}</h1>
+                            </div>
+                            <p class="additional">{{ __('Ocjene od korisnika kont.ba') }}</p>
+                        </div>
+                        <div class="line__between"><div class="fill"></div></div>
+                        <div class="rg__wrapper rg__wrapper__small">
+                            <p class="description">{{ __('Prosječna ocjena') }}</p>
+                            <div class="heading__wrapper">
+                                <h1>{{ $episode->averageRating() }}</h1>
+                                <div class="stars__wrapper">
+                                    @include('public-part.app.shared.common.stars', ['stars' => $episode->averageRating() ])
+                                </div>
+                            </div>
+                            <p class="additional">{{ __('Zaokružena prosječna ocjena') }}</p>
+                        </div>
+                        <div class="line__between"><div class="fill"></div></div>
+                        <div class="rg__wrapper rg__wrapper__big rg__wrapper__reviews">
+                            @foreach($reviewsByNumber as $index => $number)
+                                <div class="rate__no">
+                                    <div class="stars__no">
+                                        <img src="{{ asset('files/images/default/icons/star-yellow.svg') }}" alt="">
+                                        <p>{{ $index }}</p>
+                                    </div>
+                                    <div class="rate__line" line-width="{{ $number['percentage'] }}"> </div>
+                                    <p>{{ $number['total'] }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="single__reviews">
+                        @foreach($episode->reviewsRel as $review)
+                            <div class="single__review">
+                                <div class="user__info">
+                                    <div class="ui__img_w">
+                                        <h2>{{ $review->userRel->getInitials() }}</h2>
+                                    </div>
+                                    <div class="ui__info">
+                                        <h2>{{ $review->userRel->name ?? '' }}</h2>
+                                        <p>{{ __('Ukupno ocjena: ') }} {{ $review->userRel->totalReviews() }}</p>
+                                    </div>
+                                </div>
+                                <div class="review__info">
+                                    <div class="stars__and__date">
+                                        <div class="stars">
+                                            @include('public-part.app.shared.common.stars', ['stars' => $review->stars])
+                                        </div>
+                                        <div class="date">
+                                            <p>24.10.2024 16:24:23h</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="note">
+                                        <p>{!! nl2br($review->note ?? '') !!}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

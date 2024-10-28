@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Core\Country;
+use App\Models\Episodes\Review;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -78,5 +79,11 @@ class User extends Authenticatable
     }
     public function countryRel(): HasOne{
         return $this->hasOne(Country::class, 'id', 'country');
+    }
+    public function getInitials(): string{
+        return substr($this->name, 0, 1) . '. ' . substr($this->name, 0, 1) . '.';
+    }
+    public function totalReviews(): int{
+        return Review::where('user_id', '=', $this->id)->count();
     }
 }

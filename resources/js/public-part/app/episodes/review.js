@@ -24,13 +24,13 @@ $(document).ready(function (){
                 return $("<div>").attr('class', 'star review-star').attr('star-index', i)
                     .append(function (){
                         if(i <= fullStar){
-                            return $("<img>").attr('src', '/files/images/default/icons/star.svg').attr('alt', 'Star image')
+                            return $("<img>").attr('src', '/files/images/default/icons/star-yellow.svg').attr('alt', 'Star image')
                         }
                         else if(halfStar && halfStar === i){
-                            return $("<img>").attr('src', '/files/images/default/icons/star-sharp-half-stroke.svg').attr('alt', 'Star image')
+                            return $("<img>").attr('src', '/files/images/default/icons/star-half-yellow.svg').attr('alt', 'Star image')
                         }
                         else{
-                            return $("<img>").attr('src', '/files/images/default/icons/star-empty.svg').attr('alt', 'Star image')
+                            return $("<img>").attr('src', '/files/images/default/icons/star-empty-yellow.svg').attr('alt', 'Star image')
                         }
                     })
                     .append(function (){
@@ -203,4 +203,13 @@ $(document).ready(function (){
             }
         });
     });
+
+    /**
+     *  Summary reviews of episode; Visible on episode preview -> Reviews
+     */
+    if($(".rg__wrapper__reviews").length){
+        $(".rate__line").each(function (){
+            $(this).css('width', $(this).attr('line-width') + '%');
+        });
+    }
 });

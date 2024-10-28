@@ -76,6 +76,14 @@ trait EpisodeBaseTrait{
         }
     }
 
+    /**
+     * Get reviews info - Used for frontend reviews
+     *
+     * @param $starsIndex
+     * @param $index
+     * @param $stars
+     * @return void
+     */
     public function getReviewsInfo(&$starsIndex, &$index, $stars): void{
         for($i=1; $i<=$stars; $i++){
             if($i == (int)$stars) $starsIndex = $i + 1;
@@ -83,5 +91,30 @@ trait EpisodeBaseTrait{
         if((int)$stars == 1) $starsIndex = 1;
 
         $index = ((int)$stars != $stars) ? 'left' : 'right';
+    }
+
+    public function getEpisodeReviewsByNumber($episode_id): array{
+        return [
+            5 => [
+                'total' => '1.2K',
+                'percentage' => '100'
+            ],
+            4 => [
+                'total' => '0.6K',
+                'percentage' => '50'
+            ],
+            3 => [
+                'total' => '0.3K',
+                'percentage' => '25'
+            ],
+            2 => [
+                'total' => '0.2K',
+                'percentage' => '16'
+            ],
+            1 => [
+                'total' => '0.1K',
+                'percentage' => '8'
+            ]
+        ];
     }
 }

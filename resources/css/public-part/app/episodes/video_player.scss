@@ -250,6 +250,104 @@
                 }
             }
 
+            .reviews{
+                width: 100%; flex-wrap: wrap; gap: 64px;
+                .reviews__global{
+                    position: relative; width: 100%; display: flex; justify-content: space-between; gap: 32px;
+                    .rg__wrapper{
+                        position: relative; width: calc(50% - 0px); display: flex; flex-wrap: wrap; gap: 8px; flex-direction: column;
+                        &.rg__wrapper__small{
+                            width: 25%;
+                        }
+                        p, h1{
+                            width: 100%; margin: 0px; padding: 0px; color: $color-black;
+                        }
+                        h1{
+                            font-size: 32px; font-weight: bold; color: $color-primary;
+                        }
+                        .heading__wrapper{
+                            display: flex; width: 100%; justify-content: flex-start; gap: 24px; align-items: center;
+                            h1{width: initial; }
+                            .stars__wrapper{
+                                display: flex; gap: 4px;
+                                img{
+                                    height: 20px;
+                                }
+                            }
+                        }
+
+                        &.rg__wrapper__big{
+                            gap: 0px;
+                        }
+                        .rate__no{
+                            width: 100%; align-items: center; display: flex; justify-content: flex-start; gap: 8px;
+                            p{
+                                width: initial; margin: 0px; padding: 0px;
+                            }
+                            .stars__no{
+                                display: flex; gap: 4px; align-items: center;
+                                img{
+                                    height: 14px;
+                                }
+                            }
+                            .rate__line{
+                                width: calc(100% - 20px); height: 6px; background: $color-secondary; border-radius: 1px;
+                            }
+                        }
+                    }
+                    .line__between{
+                        height: 100%; width: 2px; display: flex; align-items: center;
+                        .fill{
+                            height: calc(100% - 24px); background: rgba(0,0,0,0.1); width: 2px;
+                        }
+                    }
+                }
+                .single__reviews{
+                    position: relative; width: 100%;  min-height: 120px; display: flex; flex-wrap: wrap; gap: 32px;
+                    .single__review{
+                        position: relative; width: 100%; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 32px;
+                        .user__info{
+                            position: relative; width: 300px; display: flex; gap: 16px;
+                            .ui__img_w{
+                                width: 60px; height: 60px; border-radius: 4px; background: $color-primary; display: flex; align-items: center; justify-content: center;
+                                h2{
+                                    font-size: 18px; font-weight: bold;
+                                }
+                            }
+                            .ui__info{
+                                display: flex; gap: 8px; flex-wrap: wrap; flex-direction: column;
+                                h2, p{
+                                    color: $color-black; margin: 0px; padding: 0px; width: 100%;
+                                }
+                                h2{
+                                    font-size: 24px;
+                                }
+                            }
+                        }
+                        .review__info{
+                            position: relative; width: calc(100% - 332px); display: flex; flex-wrap: wrap; gap: 16px;
+                            .stars__and__date{
+                                position: relative; width: 100%; display: flex; gap: 16px; align-items: center; align-content: center;
+                                .stars{
+                                    display: flex; gap: 2px;
+                                    .star{
+                                        img{
+                                            height: 16px !important;
+                                        }
+                                    }
+                                }
+                                p{
+                                    margin-top: 2px;
+                                }
+                            }
+                            .note{
+                                min-height: 20px;
+                            }
+                        }
+                    }
+                    .single__review:last-child{border-bottom: none;}
+                }
+            }
             .rest_of_episodes{
                 position: relative; justify-content: space-between; gap: 24px;
 
