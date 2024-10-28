@@ -1,6 +1,6 @@
 <div class="profile__wrapper_left @if(isset($myProfile)) my_profile @endif">
     <div class="p__w_l_img_w">
-        <form action="#" method="POST" id="update-profile-image" enctype="multipart/form-data">
+        <form action="{{ route('public.my-profile.update-image') }}" method="POST" id="update-profile-image" enctype="multipart/form-data">
             @csrf
 
             @if(isset(Auth()->user()->photo_uri))

@@ -214,7 +214,11 @@
                             <div class="single__review">
                                 <div class="user__info">
                                     <div class="ui__img_w">
-                                        <h2>{{ $review->userRel->getInitials() }}</h2>
+                                        @if(isset($review->userRel->photo_uri))
+                                            <img src="{{ asset('files/images/public-part/users/' . ($review->userRel->photo_uri)) }}" alt="">
+                                        @else
+                                            <h2>{{ $review->userRel->getInitials() }}</h2>
+                                        @endif
                                     </div>
                                     <div class="ui__info">
                                         <h2>{{ $review->userRel->name ?? '' }}</h2>
@@ -227,7 +231,7 @@
                                             @include('public-part.app.shared.common.stars', ['stars' => $review->stars])
                                         </div>
                                         <div class="date">
-                                            <p>24.10.2024 16:24:23h</p>
+                                            <p>{{ $review->createdAt() }}h</p>
                                         </div>
                                     </div>
 

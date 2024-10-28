@@ -3,6 +3,7 @@
 namespace App\Models\Episodes;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -23,5 +24,8 @@ class Review extends Model{
     }
     public function userRel(): HasOne{
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+    public function createdAt(): string{
+        return Carbon::parse($this->created_at)->format('d.m.Y H:i');
     }
 }

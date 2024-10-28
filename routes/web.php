@@ -84,7 +84,7 @@ Route::prefix('/')->group(function () {
      */
     Route::prefix('/my-profile')->group(function () {
         Route::get ('/',                              [MyProfileController::class, 'profile'])->name('public.my-profile');
-
+        Route::post('/update-image',                  [MyProfileController::class, 'updateImage'])->name('public.my-profile.update-image');
         /**
          *  My progress
          */

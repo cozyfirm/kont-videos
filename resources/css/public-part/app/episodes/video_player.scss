@@ -309,9 +309,12 @@
                         .user__info{
                             position: relative; width: 300px; display: flex; gap: 16px;
                             .ui__img_w{
-                                width: 60px; height: 60px; border-radius: 4px; background: $color-primary; display: flex; align-items: center; justify-content: center;
+                                width: 60px; height: 60px; border-radius: 4px; background: $color-primary; display: flex; align-items: center; justify-content: center; overflow: hidden;
                                 h2{
                                     font-size: 18px; font-weight: bold;
+                                }
+                                img{
+                                    position: relative; min-width: 100%; min-height: 100%; max-width: 150%; max-height: 150%; height: auto; object-fit: cover;
                                 }
                             }
                             .ui__info{

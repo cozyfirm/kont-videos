@@ -57,7 +57,17 @@ class Episode extends Model{
         return number_format(4, 1, '.', '');
     }
     public function totalReviews(): string{
-        return "0.1K";
+        try{
+            $reviews = $this->reviewsRel->count();
+
+            if($reviews < 100){
+                return $reviews;
+            }else{
+                return number_format(($reviews / 1000), 1, '.', '') . 'K';
+            }
+        }catch (\Exception $e){
+            return 0;
+        }
     }
 
     /**
