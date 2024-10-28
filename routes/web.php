@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Other\Blog\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisodesController;
 use App\Http\Controllers\PublicPart\Blog\BlogController as PublicBlogController;
+use App\Http\Controllers\PublicPart\Episodes\ReviewsController;
 use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicPart\MyProfile\MyProfileController;
@@ -50,6 +51,16 @@ Route::prefix('/')->group(function () {
 
             /* Play specific video */
             Route::post('/play-video',                    [PublicEpisodesController::class, 'playVideo'])->name('public.episodes.play-video');
+        });
+
+        /**
+         *  Reviews
+         */
+        Route::prefix('/reviews')->group(function () {
+            Route::post('/save',                          [ReviewsController::class, 'save'])->name('public.episodes.reviews.save');
+
+            /* Check does review already exists */
+            Route::post('/check-for-review',              [ReviewsController::class, 'checkForReview'])->name('public.episodes.reviews.check-for-review');
         });
     });
 

@@ -1,7 +1,18 @@
+import { Notify } from './../../../style/layout/notify.ts';
+
 $(document).ready(function (){
     let totalStars = 5, globalStarIndex = 1, globalIndex = 0;
-    let finalStarIndex = 1, finalIndex = 0;
+    let finalStarIndex = 5, finalIndex = 0;
+    let saveReviewUri = '/episodes/reviews/save';
+    let checkForReviewUri = '/episodes/reviews/check-for-review';
 
+    /**
+     * Set GUI for stars
+     *
+     * @param fullStar
+     * @param halfStar
+     * @param emptyStar
+     */
     let setStars = function (fullStar, halfStar, emptyStar){
         let starsWrapper = $(".stars__wrapper");
 
@@ -32,6 +43,12 @@ $(document).ready(function (){
         }
     }
 
+    /**
+     * Calculate star index
+     *
+     * @param starInd
+     * @param ind
+     */
     let calculateStars = function (starInd, ind){
         let fullStar = 1;
         let halfStar = 0;
@@ -63,6 +80,38 @@ $(document).ready(function (){
         }
     }
 
+    /**
+     *  Create request and save data to database
+     */
+    let createRequest = function (notifyUser = false){
+        $.ajax({
+            url: saveReviewUri,
+            method: 'POST',
+            dataType: "json",
+            data: {
+                stars: totalStars,
+                note: $(".review-note").val(),
+                episode_id: $(".review-episode-id").val()
+            },
+            success: function success(response) {
+                let code = response['code'];
+
+                if(code === '0000'){
+                    if(notifyUser) {
+                        /* User saved note */
+                        Notify.Me([response['message'], "success"]);
+                        closeReview();
+
+                        /* Hide button for review */
+                        $(".leave-review-content").text('Uredite ocjenu');
+                    }
+                }else{
+                    Notify.Me([response['message'], "danger"]);
+                }
+            }
+        });
+    };
+
     $('body').on('mouseenter', '.review-star-child', function() {
         let starIndex = parseInt($(this).parent().attr('star-index'));
         let index = $(this).attr('index');
@@ -78,6 +127,12 @@ $(document).ready(function (){
         finalIndex = globalIndex;
 
         $(".text__form").addClass('d-flex');
+
+        /* Calculate final */
+        calculateStars(finalStarIndex, finalIndex);
+
+        /* Create request with stars only */
+        createRequest();
     }).on('mouseleave', '.stars__wrapper', function() {
         calculateStars(finalStarIndex, finalIndex);
     });
@@ -86,7 +141,7 @@ $(document).ready(function (){
      *  Close review on X or anywhere except the box
      */
     let closeReview = function (){
-        console.log("Close it!!");
+        $(".add__review__wrapper").removeClass('d-flex');
     };
 
     /* Hide on click */
@@ -97,5 +152,55 @@ $(document).ready(function (){
     });
     $(".ar__header").click(function (){
         closeReview();
+    });
+
+    /**
+     *  Save review note
+     */
+    $(".save-review-note").click(function (){
+        createRequest(true);
+    });
+
+    /**
+     *  Open review form
+     */
+    $(".leave-review").click(function (){
+        $.ajax({
+            url: checkForReviewUri,
+            method: 'POST',
+            dataType: "json",
+            data: {
+                episode_id: $(".review-episode-id").val()
+            },
+            success: function success(response) {
+                let code = response['code'];
+
+                if(code === '0000'){
+                    let data = response['data'];
+
+                    if(data['hasReview'] === true){
+                        /* Review exists */
+
+                        calculateStars(data['starIndex'], data['index']);
+
+                        finalStarIndex = data['starIndex'];
+                        finalIndex = data['index'];
+
+                        console.log("NOte:" + data['review']['note']);
+                        $(".text__form").addClass('d-flex');
+                        $(".review-note").val(data['review']['note']);
+                    }
+                    console.log(data);
+                }else{
+                    Notify.Me([response['message'], "danger"]);
+                }
+
+                $(".add__review__wrapper").addClass('d-flex');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log("Error while loading reviews");
+                $(".add__review__wrapper").addClass('d-flex');
+            }
+        });
     });
 });

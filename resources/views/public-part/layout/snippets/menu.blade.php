@@ -24,24 +24,22 @@
         <div class="action-btn">
             @if(Auth()->check())
                 @isset($previewEpisode)
-                    <a href="{{ route('public.my-profile.progress') }}">
-                        <button target class="btn-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
-                                <path fill="#FFFFFF" d="M19.467,23.316,12,17.828,4.533,23.316,7.4,14.453-.063,9H9.151L12,.122,14.849,9h9.213L16.6,14.453Z"/>
-                            </svg>
-                            <p>{{ __('Ostavite ocjenu') }}</p>
-                        </button>
-                    </a>
+                    <button class="btn-secondary leave-review">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                            <path fill="#FFFFFF" d="M19.467,23.316,12,17.828,4.533,23.316,7.4,14.453-.063,9H9.151L12,.122,14.849,9h9.213L16.6,14.453Z"/>
+                        </svg>
+                        <p class="leave-review-content">@if($episode->hasReview()) {{ __('Uredite ocjenu') }} @else {{ __('Ostavite ocjenu') }} @endif</p>
+                    </button>
                 @else
                     <a href="{{ route('public.my-profile.progress') }}">
-                        <button target class="btn-secondary"> <i class="fi fi-br-video-duration"></i> {{ __('Moj progres') }}</button>
+                        <button class="btn-secondary"> <i class="fi fi-br-video-duration"></i> {{ __('Moj progres') }}</button>
                     </a>
                 @endisset
                 <a href="{{ route('public.my-profile') }}" title="{{ __('Moj profil') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>
                 </a>
                 <a href="{{ route('auth.logout') }}" title="{{ __('Odjavi se') }}">
-                    <button target class="btn-primary btn-tertiary-color"><i class="fi fi-bs-sign-out-alt"></i></button>
+                    <button class="btn-primary btn-tertiary-color"><i class="fi fi-bs-sign-out-alt"></i></button>
                 </a>
             @else
                 <a href="{{ route('auth') }}">

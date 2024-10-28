@@ -9,6 +9,12 @@ use GuzzleHttp\Exception\GuzzleException;
 
 trait EpisodeBaseTrait{
     use CommonTrait;
+
+    /**
+     * Check does exist episode with the same title
+     * @param $slug
+     * @return string
+     */
     protected function episodesBySlug($slug) : string{
         try{
             $total = Episode::where('slug', '=', $slug)->count();
@@ -16,12 +22,25 @@ trait EpisodeBaseTrait{
             else return $total;
         }catch (\Exception $e){ return ''; }
     }
+
+    /**
+     * Get final slug of episode
+     *
+     * @param $slug
+     * @return string
+     */
     public function getSlug($slug): string{
         $string = $this->generateSlug($slug);
-
         return ($string . ($this->episodesBySlug($string)));
     }
 
+    /**
+     * Get video information from BunnyNET API
+     *
+     * @param $libraryID
+     * @param $videoID
+     * @return object|bool
+     */
     public function getVideoInfo($libraryID, $videoID): object | bool{
         $client = new Client();
 
@@ -40,6 +59,12 @@ trait EpisodeBaseTrait{
         else return false;
     }
 
+    /**
+     * Get duration of video providing seconds
+     *
+     * @param $seconds
+     * @return string
+     */
     public function getDurationHelper($seconds): string{
         $hours = gmdate("H", $seconds);
         $minutes = gmdate("i", $seconds);
@@ -49,5 +74,14 @@ trait EpisodeBaseTrait{
         }else{
             return (int) $minutes . " min ";
         }
+    }
+
+    public function getReviewsInfo(&$starsIndex, &$index, $stars): void{
+        for($i=1; $i<=$stars; $i++){
+            if($i == (int)$stars) $starsIndex = $i + 1;
+        }
+        if((int)$stars == 1) $starsIndex = 1;
+
+        $index = ((int)$stars != $stars) ? 'left' : 'right';
     }
 }

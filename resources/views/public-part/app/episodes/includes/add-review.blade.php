@@ -18,9 +18,10 @@
         </div>
 
         <div class="text__form">
-            {{ html()->textarea('review-note')->class('form-control form-control-sm')->maxlength('400')->placeholder(__('Recite nam Vaše osobno iskustvo gledajući ovu epizodu. Da li je bilo dobro za Vas?'))}}
+            {{ html()->textarea('review-note')->class('form-control form-control-sm review-note')->maxlength('400')->placeholder(__('Recite nam Vaše osobno iskustvo gledajući ovu epizodu. Da li je bilo dobro za Vas?'))}}
+            {{ html()->hidden('review-episode-id')->class('form-control review-episode-id')->value($episode->id) }}
 
-            <button class="btn-primary">
+            <button class="btn-primary save-review-note">
                 {{ __('Sačuvajte') }}
             </button>
         </div>

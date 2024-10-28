@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @method static where(string $string, string $string1, int $int)
@@ -35,6 +36,13 @@ class Episode extends Model{
     public function videoContentRel(): HasMany{
         return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id');
     }
+    public function reviewsRel(): HasMany{
+        return $this->hasMany(Review::class, 'id', 'episode_id');
+    }
+
+    /**
+     *  Helper functions
+     */
     public function totalDuration(): string{
         $duration = 0;
         foreach ($this->videoContentRel as $video){
@@ -44,5 +52,12 @@ class Episode extends Model{
     }
     public function totalViews(): int{
         return EpisodeVideo::where('episode_id', '=', $this->id)->sum('views');
+    }
+
+    /**
+     *  Check does this episode has review from logged User
+     */
+    public function hasReview(): int{
+        return Review::where('episode_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->count();
     }
 }
