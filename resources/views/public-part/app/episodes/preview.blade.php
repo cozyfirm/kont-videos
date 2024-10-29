@@ -6,7 +6,7 @@
 
     <div class="video__player">
         <div class="player__wrapper">
-{{--            <iframe id="active-video" current-time="{{ $video->activityRel->time ?? 0 }}" finished="{{ $video->finished }}" video-id="{{ $video->id }}" episode-id="{{ $episode->id }}" src="https://iframe.mediadelivery.net/embed/{{ $video->library_id }}/{{ $video->video_id }}?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>--}}
+            <iframe id="active-video" current-time="{{ $video->activityRel->time ?? 0 }}" finished="{{ $video->finished }}" video-id="{{ $video->id }}" episode-id="{{ $episode->id }}" src="https://iframe.mediadelivery.net/embed/{{ $video->library_id }}/{{ $video->video_id }}?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
 
             <div class="next__video d-none">
                 <div class="next__video__btn">
@@ -85,21 +85,23 @@
             <div class="inner__header">
                 <div class="inner__tab active" ref-tag="overview__wrapper">
                     <p> {{ __('Više informacija') }} </p>
+                    <img src="{{ asset('files/images/default/icons/info-white.svg') }}" alt="">
                 </div>
-{{--                <div class="inner__tab">--}}
-{{--                    <p> {{ __('O temi') }} </p>--}}
-{{--                </div>--}}
                 <div class="inner__tab" ref-tag="presenter">
                     <p> {{ __('O predavaču') }} </p>
+                    <img src="{{ asset('files/images/default/icons/chalkboard-user-white.svg') }}" alt="">
                 </div>
                 <div class="inner__tab" ref-tag="overview__wrapper">
                     <p> {{ __('Zabilješke') }} </p>
+                    <img src="{{ asset('files/images/default/icons/memo-pad-white.svg') }}" alt="">
                 </div>
                 <div class="inner__tab" ref-tag="reviews">
                     <p> {{ __('Recenzije') }} </p>
+                    <img src="{{ asset('files/images/default/icons/review-white.svg') }}" alt="">
                 </div>
                 <div class="inner__tab" ref-tag="rest_of_episodes">
                     <p> {{ __('Ostale epizode') }} </p>
+                    <img src="{{ asset('files/images/default/icons/screen-play-white.svg') }}" alt="">
                 </div>
             </div>
 
@@ -143,7 +145,7 @@
                     </div>
                 </div>
 
-                <div class="inner__element presenter">
+                <div class="inner__element presenter ">
                     <div class="img__wrapper">
                         <img src="{{ asset('files/images/public-part/users/' . ($episode->presenterRel->photoUri())) }}" class="episode-img">
                         <a href="#">
@@ -155,7 +157,7 @@
                     </div>
                 </div>
 
-                <div class="inner__element rest_of_episodes">
+                <div class="inner__element rest_of_episodes ">
                     @for($i=0; $i<4; $i++)
                         <div class="single__episode">
                             <img src="{{ asset('files/images/episodes/Kaftan.jpg') }}" class="episode-img">
@@ -174,7 +176,7 @@
                     @endfor
                 </div>
 
-                <div class="inner__element reviews">
+                <div class="inner__element reviews ">
                     <div class="reviews__global">
                         <div class="rg__wrapper rg__wrapper__small">
                             <p class="description">{{ __('Ukupno ocjena') }}</p>

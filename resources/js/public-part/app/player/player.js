@@ -13,6 +13,10 @@ $(document).ready(function (){
         togglePlayer();
     })
 
+    // if(window.innerWidth <= 1000){
+    //     if($(".toggle-player").length) togglePlayer();
+    // }
+
     /**
      *  Short description of video
      */
@@ -244,6 +248,7 @@ $(document).ready(function (){
                         $(".se__wrapper[video-id='" + videoID +"']").find('.checkbox_w').removeClass('checked');
 
                         playNewVideo();
+                        togglePlayer();
                     }else{
                         Notify.Me([response['message'], "warn"]);
                     }
