@@ -63,14 +63,18 @@
                 @endforeach
             </div>
             <div class="ew__footer">
-                <button class="btn-secondary">
-                    <img src="{{ asset('files/images/default/icons/topic.svg') }}" alt="">
-                    {{ __('Više o temi') }}
-                </button>
-                <button class="btn-secondary">
-                    <img src="{{ asset('files/images/default/icons/presenter.svg') }}" alt="">
-                    {{ __('O predavaču') }}
-                </button>
+                <a href="#more-about" class="show-more-about">
+                    <button class="btn-secondary">
+                        <img src="{{ asset('files/images/default/icons/topic.svg') }}" alt="">
+                        {{ __('Više o temi') }}
+                    </button>
+                </a>
+                <a href="#presenter-wrapper" class="show-presenter-wrapper">
+                    <button class="btn-secondary">
+                        <img src="{{ asset('files/images/default/icons/presenter.svg') }}" alt="">
+                        {{ __('O predavaču') }}
+                    </button>
+                </a>
             </div>
         </div>
 
@@ -106,7 +110,7 @@
             </div>
 
             <div class="inner__body">
-                <div class="inner__element overview__wrapper active">
+                <div class="inner__element overview__wrapper active" id="more-about">
                     <h1> {{ $episode->title ?? '' }} </h1>
                     <div class="numbers__w">
                         <div class="number">
@@ -145,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="inner__element presenter ">
+                <div class="inner__element presenter " id="presenter-wrapper">
                     <div class="img__wrapper">
                         <img src="{{ asset('files/images/public-part/users/' . ($episode->presenterRel->photoUri())) }}" class="episode-img">
                         <a href="#">

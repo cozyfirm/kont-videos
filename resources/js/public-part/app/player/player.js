@@ -35,7 +35,21 @@ $(document).ready(function (){
         $("." + $(this).attr('ref-tag')).addClass('active');
 
         console.log($(this).attr('ref-tag'));
-    })
+    });
+    $(".show-more-about").click(function (){
+        $(".inner__element").removeClass('active');
+        $(".inner__tab").removeClass('active');
+
+        $("#more-about").addClass('active');
+        $(".inner__tab[ref-tag='overview__wrapper']").addClass('active');
+    });
+    $(".show-presenter-wrapper").click(function (){
+        $(".inner__element").removeClass('active');
+        $(".inner__tab").removeClass('active');
+
+        $("#presenter-wrapper").addClass('active');
+        $(".inner__tab[ref-tag='presenter']").addClass('active');
+    });
 
     /* -------------------------------------------------------------------------------------------------------------- */
     /*
@@ -103,7 +117,10 @@ $(document).ready(function (){
             /* Hide shadow and reset it */
             $(".next__video").addClass('d-none');
             circle.object.removeClass('over50');
-            circle.object.removeClass('p100').addClass('p0');
+            for(let i=1; i<=100; i++){
+                circle.object.removeClass('p' + i);
+            }
+            circle.object.addClass('p0');
         };
         function increasePercentage(percentage){
             if(percentage < 50) circle.object.removeClass('over50');
@@ -248,7 +265,7 @@ $(document).ready(function (){
                         $(".se__wrapper[video-id='" + videoID +"']").find('.checkbox_w').removeClass('checked');
 
                         playNewVideo();
-                        togglePlayer();
+                        if(window.innerWidth <= 1000) togglePlayer();
                     }else{
                         Notify.Me([response['message'], "warn"]);
                     }
