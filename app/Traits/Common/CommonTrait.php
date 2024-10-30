@@ -4,6 +4,7 @@ namespace App\Traits\Common;
 use Illuminate\Http\Request;
 
 trait CommonTrait{
+    protected array $_months = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'];
     protected static array $_time_arr = [];
     public static function formTimeArr() : array{
         for($i=0; $i<= 23; $i++){
@@ -33,5 +34,8 @@ trait CommonTrait{
         $string = strtolower(trim($string, '-'));
 
         return $string;
+    }
+    public function getMonthName($index): string{
+        return $this->_months[$index];
     }
 }

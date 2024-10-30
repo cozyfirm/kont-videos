@@ -3,8 +3,11 @@
 namespace App\Models\Episodes;
 
 use App\Models\Core\File;
+use App\Models\Core\Keyword;
 use App\Models\User;
+use App\Traits\Common\CommonTrait;
 use App\Traits\Episodes\EpisodeBaseTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -19,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static orderBy(string $string, string $string1)
  */
 class Episode extends Model{
-    use HasFactory, SoftDeletes, EpisodeBaseTrait;
+    use HasFactory, SoftDeletes, EpisodeBaseTrait, CommonTrait;
 
     protected $table = 'episodes';
     protected $guarded = ['id'];
@@ -42,7 +45,12 @@ class Episode extends Model{
     public function approvedReviewsRel(): HasMany{
         return $this->hasMany(Review::class, 'episode_id', 'id')->where('status', '=', 1);
     }
-
+    public function languageRel(): HasOne{
+        return $this->hasOne(Keyword::class, 'id', 'language_id');
+    }
+    public function userNotesRel(): HasMany{
+        return $this->hasMany(MyNote::class, 'episode_id', 'id')->where('user_id', '=', Auth::user()->id);
+    }
     /**
      *  Helper functions
      */
@@ -71,6 +79,9 @@ class Episode extends Model{
         }catch (\Exception $e){
             return 0;
         }
+    }
+    public function lastUpdated(): string{
+        return $this->getMonthName(Carbon::parse($this->updated_at)->format('m') - 1) . ' ' . Carbon::parse($this->updated_at)->format('Y');
     }
 
     /**

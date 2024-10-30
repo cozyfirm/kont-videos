@@ -39,7 +39,8 @@ class EpisodesController extends Controller{
     public function create (): View{
         return view($this->_path . 'create', [
             'create' => true,
-            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id')
+            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
+            'languages' => Keyword::getIt('languages')
         ]);
     }
     public function save(Request $request): RedirectResponse{
@@ -63,6 +64,7 @@ class EpisodesController extends Controller{
                 'presenter_id' => $request->presenter_id,
                 'image_id' => $image->id,
                 'video_id' => $video->id,
+                'language_id' => $request->language_id,
                 'created_by' => $request->created_by
             ]);
 
@@ -75,14 +77,16 @@ class EpisodesController extends Controller{
         return view($this->_path . 'create', [
             'preview' => true,
             'episode' => Episode::where('slug', '=', $slug)->first(),
-            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id')
+            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
+            'languages' => Keyword::getIt('languages')
         ]);
     }
     public function edit ($slug): View{
         return view($this->_path . 'create', [
             'edit' => true,
             'episode' => Episode::where('slug', '=', $slug)->first(),
-            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id')
+            'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
+            'languages' => Keyword::getIt('languages')
         ]);
     }
     public function update(Request $request): RedirectResponse{
@@ -105,7 +109,8 @@ class EpisodesController extends Controller{
                 'presenter_id' => $request->presenter_id,
                 'description' => $request->description,
                 'image_id' => isset($image) ? $image->id : $episode->image_id,
-                'video_id' => isset($video) ? $video->id : $episode->video_id
+                'video_id' => isset($video) ? $video->id : $episode->video_id,
+                'language_id' => $request->language_id,
             ]);
 
             return redirect()->route('system.admin.episodes.preview', ['slug'  => $episode->slug ]);

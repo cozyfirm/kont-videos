@@ -38,6 +38,7 @@ import './admin/blog/blog.js';
 
 /* Episodes JS */
 import './public-part/app/episodes/review.js';
+import './public-part/app/episodes/notes.js';
 
 /* Public app */
 import './public-part/app/blog/blog.js';

@@ -22,7 +22,8 @@ class Keyword extends Model{
         /* Questions keywords */
         'yes_no' => 'Da / Ne',
         'video_category' => 'Kategorija videa',
-        'blog_category' => 'Kategorija bloga'
+        'blog_category' => 'Kategorija bloga',
+        'languages' => 'Jezici'
     ];
 
     /* Return all types of keywords */

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Other\Blog\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisodesController;
 use App\Http\Controllers\PublicPart\Blog\BlogController as PublicBlogController;
+use App\Http\Controllers\PublicPart\Episodes\NotesController;
 use App\Http\Controllers\PublicPart\Episodes\ReviewsController;
 use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
@@ -61,6 +62,16 @@ Route::prefix('/')->group(function () {
 
             /* Check does review already exists */
             Route::post('/check-for-review',              [ReviewsController::class, 'checkForReview'])->name('public.episodes.reviews.check-for-review');
+        });
+
+        /**
+         *  My Notes
+         */
+        Route::prefix('/notes')->group(function () {
+            Route::post('/save',                          [NotesController::class, 'save'])->name('public.episodes.notes.save');
+            Route::post('/load',                          [NotesController::class, 'load'])->name('public.episodes.notes.load');
+            Route::post('/update',                        [NotesController::class, 'update'])->name('public.episodes.notes.update');
+            Route::post('/delete',                        [NotesController::class, 'delete'])->name('public.episodes.notes.delete');
         });
     });
 

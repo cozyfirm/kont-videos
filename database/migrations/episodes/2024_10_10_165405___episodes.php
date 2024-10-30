@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->integer('image_id');
             $table->integer('video_id');
+            $table->integer('language_id');
 
             $table->integer('created_by');
 
