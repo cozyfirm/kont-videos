@@ -39,6 +39,9 @@ class Episode extends Model{
     public function reviewsRel(): HasMany{
         return $this->hasMany(Review::class, 'episode_id', 'id');
     }
+    public function approvedReviewsRel(): HasMany{
+        return $this->hasMany(Review::class, 'episode_id', 'id')->where('status', '=', 1);
+    }
 
     /**
      *  Helper functions

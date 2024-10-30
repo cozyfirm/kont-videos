@@ -5,20 +5,24 @@ let activeDiv = document.querySelectorAll(".single__episode .episode-img");
 let overlayDIV = document.querySelectorAll(".single__episode .card__content ");
 
 if (video != null) {
-    activeDiv.forEach(function (cardHomeOne, index) {
-        cardHomeOne.addEventListener("mouseenter", function () {
+    if($(".episode-hover-video").length){
+        activeDiv.forEach(function (cardHomeOne, index) {
+            cardHomeOne.addEventListener("mouseenter", function () {
 
-            activeDiv[index].classList.add("active");
-            // overlayDIV[index].classList.add("active");
-            video[index].currentTime = 0;
-            video[index].play();
+                activeDiv[index].classList.add("active");
+                // overlayDIV[index].classList.add("active");
+                video[index].currentTime = 0;
+                video[index].play();
+            });
+            cardHomeOne.addEventListener("mouseleave", function () {
+                activeDiv[index].classList.remove("active");
+                // overlayDIV[index].classList.remove("active");
+                video[index].pause();
+            });
         });
-        cardHomeOne.addEventListener("mouseleave", function () {
-            activeDiv[index].classList.remove("active");
-            // overlayDIV[index].classList.remove("active");
-            video[index].pause();
-        });
-    });
+    }else{
+        console.log("Do not add anything ...");
+    }
 }
 
 

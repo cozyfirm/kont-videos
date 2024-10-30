@@ -216,7 +216,7 @@
                     </div>
 
                     <div class="single__reviews">
-                        @foreach($episode->reviewsRel as $review)
+                        @foreach($episode->approvedReviewsRel as $review)
                             <div class="single__review">
                                 <div class="user__info">
                                     <div class="ui__img_w">

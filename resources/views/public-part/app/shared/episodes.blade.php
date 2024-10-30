@@ -3,7 +3,9 @@
         @foreach($episodes as $episode)
             <div class="single__episode @isset($all_episodes) se__small @endisset">
                 <img src="{{ asset($episode->imageRel->getFile()) }}" class="episode-img">
-                <video loop muted preload src="{{ asset($episode->videoRel->getFile()) }}"></video>
+                @if (!$browser->isMobile())
+                    <video class="episode-hover-video" loop muted preload src="{{ asset($episode->videoRel->getFile()) }}"></video>
+                @endif
 
                 <div class="card__content">
                     <h1> {{ $episode->title ?? '' }} </h1>

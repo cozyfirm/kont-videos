@@ -2,7 +2,7 @@
 
 @section('public-content')
     <div class="hero-video">
-        <video autoplay loop muted preload src="{{ asset('files/videos/main-vdeo.mp4')}}"></video>
+        <video autoplay loop muted preload playsinline src="{{ asset('files/videos/main-vdeo.mp4')}}"></video>
 
         <div class="hero-bunner">
             <div class="hero-bunner-content">
@@ -21,7 +21,6 @@
                                 <form action="#" method="get">
                                     <button class="btn-tertiary">Registruj se</button>
                                 </form>
-
                             </div>
                         </div>
                         <a href="#trailer-overlay"><span class="hero-link-span">Saznaj više &rarr;</a>
