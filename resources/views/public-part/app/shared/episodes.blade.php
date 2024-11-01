@@ -30,13 +30,14 @@
                 </a>
             </div>
         @else
-            <div class="load__more">
-                <a href="{{ route('public.episodes') }}">
-                    <button class="btn-secondary">
-                        {{ __('Učitajte još') }}
-                    </button>
-                </a>
-            </div>
+            <!-- ToDo:: Add in new release -->
+{{--            <div class="load__more">--}}
+{{--                <a href="{{ route('public.episodes') }}">--}}
+{{--                    <button class="btn-secondary">--}}
+{{--                        {{ __('Učitajte još') }}--}}
+{{--                    </button>--}}
+{{--                </a>--}}
+{{--            </div>--}}
         @endif
     </div>
 </section>

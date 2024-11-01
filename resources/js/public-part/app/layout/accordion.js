@@ -15,10 +15,12 @@ $(document).ready(function (){
             /* if panel is already open - minimize */
             if (panel.style.maxHeight){
                 //minifies current panel if already open
+                // panel.style.padding  = "0px";
                 panel.style.maxHeight = null;
                 //removes the 'active' class as toggle didn't work on browsers minus chrome
                 this.classList.remove("active");
             } else {
+
                 //panel isn't open...
                 //goes through the buttons and removes the 'active' css (+ and -)
                 for (let ii = 0; ii < courseAccordionActive.length; ii++) {
@@ -30,6 +32,8 @@ $(document).ready(function (){
                     coursePanel[iii].style.maxHeight = null;
                 }
                 //opens the specified pannel
+                // panel.style.padding  = "16px";
+
                 panel.style.maxHeight = panel.scrollHeight + "px";
                 //adds the 'active' addition to the css.
                 this.classList.add("active");

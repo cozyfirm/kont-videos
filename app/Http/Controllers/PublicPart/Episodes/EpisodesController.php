@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeActivity;
 use App\Models\Episodes\EpisodeVideo;
+use App\Models\Other\FAQ;
 use App\Traits\Episodes\EpisodeBaseTrait;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
@@ -17,11 +18,13 @@ use Illuminate\View\View;
 class EpisodesController extends Controller{
     use ResponseTrait, EpisodeBaseTrait;
     protected string $_path = 'public-part.app.episodes.';
+    protected int $_total_episodes = 8;
 
     public function episodes(): View{
         return view($this->_path . 'preview-all', [
-            'episodes' => Episode::orderBy('id', 'DESC')->take(8)->get(),
-            'all_episodes' => true
+            'episodes' => Episode::orderBy('id', 'DESC')->take($this->_total_episodes)->get(),
+            'all_episodes' => true,
+            'faqs' => FAQ::get()
         ]);
     }
 
@@ -148,6 +151,11 @@ class EpisodesController extends Controller{
         }
     }
 
+    /**
+     * Mark video as watched | non watched depending on checkbox state
+     * @param Request $request
+     * @return JsonResponse|bool|string
+     */
     public function markAsWatched(Request $request): JsonResponse | bool | string{
         try{
             if(isset($request->id) and isset($request->checked)){

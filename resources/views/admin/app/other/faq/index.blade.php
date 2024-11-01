@@ -39,13 +39,7 @@
                 <tr>
                     <td class="text-center">{{ $i++}}.</td>
                     <td> {{ $faq->title ?? ''}} </td>
-                    <td>
-                        @if($faq->what == 0)
-                            {{ __('Ostalo') }}
-                        @else
-                            {{ $faq->sectionRel->title ?? '' }}
-                        @endif
-                    </td>
+                    <td> {{ $faq->sectionRel->name ?? '' }} </td>
 
                     <td class="text-center">
                         <a href="{{route('system.admin.other.faq.edit', ['id' => $faq->id] )}}" title="{{ __('Više informacija') }}">

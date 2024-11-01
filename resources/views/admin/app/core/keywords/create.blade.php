@@ -30,14 +30,22 @@
             @endif
             {{ html()->hidden('type')->class('form-control')->value($key) }}
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         {{ html()->label(__('Vrijednost'))->for('name')->class('bold') }}
                         {{ html()->text('name')->class('form-control form-control-sm mt-2')->required()->maxlength(100)->value((isset($instance) ? $instance->name : '')) }}
                         <small id="nameHelp" class="form-text text-muted">{{ __('Prikazana vrijednost šifarnika') }}</small>
                     </div>
                 </div>
-
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ html()->label(__('Specijalna vrijednost'))->for('value')->class('bold') }}
+                        {{ html()->text('value')->class('form-control form-control-sm mt-2')->required()->maxlength(100)->value((isset($instance) ? $instance->value : '')) }}
+                        <small id="valueHelp" class="form-text text-muted">{{ __('Specijalna vrijednost (specifični slučajevi šifarnika)') }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="form-group">
                         {{ html()->label(__('Opis'))->for('description')->class('bold') }}

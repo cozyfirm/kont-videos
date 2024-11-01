@@ -18,8 +18,8 @@
             color: $color-white;
         }
         .course-panel{
-            p{
-                color: $color-white;
+            h1, h2, h3, h4, h5, h6, p, span{
+                margin: 0px; padding: 0px !important; color: $color-white;
             }
         }
     }
@@ -80,6 +80,8 @@ button.course-accordion {
     letter-spacing: 0px;
     font-style: normal;
     border-top: 2px solid $color-secondary;
+
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
 }
 
 /*When the button is active or mouse hovers*/
@@ -105,8 +107,12 @@ button.course-accordion.active:after {
     color: $color-white;
 }
 
+.course-panel-text-w{
+    margin: 16px 0px;
+}
+
 div.course-panel {
-    padding: 0 18px;
+    padding: 0 16px;
     background-color: transparent;
     max-height: 0;
     overflow: hidden;
@@ -120,10 +126,14 @@ div.course-panel {
 
     p {
         color: $color-white;
-        color: $color-black;
+
         padding: 16px 8px;
         font-size: 14px;
         letter-spacing: 0.4px;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, span{
+        margin: 0px; padding: 0px !important; color: $color-black;
     }
 }
 

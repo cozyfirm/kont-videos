@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Other;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Core\Filters;
+use App\Models\Core\Keyword;
 use App\Models\Other\FAQ;
 use App\Traits\Common\FileTrait;
 use App\Traits\Http\ResponseTrait;
@@ -30,7 +31,7 @@ class FAQsController extends Controller{
     public function faqCreate(): View{
         return view($this->_path . 'create', [
             'create' => true,
-            'other' => [0 => 'Something', 1 => "Something else"]
+            'other' => Keyword::getItByVal('faq__section')
         ]);
     }
     public function faqSave(Request $request): JsonResponse{
@@ -45,7 +46,7 @@ class FAQsController extends Controller{
     public function faqEdit($id): View{
         return view($this->_path . 'create', [
             'edit' => true,
-            'other' => [0 => 'Something', 1 => "Something else"],
+            'other' => Keyword::getItByVal('faq__section'),
             'faq' => FAQ::where('id', '=', $id)->first()
         ]);
     }

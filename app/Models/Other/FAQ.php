@@ -2,14 +2,17 @@
 
 namespace App\Models\Other;
 
+use App\Models\Core\Keyword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static where(string $string, string $string1, int $int)
  * @method static create(array $all)
  * @method update (array $all)
+ * @method static get()
  */
 class FAQ extends Model{
     use HasFactory, SoftDeletes;
@@ -17,7 +20,7 @@ class FAQ extends Model{
     protected $table = '__faq';
     protected $guarded = ['id'];
 
-    /**
-     *  Section relationships should be added later !!
-     */
+    public function sectionRel(): HasOne{
+        return $this->hasOne(Keyword::class, 'value', 'what')->where('type', '=', 'faq__section');
+    }
 }

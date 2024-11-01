@@ -23,7 +23,8 @@ class Keyword extends Model{
         'yes_no' => 'Da / Ne',
         'video_category' => 'Kategorija videa',
         'blog_category' => 'Kategorija bloga',
-        'languages' => 'Jezici'
+        'languages' => 'Jezici',
+        'faq__section' => 'FAQ sections'
     ];
 
     /* Return all types of keywords */
