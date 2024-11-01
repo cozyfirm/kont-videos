@@ -39,7 +39,7 @@
                 @foreach($episode->videoContentRel as $content)
                     <div class="se__wrapper @if($video->id == $content->id) current @endif" video-id="{{ $content->id }}">
                         <div class="se__w__no">
-                            <div class="checkbox_w @if($content->activityRel->finished ?? 0) checked @endif">
+                            <div class="checkbox_w @if($content->activityRel->finished ?? 0) checked @endif mark-video-as-watched" video-id="{{ $content->id }}">
                                 <img src="{{ asset('files/images/default/icons/check.svg') }}" alt="">
                             </div>
                         </div>

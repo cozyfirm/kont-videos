@@ -60,10 +60,11 @@ $(document).ready(function (){
         /* We are currently at active player */
 
         let player;
-        let currentVideoID = 0; let mainDataResponse = null;
+        let currentVideoID = $("#active-video").attr('video-id'); let mainDataResponse = null;
         let currentTime = 0, finishedVideo = false;
         let updateActivityUri = '/episodes/activity/update-activity';
         let playVideoUri = '/episodes/activity/play-video';
+        let markVideoAsWatchedUri = '/episodes/activity/mark-as-watched';
 
         let iframeUri = "https://iframe.mediadelivery.net/embed/";
         let iframeGetParams = "?autoplay=false&loop=false&muted=false&preload=true&responsive=true";
@@ -298,6 +299,41 @@ $(document).ready(function (){
                     }
                 }
             });
+        });
+
+        /**
+         *  When user wants to mark video as watched; Note: Allow only videos that are not currently active
+         */
+        $(".mark-video-as-watched").click(function (){
+            let videoAttr = $(this).attr('video-id');
+            let $this = $(this);
+
+            let checked = $(this).hasClass('checked');
+
+            if(videoAttr !== currentVideoID){
+                $.ajax({
+                    url: markVideoAsWatchedUri,
+                    method: 'POST',
+                    dataType: "json",
+                    data: {
+                        id: videoAttr,
+                        checked: checked
+                    },
+                    success: function success(response) {
+                        let code = response['code'];
+
+                        if(code === '0000'){
+                            let activity = response['data']['activity'];
+
+                            if(checked){
+                                $this.removeClass('checked');
+                            }else $this.addClass('checked');
+                        }else{
+                            Notify.Me([response['message'], "danger"]);
+                        }
+                    }
+                });
+            }
         });
 
         /* On GET request, set initial data */

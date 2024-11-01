@@ -567,12 +567,33 @@
                 }
             }
             .rest_of_episodes{
-                position: relative; justify-content: space-between; gap: 24px;
-                @media screen and (max-width: 800px){
-                    flex-wrap: wrap;
-                }
+                position: relative; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+                .ie_roe__wrapper{
+                    position: relative; width: 100%; display: flex; justify-content: space-between; gap: 24px;
 
-                @import "../shared/single__episode";
+                    @media screen and (max-width: 800px){
+                        flex-wrap: wrap;
+                    }
+
+                    @import "../shared/single__episode";
+                }
+                .all__episodes{
+                    position: relative; width: 100%; display: flex; justify-content: flex-end;
+                    a{
+                        text-decoration: none;
+                        .btn-secondary {
+                            padding: 8px 16px;
+
+                            &:hover {
+                                background-color: rgba(30, 28, 28, 0.6) !important;
+                            }
+
+                            &:focus {
+                                background-color: rgba(30, 28, 28, 0.6) !important;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

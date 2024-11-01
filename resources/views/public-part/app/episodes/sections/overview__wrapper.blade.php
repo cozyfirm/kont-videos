@@ -1,13 +1,15 @@
-<div class="inner__element overview__wrapper" id="more-about">
+<div class="inner__element overview__wrapper active" id="more-about">
     <h1> {{ $episode->title ?? '' }} </h1>
     <div class="numbers__w">
-        <div class="number">
-            <div class="number__header">
-                <h4> 4.2 </h4>
-                <img src="{{ asset('files/images/default/icons/star-yellow.svg') }}" alt="">
+        @if($episode->totalReviews())
+            <div class="number">
+                <div class="number__header">
+                    <h4> {{ $episode->averageRating() }} </h4>
+                    <img src="{{ asset('files/images/default/icons/star-yellow.svg') }}" alt="">
+                </div>
+                <p> {{ $episode->totalReviews() }} {{ __('recenzije/a') }} </p>
             </div>
-            <p> 156 recenzija </p>
-        </div>
+        @endif
         <div class="number">
             <div class="number__header">
                 <h4> {{ $episode->totalViews() }} </h4>

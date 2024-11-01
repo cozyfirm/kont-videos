@@ -52,6 +52,9 @@ Route::prefix('/')->group(function () {
 
             /* Play specific video */
             Route::post('/play-video',                    [PublicEpisodesController::class, 'playVideo'])->name('public.episodes.play-video');
+
+            /* Mark video as watched */
+            Route::post('/mark-as-watched',               [PublicEpisodesController::class, 'markAsWatched'])->name('public.episodes.mark-as-watched');
         });
 
         /**

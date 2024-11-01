@@ -1,18 +1,30 @@
-<div class="inner__element rest_of_episodes ">
-    @for($i=0; $i<4; $i++)
-        <div class="single__episode">
-            <img src="{{ asset('files/images/episodes/Kaftan.jpg') }}" class="episode-img">
-            <video loop muted preload src=" {{ asset('files/images/episodes/novi.mp4')}}"></video>
+<div class="inner__element rest_of_episodes">
+    <div class="ie_roe__wrapper">
+        @foreach($otherEpisodes as $episode)
+            <div class="single__episode">
+                <img src="{{ asset($episode->imageRel->getFile()) }}" class="episode-img">
+                @if (!$browser->isMobile())
+                    <video class="episode-hover-video" loop muted preload src="{{ asset($episode->videoRel->getFile()) }}"></video>
+                @endif
 
-            <div class="card__content">
-                <h1>Kaftan moda</h1>
-                <p>Sanja Delić</p>
-                <div class="card-btns">
-                    <form action="#" method="get">
-                        <button class="btn-primary"><i class="fi fi-bs-play-circle"></i>Video</button>
-                    </form>
+                <div class="card__content">
+                    <h1>{{ $episode->title ?? '' }}</h1>
+                    <p>{{ $episode->presenterRel->name ?? '' }}</p>
+                    <div class="card-btns">
+                        <a href="{{ route('public.episodes.preview', ['slug' => $episode->slug]) }}">
+                            <button class="btn-primary"><i class="fi fi-bs-play-circle"></i>Video</button>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    @endfor
+        @endforeach
+    </div>
+    <div class="all__episodes">
+        <a href="{{ route('public.episodes') }}">
+            <button class="btn-secondary">
+                {{ __('Sve epizode') }}
+                <i class="fi fi-br-arrow-small-right"></i>
+            </button>
+        </a>
+    </div>
 </div>

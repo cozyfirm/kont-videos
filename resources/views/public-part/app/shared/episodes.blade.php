@@ -9,7 +9,7 @@
 
                 <div class="card__content">
                     <h1> {{ $episode->title ?? '' }} </h1>
-                    <p>Sanja Delić</p>
+                    <p>{{ $episode->presenterRel->name ?? '' }}</p>
                     <div class="card-btns">
                         <button type="submit" class="btn-primary modaloppener"><i class="fi fi-bs-play-circle"></i>Trailer</button>
                         <a href="{{ route('public.episodes.preview', ['slug' => $episode->slug]) }}">

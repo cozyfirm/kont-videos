@@ -52,9 +52,16 @@ class EpisodesController extends Controller{
             'video' => $video,
             /* Replace menu links with episode title */
             'previewEpisode' => true,
-            'reviewsByNumber' => $this->getEpisodeReviewsByNumber($episode->id)
+            'reviewsByNumber' => $this->getEpisodeReviewsByNumber($episode->id),
+            'otherEpisodes' => Episode::where('id', '!=', $episode->id)->inRandomOrder()->take(4)->get()
         ]);
     }
+
+    /**
+     * On every second, update video activity ...
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function updateActivity(Request $request): JsonResponse{
         try{
             $activity = EpisodeActivity::where('episode_id', '=', $request->episode_id)
@@ -116,6 +123,12 @@ class EpisodesController extends Controller{
             return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
         }
     }
+
+    /**
+     * On click, give user a new wanted video
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function playVideo(Request $request): JsonResponse{
         try{
             if(isset($request->video_id)){
@@ -130,6 +143,44 @@ class EpisodesController extends Controller{
                     'episodeFinished' => false
                 ]);
             }else throw new \ErrorException('Video not found!!');
+        }catch (\Exception $e){
+            return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
+        }
+    }
+
+    public function markAsWatched(Request $request): JsonResponse | bool | string{
+        try{
+            if(isset($request->id) and isset($request->checked)){
+                $video = EpisodeVideo::where('id', '=', $request->id)->first();
+
+                if($video){
+                    $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)
+                        ->where('episode_id', '=', $video->episode_id)
+                        ->where('video_id', '=', $video->id)
+                        ->first();
+
+                    if($activity){
+                        $activity->update([
+                            'finished' => ($request->checked == "false"),
+                            'time' => ($request->checked == "false") ? $video->duration_sec : '0',
+                            'progress' => ($request->checked == "false") ? '100' : '0'
+                        ]);
+                    }else{
+                        $activity = EpisodeActivity::create([
+                            'user_id' => Auth::user()->id,
+                            'episode_id' => $video->episode_id,
+                            'video_id' => $video->id,
+                            'finished' => ($request->checked == "false"),
+                            'time' => ($request->checked == "false") ? $video->duration_sec : '0',
+                            'progress' => ($request->checked == "false") ? '100' : '0'
+                        ]);
+                    }
+
+                    return $this->jsonResponse('0000', __('Uspješno ažurirano!!'), [
+                        'activity' => $activity
+                    ]);
+                }else throw new \ErrorException('Video not found!!');
+            }else throw new \ErrorException('Video ID unknown');
         }catch (\Exception $e){
             return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
         }

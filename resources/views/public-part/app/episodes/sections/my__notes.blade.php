@@ -1,4 +1,4 @@
-<div class="inner__element my__notes active">
+<div class="inner__element my__notes">
     <div class="add__note___wrapper">
         <!-- ToDo:: On change video, replace this video ID -->
         <div class="add__new_note" video-id="{{ $video->id }}" episode-id="{{ $episode->id }}">

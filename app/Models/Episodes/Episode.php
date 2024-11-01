@@ -64,7 +64,7 @@ class Episode extends Model{
         return $this->getDurationHelper($duration);
     }
     public function totalViews(): int{
-        return EpisodeVideo::where('episode_id', '=', $this->id)->sum('views');
+        return EpisodeVideo::where('episode_id', '=', $this->id)->sum('total_loads');
     }
     public function averageRating(): string {
         return ($this->stars) ? $this->stars : '1.0';
