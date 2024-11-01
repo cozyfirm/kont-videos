@@ -30,6 +30,7 @@ return new class extends Migration
             $table->integer('views')->default(0);
             $table->integer('average_watch_time')->default(0);
             $table->integer('total_watch_time')->default(0);
+            $table->integer('total_loads')->default(0);
 
             $table->timestamps();
             $table->softDeletes();

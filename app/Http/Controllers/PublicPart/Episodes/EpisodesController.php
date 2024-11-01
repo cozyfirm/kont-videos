@@ -44,6 +44,9 @@ class EpisodesController extends Controller{
             $video = EpisodeVideo::where('id', '=', $activity->video_id)->first();
         }
 
+        /* Increment number of video loads */
+        $this->updateVideoLoads($video->id);
+
         return view($this->_path . 'preview', [
             'episode' => $episode,
             'video' => $video,
@@ -96,6 +99,9 @@ class EpisodesController extends Controller{
                             'video_id' => $nextVideo->id
                         ]);
                     }
+
+                    /* Increment number of video loads */
+                    $this->updateVideoLoads($nextVideo->id);
                 }else{
                     $episodeFinished = true;
                 }
@@ -112,13 +118,18 @@ class EpisodesController extends Controller{
     }
     public function playVideo(Request $request): JsonResponse{
         try{
-            $nextVideo = EpisodeVideo::where('id', '=', $request->video_id)->first();
+            if(isset($request->video_id)){
+                $nextVideo = EpisodeVideo::where('id', '=', $request->video_id)->first();
 
-            return $this->apiResponse('0000', __('Success'), [
-                'progress' => 0,
-                'nextVideo' => $nextVideo,
-                'episodeFinished' => false
-            ]);
+                /* Increment number of video loads */
+                $this->updateVideoLoads($request->video_id);
+
+                return $this->apiResponse('0000', __('Success'), [
+                    'progress' => 0,
+                    'nextVideo' => $nextVideo,
+                    'episodeFinished' => false
+                ]);
+            }else throw new \ErrorException('Video not found!!');
         }catch (\Exception $e){
             return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
         }

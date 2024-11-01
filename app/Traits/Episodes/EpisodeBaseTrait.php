@@ -3,6 +3,7 @@ namespace App\Traits\Episodes;
 
 
 use App\Models\Episodes\Episode;
+use App\Models\Episodes\EpisodeVideo;
 use App\Models\Episodes\Review;
 use App\Traits\Common\CommonTrait;
 use GuzzleHttp\Client;
@@ -106,6 +107,13 @@ trait EpisodeBaseTrait{
         }
         return (string) $count;
     }
+
+    /**
+     * Format Episode reviews by stars (5, 4, 3, 2, 1) presented in percentages
+     *
+     * @param $episode_id
+     * @return array
+     */
     public function getEpisodeReviewsByNumber($episode_id): array{
         $oneStar    = Review::where('stars', '<=', 1)->where('episode_id', '=', $episode_id)->where('status', '=', 1)->count();
         $twoStars   = Review::where('stars', '>', 1)->where('stars', '<=', 2)->where('episode_id', '=', $episode_id)->where('status', '=', 1)->count();
@@ -136,5 +144,20 @@ trait EpisodeBaseTrait{
         }
 
         return $result;
+    }
+
+    /**
+     * Increment loads (number when user opened or loaded video; Should be different from views)
+     *
+     * @param $video_id
+     * @return void
+     */
+    public function updateVideoLoads($video_id): void{
+        try{
+            $video = EpisodeVideo::where('id', '=', $video_id)->first();
+            $video->update(['total_loads' => ($video->total_loads + 1)]);
+
+            /* ToDo:: Broadcast over websockets */
+        }catch (\Exception  $e){}
     }
 }

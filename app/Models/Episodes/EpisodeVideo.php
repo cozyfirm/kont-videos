@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * @method static create(array $except)
  * @method static where(string $string, string $string1, $id)
+ * @method static get()
  */
 class EpisodeVideo extends Model{
     use HasFactory, SoftDeletes, EpisodeBaseTrait;
