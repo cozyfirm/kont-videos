@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('image_id');
             $table->integer('video_id');
             $table->integer('language_id');
+            $table->string('stars', 3)->default('1.0');
 
             $table->integer('created_by');
 

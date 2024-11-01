@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
  * @method static create(array $array)
  * @method static get()
  * @method static orderBy(string $string, string $string1)
+ * @property mixed $stars
+ * @property mixed $videoContentRel
  */
 class Episode extends Model{
     use HasFactory, SoftDeletes, EpisodeBaseTrait, CommonTrait;
@@ -43,7 +45,7 @@ class Episode extends Model{
         return $this->hasMany(Review::class, 'episode_id', 'id');
     }
     public function approvedReviewsRel(): HasMany{
-        return $this->hasMany(Review::class, 'episode_id', 'id')->where('status', '=', 1);
+        return $this->hasMany(Review::class, 'episode_id', 'id')->where('status', '=', 1)->orderBy('id', 'DESC');
     }
     public function languageRel(): HasOne{
         return $this->hasOne(Keyword::class, 'id', 'language_id');
@@ -65,7 +67,16 @@ class Episode extends Model{
         return EpisodeVideo::where('episode_id', '=', $this->id)->sum('views');
     }
     public function averageRating(): string {
-        return number_format(4, 1, '.', '');
+        return ($this->stars) ? $this->stars : '1.0';
+    }
+    public function setAverageRating(): string{
+        $stars = Review::where('episode_id', '=', $this->id)->where('status', '=', 1)->sum('stars');
+        $total = Review::where('episode_id', '=', $this->id)->where('status', '=', 1)->count();
+        $avgReview = number_format(($total) ? (floor(($stars / $total) * 2) / 2) : 0, 1, '.', '');
+
+        $this->update(['stars' => $avgReview]);
+
+        return $avgReview;
     }
     public function totalReviews(): string{
         try{

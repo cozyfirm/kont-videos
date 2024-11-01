@@ -121,6 +121,8 @@ $(document).ready(function (){
             globalIndex = index;
         }else return;
 
+        console.log("starIndex: " + starIndex + ', index: ' + index);
+
         calculateStars(starIndex, index);
     }).on('click', '.review-star-child', function() {
         finalStarIndex = globalStarIndex;

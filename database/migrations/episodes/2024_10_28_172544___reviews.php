@@ -26,7 +26,7 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->text('stars');
+            $table->string('stars', 5)->default('1');
             $table->text('note')->nullable();
 
             /**

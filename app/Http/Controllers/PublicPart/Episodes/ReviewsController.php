@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PublicPart\Episodes;
 
 use App\Http\Controllers\Controller;
+use App\Models\Episodes\Episode;
 use App\Models\Episodes\Review;
 use App\Traits\Episodes\EpisodeBaseTrait;
 use App\Traits\Http\ResponseTrait;

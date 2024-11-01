@@ -3,6 +3,7 @@ namespace App\Traits\Episodes;
 
 
 use App\Models\Episodes\Episode;
+use App\Models\Episodes\Review;
 use App\Traits\Common\CommonTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -85,36 +86,55 @@ trait EpisodeBaseTrait{
      * @return void
      */
     public function getReviewsInfo(&$starsIndex, &$index, $stars): void{
-        for($i=1; $i<=$stars; $i++){
-            if($i == (int)$stars) $starsIndex = $i + 1;
-        }
-        if((int)$stars == 1) $starsIndex = 1;
-
         $index = ((int)$stars != $stars) ? 'left' : 'right';
+
+        if($stars <= 1) $starsIndex = 1;
+        else if($stars > 1 and $stars <= 2) $starsIndex = 2;
+        else if($stars > 2 and $stars <= 3) $starsIndex = 3;
+        else if($stars > 3 and $stars <= 4) $starsIndex = 4;
+        else $starsIndex = 5;
     }
 
+    /**
+     * @param $count
+     * @return string
+     */
+    // Helper function to format count values
+    private function formatCount($count): string {
+        if ($count >= 1000) {
+            return round($count / 1000, 1) . 'K';
+        }
+        return (string) $count;
+    }
     public function getEpisodeReviewsByNumber($episode_id): array{
-        return [
-            5 => [
-                'total' => '1.2K',
-                'percentage' => '100'
-            ],
-            4 => [
-                'total' => '0.6K',
-                'percentage' => '50'
-            ],
-            3 => [
-                'total' => '0.3K',
-                'percentage' => '25'
-            ],
-            2 => [
-                'total' => '0.2K',
-                'percentage' => '16'
-            ],
-            1 => [
-                'total' => '0.1K',
-                'percentage' => '8'
-            ]
+        $oneStar    = Review::where('stars', '<=', 1)->where('episode_id', '=', $episode_id)->where('status', '=', 1)->count();
+        $twoStars   = Review::where('stars', '>', 1)->where('stars', '<=', 2)->where('episode_id', '=', $episode_id)->where('status', '=', 1)->count();
+        $threeStars = Review::where('stars', '>', 2)->where('stars', '<=', 3)->where('episode_id', '=', $episode_id)->where('status', '=', 1)->count();
+        $fourStars  = Review::where('stars', '>', 3)->where('stars', '<=', 4)->where('episode_id', '=', $episode_id)->where('status', '=', 1)->count();
+        $fiveStars  = Review::where('stars', '>', 4)->where('stars', '<=', 5)->where('episode_id', '=', $episode_id)->where('status', '=', 1)->count();
+
+        // Store counts in an array
+        $counts = [
+            5 => $fiveStars,
+            4 => $fourStars,
+            3 => $threeStars,
+            2 => $twoStars,
+            1 => $oneStar,
         ];
+
+        // Find the maximum count
+        $maxCount = max($counts);
+
+        // Calculate percentages and format counts
+        $result = [];
+        foreach ($counts as $stars => $count) {
+            $percentage = $maxCount > 0 ? round(($count / $maxCount) * 100) : 0;
+            $result[$stars] = [
+                'total' => $this->formatCount($count),
+                'percentage' => $percentage
+            ];
+        }
+
+        return $result;
     }
 }
