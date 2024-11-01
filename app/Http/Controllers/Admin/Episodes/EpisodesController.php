@@ -140,6 +140,7 @@ class EpisodesController extends Controller{
                 return $this->jsonError('2200', __('Greška prilikom čitanja podataka o videu. Jeste li unijeli dobre podatke?'));
             }
 
+            $request['thumbnail'] = $video->thumbnailFileName;
             $request['duration'] = gmdate("H:i:s", $video->length);;
             $request['duration_sec'] = $video->length;
             $request['views'] = $video->views;
@@ -179,6 +180,7 @@ class EpisodesController extends Controller{
                 return $this->jsonError('2200', __('Greška prilikom čitanja podataka o videu. Jeste li unijeli dobre podatke?'));
             }
 
+            $request['thumbnail'] = $video->thumbnailFileName;
             $request['duration'] = gmdate("H:i:s", $video->length);
             $request['duration_sec'] = $video->length;
             $request['views'] = $video->views;

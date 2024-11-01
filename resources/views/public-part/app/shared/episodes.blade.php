@@ -11,7 +11,7 @@
                     <h1> {{ $episode->title ?? '' }} </h1>
                     <p>{{ $episode->presenterRel->name ?? '' }}</p>
                     <div class="card-btns">
-                        <button type="submit" class="btn-primary modaloppener"><i class="fi fi-bs-play-circle"></i>Trailer</button>
+                        <button type="submit" class="btn-primary show__trailer" episode-id="{{ $episode->id }}"><i class="fi fi-bs-play-circle"></i>Trailer</button>
                         <a href="{{ route('public.episodes.preview', ['slug' => $episode->slug]) }}">
                             <button class="btn-primary"><i class="fi fi-bs-play-circle"></i>Video</button>
                         </a>

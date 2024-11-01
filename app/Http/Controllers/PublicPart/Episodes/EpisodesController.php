@@ -35,6 +35,8 @@ class EpisodesController extends Controller{
         /* Initial video that should be loaded */
         $video = EpisodeVideo::where('episode_id', '=', $episode->id)->first();
 
+        if(!$episode or !$video) abort(404);
+
         /* Check for last watched video that is not finished */
         $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('video_id', 'DESC')->first();
         if(!$activity){
@@ -189,6 +191,37 @@ class EpisodesController extends Controller{
                     ]);
                 }else throw new \ErrorException('Video not found!!');
             }else throw new \ErrorException('Video ID unknown');
+        }catch (\Exception $e){
+            return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
+        }
+    }
+
+    /**
+     * Fetch trailer and all videos from episode
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function fetchTrailer(Request $request): JsonResponse{
+        try{
+            if(isset($request->id)){
+
+                $episode = Episode::where('id', '=', $request->id)->with('videoContentRel:id,episode_id,title,description,library_id,video_id,thumbnail,category,duration_sec', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description']);
+                foreach ($episode->videoContentRel as $content){
+                    if($content->category != 2){
+                        $content->img = $this->getThumbnailUri($content->video_id, $content->thumbnail);
+                    }
+                }
+                $episode->duration = $episode->totalDuration();
+
+                $trailer = EpisodeVideo::where('episode_id', '=', $episode->id)->where('category', '=', 2)->first(['id', 'title', 'library_id', 'video_id', 'thumbnail']);
+                $trailer->uri = $trailer->getIframeUri($trailer->library_id, $trailer->video_id);
+
+                return $this->apiResponse('0000', __('Success'), [
+                    'episode' => $episode,
+                    'trailer' => $trailer
+                ]);
+            }else throw new \ErrorException('Video not found!!');
         }catch (\Exception $e){
             return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
         }

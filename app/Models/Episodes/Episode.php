@@ -61,6 +61,7 @@ class Episode extends Model{
         foreach ($this->videoContentRel as $video){
             $duration += $video->duration_sec;
         }
+
         return $this->getDurationHelper($duration);
     }
     public function totalViews(): int{

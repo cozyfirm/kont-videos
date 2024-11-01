@@ -33,13 +33,16 @@ class updateVideoProgress extends Command{
 
             /* Update video from info from BunnyNet */
             if($info){
-                $video->update([
-                    'duration' => gmdate("H:i:s", $info->length),
-                    'duration_sec' => $info->length,
-                    'views' => $info->views,
-                    'average_watch_time' => $info->averageWatchTime,
-                    'total_watch_time' => $info->totalWatchTime
-                ]);
+                try{
+                    $video->update([
+                        'thumbnail' => $info->thumbnailFileName,
+                        'duration' => gmdate("H:i:s", $info->length),
+                        'duration_sec' => $info->length,
+                        'views' => $info->views,
+                        'average_watch_time' => $info->averageWatchTime,
+                        'total_watch_time' => $info->totalWatchTime
+                    ]);
+                }catch (\Exception $e){}
             }
         }
     }

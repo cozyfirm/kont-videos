@@ -1,0 +1,112 @@
+.trailer__wrapper{
+    position: fixed; background: rgba(0,0,0,0.8); z-index: 100; overflow: auto;
+    padding: 64px 0px; visibility: hidden; opacity: 0; width: 80%; height: 80%; left: 10%; top: 10%;  transition: 0.75s all;
+
+    &.trailer__wrapper__visible{
+        visibility: visible; opacity: 1; width: 100%; height: 100%; transition: 0.75s all; left: 0px; top: 0px;
+    }
+
+    .inner__wrapper{
+        position: relative; left: calc(50% - 570px); width: 1140px; display: flex; gap: 20px; flex-wrap: wrap; border-radius: 8px;
+        background: #000000; padding-bottom: 20px; overflow: hidden;
+
+        .pp__video__wrapper{
+            position: relative; width: 100%;
+            iframe{
+                width: 100%; height: 640px;
+            }
+            .iframe__header{
+                position: absolute; width: 100%; z-index: 100; display: flex; justify-content: space-between; padding: 32px;
+                .ih__text{
+                    display: flex; flex-wrap: wrap; gap: 16px;
+                    h1,h2,h3,h4,h5,p{width: 100%;}
+                    h5{
+                        font-size: 20px;
+                    }
+                    h1{
+                        font-weight: 800; text-transform: uppercase; font-size: 40px;
+                    }
+                }
+                .ih_exit{
+                    .ih__exit__btn{
+                        border: 3px solid #FFFFFF; border-radius: 50%; padding: 2px; transition: 0.1s all;
+                        &:hover{
+                            cursor: pointer;
+                            //border: 4px solid $color-white; margin-right: -2px; margin-top: -2px;
+                            //img{
+                            //    height: 18px;
+                            //}
+                        }
+                        img{
+                            height: 16px; width: 16px; margin: 0px; padding: 0px; transition: 0.1s all;
+                        }
+                    }
+                }
+            }
+        }
+        .pp__video__info{
+            position: relative; width: 100%; height: 40px; display: flex; justify-content: flex-start; padding: 0px 20px; align-items: center;
+            gap: 16px;
+            .text__elem{
+                p{
+                    margin: 0px; padding: 0px; color: #FFFFFF; font-size: 16px;
+                }
+            }
+            .stars{
+                display: flex; gap: 2px; align-items: center;
+                .star{
+                    img{
+                        height: 20px !important;
+                    }
+                }
+            }
+        }
+        .pp__more_info{
+            position: relative; width: 100%; display: flex; gap: 16px; padding: 0px 20px; flex-wrap: wrap;
+            h1{
+                width: 100%; font-size: 32px; color: $color-white;
+            }
+            p{ color: $color-white; margin:0px; padding: 0px; }
+        }
+        .pp__chapters{
+            position: relative; width: 100%; display: flex; flex-wrap: wrap; margin-top: 20px; padding: 0px 20px;
+            .single__chapter{
+                position: relative; width: 100%; display: flex; justify-content: space-between; gap: 20px; padding: 20px;
+                background: rgba(255,255,255,0.05); transition: 0.75s all;
+                &:hover{
+                    background: rgba(255,255,255,0.2); cursor: pointer;
+                }
+                .no__part{
+                    position: relative; display: flex; padding: 0px 12px;
+                    h1{
+                        font-size: 32px; color: $color-white;
+                    }
+                }
+                .img__part{
+                    position: relative; width: 132px; overflow: hidden;
+                    img{
+                        position: relative; width: 100%;
+                    }
+                }
+                .text__part{
+                    position: relative; width: 100%; display: flex; gap: 8px; flex-wrap: wrap; flex-direction: column;
+                    .text__part__header{
+                        position: relative; width: 100%; display: flex; justify-content: space-between;
+                        h4, p{margin: 0px; padding: 0px;}
+                        h4{
+                            font-size: 24px;
+                        }
+                    }
+                    .text__part__body{
+                        p{margin: 0px; padding: 0px;}
+                    }
+                }
+            }
+        }
+    }
+    &::-webkit-scrollbar {
+        width: 0px;
+        height:0px;
+        //background: gray;
+    }
+}

@@ -79,7 +79,6 @@ $(document).ready(function (){
                         })
                     }
 
-                    console.log("Left: " + response['data']['leftPosts']);
                     /**
                      *  Hide load more btn
                      */

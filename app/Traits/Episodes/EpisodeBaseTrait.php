@@ -160,4 +160,18 @@ trait EpisodeBaseTrait{
             /* ToDo:: Broadcast over websockets */
         }catch (\Exception  $e){}
     }
+
+    /**
+     * Format uri for iframe
+     *
+     * @param $library_id
+     * @param $video_id
+     * @return string
+     */
+    public function getIframeUri($library_id, $video_id): string{
+        return "https://iframe.mediadelivery.net/embed/" . $library_id . "/" . $video_id;
+    }
+    public function getThumbnailUri($video_id, $thumbnail): string{
+        return "https://vz-49b3acb4-335.b-cdn.net/" . $video_id . "/" . $thumbnail;
+    }
 }

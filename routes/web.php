@@ -44,6 +44,9 @@ Route::prefix('/')->group(function () {
         Route::get ('/',                              [PublicEpisodesController::class, 'episodes'])->name('public.episodes');
         Route::get ('/preview/{slug}',                [PublicEpisodesController::class, 'preview'])->name('public.episodes.preview');
 
+        /* Fetch trailer and other episodes */
+        Route::post('/fetch-trailer',                 [PublicEpisodesController::class, 'fetchTrailer'])->name('public.episodes.fetch-trailer');
+
         /**
          *  Post request as user activity
          */
