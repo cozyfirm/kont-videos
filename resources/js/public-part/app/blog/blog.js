@@ -34,7 +34,10 @@ $(document).ready(function (){
 
                     /* Remove load more btn and return */
                     if(posts.length === 0){
-                        $(".blog__load_more_w").addClass('d-none');
+                        $(".blog__load_more").addClass('d-none');
+                        /* Remove margin */
+                        $(".posts__wrapper").addClass('margin_bottom_none');
+
                         return;
                     }
 
@@ -76,6 +79,7 @@ $(document).ready(function (){
                         })
                     }
 
+                    console.log("Left: " + response['data']['leftPosts']);
                     /**
                      *  Hide load more btn
                      */

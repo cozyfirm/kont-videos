@@ -17,7 +17,7 @@
                         @endisset
 
                         <div class="content__wrapper">
-                            {!! nl2br($post->description) !!}
+                            {!! nl2br($post->description ?? '') !!}
                         </div>
 
                         @if(isset($post->video))
@@ -26,20 +26,22 @@
                             </div>
                         @endif
 
-                        <div class="single-blog__images">
-                            @foreach($post->imageRel as $image)
-                                <input type="hidden" name="post_id" id="post_id" value="{{ $post->id }}">
-                                <div class="img__wrapper" attr-id="{{ $image->id }}">
-                                    <img src="{{ asset($image->fileRel->getFile()) }}">
+                        @isset($post->imageRel)
+                            <div class="single-blog__images">
+                                @foreach($post->imageRel as $image)
+                                    <input type="hidden" name="post_id" id="post_id" value="{{ $post->id }}">
+                                    <div class="img__wrapper" attr-id="{{ $image->id }}">
+                                        <img src="{{ asset($image->fileRel->getFile()) }}">
 
-                                    <div class="gallery_shadow">
-                                        <div class="open_icon_w">
-                                            <i class="fas fa-expand"></i>
+                                        <div class="gallery_shadow">
+                                            <div class="open_icon_w">
+                                                <i class="fas fa-expand"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
+                                @endforeach
+                            </div>
+                        @endisset
                     </div>
                 </div>
                 @include('public-part.app.blog.includes.categories')

@@ -26,11 +26,11 @@ class BlogController extends Controller{
         ]);
     }
     public function index(): View{
-        $posts = Blog::orderBy('id', 'DESC')->take($this->_numberOfPosts)->get();
+        $posts = Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take($this->_numberOfPosts)->get();
         return $this->getPosts($posts);
     }
     public function indexWithCategories($id): View{
-        $posts = Blog::orderBy('id', 'DESC')->take($this->_numberOfPosts)->where('category', '=', $id)->get();
+        $posts = Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take($this->_numberOfPosts)->where('category', '=', $id)->get();
         return $this->getPosts($posts, $id);
     }
     public function preview($slug): View{

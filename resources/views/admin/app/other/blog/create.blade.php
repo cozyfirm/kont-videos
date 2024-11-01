@@ -59,7 +59,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('YouTube video'))->for('video')->class('bold') }}
-                                {{ html()->text('video', $post->video ?? '' )->class('form-control form-control-sm')->required()->value((isset($post) ? $post->video : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->text('video', $post->video ?? '' )->class('form-control form-control-sm')->value((isset($post) ? $post->video : ''))->isReadonly(isset($preview)) }}
                             </div>
                         </div>
                         <div class="col-md-6">

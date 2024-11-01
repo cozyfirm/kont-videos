@@ -29,6 +29,8 @@
             flex-wrap: wrap;
             justify-content: center;
 
+            @import "../blog/news__wrapper";
+
             @media screen and (max-width: 1400px){
                 .single__new:last-child{display: none; }
             }
