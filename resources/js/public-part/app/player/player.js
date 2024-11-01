@@ -71,6 +71,17 @@ $(document).ready(function (){
         let clockCounter = 0;
         let continueNewVideo = true;
         let intervalId;
+
+        /* Round to 2 decimal points */
+        function str_pad_left(string, pad, length) {
+            return (new Array(length + 1).join(pad) + string).slice(-length);
+        }
+        let getMinutesAndSeconds = function (time){
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = currentTime - minutes * 60;
+            return str_pad_left(minutes, '0', 2) + ':' + str_pad_left(seconds, '0', 2);
+        }
+
         /**
          * Start new video
          * @param interval
@@ -105,14 +116,25 @@ $(document).ready(function (){
             $(".se__wrapper").removeClass('current');
             $(".se__wrapper[video-id='" + mainDataResponse['nextVideo']['id'] +"']").addClass('current');
 
+            /* Change video title in MENU */
+            $(".menu-video-title").text(mainDataResponse['nextVideo']['title']);
+
+            /* My notes: Change video id for note */
+            $(".add__new_note").attr('video-id', mainDataResponse['nextVideo']['id']);
+
+            /* Reset percentage to 0 percent */
             resetPercentage();
 
+            /* Setup player for new video */
             handleVideo();
         }
         let finishEpisode = function (){
             $(".se__wrapper[video-id='" + $("#active-video").attr('video-id') +"']").find('.checkbox_w').addClass('checked');
         }
 
+        /**
+         *  Load new episode screen
+         */
         let resetPercentage = function (){
             /* Hide shadow and reset it */
             $(".next__video").addClass('d-none');
@@ -128,7 +150,6 @@ $(document).ready(function (){
 
             circle.object.removeClass('p' + percentage).addClass('p' + (percentage + 1));
         }
-
         function doTerminateWhen(counter) {
             if(counter >= 100){
                 playNewVideo();
@@ -172,6 +193,9 @@ $(document).ready(function (){
                     const currentTime = parseFloat($("#active-video").attr('current-time'));
                     setTimeout(() => {
                         player.setCurrentTime(currentTime);
+
+                        /* Set my note starts at .. */
+                        $(".note__time").text(getMinutesAndSeconds(currentTime));
                     }, 200); // Adjust delay if necessary
                 }
             });
@@ -200,6 +224,9 @@ $(document).ready(function (){
                     }else{
                         finishedVideo = false;
                     }
+
+                    /* Set my note starts at .. */
+                    $(".note__time").text(getMinutesAndSeconds(currentTime));
 
                     $.ajax({
                         url: updateActivityUri,
