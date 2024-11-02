@@ -3,8 +3,8 @@
         <div class="pp__video__wrapper">
             <div class="iframe__header">
                 <div class="ih__text">
-                    <h5 id="pp__presenter">Ivana Koraljić</h5>
-                    <h1 id="pp__trailer_title">ZAROBLJENA DRŽAva</h1>
+                    <h5 id="pp__presenter"></h5>
+                    <h1 id="pp__trailer_title"></h1>
                 </div>
                 <div class="ih_exit">
                     <div class="ih__exit__btn">
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <!-- https://iframe.mediadelivery.net/embed/61480/0e947078-2670-44b3-a90f-5b7735fe0a88?autoplay=false&loop=false&muted=false&preload=true&responsive=true -->
-            <iframe id="pp__iframe" src="https://iframe.mediadelivery.net/embed/61480/0e947078-2670-44b3-a90f-5b7735fe0a88" loading="lazy" allow="accelerometer;gyroscope;encrypted-media;picture-in-picture;"></iframe>
+            <iframe id="pp__iframe" src="" loading="lazy" allow="accelerometer;gyroscope;encrypted-media;picture-in-picture;"></iframe>
         </div>
         <div class="pp__video__info">
             <div class="text__elem">
@@ -23,15 +23,13 @@
                 <p id="pp__duration">Trajanje: 52 min</p>
             </div>
             <div class="stars pp__stars">
-                @include('public-part.app.shared.common.stars', ['stars' => 4 ])
+
             </div>
         </div>
 
         <div class="pp__more_info">
-            <h1>Kaftan Studio</h1>
-            <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, ipsum mollitia. Temporibus suscipit quam ea non aut, ad rerum perspiciatis earum dolores pariatur quisquam magnam repudiandae dolorum dignissimos, minus incidunt.
-            </p>
+            <h1 id="pp__episode__title"></h1>
+            <p id="pp__episode__description"> </p>
         </div>
 
         <div class="pp__chapters">

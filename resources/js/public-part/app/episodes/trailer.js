@@ -90,6 +90,10 @@ $(document).ready(function (){
 
                     $("#pp__no_chapters").text(chapterText);
                     $("#pp__duration").text("Trajanje: " + episode['duration']);
+                    $("#pp__episode__title").text(episode['title']);
+                    /* If we want to cut text, just uncomment this line */
+                    // $("#pp__episode__description").html(episode['description'].substring(0, 560) + ((episode['description'].length > 560) ? "..." : ""));
+                    $("#pp__episode__description").html(episode['description']);
 
                     $(".pp__stars").empty();
 
