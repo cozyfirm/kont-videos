@@ -8,41 +8,41 @@
         <div class="profile__wrapper profile__wrapper_wrap">
             <div class="last__watched">
                 <div class="episode__image">
-                    <img src="{{ asset($lastWatched->imageRel->getFile()) }}" class="episode-img">
+                    <img src="{{ asset($lastWatched->episodeRel->imageRel->getFile()) }}" class="episode-img">
                 </div>
                 <div class="episode__details">
                     <div class="text__wrapper">
-                        <div class="width-100 episode__title">
-                            <h1>{{ $lastWatched->title }}</h1>
+                        <div class="mp-width-100 episode__title">
+                            <h1>{{ $lastWatched->episodeRel->title ?? '' }}</h1>
                         </div>
-                        <div class="width-100">
+                        <div class="mp-width-100">
                             <button class="btn-primary">{{ __('ZADNJE GLEDANO') }}</button>
                         </div>
-                        <div class="width-100 video__title">
-                            <h2>{{ __('Društveno odgovorna moda') }}</h2>
+                        <div class="mp-width-100 video__title">
+                            <h2>{{ $lastWatched->title ?? '' }}</h2>
                         </div>
-                        <div class="width-100 description">
-                            {!! substr(strip_tags($lastWatched->description), 0 , 300) !!} ...
+                        <div class="mp-width-100 description">
+                            {!! substr(strip_tags($lastWatched->description ?? ''), 0 , 300) !!} ...
                         </div>
-{{--                        <div class="width-100 tags">--}}
+{{--                        <div class="mp-width-100 tags">--}}
 {{--                            <button class="btn-dark-grey">{{ __('Moda') }}</button>--}}
 {{--                            <button class="btn-dark-grey">{{ __('Društvo') }}</button>--}}
 {{--                            <button class="btn-dark-grey">{{ __('Sestre') }}</button>--}}
 {{--                        </div>--}}
-                        <div class="width-100 details">
+                        <div class="mp-width-100 details">
                             <div class="details__inner">
-                                <p>4 chapters</p>
+                                <p>{{ EpisodeHelper::getNumberOfChapters($lastWatched->episodeRel->totalChapters()) }}</p>
                                 <span>|</span>
-                                <p>2024</p>
+                                <p>{{ $lastWatched->episodeRel->getCreationYear() }}</p>
                                 <span>|</span>
                                 <div class="icon_btn">
                                     <i class="fi fi-bs-clock"></i>
-                                    <p>55 min</p>
+                                    <p>{{ $lastWatched->episodeRel->totalDuration() }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="width-100 more-info">
-                            <a href="#">
+                        <div class="mp-width-100 more-info">
+                            <a href="{{ route('public.episodes.preview', ['slug' => $lastWatched->episodeRel->slug]) }}">
                                 {{ __('Više informacija') }}
                                 <i class="fi fi-br-arrow-small-right"></i>
                             </a>
@@ -54,62 +54,45 @@
             <hr class="my__learnings__line">
 
             <div class="my__learnings">
-                @for($i=0; $i<8; $i++)
-                    <div class="learning_wrapper">
+                @foreach($otherActivities as $activity)
+                    <div class="learning_wrapper go-to" custom-uri="{{ route('public.episodes.preview', ['slug' => $activity->slug]) }}">
                         <div class="image__wrapper">
-                            <img src="{{ asset('files/images/public-part/blog/6ddf8fb6d2326e2914e8a1001efec2d8.jpg') }}" alt="">
+                            <img src="{{ asset($activity->imageRel->getFile()) }}" class="episode-img">
                         </div>
 
                         <div class="text__wrapper">
                             <div class="text__content">
-                                <h2>
-                                    Hello there
-                                    @if($i%2 == 0)
-                                        , are you fine?
-                                    @endif
-                                </h2>
+                                <h2> {{ $activity->title ?? '' }} </h2>
                             </div>
 
                             <div class="progress">
-                                <p>Well hello there</p>
+                                <p>{{ $activity->presenterRel->name ?? '' }}</p>
 
-                                <div class="progress_line"><div class="real__progress"></div></div>
+                                <div class="progress_line"><div class="real__progress width-{{ $activity->progressByUser() }}"></div></div>
 
                                 <div class="statistics">
-                                    <h2>74%</h2>
-                                    <div class="stars">
-                                        <div class="svg__wrapper">
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
-                                                <path d="M19.467,23.316,12,17.828,4.533,23.316,7.4,14.453-.063,9H9.151L12,.122,14.849,9h9.213L16.6,14.453Z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
-                                                <path d="M19.467,23.316,12,17.828,4.533,23.316,7.4,14.453-.063,9H9.151L12,.122,14.849,9h9.213L16.6,14.453Z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
-                                                <path d="M19.467,23.316,12,17.828,4.533,23.316,7.4,14.453-.063,9H9.151L12,.122,14.849,9h9.213L16.6,14.453Z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
-                                                <path d="m19.448,23.309l-7.467-5.488-7.467,5.488,2.864-8.863L-.082,8.992h9.214L11.981.114l2.849,8.878h9.214l-7.46,5.453,2.864,8.863Zm-7.467-7.971l3.658,2.689-1.403-4.344,3.683-2.691h-4.548l-1.39-4.331v8.677Z"/>
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
-                                                <g id="_01_align_center" data-name="01 align center"><path d="M19.467,23.316,12,17.828,4.533,23.316,7.4,14.453-.063,9H9.151L12,.122,14.849,9h9.213L16.6,14.453ZM12,15.346l3.658,2.689-1.4-4.344L17.937,11H13.39L12,6.669,10.61,11H6.062l3.683,2.691-1.4,4.344Z"/></g>
-                                            </svg>
+                                    <h2>{{ $activity->progressByUser() }}%</h2>
+                                    @if($activity->userRating())
+                                        <div class="stars" title="{{ __('Moja ocjena: ') . $activity->userRating() }}">
+                                            <div class="svg__wrapper">
+                                                @include('public-part.app.shared.common.stars-black', ['stars' => $activity->userRating() ])
+                                            </div>
+                                            <p>{{ __('Moja ocjena') }}</p>
                                         </div>
-                                        <p>{{ __('Moja ocjena') }}</p>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-
-                        <a href="#"> </a>
                     </div>
-                @endfor
+                @endforeach
             </div>
 
             <div class="load__more">
-                <button class="btn-secondary">
-                    {{ __('Učitajte još') }}
-                </button>
+                <a href="{{ route('public.episodes') }}">
+                    <button class="btn-secondary">
+                        {{ __('Pregled svih epizoda') }}
+                    </button>
+                </a>
             </div>
         </div>
     </div>

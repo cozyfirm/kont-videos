@@ -1,18 +1,33 @@
 .last__watched{
     position: relative; width: 100%; display: flex; justify-content: space-between; gap: 32px;
-
+    @media screen and (max-width: 1000px){ flex-wrap: wrap; }
     .episode__image{
-        position: relative; width: 40%; background: grey; border-radius: 16px; overflow: hidden;
+        position: relative; width: 40%; border-radius: 16px; overflow: hidden;height: 100%;
+        @media screen and (max-width: 1000px){
+            width: 100%; height: auto;
+        }
         img{
-            width: 100%;
+            @media screen and (max-width: 1100px){
+                max-width: 150%;
+            }
+            @media screen and (max-width: 1100px){
+                max-width: 180%;
+            }
+            @media screen and (max-width: 1000px){
+                width: 100%; max-width: 100%;
+            }
+            min-width:100%; max-width: 120%; object-fit: cover; object-position: center;
         }
     }
     .episode__details{
         position: relative; width: calc(60% - 32px); display: flex; align-items: center;
+        @media screen and (max-width: 1000px){
+            width: 100%; height: auto;
+        }
         .text__wrapper{
             position: relative; width: 100%; display: flex; flex-wrap: wrap; gap: 24px;
 
-            .width-100{
+            .mp-width-100{
                 position: relative; width: 100%;
             }
             .episode__title{
@@ -34,7 +49,10 @@
             .details{
                 display: flex;
                 .details__inner{
-                    display: flex; gap: 16px; background: #464545; width: auto; padding: 6px 16px; align-items: center;
+                    display: flex; gap: 16px; width: auto; padding: 6px 16px; align-items: center; background: $color-dark-grey-hover;
+                    @media screen and (max-width: 1000px){
+                        width: 100%; height: auto; justify-content: center;
+                    }
                     p, span{
                         color: $color-white; margin: 0px; padding: 0px;
                     }
@@ -48,6 +66,9 @@
             }
             .more-info{
                 display: flex; justify-content: flex-end;
+                @media screen and (max-width: 1000px){
+                    justify-content: center;
+                }
                 a{
                     display: flex; color: $color-black; text-decoration: none; transition: 0.75s all;
                 }
@@ -68,6 +89,7 @@
 
     .learning_wrapper{
         position:relative; width: calc(25% - 18px); border: 2px solid $color-primary; flex-direction: column; display: flex;
+        &:hover{cursor:pointer;}
 
         @media screen and (max-width: 1100px){
             width: calc(33.33% - 16px);
@@ -84,10 +106,10 @@
         }
 
         .image__wrapper{
-            transition: all .1s ease; position: relative; overflow: hidden; width: 100%; height: 220px;
+            transition: all .1s ease; position: relative; overflow: hidden; width: 100%; height: 260px;
 
             img {
-                width: 100%; height: auto; object-fit: cover; transition: all 2s ease;
+                max-width: 150%; max-height: 150%; min-width: 100%; min-height: 100%; object-fit: cover; transition: all 2s ease; object-position: center;
             }
 
             &::after {
@@ -113,7 +135,7 @@
                 .progress_line{
                     width: 100%; position: relative; height: 10px; background: $color-primary; margin: 0px; padding: 0px;
                     .real__progress{
-                        position: relative; width: 40%; background: $color-secondary; height: 10px;
+                        position: relative; background: $color-secondary; height: 10px;
                     }
                 }
 
@@ -127,7 +149,7 @@
                         align-items: center;
                         .svg__wrapper{
                             position: relative; width: 100%; display: flex; justify-content: flex-end;
-                            svg{
+                            svg, img{
                                 height: 24px;
                             }
                         }

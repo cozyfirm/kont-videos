@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits\Common;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 trait CommonTrait{
@@ -37,5 +38,8 @@ trait CommonTrait{
     }
     public function getMonthName($index): string{
         return $this->_months[$index];
+    }
+    public function getYear($dateTime): int{
+        return Carbon::parse($dateTime)->format('Y');
     }
 }

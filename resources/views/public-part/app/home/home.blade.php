@@ -1,6 +1,9 @@
 @extends('public-part.layout.layout')
 
 @section('public-content')
+    <!-- Import episode trailer -->
+    @include('public-part.app.shared.trailer')
+
     <div class="hero-video">
         <video autoplay loop muted preload playsinline src="{{ asset('files/videos/main-vdeo.mp4')}}"></video>
 

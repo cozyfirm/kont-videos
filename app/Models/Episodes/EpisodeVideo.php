@@ -26,4 +26,7 @@ class EpisodeVideo extends Model{
     public function activityRel(): HasOne{
         return $this->hasOne(EpisodeActivity::class, 'video_id', 'id')->where('user_id', '=', Auth::user()->id);
     }
+    public function episodeRel(): HasOne{
+        return $this->hasOne(Episode::class, 'id', 'episode_id');
+    }
 }

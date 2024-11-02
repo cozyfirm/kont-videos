@@ -29,7 +29,7 @@ $(document).ready(function (){
                     let chapters = 0;
 
                     episodeChapters.empty();
-                    if(episode['video_content_rel'].length > 1){
+                    if(episode['video_content_rel'].length > 0){
                         let counter = 1;
 
                         for(let i=0; i<episode['video_content_rel'].length; i++){

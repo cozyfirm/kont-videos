@@ -10,7 +10,7 @@
         <div class="stars__wrapper">
             @for($i=1; $i<=5; $i++)
                 <div class="star review-star" star-index="{{ $i }}">
-                    <img src="{{ asset('files/images/default/icons/star.svg') }}" alt="">
+                    <img src="{{ asset('files/images/default/icons/star-yellow.svg') }}" alt="">
                     <div class="first-half review-star-child" index="left"></div>
                     <div class="second-half review-star-child" index="right"></div>
                 </div>

@@ -39,6 +39,9 @@ class Episode extends Model{
         return $this->hasOne(File::class, 'id', 'video_id');
     }
     public function videoContentRel(): HasMany{
+        return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id')->where('category', '=', 1);
+    }
+    public function allVideoContentRel(): HasMany{
         return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id');
     }
     public function reviewsRel(): HasMany{
@@ -53,23 +56,50 @@ class Episode extends Model{
     public function userNotesRel(): HasMany{
         return $this->hasMany(MyNote::class, 'episode_id', 'id')->where('user_id', '=', Auth::user()->id);
     }
+    public function episodeActivity(): HasMany{
+        return $this->hasMany(EpisodeActivity::class, 'episode_id', 'id');
+    }
+
     /**
-     *  Helper functions
+     * Get duration in seconds (based on video durations)
+     * @return int
      */
-    public function totalDuration(): string{
+    public function durationInSeconds(): int{
         $duration = 0;
         foreach ($this->videoContentRel as $video){
             $duration += $video->duration_sec;
         }
-
-        return $this->getDurationHelper($duration);
+        return $duration;
     }
+    /**
+     * Get total duration of Episode (based on video durations)
+     * @return string
+     */
+    public function totalDuration(): string{
+        return $this->getDurationHelper($this->durationInSeconds());
+    }
+
+    /**
+     * Get number of total views | loads (API is not considered this time)
+     * @return int
+     */
     public function totalViews(): int{
         return EpisodeVideo::where('episode_id', '=', $this->id)->sum('total_loads');
     }
+
+    /**
+     * Average rating (based on calculated value)
+     * @return string
+     */
     public function averageRating(): string {
         return ($this->stars) ? $this->stars : '1.0';
     }
+
+    /**
+     * Set average rating of episode, according to approved ratings;
+     * This function should be called on "Approve rating"
+     * @return string
+     */
     public function setAverageRating(): string{
         $stars = Review::where('episode_id', '=', $this->id)->where('status', '=', 1)->sum('stars');
         $total = Review::where('episode_id', '=', $this->id)->where('status', '=', 1)->count();
@@ -79,9 +109,14 @@ class Episode extends Model{
 
         return $avgReview;
     }
+
+    /**
+     * Total approved reviews (scaled for huge amount of reviews)
+     * @return string
+     */
     public function totalReviews(): string{
         try{
-            $reviews = $this->reviewsRel->count();
+            $reviews = $this->approvedReviewsRel->count();
 
             if($reviews < 100){
                 return $reviews;
@@ -92,8 +127,29 @@ class Episode extends Model{
             return 0;
         }
     }
+
+    /**
+     * Last updated in format Month year
+     * @return string
+     */
     public function lastUpdated(): string{
         return $this->getMonthName(Carbon::parse($this->updated_at)->format('m') - 1) . ' ' . Carbon::parse($this->updated_at)->format('Y');
+    }
+
+    /**
+     * Number of chapters (trailer not included)
+     * @return int
+     */
+    public function totalChapters(): int{
+        return isset($this->videoContentRel) ? $this->videoContentRel->count() : 0;
+    }
+
+    /**
+     * Year, when episode is created | published
+     * @return string
+     */
+    public function getCreationYear(): string{
+        return isset($this->created_at) ? $this->getYear($this->created_at) : date('Y');
     }
 
     /**
@@ -101,5 +157,30 @@ class Episode extends Model{
      */
     public function hasReview(): int{
         return Review::where('episode_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->count();
+    }
+
+    /**
+     * Calculate progress per episode for logged User
+     * @return int
+     */
+    public function progressByUser(): int{
+        $durationInSeconds = $this->durationInSeconds();
+        if(!$durationInSeconds) return 0;
+
+        /**
+         *  Let's find out, total watch time of episode, based on logged User activity
+         */
+        $watchedSeconds = EpisodeActivity::where('episode_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->sum('time');
+
+        return (int) (($watchedSeconds / $durationInSeconds) * 100);
+    }
+
+    /**
+     * Get rating by user for specific Episode
+     * @return int|string|bool
+     */
+    public function userRating(): int | string | bool{
+        $review =  Review::where('episode_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->first(['stars']);
+        return isset($review) ? $review->stars : false;
     }
 }

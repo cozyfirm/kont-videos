@@ -18,13 +18,14 @@ html{
         border-radius: 3px;
 
     }
+
 }
 
 /**
  *  Import colors
  */
 @import "../style/layout/colors";
-
+@import "./snippets/width";
 
 @import url('https://cdn-uicons.flaticon.com/2.2.0/uicons-bold-rounded/css/uicons-bold-rounded.css');
 

@@ -32,9 +32,11 @@
                         <p class="leave-review-content">@if($episode->hasReview()) {{ __('Uredite ocjenu') }} @else {{ __('Ostavite ocjenu') }} @endif</p>
                     </button>
                 @else
-                    <a href="{{ route('public.my-profile.progress') }}">
-                        <button class="btn-secondary"> <i class="fi fi-br-video-duration"></i> {{ __('Moj progres') }}</button>
-                    </a>
+                    @if(Auth()->user()->hasActivity())
+                        <a href="{{ route('public.my-profile.progress') }}">
+                            <button class="btn-secondary"> <i class="fi fi-br-video-duration"></i> {{ __('Moj progres') }}</button>
+                        </a>
+                    @endif
                 @endisset
                 <a href="{{ route('public.my-profile') }}" title="{{ __('Moj profil') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>

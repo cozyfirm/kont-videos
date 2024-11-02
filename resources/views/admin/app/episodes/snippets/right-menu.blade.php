@@ -15,11 +15,11 @@
                         <i class="fas fa-plus mt-1 mr-1"></i>
                     </div>
                 </a>
-                @if($episode->videoContentRel->count())
+                @if($episode->allVideoContentRel->count())
                     <div class="card-body d-flex justify-content-between m-0">
                         <ul class="m-0 pl-3">
                             @php $counter = 1; @endphp
-                            @foreach($episode->videoContentRel as $video)
+                            @foreach($episode->allVideoContentRel as $video)
                                 <li><a href="{{ route('system.admin.episodes.video-content.preview', ['id' => $video->id ]) }}">{{ $counter++ }}. {{ $video->title }} </a> </li>
                             @endforeach
                         </ul>

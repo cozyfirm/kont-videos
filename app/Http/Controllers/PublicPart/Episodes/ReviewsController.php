@@ -18,8 +18,10 @@ class ReviewsController extends Controller{
         try{
             $review = Review::where('episode_id', '=', $request->episode_id)->where('user_id', '=', Auth::user()->id)->first();
             if($review){
-                if($review->status != 0){
+                if($review->status == 1){
                     return $this->jsonError('0001', __('Vaša recenzija je objavljena. Nije moguće vršiti naknadne izmjene!'));
+                }else if($review->status == 2){
+                    return $this->jsonError('0001', __('Vaša recenzija je odbijena. Molimo kontaktirajte nas za više informacija!'));
                 }
                 $review->update([
                     'stars' => $request->stars,
@@ -33,6 +35,10 @@ class ReviewsController extends Controller{
                     'note' => $request->note
                 ]);
             }
+
+
+            // $episode = Episode::where('id', '=', $request->episode_id)->first();
+            // $episode->setAverageRating();
 
             return $this->jsonSuccess(__('Uspješno sačuvano!'));
         }catch (\Exception $e){

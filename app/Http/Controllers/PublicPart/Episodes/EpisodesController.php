@@ -34,7 +34,7 @@ class EpisodesController extends Controller{
         $episode = Episode::where('slug', '=', $slug)->first();
 
         /* Initial video that should be loaded */
-        $video = EpisodeVideo::where('episode_id', '=', $episode->id)->first();
+        $video = EpisodeVideo::where('category', '=',1)->where('episode_id', '=', $episode->id)->first();
 
         if(!$episode or !$video) abort(404);
 
@@ -47,7 +47,7 @@ class EpisodesController extends Controller{
                 'video_id' => $video->id
             ]);
         }else{
-            $video = EpisodeVideo::where('id', '=', $activity->video_id)->first();
+            $video = EpisodeVideo::where('category', '=',1)->where('id', '=', $activity->video_id)->first();
         }
 
         /* Increment number of video loads */
@@ -96,6 +96,7 @@ class EpisodesController extends Controller{
             if($request->finished === "true"){
                 $nextVideo = EpisodeVideo::where('episode_id', '=', $request->episode_id)
                     ->where('id', '>', $request->video_id)
+                    ->where('category', '=', 1)
                     ->orderBy('id')
                     ->first();
 
