@@ -6,12 +6,12 @@
 @section('content')
     <div class="auth-form">
         <div class="af-image">
-            <img src="{{ asset('files/images/logo.png') }}" alt="">
+            <img src="{{ asset('files/images/logo.svg') }}">
         </div>
         <div class="af-form">
             <div class="aff-container">
                 <div class="aff-header">
-                    <h1 class="tb-color mb-4"> <b>{{ __('Talent Akademija') }}</b> </h1>
+                    <h1 class="tb-color mb-4"> <b>{{ __('KONT') }}</b> </h1>
                 </div>
 
                 <div class="aff-short">

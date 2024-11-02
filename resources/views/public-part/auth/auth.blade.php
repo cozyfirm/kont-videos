@@ -6,17 +6,17 @@
 @section('content')
     <div class="auth-form">
         <div class="af-image">
-            <img src="{{ asset('files/images/logo.png') }}" alt="">
+            <img src="{{ asset('files/images/logo.svg') }}">
         </div>
         <div class="af-form">
             <div class="aff-container">
                 <div class="aff-header">
-                    <h1 class="tb-color mb-4"> <b>{{ __('Welcome') }}</b> </h1>
+                    <h1 class="tb-color mb-4"> <b>{{ __('Dobrodošli') }}</b> </h1>
                 </div>
 
                 <div class="aff-short">
                     <p>
-                        {{ __('Dobrodošli nazad. Unesite Vaše kredencijale i prijavite se na sistem www.example.ba. Enjoy using it !') }}
+                        {{ __('Dobrodošli nazad. Unesite Vaše kredencijale i prijavite se na sistem www.kont.ba. Gledajte epizode, učite, istražujte, pravite bilješke, sve na jednom mjestu. Vaša Fondacija EKIPA!') }}
                     </p>
                 </div>
                 <hr>
