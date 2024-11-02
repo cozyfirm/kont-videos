@@ -39,7 +39,7 @@
                 <tr>
                     <td class="text-center">{{ $i++}}</td>
                     <td> {{ $episode->title ?? ''}} </td>
-                    <td> {{ $episode->presenter ?? ''}} </td>
+                    <td> {{ $episode->presenterRel->name ?? ''}} </td>
 
                     <td class="text-center">
                         <a href="{{route('system.admin.episodes.preview', ['slug' => $episode->slug] )}}" title="{{ __('Više informacija') }}">

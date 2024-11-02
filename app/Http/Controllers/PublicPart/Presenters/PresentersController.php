@@ -19,9 +19,10 @@ class PresentersController extends Controller{
         ]);
     }
     public function preview($username): View{
+        $presenter = User::where('username', '=', $username)->first();
         return view($this->_path . 'preview', [
-            'presenters' => User::where('role', '=', 'presenter')->get(),
-            'presenter' => User::where('username', '=', $username)->first(),
+            'presenters' => User::where('id', '!=', $presenter->id)->where('role', '=', 'presenter')->inRandomOrder()->take(4)->get(),
+            'presenter' => $presenter,
             'categories' => Keyword::where('type', 'blog_category')->get(),
             'popular' => Blog::take($this->_numberOfPopular)->get(),
         ]);

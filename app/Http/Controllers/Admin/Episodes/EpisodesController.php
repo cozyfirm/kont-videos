@@ -28,7 +28,7 @@ class EpisodesController extends Controller{
 
         $filters = [
             'title' => __('Naslov'),
-            'presenter' => __('Predavač')
+            'presenterRel.name' => __('Predavač')
         ];
 
         return view($this->_path . 'index', [

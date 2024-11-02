@@ -1,6 +1,9 @@
 @extends('public-part.layout.layout')
 
 @section('public-content')
+    <!-- Import episode trailer -->
+    @include('public-part.app.shared.trailer')
+
     <div class="presenters__wrapper">
         <div class="sp__inner_w">
             <div class="sp__content">
@@ -20,18 +23,18 @@
                                     <button class="btn-light-grey">{{ __('NOVO') }}</button>
                                 </div>
                                 <div class="full-width d-center">
-                                    <h1>{{ __('Kaftan Studio') }}</h1>
+                                    <h1>{{ $presenter->episodeRel->title ?? '' }}</h1>
                                 </div>
                                 <div class="full-width d-center">
-                                    <h2>{{ __('Društveno odgovorna moda') }}</h2>
+                                    <h2>{{ $presenter->episodeRel->short_description ?? '' }}</h2>
                                 </div>
                                 <div class="full-width d-center">
                                     <div class="btns__wrapper">
-                                        <button class="play-btn">
+                                        <button class="play-btn go-to" custom-uri="{{ route('public.episodes.preview', ['slug' => $presenter->episodeRel->slug]) }}">
                                             <i class="fi fi-br-play"></i>
                                             {{ __('PLAY') }}
                                         </button>
-                                        <button class="watch-trailer">
+                                        <button class="watch-trailer show__trailer" episode-id="{{ $presenter->episodeRel->id }}">
                                             {{ __('Pregledaj trailer') }}
                                         </button>
                                     </div>
@@ -43,13 +46,13 @@
                                 </div>
                                 <div class="full-width d-center">
                                     <div class="details__inner">
-                                        <p> 4 čaptera </p>
+                                        <p>{{ EpisodeHelper::getNumberOfChapters($presenter->episodeRel->totalChapters()) }}</p>
                                         <span>|</span>
-                                        <p> 2024 </p>
+                                        <p>{{ $presenter->episodeRel->getCreationYear() }}</p>
                                         <span>|</span>
                                         <div class="icon_btn">
                                             <i class="fi fi-bs-clock"></i>
-                                            <p> 15 min</p>
+                                            <p>{{ $presenter->episodeRel->totalDuration() }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -63,5 +66,8 @@
                 @include('public-part.app.blog.includes.categories')
             </div>
         </div>
+
+        <!-- All presenters -->
+        @include('public-part.app.presenters.includes.all-presenters')
     </div>
 @endsection
