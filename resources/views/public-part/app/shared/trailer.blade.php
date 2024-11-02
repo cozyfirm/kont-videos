@@ -1,4 +1,4 @@
-<div class="trailer__wrapper">
+<div class="trailer__wrapper ">
     <div class="inner__wrapper">
         <div class="pp__video__wrapper">
             <div class="iframe__header">
@@ -12,8 +12,8 @@
                     </div>
                 </div>
             </div>
-            <!-- ?autoplay=false&loop=false&muted=false&preload=true&responsive=true --> https://iframe.mediadelivery.net/embed/61480/0e947078-2670-44b3-a90f-5b7735fe0a88
-            <iframe id="pp__iframe" src="" loading="lazy" allow="accelerometer;gyroscope;encrypted-media;picture-in-picture;"></iframe>
+            <!-- https://iframe.mediadelivery.net/embed/61480/0e947078-2670-44b3-a90f-5b7735fe0a88?autoplay=false&loop=false&muted=false&preload=true&responsive=true -->
+            <iframe id="pp__iframe" src="https://iframe.mediadelivery.net/embed/61480/0e947078-2670-44b3-a90f-5b7735fe0a88" loading="lazy" allow="accelerometer;gyroscope;encrypted-media;picture-in-picture;"></iframe>
         </div>
         <div class="pp__video__info">
             <div class="text__elem">
@@ -22,7 +22,7 @@
             <div class="text__elem">
                 <p id="pp__duration">Trajanje: 52 min</p>
             </div>
-            <div class="stars">
+            <div class="stars pp__stars">
                 @include('public-part.app.shared.common.stars', ['stars' => 4 ])
             </div>
         </div>

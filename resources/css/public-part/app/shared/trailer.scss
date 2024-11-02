@@ -2,6 +2,13 @@
     position: fixed; background: rgba(0,0,0,0.8); z-index: 100; overflow: auto;
     padding: 64px 0px; visibility: hidden; opacity: 0; width: 80%; height: 80%; left: 10%; top: 10%;  transition: 0.75s all;
 
+    @media screen and (max-width: 1140px){
+        padding: 32px 0px;
+    }
+    @media screen and (max-width: 1100px){
+        padding: 20px 0px;
+    }
+
     &.trailer__wrapper__visible{
         visibility: visible; opacity: 1; width: 100%; height: 100%; transition: 0.75s all; left: 0px; top: 0px;
     }
@@ -9,6 +16,13 @@
     .inner__wrapper{
         position: relative; left: calc(50% - 570px); width: 1140px; display: flex; gap: 20px; flex-wrap: wrap; border-radius: 8px;
         background: #000000; padding-bottom: 20px; overflow: hidden;
+
+        @media screen and (max-width: 1140px){
+            left: 30px; width: calc(100% - 60px);
+        }
+        @media screen and (max-width: 1100px){
+            left: 20px; width: calc(100% - 40px);
+        }
 
         .pp__video__wrapper{
             position: relative; width: 100%;
@@ -19,7 +33,7 @@
                 position: absolute; width: 100%; z-index: 100; display: flex; justify-content: space-between; padding: 32px;
                 .ih__text{
                     display: flex; flex-wrap: wrap; gap: 16px;
-                    h1,h2,h3,h4,h5,p{width: 100%;}
+                    h1,h2,h3,h4,h5,p{width: 100%; color: #FFFFFF; }
                     h5{
                         font-size: 20px;
                     }
@@ -47,6 +61,9 @@
         .pp__video__info{
             position: relative; width: 100%; height: 40px; display: flex; justify-content: flex-start; padding: 0px 20px; align-items: center;
             gap: 16px;
+            @media screen and (max-width: 800px){
+                padding: 0px;
+            }
             .text__elem{
                 p{
                     margin: 0px; padding: 0px; color: #FFFFFF; font-size: 16px;
@@ -63,6 +80,9 @@
         }
         .pp__more_info{
             position: relative; width: 100%; display: flex; gap: 16px; padding: 0px 20px; flex-wrap: wrap;
+            @media screen and (max-width: 800px){
+                padding: 0px;
+            }
             h1{
                 width: 100%; font-size: 32px; color: $color-white;
             }
@@ -70,20 +90,34 @@
         }
         .pp__chapters{
             position: relative; width: 100%; display: flex; flex-wrap: wrap; margin-top: 20px; padding: 0px 20px;
+            @media screen and (max-width: 800px){ padding: 0px; gap: 20px; }
             .single__chapter{
                 position: relative; width: 100%; display: flex; justify-content: space-between; gap: 20px; padding: 20px;
                 background: rgba(255,255,255,0.05); transition: 0.75s all;
+
+                @media screen and (max-width: 800px){
+                    padding: 0px; gap:32px;
+                }
                 &:hover{
+                    @media screen and (max-width: 800px){
+                        background: transparent;
+                    }
                     background: rgba(255,255,255,0.2); cursor: pointer;
                 }
                 .no__part{
                     position: relative; display: flex; padding: 0px 12px;
+                    @media screen and (max-width: 800px){
+                         padding: 0px; align-items: center;
+                    }
                     h1{
                         font-size: 32px; color: $color-white;
                     }
                 }
                 .img__part{
                     position: relative; width: 132px; overflow: hidden;
+                    @media screen and (max-width: 800px){
+                        display: none;
+                    }
                     img{
                         position: relative; width: 100%;
                     }

@@ -19,6 +19,7 @@ $(document).ready(function (){
                 if(code === '0000'){
                     let episode = response['data']['episode'];
                     let trailer = response['data']['trailer'];
+                    let stars   = response['data']['reviews'];
 
                     /* Set static data */
                     $("#pp__presenter").text(episode['presenter_rel']['name']);
@@ -34,7 +35,6 @@ $(document).ready(function (){
                         for(let i=0; i<episode['video_content_rel'].length; i++){
                             let video = episode['video_content_rel'][i];
 
-                            console.log(video['category']);
                             if(parseInt(video['category']) !== 2){
                                 chapters ++;
 
@@ -59,7 +59,7 @@ $(document).ready(function (){
                                                         .append(function (){
                                                             return $("<h4>").text(video['title'])
                                                         }).append(function (){
-                                                            return $("<p>").text("12min")
+                                                            return $("<p>").text(video['duration'])
                                                         })
                                                 })
                                                 .append(function (){
@@ -91,7 +91,26 @@ $(document).ready(function (){
                     $("#pp__no_chapters").text(chapterText);
                     $("#pp__duration").text("Trajanje: " + episode['duration']);
 
-                    console.log(episode, trailer);
+                    $(".pp__stars").empty();
+
+                    if(parseInt(stars['total'])){
+                        for(let j=1; j<=5; j++){
+                            $(".pp__stars").append(function (){
+                                return $("<div>").attr('class', 'star')
+                                    .append(function (){
+                                        if (j <= parseInt(stars['fullStar'])){
+                                            return $("<img>").attr('src', '/files/images/default/icons/star-yellow.svg').attr('tag', 'Star');
+                                        }else if(stars['halfStar'] && stars['halfStar'] === j){
+                                            return $("<img>").attr('src', '/files/images/default/icons/star-half-yellow.svg').attr('tag', 'Star');
+                                        }else{
+                                            return $("<img>").attr('src', '/files/images/default/icons/star-empty-yellow.svg').attr('tag', 'Star');
+                                        }
+                                    });
+                            });
+                        }
+                    }
+
+                    console.log(stars);
                     $(".trailer__wrapper").addClass('trailer__wrapper__visible');
                 }else{
                     Notify.Me([response['message'], "danger"]);

@@ -14,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use ReviewHelper;
 
 class EpisodesController extends Controller{
     use ResponseTrait, EpisodeBaseTrait;
@@ -205,21 +206,32 @@ class EpisodesController extends Controller{
     public function fetchTrailer(Request $request): JsonResponse{
         try{
             if(isset($request->id)){
+                $fullStar = 1; $halfStar = 0;
 
-                $episode = Episode::where('id', '=', $request->id)->with('videoContentRel:id,episode_id,title,description,library_id,video_id,thumbnail,category,duration_sec', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description']);
+                $episode = Episode::where('id', '=', $request->id)->with('videoContentRel:id,episode_id,title,description,library_id,video_id,thumbnail,category,duration_sec', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description', 'stars']);
                 foreach ($episode->videoContentRel as $content){
                     if($content->category != 2){
                         $content->img = $this->getThumbnailUri($content->video_id, $content->thumbnail);
+                        $content->duration = $content->getDuration();
                     }
                 }
                 $episode->duration = $episode->totalDuration();
+
+                /* Get stars info */
+                // $this->getReviewsInfo($starIndex, $index, $episode->stars);
+                ReviewHelper::getRawData($episode->stars ?? '1', $fullStar, $halfStar);
 
                 $trailer = EpisodeVideo::where('episode_id', '=', $episode->id)->where('category', '=', 2)->first(['id', 'title', 'library_id', 'video_id', 'thumbnail']);
                 $trailer->uri = $trailer->getIframeUri($trailer->library_id, $trailer->video_id);
 
                 return $this->apiResponse('0000', __('Success'), [
                     'episode' => $episode,
-                    'trailer' => $trailer
+                    'trailer' => $trailer,
+                    'reviews' => [
+                        'fullStar' => $fullStar,
+                        'halfStar' => $halfStar,
+                        'total' => $episode->reviewsRel->count()
+                    ]
                 ]);
             }else throw new \ErrorException('Video not found!!');
         }catch (\Exception $e){
