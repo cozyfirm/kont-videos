@@ -1,0 +1,83 @@
+@import "single_presenter";
+
+.presenters__wrapper{
+    position: relative; width: 100%; padding-bottom: 32px;
+    .inner__wrapper{
+        position: relative; width: $d-width; left:calc(50% - ($d-width / 2));
+        display: flex; justify-content: flex-start; gap: 24px; flex-wrap: wrap;
+
+        &.pt-32{padding-top: 32px;}
+
+        @media screen and (max-width: $d-width){
+            left: 30px; width: calc(100% - 60px);
+        }
+        @media screen and (max-width: 1100px){
+            left: 20px; width: calc(100% - 40px);
+        }
+        .presenter__wrapper{
+            position: relative; width: calc(25% - 18px); height: 420px; border-radius: 8px; overflow: hidden;
+            @media screen and (max-width: 1100px){
+                width: calc(33.33% - 16px);
+            }
+            @media screen and (max-width: 900px){
+                width: calc(50% - 12px);
+            }
+            @media screen and (max-width: 600px){
+                width: 100%;
+            }
+            &:hover, &.force__hover{
+                .presenter__info{ opacity: 0; visibility: hidden; }
+                .hover__wrapper{opacity: 1; visibility: visible;  }
+                cursor: pointer;
+            }
+            img{
+                height: 100%; width: 100%; object-fit: cover; object-position: center;
+            }
+            .presenter__info{
+                position: absolute; bottom: 0px; width: 100%; height: 100%; padding: 24px; display: flex; justify-content: center; align-items: flex-end;
+                transition: 0.5s ease-in-out;
+                h1{
+                    font-size: 32px; color: #FFFFFF; margin: 0px; padding: 0px; width: 100%; text-align: center;
+                }
+            }
+            .hover__wrapper{
+                position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: 0.5s ease-in-out;
+                 background: rgba(115, 57, 74, 0.8);
+
+                .hover__header, .hover__footer{
+                    position: absolute; width: 100%; padding: 32px; display: flex;
+                }
+                .hover__header{
+                    left: 0px; top: 0px; justify-content: flex-end;
+                    h2{
+                        font-size: 40px; color: $color-white; width: 100%; text-align: right;
+                    }
+                }
+                .hover__footer{
+                    left: 0px; bottom: 0px;
+                    .hover__btn{
+                        display: flex; gap: 16px; width: auto; padding: 6px 16px; align-items: center; background: $color-black;
+                        @media screen and (max-width: 1000px){
+                            // width: 100%; height: auto; justify-content: center;
+                        }
+                        p, span{
+                            color: #FFF; margin: 0px; padding: 0px;
+                        }
+                        .icon_btn{
+                            display: flex; gap: 8px; align-items: center;
+                            i{
+                                color:#FFF; font-size: 14px;
+                            }
+                        }
+                    }
+                    .presenters__stars__wrapper{
+                        position: absolute; right: 32px; bottom: 32px; width: 20px; min-height: 20px; display: flex; flex-direction: column-reverse;
+                        img{
+                            width: 20px; height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

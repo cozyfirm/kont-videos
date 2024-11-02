@@ -20,7 +20,7 @@
                             {!! nl2br($post->description ?? '') !!}
                         </div>
 
-                        @if(isset($post->video))
+                        @if(isset($post->video) and !empty($post->video))
                             <div class="blog__video">
                                 <iframe class="blog__video_iframe" src="{{ $post->video }}" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
                             </div>

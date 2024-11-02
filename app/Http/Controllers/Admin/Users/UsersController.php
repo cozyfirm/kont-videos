@@ -117,7 +117,21 @@ class UsersController extends Controller{
             User::where('id', '=', $request->id)->update(['photo_uri' => $name]);
 
         }catch (\Exception $e){}
+        return back();
+    }
+    //
+    public function updateCoverImage (Request $request): RedirectResponse{
+        try{
 
+            $file = $request->file('cover__photo');
+            $ext = pathinfo($file->getClientOriginalName(),PATHINFO_EXTENSION);
+            $name = md5($file->getClientOriginalName().time()).'.'.$ext;
+            $file->move(public_path('files/images/public-part/users'), $name);
+
+            /* Update file name */
+            User::where('id', '=', $request->id)->update(['cover_photo_uri' => $name]);
+
+        }catch (\Exception $e){}
         return back();
     }
 }

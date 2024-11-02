@@ -34,8 +34,12 @@ class BlogController extends Controller{
         return $this->getPosts($posts, $id);
     }
     public function preview($slug): View{
+        $post = Blog::where('slug', '=', $slug)->first();
+        /* Increment views of post */
+        $post->update(['views' => ($post->views + 1)]);
+
         return view($this->_path . 'preview', [
-            'post' => Blog::where('slug', '=', $slug)->first(),
+            'post' => $post,
             'categories' => Keyword::where('type', 'blog_category')->get(),
             'popular' => Blog::take(4)->get()
         ]);

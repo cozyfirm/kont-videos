@@ -47,16 +47,6 @@
                         {{ html()->hidden('id')->class('form-control')->value($user->id) }}
                     @endif
 
-                    {{--                    <div class="row">--}}
-                    {{--                        <div class="col-md-12">--}}
-                    {{--                            <div class="form-group">--}}
-                    {{--                                {{ html()->label(__('Ime i prezime'))->for('supplier_id')->class('bold') }}--}}
-                    {{--                                {{ html()->select('supplier_id', [], isset($invoice) ? $user->supplier_id : '')->class('form-control form-control-sm')->required()->disabled(isset($preview)) }}--}}
-                    {{--                                <small id="supplier_idHelp" class="form-text text-muted">{{ __('Odaberite dobavljača robe') }}</small>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -167,6 +157,21 @@
                                 </div>
                             </form>
 
+                            @if($user->role == 'presenter')
+                                <form action="{{ route('system.admin.users.update-cover-image') }}" method="POST" id="update-cover-photo" enctype="multipart/form-data">
+                                    @csrf
+                                    {{ html()->hidden('id')->class('form-control')->value($user->id) }}
+                                    <div class="card p-0 m-0 mt-3" title="{{ __('Nova fotografija za program') }}">
+                                        <div class="card-body d-flex justify-content-between">
+                                            <label for="cover__photo" >
+                                                <p class="m-0">{{ __('Ažurirajte cover') }}</p>
+                                            </label>
+                                            <i class="fas fa-image mt-1"></i>
+                                        </div>
+                                        <input name="cover__photo" class="form-control form-control-lg d-none" id="cover__photo" type="file">
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

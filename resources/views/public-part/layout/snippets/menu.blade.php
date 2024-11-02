@@ -13,7 +13,7 @@
                     </li>
                 @else
                     <li><a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a></li>
-                    <li><a href="#">Predavači</a></li>
+                    <li><a href="{{ route('public.presenters') }}">{{ __('Predavači') }}</a></li>
                     {{--                <li><a href="#">Teme</a></li>--}}
                     <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
                     <li><a href="#">O nama</a></li>
@@ -64,7 +64,7 @@
         <div class="list">
             <ul>
                 <li><a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a></li>
-                <li><a href="#">Predavači</a></li>
+                <li><a href="{{ route('public.presenters') }}">{{ __('Predavači') }}</a></li>
 {{--                <li><a href="#">Teme</a></li>--}}
                 <li><a href="#">{{ __('Teme') }}</a></li>
                 <li><a href="#">O nama</a></li>

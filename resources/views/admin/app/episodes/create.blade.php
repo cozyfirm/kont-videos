@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Naslov epizode'))->for('title')->class('title') }}
-                                {{ html()->text('title')->class('form-control form-control-sm')->required()->value((isset($episode) ? $episode->title : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->text('title')->class('form-control form-control-sm')->required()->value((isset($episode) ? $episode->title : ''))->maxlength('150')->isReadonly(isset($preview)) }}
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -68,7 +68,13 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ html()->label(__('Kratki opis'))->for('short_description')->class('bold') }}
+                                {{ html()->text('short_description')->class('form-control form-control-sm')->required()->value((isset($episode) ? $episode->short_description : ''))->maxlength('200')->isReadonly(isset($preview)) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Jezik'))->for('language_id')->class('bold') }}
                                 {{ html()->select('language_id', $languages, isset($episode) ? $episode->language_id : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}

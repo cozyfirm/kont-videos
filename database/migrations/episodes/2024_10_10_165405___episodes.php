@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->string('slug');
+            $table->string('short_description');
             $table->text('description');
 
             /* Basically user id */

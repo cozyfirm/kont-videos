@@ -60,6 +60,7 @@ class EpisodesController extends Controller{
             $episode = Episode::create([
                 'title' => $request->title,
                 'slug' => $request->slug,
+                'short_description' => $request->short_description,
                 'description' => $request->description,
                 'presenter_id' => $request->presenter_id,
                 'image_id' => $image->id,
@@ -107,6 +108,7 @@ class EpisodesController extends Controller{
             $episode->update([
                 'title' => $request->title,
                 'presenter_id' => $request->presenter_id,
+                'short_description' => $request->short_description,
                 'description' => $request->description,
                 'image_id' => isset($image) ? $image->id : $episode->image_id,
                 'video_id' => isset($video) ? $video->id : $episode->video_id,

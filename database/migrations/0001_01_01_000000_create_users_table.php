@@ -36,8 +36,9 @@ return new class extends Migration
 
             /* About user - text data */
             $table->text('about')->nullable();
-            /* Profile image */
+            /* Profile image and cover photo for presenters */
             $table->string('photo_uri')->nullable();
+            $table->string('cover_photo_uri')->nullable();
 
             /* Social networks links */
             $table->string('instagram', 100)->nullable();

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Core\Country;
+use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeActivity;
 use App\Models\Episodes\Review;
 use Carbon\Carbon;
@@ -43,6 +44,7 @@ class User extends Authenticatable
         'country',
         'about',
         'photo_uri',
+        'cover_photo_uri',
         'instagram',
         'facebook',
         'twitter',
@@ -76,6 +78,9 @@ class User extends Authenticatable
     public function photoUri(){
         return isset($this->photo_uri) ? $this->photo_uri : 'silhouette.png';
     }
+    public function coverPhotoUri(){
+        return isset($this->cover_photo_uri	) ? $this->cover_photo_uri : '';
+    }
     public function birthDate(): string {
         return Carbon::parse(isset($this->birth_date) ? $this->birth_date : date('Y-m-d'))->format('d.m.Y');
     }
@@ -83,7 +88,8 @@ class User extends Authenticatable
         return $this->hasOne(Country::class, 'id', 'country');
     }
     public function getInitials(): string{
-        return substr($this->name, 0, 1) . '. ' . substr($this->name, 0, 1) . '.';
+        $name = explode(' ', $this->name);
+        return substr($name[0] ?? '', 0, 1) . (isset($name[1]) ? '. ' . substr($name[1] ?? '', 0, 1) . '.' : '');
     }
     public function totalReviews(): int{
         return Review::where('user_id', '=', $this->id)->count();
@@ -93,5 +99,8 @@ class User extends Authenticatable
     }
     public function hasActivity(): int{
         return isset($this->activityRel) ? $this->activityRel->count() : 0;
+    }
+    public function episodeRel(): HasOne{
+        return $this->hasOne(Episode::class, 'presenter_id', 'id');
     }
 }

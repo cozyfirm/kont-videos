@@ -26,6 +26,7 @@ return new class extends Migration
 
             $table->integer('created_by');
             $table->tinyInteger('published')->default(0);
+            $table->tinyInteger('views')->default(0);
 
             $table->timestamps();
             $table->softDeletes();

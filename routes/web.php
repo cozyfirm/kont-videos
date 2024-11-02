@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicPart\MyProfile\MyProfileController;
 use App\Http\Controllers\PublicPart\MyProfile\MyProgressController;
 use App\Http\Controllers\PublicPart\Pages\ContactController;
+use App\Http\Controllers\PublicPart\Presenters\PresentersController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function () {
@@ -37,6 +38,15 @@ Route::prefix('/')->group(function () {
         /* Load more posts */
         Route::post('/load-more',                     [PublicBlogController::class, 'loadMore'])->name('public-part.blog.load-more');
     });
+
+    /**
+     *  Presenters
+     */
+    Route::prefix('/presenters')->group(function () {
+        Route::get ('/',                              [PresentersController::class, 'index'])->name('public.presenters');
+        Route::get ('/{username}',                    [PresentersController::class, 'preview'])->name('public.presenters.preview');
+    });
+
     /**
      *  Episodes
      */
@@ -152,6 +162,7 @@ Route::prefix('system')->group(function () {
             Route::get ('/edit/{username}',           [UsersController::class, 'edit'])->name('system.admin.users.edit');
             Route::post('/update',                    [UsersController::class, 'update'])->name('system.admin.users.update');
             Route::post('/update-profile-image',      [UsersController::class, 'updateProfileImage'])->name('system.admin.users.update-profile-image');
+            Route::post('/update-cover-image',        [UsersController::class, 'updateCoverImage'])->name('system.admin.users.update-cover-image');
         });
 
         /**

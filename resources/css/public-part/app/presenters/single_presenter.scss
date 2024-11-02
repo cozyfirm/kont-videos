@@ -1,0 +1,116 @@
+.sp__inner_w{
+    position: relative; width: $d-width; left: calc(50% - ($d-width / 2)); min-height: 120px;
+    display: flex; justify-content: left; gap: 24px; flex-wrap: wrap;
+    flex-direction: row;
+
+    @media screen and (max-width: $d-width){
+        left: 30px; width: calc(100% - 60px);
+    }
+    @media screen and (max-width: 1100px){
+        left: 20px; width: calc(100% - 40px);
+    }
+
+    .sp__content{
+        position: relative; width: 100%; display: flex; justify-content: space-between; gap: 64px; overflow: visible;
+        @media screen and (max-width: 800px){
+            flex-wrap: wrap; gap: 32px;
+        }
+        .sp__data{
+            position: relative; width: calc(100% - 364px); gap: 64px; display: flex; flex-wrap: wrap; flex-direction: column; padding-top: 32px;
+
+            @media screen and (max-width: 800px){
+                width: 100%; gap: 32px; display: flex; flex-wrap: wrap;
+            }
+
+            .cover__image{
+                position: relative; width: 100%; border-radius: 16px; overflow: hidden;
+                img{
+                    width: 100%;
+                }
+            }
+            .text__info{
+                h1,h2,h3,h4,h5,p,span,a{
+                    color: $color-white; margin: 0px; padding: 0px;
+                }
+            }
+
+            .episode__info{
+                position: relative; width: 100%; display: flex; justify-content: space-between; gap: 32px;
+                .ei__img{
+                    position: relative; width: calc(50% - 16px); border-radius: 16px; overflow: hidden;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .ei__rest{
+                    position: relative; width: calc(50% - 16px); display: flex; align-items: center; justify-content: center;
+                    .ei_r_data{
+                        position: relative; width: 100%; display: flex; gap: 32px; flex-wrap: wrap; max-width: 70%;
+                        .full-width{
+                            position: relative; width: 100%;
+                        }
+                        .d-center{
+                            display: flex; justify-content: center;
+                            button{
+                                background-color: $color-dark-grey-hover !important; color: #FFF;
+                            }
+                        }
+                        h1{
+                            color: $color-white; font-size: 40px; width: 100%; text-align: center;
+                        }
+                        h2{
+                            color: $color-white; font-size: 32px; width: 100%; text-align: center;
+                        }
+
+                        .btns__wrapper{
+                            display: flex; width: 100%; justify-content: center; gap: 16px;
+                            button{
+                                width: calc(100% - 16px); border: 1px solid $color-white; border-radius: 0px;
+                                display: flex; gap: 8px; align-items: center; justify-content: center; padding: 8px 0px;
+                                font-size: 14px; background: #717070;
+                                i{
+                                    font-size: 14px;
+                                }
+                            }
+                            .play-btn{
+                                background: $color-primary !important;
+
+                                &:hover {
+                                    background-color: $color-primary-hover;
+                                    //border: 1px $color-black solid;
+                                    transition: 0.75s;
+                                }
+                            }
+                        }
+                        .tags__wrapper{
+                            display: flex; width: 100%; justify-content: center; gap: 16px;
+                            button{
+                                border:none; border-radius: 12px; background: #2E2D2D;
+                                display: flex; gap: 8px; align-items: center; justify-content: center; padding: 6px 16px;
+                                font-size: 14px; color: $color-white;
+                            }
+                        }
+                        .details__inner{
+                            display: flex; gap: 16px; padding: 6px 16px; align-items: center; background: $color-dark-grey-hover;
+                            justify-content: center;
+                            @media screen and (max-width: 1000px){
+                                // width: 100%; height: auto;
+                            }
+                            p, span{
+                                color: $color-white; margin: 0px; padding: 0px;
+                            }
+                            .icon_btn{
+                                display: flex; gap: 8px; align-items: center;
+                                i{
+                                    color:$color-white; font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @import "../blog/categories";
+    }
+}
