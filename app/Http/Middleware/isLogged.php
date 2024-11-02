@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class isAdmin
+class isLogged
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,7 @@ class isAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response{
-        if (isset(Auth::user()->role)) {
-            return Auth::user()->role == 'admin' ? $next($request) : redirect()->route('public.my-profile');
-        }else return redirect()->route('auth');
+        if(!Auth::check()) return redirect()->route('auth');
+        else return $next($request);
     }
 }

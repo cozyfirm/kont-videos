@@ -109,7 +109,7 @@ Route::prefix('/')->group(function () {
      *      2. My progress
      *      3. Notes, etc
      */
-    Route::prefix('/my-profile')->group(function () {
+    Route::prefix('/my-profile')->middleware('isLogged')->group(function () {
         Route::get ('/',                              [MyProfileController::class, 'profile'])->name('public.my-profile');
         Route::post('/update-image',                  [MyProfileController::class, 'updateImage'])->name('public.my-profile.update-image');
         /**
