@@ -35,6 +35,7 @@ import './public-part/app/shared/episodes.js';
 
 import './public-part/app/player/player.js';
 import './admin/blog/blog.js';
+import './admin/reviews/review.js';
 
 /* Episodes JS */
 import './public-part/app/episodes/review.js';

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Core\Keyword;
 use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeVideo;
+use App\Models\Episodes\Review;
 use App\Models\User;
 use App\Traits\Common\FileTrait;
 use App\Traits\Episodes\EpisodeBaseTrait;
@@ -203,5 +204,39 @@ class EpisodesController extends Controller{
 
         $video->delete();
         return redirect()->route('system.admin.episodes.preview', ['slug' => $episode->slug]);
+    }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     * Reviews
+     */
+    public function allReviews(): View{
+        $reviews = Review::where('id', '>', 0)->orderBy('id', 'DESC');
+        $reviews = Filters::filter($reviews);
+
+        $filters = [
+            'episodeRel.title' => __('Epizoda'),
+            'userRel.name' => __('Korisnik'),
+            'stars' => __('Ocjena'),
+            'note' => __('Poruka'),
+            'statusRel.name' => __('Status')
+        ];
+
+        return view($this->_path . 'all-reviews', [
+            'filters' => $filters,
+            'reviews' => $reviews
+        ]);
+    }
+    public function updateReviewStatus(Request $request): JsonResponse{
+        try{
+            $review = Review::where('id', '=', $request->id)->first();
+            $review->update(['status' => $request->status]);
+
+            /* Update average review */
+            $episode = Episode::where('id', '=', $review->episode_id)->first();
+            $average = $episode->setAverageRating();
+
+            return $this->jsonSuccess(__('Uspješno spašeno! Prosječna ocjena ' . ($episode->title ?? '') . ' je ') . $episode->stars . '!');
+        }catch (\Exception $e){}
     }
 }

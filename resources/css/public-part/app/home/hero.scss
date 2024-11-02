@@ -166,12 +166,19 @@
 }
 
 @media screen and (max-width: 900px) {
+    .hero-bunner-content {
+        width: calc(100% - 40px);
+    }
     .hero-bunner {
         bottom: 30px;
     }
     .hero-bunner-left {
         flex-direction: column;
-        padding: 0px 16px;
+        .hero-action-btns{
+            width: 100%;
+            .textfield-outlined{width: 100%;}
+            // padding: 0px 16px;
+        }
     }
     .input-secondary {
         width: 100%;

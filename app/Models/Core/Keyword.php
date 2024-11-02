@@ -24,7 +24,8 @@ class Keyword extends Model{
         'video_category' => 'Kategorija videa',
         'blog_category' => 'Kategorija bloga',
         'languages' => 'Jezici',
-        'faq__section' => 'FAQ sections'
+        'faq__section' => 'FAQ sections',
+        'reviews_status' => 'Status recenzije'
     ];
 
     /* Return all types of keywords */

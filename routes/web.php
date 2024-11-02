@@ -187,6 +187,11 @@ Route::prefix('system')->group(function () {
                 Route::post('/update',                        [EpisodesController::class, 'updateVideo'])->name('system.admin.episodes.video-content.update');
                 Route::get ('/delete/{id}',                   [EpisodesController::class, 'deleteVideo'])->name('system.admin.episodes.video-content.delete');
             });
+
+            Route::prefix('reviews')->group(function () {
+                Route::get ('/',                              [EpisodesController::class, 'allReviews'])->name('system.admin.episodes.reviews');
+                Route::post('/update-status',                 [EpisodesController::class, 'updateReviewStatus'])->name('system.admin.episodes.reviews.update-status');
+            });
         });
 
         /**

@@ -141,10 +141,10 @@
                             <p>{{__('Sve epizode')}}</p>
                         </div>
                     </a>
-                    <a href="#">
+                    <a href="{{ route('system.admin.episodes.reviews') }}">
                         <div class="inside-lm-link">
                             <div class="ilm-l"></div><div class="ilm-c"></div>
-                            <p> {{__('Other link')}} </p>
+                            <p> {{__('Recenzije')}} </p>
                         </div>
                     </a>
                 </div>

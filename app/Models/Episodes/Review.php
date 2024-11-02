@@ -2,6 +2,7 @@
 
 namespace App\Models\Episodes;
 
+use App\Models\Core\Keyword;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,5 +28,8 @@ class Review extends Model{
     }
     public function createdAt(): string{
         return Carbon::parse($this->created_at)->format('d.m.Y H:i');
+    }
+    public function statusRel(): HasOne{
+        return $this->hasOne(Keyword::class, 'value', 'status')->where('type', '=', 'reviews_status');
     }
 }
