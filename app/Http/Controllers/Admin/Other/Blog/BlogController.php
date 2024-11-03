@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Other\Blog;
 
 use App\Http\Controllers\Admin\Core\Filters;
+use App\Http\Controllers\Admin\Core\HashtagController;
 use App\Http\Controllers\Controller;
 use App\Models\Core\Keyword;
 use App\Models\Other\Blog\Blog;
@@ -43,6 +44,10 @@ class BlogController extends Controller{
 
             $post = Blog::create($request->except(['files', 'undefined']));
 
+            /* HashTags */
+            request()->merge(['id' => $post->id]);
+            HashtagController::extract(request(), Blog::find($post->id));
+
             return $this->jsonSuccess(__('Uspješno spremljeno !'), route('system.admin.blog.preview', ['id' => $post->id]));
         }catch (\Exception $e){
             return $this->jsonError('2100', __('Desila se greška!'));
@@ -66,6 +71,10 @@ class BlogController extends Controller{
         try{
             $request['slug'] = $this->generateSlug($request->title);
             Blog::where('id', '=', $request->id)->update($request->except(['files', 'undefined', 'id']));
+
+            /* HashTags */
+            request()->merge(['id' => $request->id]);
+            HashtagController::extract(request(), Blog::find($request->id));
 
             return $this->jsonSuccess(__('Uspješno spremljeno !'), route('system.admin.blog.preview', ['id' => $request->id]));
         }catch (\Exception $e){

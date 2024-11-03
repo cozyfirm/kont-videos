@@ -18,8 +18,11 @@
                                     </div>
 
                                     <div class="hashtags">
-                                        <div class="hashtag"> INTERVIEW </div>
-                                        <div class="hashtag"> LONGREAD </div>
+                                        @foreach($post->getAllTags() as $tag)
+                                            <div class="hashtag">
+                                                {{ $tag->tag ?? '' }}
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
 

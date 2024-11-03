@@ -17,6 +17,20 @@
     }
 }
 
+.tags-wrapper{
+    display: inline-flex;
+    flex-wrap: wrap;
+    .tag{
+        position:relative;
+        margin-right:4px;
+        left:0px;
+        padding:4px 10px;
+        margin-top:4px;
+        border:1px solid #CBCCCC;
+        a{margin:0px; padding: 0px; display: initial; font-size:14px; color:grey;}
+    }
+}
+
 .single-blog__images {
     width: 100%; position: relative;
     display: flex;

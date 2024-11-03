@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static create(array $array)
  * @method static get()
  * @method static orderBy(string $string, string $string1)
+ * @method static find(mixed $id)
  * @property mixed $stars
  * @property mixed $videoContentRel
  */
@@ -28,6 +29,9 @@ class Episode extends Model{
 
     protected $table = 'episodes';
     protected $guarded = ['id'];
+
+    protected array $taggable = ['title', 'short_description', 'description'];
+    public function getTaggable(): array {return $this->taggable; }
 
     public function presenterRel(): HasOne{
         return $this->hasOne(User::class, 'id', 'presenter_id');

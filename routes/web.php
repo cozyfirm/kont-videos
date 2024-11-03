@@ -32,6 +32,7 @@ Route::prefix('/')->group(function () {
         Route::get ('/category/{id}',                 [PublicBlogController::class, 'indexWithCategories'])->name('public.blog.with-categories');
         Route::get ('/preview/{slug}',                [PublicBlogController::class, 'preview'])->name('public.blog.preview');
 
+        Route::get('/tags/{tag}',                     [PublicBlogController::class, 'tags'])->name('public-part.blog.tag');
         /* Fetch images */
         Route::post('/fetch-images',                  [PublicBlogController::class, 'fetchImages'])->name('public-part.blog.fetch-images');
 

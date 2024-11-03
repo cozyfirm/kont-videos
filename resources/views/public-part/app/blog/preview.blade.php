@@ -26,6 +26,14 @@
                             </div>
                         @endif
 
+                        <div class="tags-wrapper">
+                            @foreach($postTags as $tag)
+                                <div class="tag">
+                                    <a href="{{ route('public-part.blog.tag', ['tag' => str_replace('#', '', $tag->tag ?? '')]) }}">{{ $tag->tag ?? '' }}</a>
+                                </div>
+                            @endforeach
+                        </div>
+
                         @isset($post->imageRel)
                             <div class="single-blog__images">
                                 @foreach($post->imageRel as $image)

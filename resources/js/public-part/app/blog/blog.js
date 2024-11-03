@@ -64,13 +64,15 @@ $(document).ready(function (){
                                                 })
                                         })
                                         .append(function (){
-                                            return $("<div>").attr('class', 'hashtags')
-                                                .append(function (){
-                                                    return $("<div>").attr('class', 'hashtag').text("HASH")
-                                                })
-                                                .append(function (){
-                                                    return $("<div>").attr('class', 'hashtag').text("TAG")
-                                                })
+                                            let tagsWrapper = $("<div>").attr('class', 'hashtags');
+                                            if(post['tags'].length){
+                                                for(let k=0; k<post['tags'].length; k++){
+                                                    tagsWrapper.append(function (){
+                                                        return $("<div>").attr('class', 'hashtag').text(post['tags'][k]['tag']);
+                                                    });
+                                                }
+                                            }
+                                            return tagsWrapper;
                                         })
                                 })
                                 .append(function (){

@@ -3,6 +3,7 @@
 namespace App\Models\Other\Blog;
 
 use App\Models\Core\File;
+use App\Models\Core\Hashtags\Hashtag;
 use App\Models\Core\Keyword;
 use App\Models\User;
 use Carbon\Carbon;
@@ -17,12 +18,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static take(int $int)
  * @method static get()
  * @method static orderBy(string $string, string $string1)
+ * @method static find($id)
  */
 class Blog extends Model{
     use HasFactory, SoftDeletes;
 
     protected $table = 'blog';
     protected $guarded = ['id'];
+
+    protected array $taggable = ['title', 'short_desc', 'description'];
+    public function getTaggable(): array {return $this->taggable; }
 
     /**
      * Helper functions:
@@ -61,5 +66,21 @@ class Blog extends Model{
      */
     public function getCategory(){
         return (!$this->category) ? __('Globalni post') : $this->categoryRel->name ?? '';
+    }
+
+    public function getAllTags(){
+        $id = $this->id;
+
+        $tags = Hashtag::where('lang', '=', 'bs')->whereHas('tagsRel', function ($query) use ($id){
+            $query->where(function ($query) use ($id){
+                $query->where('post_id', $id)->where('category', $this->getTable());
+            });
+        })->orderBy('id')->get();
+
+        foreach ($tags as $tag){
+            $tag->update(['views' => ($tag->views + 1)]);
+        }
+
+        return $tags;
     }
 }

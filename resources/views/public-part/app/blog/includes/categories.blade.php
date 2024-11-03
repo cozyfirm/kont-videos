@@ -39,20 +39,10 @@
 
     <h5>{{ __('KLJUČNE RIJEČI') }}</h5>
     <div class="tags-wrapper">
-        <div class="tag">
-            <a href="#">TAGS</a>
-        </div>
-        <div class="tag">
-            <a href="#">KONT</a>
-        </div>
-        <div class="tag">
-            <a href="#">VIDEO</a>
-        </div>
-
-{{--        @foreach($popularTags as $tag)--}}
-{{--            <div class="tag">--}}
-{{--                <a href="{{ route('public-part.blog.tag', ['tag' => str_replace('#', '', $tag->tag ?? '')]) }}">{{ $tag->tag ?? '' }}</a>--}}
-{{--            </div>--}}
-{{--        @endforeach--}}
+        @foreach($popularTags as $tag)
+            <div class="tag">
+                <a href="{{ route('public-part.blog.tag', ['tag' => str_replace('#', '', $tag->tag ?? '')]) }}">{{ $tag->tag ?? '' }}</a>
+            </div>
+        @endforeach
     </div>
 </div>

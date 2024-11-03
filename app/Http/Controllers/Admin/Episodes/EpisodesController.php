@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Episodes;
 
 use App\Http\Controllers\Admin\Core\Filters;
+use App\Http\Controllers\Admin\Core\HashtagController;
 use App\Http\Controllers\Controller;
 use App\Models\Core\Keyword;
 use App\Models\Episodes\Episode;
@@ -70,6 +71,10 @@ class EpisodesController extends Controller{
                 'created_by' => $request->created_by
             ]);
 
+            /* HashTags */
+            request()->merge(['id' => $episode->id]);
+            HashtagController::extract(request(), Episode::find($episode->id));
+
             return redirect()->route('system.admin.episodes.preview', ['slug'  => $episode->slug ]);
         }catch (\Exception $e){
             return back()->with('error', __('Desila se greška! Pokušajte ponovo!'));
@@ -115,6 +120,10 @@ class EpisodesController extends Controller{
                 'video_id' => isset($video) ? $video->id : $episode->video_id,
                 'language_id' => $request->language_id,
             ]);
+
+            /* HashTags */
+            request()->merge(['id' => $request->id]);
+            HashtagController::extract(request(), Episode::find($request->id));
 
             return redirect()->route('system.admin.episodes.preview', ['slug'  => $episode->slug ]);
         }catch (\Exception $e){
