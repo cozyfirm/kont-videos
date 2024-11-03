@@ -186,7 +186,7 @@
             </div>
         </div>
 
-        <a href="#" class="menu-a-link">
+        <a href="{{ route('system.admin.other.pages') }}" class="menu-a-link">
             <div class="s-lm-wrapper">
                 <div class="s-lm-s-elements">
                     <div class="s-lms-e-img">

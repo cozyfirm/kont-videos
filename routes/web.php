@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Episodes\EpisodesController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Other\FAQsController;
 use App\Http\Controllers\Admin\Other\Blog\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\Other\PagesController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisodesController;
 use App\Http\Controllers\PublicPart\Blog\BlogController as PublicBlogController;
@@ -24,6 +25,15 @@ Route::prefix('/')->group(function () {
      */
     Route::get ('/',                              [PublicHomeController::class, 'home'])->name('public.home');
 
+    /**
+     *  Single pages
+     */
+    Route::prefix('/page')->group(function () {
+        Route::get ('/about-us',                      [PublicHomeController::class, 'aboutUs'])->name('public.page.about-us');
+        Route::get ('/impressum',                     [PublicHomeController::class, 'impressum'])->name('public.page.impressum');
+        Route::get ('/terms-and-conditions',          [PublicHomeController::class, 'terms'])->name('public.page.terms');
+        Route::get ('/privacy-policy',                [PublicHomeController::class, 'privacy'])->name('public.page.privacy');
+    });
     /**
      *  Blog posts
      */
@@ -155,7 +165,7 @@ Route::prefix('system')->group(function () {
         /**
          *  Users routes;
          */
-        Route::prefix('users')->middleware('auth')->group(function () {
+        Route::prefix('users')->group(function () {
             Route::get ('/',                          [UsersController::class, 'index'])->name('system.admin.users');
             Route::get ('/create',                    [UsersController::class, 'create'])->name('system.admin.users.create');
             Route::post('/save',                      [UsersController::class, 'save'])->name('system.admin.users.save');
@@ -203,13 +213,23 @@ Route::prefix('system')->group(function () {
             /**
              *  FAQs section
              */
-            Route::prefix('faq')->middleware('auth')->group(function () {
+            Route::prefix('faq')->group(function () {
                 Route::get ('/',                               [FAQsController::class, 'faqIndex'])->name('system.admin.other.faq');
                 Route::get ('/create',                         [FAQsController::class, 'faqCreate'])->name('system.admin.other.faq.create');
                 Route::post('/save',                           [FAQsController::class, 'faqSave'])->name('system.admin.other.faq.save');
                 Route::get ('/edit/{id}',                      [FAQsController::class, 'faqEdit'])->name('system.admin.other.faq.edit');
                 Route::post('/update',                         [FAQsController::class, 'faqUpdate'])->name('system.admin.other.faq.update');
                 Route::get ('/delete/{id}',                    [FAQsController::class, 'faqDelete'])->name('system.admin.other.faq.delete');
+            });
+
+            /**
+             *  Single pages
+             */
+            Route::prefix('pages')->group(function () {
+                Route::get ('/',                               [PagesController::class, 'index'])->name('system.admin.other.pages');
+                Route::get ('/edit/{id}',                      [PagesController::class, 'edit'])->name('system.admin.other.pages.edit');
+                Route::post('/update',                         [PagesController::class, 'update'])->name('system.admin.other.pages.update');
+                Route::post('/update-photo',                   [PagesController::class, 'updatePhoto'])->name('system.admin.other.pages.update-photo');
             });
         });
 
@@ -236,7 +256,7 @@ Route::prefix('system')->group(function () {
         /**
          *  Blog
          */
-        Route::prefix('blog')->middleware('auth')->group(function () {
+        Route::prefix('blog')->group(function () {
             Route::get ('/',                               [AdminBlogController::class, 'index'])->name('system.admin.blog');
             Route::get ('/create',                         [AdminBlogController::class, 'create'])->name('system.admin.blog.create');
             Route::post('/save',                           [AdminBlogController::class, 'save'])->name('system.admin.blog.save');

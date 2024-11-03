@@ -11,4 +11,15 @@ $(document).ready(function () {
     $(".go-to").click(function (){
         window.location = $(this).attr('custom-uri');
     });
+
+    /**
+     *  Fit iframe (YouTube link to height)
+     */
+
+    if($(".yt__iframe").length){
+        let elem = $(".yt__iframe");
+
+        elem.height(parseInt(elem.width() / 1.77));
+        console.log("Exists!", elem.width());
+    }
 });

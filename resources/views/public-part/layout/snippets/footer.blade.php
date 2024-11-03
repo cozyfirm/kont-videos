@@ -5,10 +5,10 @@
                 <h2>{{ __('Uslovi korištenja') }}</h2>
                 <ul>
                     <li>
-                        <a href="">Fondacija Ekipa</a>
-                        <a href="">Impessum</a>
-                        <a href="">Pravila korištenja</a>
-                        <a href="">Politika privatnosti</a>
+                        <a href="https://fondacijaekipa.ba/">{{ __('Fondacija Ekipa') }}</a>
+                        <a href="{{ route('public.page.impressum') }}">{{ __('Impessum') }}</a>
+                        <a href="{{ route('public.page.terms') }}">{{ __('Pravila korištenja') }}</a>
+                        <a href="{{ route('public.page.privacy') }}">{{ __('Politika privatnosti') }}</a>
                     </li>
                 </ul>
             </div>
@@ -16,10 +16,9 @@
                 <h2>{{ __('Program') }}</h2>
                 <ul>
                     <li>
-                        <a href="">Teme</a>
-                        <a href="">Predavači</a>
-                        <a href="">Epizode</a>
-                        <a href="">Oblasti</a>
+                        <a href="{{ route('public.blog') }}">{{ __('Teme') }}</a>
+                        <a href="{{ route('public.presenters') }}">{{ __('Predavači') }}</a>
+                        <a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a>
                     </li>
                 </ul>
             </div>
@@ -27,10 +26,10 @@
                 <h2>{{ __('Kontakt') }}</h2>
                 <ul>
                     <li>
-                        <a href="">Registriraj se</a>
-                        <a href="#">Kontakt</a>
-                        <a href="">O nama</a>
-                        <a href="">Politika privatnosti</a>
+                        <a href="{{ route('public.page.about-us') }}">{{ __('O nama') }}</a>
+                        <a href="{{ route('public.contact') }}">{{ __('Kontaktirajte nas') }}</a>
+                        <a href="{{ route('auth') }}">{{ __('Prijavi se') }}</a>
+                        <a href="{{ route('auth.create-account') }}">{{ __('Registruj se') }}</a>
                     </li>
                 </ul>
             </div>

@@ -14,9 +14,8 @@
                 @else
                     <li><a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a></li>
                     <li><a href="{{ route('public.presenters') }}">{{ __('Predavači') }}</a></li>
-                    {{--                <li><a href="#">Teme</a></li>--}}
                     <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
-                    <li><a href="#">O nama</a></li>
+                    <li><a href="{{ route('public.page.about-us') }}">{{ __('O nama') }}</a></li>
                     <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
                 @endisset
             </ul>
@@ -65,9 +64,8 @@
             <ul>
                 <li><a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a></li>
                 <li><a href="{{ route('public.presenters') }}">{{ __('Predavači') }}</a></li>
-{{--                <li><a href="#">Teme</a></li>--}}
-                <li><a href="#">{{ __('Teme') }}</a></li>
-                <li><a href="#">O nama</a></li>
+                <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
+                <li><a href="{{ route('public.page.about-us') }}">{{ __('O nama') }}</a></li>
                 <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
             </ul>
         </div>

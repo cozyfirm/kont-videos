@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Core\Keyword;
 use App\Models\Other\Blog\Blog;
 use App\Models\User;
+use App\Traits\Common\HashtagTrait;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PresentersController extends Controller{
+    use HashtagTrait;
+
     protected string $_path = 'public-part.app.presenters.';
     protected int $_numberOfPopular = 4;
 
@@ -25,6 +28,7 @@ class PresentersController extends Controller{
             'presenter' => $presenter,
             'categories' => Keyword::where('type', 'blog_category')->get(),
             'popular' => Blog::take($this->_numberOfPopular)->get(),
+            'popularTags' => $this->popularTags('blog'),
         ]);
     }
 }
