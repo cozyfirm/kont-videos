@@ -67,6 +67,12 @@
                 <li><a href="{{ route('public.blog') }}">{{ __('Teme') }}</a></li>
                 <li><a href="{{ route('public.page.about-us') }}">{{ __('O nama') }}</a></li>
                 <li><a href="{{ route('public.contact') }}">{{ __('Kontakt') }}</a></li>
+
+                @if(Auth()->check())
+                    @if(Auth()->user()->hasActivity())
+                        <li><a href="{{ route('public.my-profile.progress') }}">{{ __('Moj progres') }}</a></li>
+                    @endif
+                @endif
             </ul>
         </div>
         <div class="action-btn">

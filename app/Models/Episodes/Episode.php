@@ -176,7 +176,9 @@ class Episode extends Model{
          */
         $watchedSeconds = EpisodeActivity::where('episode_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->sum('time');
 
-        return (int) (($watchedSeconds / $durationInSeconds) * 100);
+        $progress = (int) (($watchedSeconds / $durationInSeconds) * 100);
+        /* Cheat sheet; Differences between duration from API and real duration in around one second */
+        return ($progress >= 98) ? 100 : $progress;
     }
 
     /**

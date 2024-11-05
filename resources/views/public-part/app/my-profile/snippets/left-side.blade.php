@@ -20,14 +20,14 @@
     <div class="p__w_l_links_w">
         <h2>{{ __('Statistički podaci') }}</h2>
 
-        <div class="text__wrapper">
-            <p>{{ __('Pregledano epizoda') }} 2</p>
+        <div class="text__wrapper" title="{{ __('Broj epizoda koje ste gledali') }}">
+            <p>{{ __('Pregledano epizoda: ') }} {{ Auth()->user()->episodesWatched() }}</p>
         </div>
-        <div class="text__wrapper">
-            <p> 3h i 45 min </p>
+        <div class="text__wrapper" title="{{ __('Vremena gledano') }}">
+            <p> {{ Auth()->user()->totalWatchTime() }} </p>
         </div>
-        <div class="text__wrapper">
-            <p> Nema recenzija </p>
+        <div class="text__wrapper" title="{{ __('Ukupan broj recenzija') }}">
+            <p> @if(Auth()->user()->totalReviews()) {{ Auth()->user()->totalReviewsByWord() }} @else {{ __('Nema recenzija') }} @endif </p>
         </div>
 
         <p class="note">{{ __('Statistički podaci koji se odnose na Vašu angažovanost na www.kont.ba') }}</p>

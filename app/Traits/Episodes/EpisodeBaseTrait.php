@@ -70,7 +70,7 @@ trait EpisodeBaseTrait{
     public function getDurationHelper($seconds): string{
         $hours = gmdate("H", $seconds);
         $minutes = gmdate("i", $seconds);
-        $seconds = gmdate("s", $seconds);
+        // $seconds = gmdate("s", $seconds);
         if($hours != "00"){
             return (int) $hours . "h " . (int) $minutes . " min ";
         }else{
@@ -159,6 +159,16 @@ trait EpisodeBaseTrait{
 
             /* ToDo:: Broadcast over websockets */
         }catch (\Exception  $e){}
+    }
+
+    /**
+     * Number of reviews drawn through the cases
+     * @param $number
+     * @return string
+     */
+    public function numberOfReviewsInWords($number): string{
+        if($number == 1 or $number == 5 or $number == 6 or $number == 7 or $number == 8 or $number == 9 or $number == 10) return $number . " recenzija";
+        else if($number == 2 or $number == 3 or $number == 4) return $number . " recenzije";
     }
 
     /**

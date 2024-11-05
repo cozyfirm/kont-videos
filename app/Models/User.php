@@ -7,6 +7,7 @@ use App\Models\Core\Country;
 use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeActivity;
 use App\Models\Episodes\Review;
+use App\Traits\Episodes\EpisodeBaseTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -19,9 +20,8 @@ use Illuminate\Notifications\Notifiable;
  * @method static create(array $except)
  * @method static pluck(string $string, string $string1)
  */
-class User extends Authenticatable
-{
-    use HasFactory, Notifiable;
+class User extends Authenticatable{
+    use HasFactory, Notifiable, EpisodeBaseTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -94,6 +94,9 @@ class User extends Authenticatable
     public function totalReviews(): int{
         return Review::where('user_id', '=', $this->id)->count();
     }
+    public function totalReviewsByWord(): int | string{
+        return $this->numberOfReviewsInWords($this->totalReviews());
+    }
     public function activityRel(): HasMany{
         return $this->hasMany(EpisodeActivity::class, 'user_id', 'id');
     }
@@ -102,5 +105,25 @@ class User extends Authenticatable
     }
     public function episodeRel(): HasOne{
         return $this->hasOne(Episode::class, 'presenter_id', 'id');
+    }
+
+    /**
+     * Get number of episodes, watched by user
+     * @return int
+     */
+    public function episodesWatched(): int{
+        return EpisodeActivity::where('user_id', '=', $this->id)
+            ->select('episode_id')
+            ->distinct()
+            ->get()
+            ->count();
+    }
+
+    /**
+     * Get total number of time, spent watching videos
+     * @return int|string
+     */
+    public function totalWatchTime(): int | string{
+        return $this->getDurationHelper(EpisodeActivity::where('user_id', '=', $this->id)->sum('time'));
     }
 }
