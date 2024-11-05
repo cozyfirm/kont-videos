@@ -11,6 +11,7 @@
             flex-wrap: wrap; gap: 32px;
         }
 
+
         .profile__wrapper_left{
             position: relative; width: 320px;
 
@@ -79,8 +80,16 @@
 
         .profile__wrapper_right{
             position: relative; width: calc(100% - 352px);
+            .pwr__header{
+                position: relative; width: 100%; background: $color-black; display: flex; padding: 16px; border-radius: 4px;
+                h2{
+                    margin:0px; padding: 0px;
+                }
+            }
             form{
                 padding: 0px;
+                &.mt-32{margin-top:32px;}
+                &.mt-20{margin-top:20px;}
                 .row{
                     .col-md-12{
                         padding: 0px;
@@ -612,7 +621,14 @@
                 }
             }
             .my_profile{display: initial;}
-            .profile__wrapper_right{width: 100%; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 16px; margin-top: 16px;}
+            .profile__wrapper_right{
+                width: 100%; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 16px; margin-top: 16px;
+                .col-md-6{margin: 0px; padding: 0px;}
+                .col-md-6:last-child{margin-top: 20px;}
+                .btn{
+                    width: 100%; margin-top: 20px;
+                }
+            }
             .profile__wrapper_right_schedule{
                 padding: 0px; border: none; margin-top: 0px;
             }

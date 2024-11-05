@@ -9,9 +9,11 @@
             @include('public-part.app.my-profile.snippets.left-side')
 
             <div class="profile__wrapper_right">
+                <div class="pwr__header">
+                    <h2>{{ __('Uredite Vaše osnovne informacije') }}</h2>
+                </div>
 
-
-                <form action="#" method="POST" id="js-form">
+                <form action="{{ route('public.my-profile.update') }}" method="POST" id="js-form" class="mt-20">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">

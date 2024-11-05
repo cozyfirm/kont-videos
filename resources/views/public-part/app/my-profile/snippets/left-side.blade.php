@@ -34,7 +34,7 @@
 
         <hr>
 
-        <a href="#" class="change-psw-link">
+        <a href="{{ route('public.my-profile.change-password') }}" class="change-psw-link">
             <div class="change-password-btn">
                 <p class="text-white">{{ __('Izmijenite šifru') }}</p>
             </div>
