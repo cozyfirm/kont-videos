@@ -58,7 +58,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{ html()->label(__('Email adresa'))->for('email')->class('bold') }}
-                                    {{ html()->email('email')->class('form-control form-control-sm mt-2')->maxlength(50)->value('') }}
+                                    {{ html()->email('email')->class('form-control form-control-sm mt-2')->maxlength(50)->value(isset($email) ? $email : '') }}
                                     <small id="emailHelp" class="form-text text-muted">{{ __('Unesite Vašu email adresu') }}</small>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
 
                     <div class="rf-body-element rf-body-element-4 pb-4 d-none">
                         <p>
-                            {{ __('Vaš korisnički račun / profil na sistemu www.talentakademija.ba je uspješno kreiran. Za verifikaciju Vašeg email-a, molimo slijedite upute poslane putem email-a.') }}
+                            {{ __('Vaš korisnički račun / profil na sistemu www.kont.ba je uspješno kreiran. Za verifikaciju Vašeg email-a, molimo slijedite upute poslane putem email-a.') }}
                             <br>
                             <b>{{ __('Napomena:') }}</b>
                             {{ __('Ukoliko ne dobijete email unutar 5 minuta, provjerite junk (spam) folder, ili nas kontaktirajte putem email-a!') }}

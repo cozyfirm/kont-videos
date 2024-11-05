@@ -143,6 +143,7 @@ Route::prefix('auth')->group(function () {
 
     /* Create an account */
     Route::get ('/create-account',                [AuthController::class, 'createAccount'])->name('auth.create-account');
+    Route::post('/create-account',                [AuthController::class, 'createAccountWithEmail'])->name('auth.create-account-with-email');
     Route::post('/save-account',                  [AuthController::class, 'saveAccount'])->name('auth.save-account');
     Route::get ('/verify-account/{token}',        [AuthController::class, 'verifyAccount'])->name('auth.verify-account');
 

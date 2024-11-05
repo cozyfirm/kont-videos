@@ -105,6 +105,9 @@
 
         .padding-clas {
             padding-top: 6px;
+            .btn-tertiary{
+                padding-bottom: 6px;
+            }
         }
 
         .textfield-outlined {
@@ -136,7 +139,7 @@
     justify-content: center;
     z-index: 3;
     .tablet {
-        padding: 8px 16px 4px 16px;
+        padding: 8px 16px 8px 16px;
         color: $color-white;
         background-color: rgb(100, 100, 100, .6);
         width: fit-content;
@@ -145,6 +148,10 @@
         font-size: 14px;
         cursor: pointer;
         transition: all .62s ease;
+
+        a{
+            color: $color-white; text-decoration: none;
+        }
 
         &:hover {
             background-color: $color-primary;

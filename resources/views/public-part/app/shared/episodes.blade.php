@@ -1,4 +1,4 @@
-<section class="episodes">
+<section class="episodes" id="s-ep-wrapper">
     <div class="inner__wrapper @isset($all_episodes) all-episodes @endisset">
         @foreach($episodes as $episode)
             <div class="single__episode @isset($all_episodes) se__small @endisset">

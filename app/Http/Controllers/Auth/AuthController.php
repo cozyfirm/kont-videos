@@ -93,6 +93,14 @@ class AuthController extends Controller{
         ]);
     }
 
+    public function createAccountWithEmail(Request $request): View{
+        return view($this->_path. 'create-account', [
+            'prefixes' => Country::orderBy('phone_code')->get()->pluck('phone_code', 'id'),
+            'countries' => Country::orderBy('name_ba')->get()->pluck('name_ba', 'id'),
+            'email' => isset($request->email) ? $request->email : ''
+        ]);
+    }
+
     /**
      * @param Request $request
      * @return bool|\Illuminate\Http\JsonResponse|string|void
@@ -122,7 +130,6 @@ class AuthController extends Controller{
 
             if($user) return $this->jsonSuccess(__('Uspješno ste se kreirali korisnički račun!'), route('auth'));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonResponse('1101', __('Greška prilikom procesiranja podataka. Molimo da nas kontaktirate!'));
         }
     }

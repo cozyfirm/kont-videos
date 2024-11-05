@@ -22,4 +22,15 @@ $(document).ready(function () {
         elem.height(parseInt(elem.width() / 1.77));
         console.log("Exists!", elem.width());
     }
+
+    /**
+     *  Register yourself, but transfer email via POST request to register form
+     */
+    $(".register-hidden-trigger").click(function (e){
+       let value = $("#input-hero").val();
+
+       if(value !== ""){
+           $("#register-hidden-email").val(value);
+       }else e.preventDefault();
+    });
 });

@@ -18,28 +18,30 @@
                         <div class="hero-action-btns">
                             <div class="textfield-outlined">
                                 <input id="input-hero" type="text" placeholder=" ">
-                                <label for="input-hero">Vaš e-mail</label>
+                                <label for="input-hero">{{ __('Vaš e-mail') }}</label>
                             </div>
                             <div class="padding-clas">
-                                <form action="#" method="get">
-                                    <button class="btn-tertiary">Registruj se</button>
+                                <form action="{{ route('auth.create-account-with-email') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="email" id="register-hidden-email">
+                                    <button class="btn-tertiary register-hidden-trigger">{{ __('Registruj se') }}</button>
                                 </form>
                             </div>
                         </div>
-                        <a href="#trailer-overlay"><span class="hero-link-span">Saznaj više &rarr;</a>
+                        <a href="#s-ep-wrapper"><span class="hero-link-span">Saznaj više &rarr;</a>
                     </div>
                 </div>
                 <div class="hero-bunner-right">
-                    <div class="tablet green">Ekonomija</div>
-                    <div class="tablet">Moda</div>
-                    <div class="tablet">Film</div>
-                    <div class="tablet">Muzika</div>
-                    <div class="tablet">Subverzivna umjetnost</div>
-                    <div class="tablet">Društvo</div>
-                    <div class="tablet">Politika</div>
-                    <div class="tablet">Mediji</div>
-                    <div class="tablet">Etika u novinarstvu</div>
-                    <div class="tablet">Mađunarodni odnosi</div>
+                    <div class="tablet green"><a href="#s-ep-wrapper">{{ __('Ekonomija') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Moda') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Film') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Muzika') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Subverzivna umjetnost') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Društvo') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Politika') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Mediji') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Etika u novinarstvu') }}</a></div>
+                    <div class="tablet"><a href="#s-ep-wrapper">{{ __('Mađunarodni odnosi') }}</a></div>
                 </div>
             </div>
         </div>
