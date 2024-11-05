@@ -21,6 +21,8 @@ $(document).ready(function (){
                     let trailer = response['data']['trailer'];
                     let stars   = response['data']['reviews'];
 
+                    console.log(episode);
+
                     /* Set static data */
                     $("#pp__presenter").text(episode['presenter_rel']['name']);
                     $("#pp__trailer_title").text(trailer['title']);
@@ -35,11 +37,13 @@ $(document).ready(function (){
                         for(let i=0; i<episode['video_content_rel'].length; i++){
                             let video = episode['video_content_rel'][i];
 
+                            console.log(video);
+
                             if(parseInt(video['category']) !== 2){
                                 chapters ++;
 
                                 episodeChapters.append(function (){
-                                    return $("<div>").attr('class', 'single__chapter')
+                                    return $("<div>").attr('class', 'single__chapter go-to').attr('custom-uri', '/episodes/preview/' + episode['slug'] + '/' + video['id'])
                                         .append(function (){
                                             return $("<div>").attr('class', 'no__part')
                                                 .append(function (){

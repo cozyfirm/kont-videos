@@ -8,7 +8,7 @@ $(document).ready(function () {
     /**
      *  Global go-to Class, Go to custom-uri Attribute
      */
-    $(".go-to").click(function (){
+    $('body').on('click', '.go-to', function() {
         window.location = $(this).attr('custom-uri');
     });
 

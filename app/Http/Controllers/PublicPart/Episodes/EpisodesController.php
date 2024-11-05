@@ -21,6 +21,10 @@ class EpisodesController extends Controller{
     protected string $_path = 'public-part.app.episodes.';
     protected int $_total_episodes = 8;
 
+    /**
+     * Get all episodes
+     * @return View
+     */
     public function episodes(): View{
         return view($this->_path . 'preview-all', [
             'episodes' => Episode::orderBy('id', 'DESC')->take($this->_total_episodes)->get(),
@@ -29,25 +33,39 @@ class EpisodesController extends Controller{
         ]);
     }
 
-    public function preview($slug): View | RedirectResponse{
+    protected function getVideoData($slug, $videoID = null): View | RedirectResponse{
         if(!Auth::check()) return redirect()->route('auth');
         $episode = Episode::where('slug', '=', $slug)->first();
+        if(!$episode) abort(404);
 
-        /* Initial video that should be loaded */
-        $video = EpisodeVideo::where('category', '=',1)->where('episode_id', '=', $episode->id)->first();
+        if($videoID){
+            $video = EpisodeVideo::where('id', '=', $videoID)->first();
+            if(!$video) abort(404);
 
-        if(!$episode or !$video) abort(404);
-
-        /* Check for last watched video that is not finished */
-        $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('video_id', 'DESC')->first();
-        if(!$activity){
-            EpisodeActivity::create([
-                'user_id' => Auth::user()->id,
-                'episode_id' => $episode->id,
-                'video_id' => $video->id
-            ]);
+            $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('video_id', '=', $video->id)->first();
+            if(!$activity){
+                EpisodeActivity::create([
+                    'user_id' => Auth::user()->id,
+                    'episode_id' => $episode->id,
+                    'video_id' => $video->id
+                ]);
+            }
         }else{
-            $video = EpisodeVideo::where('category', '=',1)->where('id', '=', $activity->video_id)->first();
+            /* Initial video that should be loaded */
+            $video = EpisodeVideo::where('category', '=',1)->where('episode_id', '=', $episode->id)->first();
+            if(!$video) abort(404);
+
+            /* Check for last watched video that is not finished */
+            $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('video_id', 'DESC')->first();
+            if(!$activity){
+                EpisodeActivity::create([
+                    'user_id' => Auth::user()->id,
+                    'episode_id' => $episode->id,
+                    'video_id' => $video->id
+                ]);
+            }else{
+                $video = EpisodeVideo::where('category', '=',1)->where('id', '=', $activity->video_id)->first();
+            }
         }
 
         /* Increment number of video loads */
@@ -61,6 +79,13 @@ class EpisodesController extends Controller{
             'reviewsByNumber' => $this->getEpisodeReviewsByNumber($episode->id),
             'otherEpisodes' => Episode::where('id', '!=', $episode->id)->inRandomOrder()->take(4)->get()
         ]);
+    }
+
+    public function preview($slug): View | RedirectResponse{
+        return $this->getVideoData($slug);
+    }
+    public function previewWithVideo($slug, $videoID): View | RedirectResponse{
+        return $this->getVideoData($slug, $videoID);
     }
 
     /**
