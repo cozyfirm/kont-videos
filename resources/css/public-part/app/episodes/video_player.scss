@@ -79,6 +79,12 @@
                 position: relative; width: 100%; display: flex; justify-content: space-between; align-items: flex-start; padding: 8px 24px;
                 &.current{
                     background: #d1d7dc;
+                    //background: rgba(99,118,76,0.6);
+                    //.se__w__data{
+                    //    .header__{
+                    //        p{color:$color-white;}
+                    //    }
+                    //}
                 }
                 &.short__desc{
                     .se__w__data{
@@ -229,13 +235,13 @@
                 p{
                     margin: 0px; color: $color-black; padding: 0px; font-weight: bold; font-size: 16px;
                 }
-                img{
+                img, svg{
                     display: none; height: 20px;
                 }
 
                 @media screen and (max-width: 800px){
                     p{display: none;}
-                    img{display: flex;}
+                    img, svg{display: flex;}
                 }
             }
             .inner__tab:hover{

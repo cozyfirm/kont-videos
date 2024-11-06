@@ -1,5 +1,12 @@
 @extends('public-part.layout.layout')
 
+<!-- Meta tags -->
+@section('title'){{ $post->title }}@endsection
+@section('meta_uri'){{ route('public.blog.preview', ['slug' => $post->slug ]) }}@endsection
+@section('meta_title'){{ $post->title }}@endsection
+@section('meta_desc'){{ $post->short_desc }}@endsection
+@isset($post->mainImgRel) @section('meta_img'){{ asset($post->mainImgRel->getFile()) }}@endsection @endisset
+
 @section('public-content')
     <!-- Preview image -->
     @include('public-part.app.blog.includes.preview-image')

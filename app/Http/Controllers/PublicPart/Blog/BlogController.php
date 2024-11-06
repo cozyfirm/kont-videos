@@ -26,7 +26,8 @@ class BlogController extends Controller{
             'popular' => Blog::take($this->_numberOfPopular)->get(),
             'posts' => $posts,
             'category' => $category,
-            'popularTags' => $this->popularTags('blog')
+            'popularTags' => $this->popularTags('blog'),
+            'blog' => true
         ]);
     }
     public function index(): View{
@@ -56,6 +57,7 @@ class BlogController extends Controller{
             'popular' => Blog::take(4)->get(),
             'postTags' => $post->getAllTags(),
             'popularTags' => $this->popularTags('blog'),
+            'blog' => true
         ]);
     }
 

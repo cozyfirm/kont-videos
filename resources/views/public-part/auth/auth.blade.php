@@ -16,7 +16,7 @@
 
                 <div class="aff-short">
                     <p>
-                        {{ __('Dobrodošli nazad. Unesite Vaše kredencijale i prijavite se na sistem www.kont.ba. Gledajte epizode, učite, istražujte, pravite bilješke, sve na jednom mjestu. Vaša Fondacija EKIPA!') }}
+                        {{ __('Unesite Vaše kredencijale i prijavite se na sistem www.kont.ba. Gledajte epizode KONT masterclass platforme besplatno!"') }}
                     </p>
                 </div>
                 <hr>
@@ -48,7 +48,7 @@
                             <a href="{{ route('auth.restart-password') }}"> {{ __('Zaboravili ste šifru?') }} </a>
                         </div>
                         <div class="col-md-6 mt-3 d-flex justify-content-end">
-                            <button type="submit" class="btn auth-btn"> {{ __('PRIJAVITE SE') }} </button>
+                            <button type="submit" class="auth-btn btn-primary"> {{ __('PRIJAVITE SE') }} </button>
                         </div>
                     </div>
 

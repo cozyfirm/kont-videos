@@ -19,6 +19,7 @@ class HashtagController extends Controller{
 
     public static function extractTags($string): array{
         self::$hashtags = []; // Set init value to empty array
+        $string = strip_tags($string);
 
         $string = strval($string);
 

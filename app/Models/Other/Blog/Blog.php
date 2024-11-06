@@ -68,7 +68,11 @@ class Blog extends Model{
         return (!$this->category) ? __('Globalni post') : $this->categoryRel->name ?? '';
     }
 
-    public function getAllTags(){
+    /**
+     * Get all tags
+     * @return mixed
+     */
+    public function getAllTags(): mixed{
         $id = $this->id;
 
         $tags = Hashtag::where('lang', '=', 'bs')->whereHas('tagsRel', function ($query) use ($id){

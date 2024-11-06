@@ -35,7 +35,7 @@
                         <!-- It will stay empty for now -->
                         <div class="col-md-6 mt-3 d-inline-flex"> </div>
                         <div class="col-md-6 mt-3 d-flex justify-content-end">
-                            <button type="submit" class="btn generate-token-btn"> {{ __('OPORAVAK ŠIFRE') }} </button>
+                            <button type="submit" class="btn-primary generate-token-btn"> {{ __('OPORAVAK ŠIFRE') }} </button>
                         </div>
                     </div>
 

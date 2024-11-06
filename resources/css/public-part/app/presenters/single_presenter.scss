@@ -80,26 +80,46 @@
                             color: $color-white; font-size: 40px; width: 100%; text-align: center;
                         }
                         h2{
-                            color: $color-white; font-size: 32px; width: 100%; text-align: center;
+                            color: $color-white; font-size: 32px; width: 100%; text-align: center; text-transform: uppercase;
                         }
 
                         .btns__wrapper{
                             display: flex; width: 100%; justify-content: center; gap: 16px;
                             button{
-                                width: calc(100% - 16px); border: 1px solid $color-white; border-radius: 0px;
+                                width: calc(100% - 16px);
                                 display: flex; gap: 8px; align-items: center; justify-content: center; padding: 8px 0px;
-                                font-size: 14px; background: #717070;
+                                font-size: 14px; background: #717070; border: 1px solid #717070; font-weight: 400; line-height: 0.8; transition: 0.75s; border-radius: 6px;
                                 i{
                                     font-size: 14px;
                                 }
                             }
                             .play-btn{
-                                background: $color-primary !important;
+                                background-color: $color-primary !important; border: 1px $color-primary solid; color: $color-white;
+
 
                                 &:hover {
-                                    background-color: $color-primary-hover;
-                                    //border: 1px $color-black solid;
+                                    background-color: $color-primary-hover !important;
+                                    border: 1px $color-black solid;
                                     transition: 0.75s;
+                                }
+
+                                &:focus {
+                                    outline: none;
+                                    box-shadow: none;
+                                    background-color: $color-primary-hover;
+                                    border: 1px $color-black solid;
+                                }
+                            }
+                            .watch-trailer{
+                                &:hover {
+                                    border: 1px $color-black solid;
+                                    transition: 0.75s;
+                                }
+
+                                &:focus {
+                                    outline: none;
+                                    box-shadow: none;
+                                    border: 1px $color-black solid;
                                 }
                             }
                         }

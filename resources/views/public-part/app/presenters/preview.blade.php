@@ -1,5 +1,12 @@
 @extends('public-part.layout.layout')
 
+<!-- Meta tags -->
+@section('title'){{ $presenter->title }}@endsection
+@section('meta_uri'){{ route('public.presenters.preview', ['username' => $presenter->username ]) }}@endsection
+@section('meta_title'){{ $presenter->name }}@endsection
+@section('meta_desc'){{ $presenter->about }}@endsection
+@isset($presenter->photo_uri) @section('meta_img'){{ asset('files/images/public-part/users/' . ($presenter->photoUri())) }}@endsection @endisset
+
 @section('public-content')
     <!-- Import episode trailer -->
     @include('public-part.app.shared.trailer')
@@ -8,9 +15,11 @@
         <div class="sp__inner_w">
             <div class="sp__content">
                 <div class="sp__data">
-                    <div class="cover__image">
-                        <img src="{{ asset('files/images/public-part/users/' . ($presenter->coverPhotoUri())) }}" class="{{ $presenter->name ?? '' }}">
-                    </div>
+                    @if(isset($presenter->cover_photo_uri))
+                        <div class="cover__image">
+                            <img src="{{ asset('files/images/public-part/users/' . ($presenter->coverPhotoUri())) }}" class="{{ $presenter->name ?? '' }}">
+                        </div>
+                    @endif
 
                     <div class="text__info">
                         {!! nl2br($presenter->about ?? '') !!}
@@ -19,9 +28,11 @@
                     <div class="episode__info">
                         <div class="ei__rest">
                             <div class="ei_r_data">
-                                <div class="full-width d-center">
-                                    <button class="btn-light-grey">{{ __('NOVO') }}</button>
-                                </div>
+                                @if($presenter->episodeRel->isNew())
+                                    <div class="full-width d-center">
+                                        <button class="btn-light-grey">{{ __('NOVO') }}</button>
+                                    </div>
+                                @endif
                                 <div class="full-width d-center">
                                     <h1>{{ $presenter->episodeRel->title ?? '' }}</h1>
                                 </div>
@@ -40,9 +51,9 @@
                                     </div>
                                 </div>
                                 <div class="tags__wrapper">
-                                    <button> {{ __('Moda') }} </button>
-                                    <button> {{ __('Društvo') }} </button>
-                                    <button> {{ __('Sestre') }} </button>
+                                    @foreach($presenter->episodeRel->getAllTags() as $tag)
+                                        <button> {{ $tag->tag ?? '' }} </button>
+                                    @endforeach
                                 </div>
                                 <div class="full-width d-center">
                                     <div class="details__inner">

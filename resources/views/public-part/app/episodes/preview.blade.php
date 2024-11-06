@@ -31,7 +31,7 @@
         </div>
         <div class="episodes__wrapper">
             <div class="ew__header">
-                <h3>{{ __('Kaftan studio') }}</h3>
+                <h3>{{ $episode->title ?? '' }}</h3>
                 <i class="fas fa-times toggle-player"></i>
             </div>
             <div class="ew__body">
@@ -110,6 +110,11 @@
                 <div class="inner__tab" ref-tag="rest_of_episodes">
                     <p> {{ __('Ostale epizode') }} </p>
                     <img src="{{ asset('files/images/default/icons/screen-play-white.svg') }}" alt="">
+                </div>
+                <div class="inner__tab leave-review">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+                        <path fill="#FFFFFF" d="m8,12c3.309,0,6-2.691,6-6S11.309,0,8,0,2,2.691,2,6s2.691,6,6,6Zm0-10c2.206,0,4,1.794,4,4s-1.794,4-4,4-4-1.794-4-4,1.794-4,4-4Zm-3,12h5v2h-5c-1.654,0-3,1.346-3,3v5H0v-5c0-2.757,2.243-5,5-5Zm19,3l-3.054,2.083,1.271,3.982-.818.571-3.382-2.338-3.331,2.338-.787-.593,1.181-4.022-3.079-2.016v-1.006h4.2l1.285-4.363h1.059l1.283,4.363h4.174v1Z"/>
+                    </svg>
                 </div>
             </div>
 

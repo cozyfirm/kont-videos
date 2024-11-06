@@ -28,6 +28,9 @@ $(document).ready(function (){
      *  Rest of info show / hide
      */
     $(".inner__tab").click(function (){
+        /* Skip for mobile add review */
+        if($(this).hasClass('leave-review')) return;
+
         $(".inner__tab").removeClass('active');
         $(".inner__element").removeClass('active');
 

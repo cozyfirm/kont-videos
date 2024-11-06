@@ -89,7 +89,7 @@ class User extends Authenticatable{
     }
     public function getInitials(): string{
         $name = explode(' ', $this->name);
-        return substr($name[0] ?? '', 0, 1) . (isset($name[1]) ? '. ' . substr($name[1] ?? '', 0, 1) . '.' : '');
+        return substr($name[0] ?? '', 0, 1) . (isset($name[1]) ? ' ' . substr($name[1] ?? '', 0, 1) : '');
     }
     public function totalReviews(): int{
         return Review::where('user_id', '=', $this->id)->count();

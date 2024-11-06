@@ -21,7 +21,6 @@ $(document).ready(function (){
                     let trailer = response['data']['trailer'];
                     let stars   = response['data']['reviews'];
 
-                    console.log(episode);
 
                     /* Set static data */
                     $("#pp__presenter").text(episode['presenter_rel']['name']);
@@ -37,10 +36,10 @@ $(document).ready(function (){
                         for(let i=0; i<episode['video_content_rel'].length; i++){
                             let video = episode['video_content_rel'][i];
 
-                            console.log(video);
-
                             if(parseInt(video['category']) !== 2){
                                 chapters ++;
+
+                                if(chapters > 6) continue;
 
                                 episodeChapters.append(function (){
                                     return $("<div>").attr('class', 'single__chapter go-to').attr('custom-uri', '/episodes/preview/' + episode['slug'] + '/' + video['id'])
@@ -78,19 +77,17 @@ $(document).ready(function (){
                         }
                     }
 
-                    /* ToDO:: 4 Cjeline */
+                    console.log("Chapters: " + chapters);
+
                     let chapterText = "";
                     if(chapters === 0) chapterText = "0 cjelina";
                     else if(chapters === 1) chapterText = "1 cjelina";
                     else if(chapters === 2) chapterText = "2 cjeline";
                     else if(chapters === 3) chapterText = "3 cjeline";
                     else if(chapters === 4) chapterText = "4 cjeline";
-                    else if(chapters === 5) chapterText = "5 cjelina";
-                    else if(chapters === 6) chapterText = "6 cjelina";
-                    else if(chapters === 7) chapterText = "7 cjelina";
-                    else if(chapters === 8) chapterText = "8 cjelina";
-                    else if(chapters === 9) chapterText = "9 cjelina";
-                    else if(chapters === 10) chapterText = "10 cjelina";
+                    else if(chapters >= 5 && chapters <= 21) chapterText = chapters + " cjelina";
+                    else if(chapters >= 22 && chapters <= 24) chapterText = chapters + " cjeline";
+                    else chapterText = chapters + " cjelina";
 
                     $("#pp__no_chapters").text(chapterText);
                     $("#pp__duration").text("Trajanje: " + episode['duration']);

@@ -1,8 +1,8 @@
 <section class="contact @isset($contact) black-wrapper @endisset">
     <div class="contact-container">
         <div class="lable-content">
-            <h1>Kontaktirajte nas</h1>
-            <p>Čekamo vaša pitanja, sugestije, komentare...</p>
+            <h1>{{ __('Kontaktirajte nas') }}</h1>
+            <p>{{ __('Čekamo vaša pitanja, sugestije, komentare...') }}</p>
         </div>
         <div class="content-container">
             <div class="left-content">
@@ -17,25 +17,17 @@
                     <div class="details">
                         <div class="el">
                             <h2>{{ __('Adresa') }}:</h2>
-                            <p>Gabelina 14 </br> 71000 Sarajevo </br> BiH
-                            </p>
+                            <p>Gabelina 14 </br> 71000 Sarajevo </br> BiH </p>
                         </div>
                         <div class="el">
                             <h2>{{ __('Telefon') }}:</h2>
-                            <p>+387 61 210 926
-                            </p>
+                            <p> +387 33 878 738 </p>
                         </div>
                         <div class="el">
                             <h2>{{ __('Mail') }}:</h2>
                             <p>info@kont.ba</p>
                         </div>
                     </div>
-                    <p class="description">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat perspiciatis vero recusandae. Ea
-                        aliquam deserunt, in rerum velit temporibus distinctio animi mollitia eligendi quibusdam quaerat,
-                        cupiditate optio! Debitis distinctio nam nulla reprehenderit alias voluptatibus, aliquid ratione at
-                        quidem, harum officia. Maxime soluta suscipit.
-                    </p>
                 </div>
             </div>
 

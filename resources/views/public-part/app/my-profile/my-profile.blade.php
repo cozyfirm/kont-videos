@@ -21,6 +21,7 @@
                                     <div class="form-group">
                                         <b>{{ html()->label(__('Ime i prezime'))->for('name')->class('bold') }}</b>
                                         {{ html()->text('name')->class('form-control form-control-sm mt-1 required')->maxlength(100)->value(Auth::user()->name) }}
+                                        <small id="nameHelp" class="form-text text-muted"> {{ __('Vaše puno ime i prezime') }} </small>
                                     </div>
                                 </div>
                             </div>

@@ -61,7 +61,7 @@
     .close_gallery{
         position: absolute; right: 32px; top: 32px;
         i{
-            color:$color-secondary; font-size: 32px; transition: 0.2s all;
+            color:$color-white; font-size: 32px; transition: 0.2s all;
         }
     }
     .close_gallery:hover{
@@ -83,6 +83,10 @@
         display: inline-flex; justify-content: flex-end;
 
         gap: 16px;
+
+        i{
+            color: $color-white; font-size: 20px;
+        }
 
         .gallery__navigation-button {
             display: flex;

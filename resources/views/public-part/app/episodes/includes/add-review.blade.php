@@ -5,7 +5,7 @@
         </div>
         <div class="ar__heading">
             <h2 class="ar__header_value">{{ __('Odaberite željenu ocjenu!?') }}</h2>
-            <p class="ar__heading_desc"> {{ __('Srednja žalost, Bogu plakati') }} </p>
+{{--            <p class="ar__heading_desc"> {{ __('Srednja žalost, Bogu plakati') }} </p>--}}
         </div>
         <div class="stars__wrapper">
             @for($i=1; $i<=5; $i++)
@@ -18,7 +18,7 @@
         </div>
 
         <div class="text__form">
-            {{ html()->textarea('review-note')->class('form-control form-control-sm review-note')->maxlength('400')->placeholder(__('Recite nam Vaše osobno iskustvo gledajući ovu epizodu. Da li je bilo dobro za Vas?'))}}
+            {{ html()->textarea('review-note')->class('form-control form-control-sm review-note')->maxlength('400')->placeholder(__('Ostavite vaš komentar na ovu epizodu'))}}
             {{ html()->hidden('review-episode-id')->class('form-control review-episode-id')->value($episode->id) }}
 
             <button class="btn-primary save-review-note">

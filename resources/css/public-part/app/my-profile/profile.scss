@@ -99,7 +99,14 @@
                 }
             }
             .form-control{
-                background: #FFFFFF; border-radius: 8px;
+                background: rgba(255,255,255,0.3); border-radius: 4px; border: 1px solid rgba(0,0,0,0.6);
+            }
+
+            .form-control:focus {
+                border-color: #ced4da; /* default B5 color or set your own color*/
+                border: 1px solid $color-primary !important; /* if you want to remove borders at all*/
+                outline: none !important;
+                box-shadow: none !important;
             }
             textarea{min-height: 120px !important; }
             .btn{

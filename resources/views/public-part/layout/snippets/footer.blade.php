@@ -36,9 +36,7 @@
             <div class="footer-element branding-brit">
                 <div class="brit-logo">
                     <img src="{{ asset('files/images/embassy.svg')}}" alt="">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum blanditiis, repudiandae consequatur fugiat tempora debitis placeat.
-                    </p>
+                    <p> {{ __('KONT Masterclass predavanja finansirana su u sklopu projekta koji podržava Vlada Ujedinjenog Kraljevstva kroz UK International Development. Izneseni stavovi ne predstavljaju nužno službene politike Ujedinjenog Kraljevstva.') }} </p>
                 </div>
             </div>
         </div>

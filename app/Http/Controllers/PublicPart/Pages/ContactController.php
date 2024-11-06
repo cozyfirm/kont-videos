@@ -25,7 +25,7 @@ class ContactController extends Controller{
                 $name = $request->name . " " . $request->surname;
             }else return $this->jsonError('3001', __('Molimo da unesete ime i prezime!'));
 
-            Mail::to($request->email)->send(new SendAnEmail('Kopija - ' . ($request->subject), 'No-Reply', env('MAIL_TO_ADDR'), $name, $request->email, $request->message));
+            Mail::to(env('MAIL_TO_ADDR'))->send(new SendAnEmail(($request->subject), $request->email, $request->email, $name, $request->email, $request->message));
 
             return $this->jsonSuccess(__('Poruka uspješno poslana!'));
         }catch (\Exception $e){

@@ -14,6 +14,9 @@ class EpisodeHelper{
             else if($chapters === 8) return "8 cjelina";
             else if($chapters === 9) return "9 cjelina";
             else if($chapters === 10) return "10 cjelina";
+            else if($chapters >= 5 && $chapters <= 21) return $chapters . " cjelina";
+            else if($chapters >= 22 && $chapters <= 24) return $chapters . " cjeline";
+            else return $chapters . " cjelina";
         }catch (\Exception $e){ return "O cjelina"; }
     }
 }

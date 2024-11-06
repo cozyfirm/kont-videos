@@ -3,6 +3,7 @@
 namespace App\Models\Episodes;
 
 use App\Models\Core\File;
+use App\Models\Core\Hashtags\Hashtag;
 use App\Models\Core\Keyword;
 use App\Models\User;
 use App\Traits\Common\CommonTrait;
@@ -43,10 +44,10 @@ class Episode extends Model{
         return $this->hasOne(File::class, 'id', 'video_id');
     }
     public function videoContentRel(): HasMany{
-        return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id')->where('category', '=', 1);
+        return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id')->where('category', '=', 1)->orderBy('id');
     }
     public function allVideoContentRel(): HasMany{
-        return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id');
+        return $this->hasMany(EpisodeVideo::class, 'episode_id', 'id')->orderBy('id');
     }
     public function reviewsRel(): HasMany{
         return $this->hasMany(Review::class, 'episode_id', 'id');
@@ -188,5 +189,33 @@ class Episode extends Model{
     public function userRating(): int | string | bool{
         $review =  Review::where('episode_id', '=', $this->id)->where('user_id', '=', Auth::user()->id)->first(['stars']);
         return isset($review) ? $review->stars : false;
+    }
+
+    /**
+     * Get all tags by user
+     * @return mixed
+     */
+    public function getAllTags(): mixed{
+        $id = $this->id;
+
+        $tags = Hashtag::where('lang', '=', 'bs')->whereHas('tagsRel', function ($query) use ($id){
+            $query->where(function ($query) use ($id){
+                $query->where('post_id', $id)->where('category', $this->getTable());
+            });
+        })->orderBy('id')->get();
+
+        foreach ($tags as $tag){
+            $tag->update(['views' => ($tag->views + 1)]);
+            $tag->tag = str_replace('#', '', $tag->tag);
+        }
+
+        return $tags;
+    }
+
+    public function isNew(): bool{
+        $date = Carbon::parse($this->created_at);
+        $now  = Carbon::now();
+
+        return !(($date->diffInDays($now) > 30));
     }
 }

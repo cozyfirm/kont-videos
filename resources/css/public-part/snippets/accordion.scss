@@ -19,7 +19,7 @@
         }
         .course-panel{
             h1, h2, h3, h4, h5, h6, p, span{
-                margin: 0px; padding: 0px !important; color: $color-white;
+                margin: 0px; padding: 0px !important; color: $color-white !important;
             }
         }
     }
@@ -133,7 +133,7 @@ div.course-panel {
     }
 
     h1, h2, h3, h4, h5, h6, p, span{
-        margin: 0px; padding: 0px !important; color: $color-black;
+        margin: 0px; padding: 0px !important; color: $color-black !important;
     }
 }
 

@@ -78,6 +78,7 @@ class BlogController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno spremljeno !'), route('system.admin.blog.preview', ['id' => $request->id]));
         }catch (\Exception $e){
+            dd($e);
             return $this->jsonError('2100', __('Desila se greška!'));
         }
     }

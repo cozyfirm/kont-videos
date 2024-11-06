@@ -16,7 +16,7 @@
                             <h1>{{ $lastWatched->episodeRel->title ?? '' }}</h1>
                         </div>
                         <div class="mp-width-100">
-                            <button class="btn-primary">{{ __('ZADNJE GLEDANO') }}</button>
+                            <button class="btn-primary">{{ __('POSLJEDNJE GLEDANO') }}</button>
                         </div>
                         <div class="mp-width-100 video__title">
                             <h2>{{ $lastWatched->title ?? '' }}</h2>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="mp-width-100 more-info">
                             <a href="{{ route('public.episodes.preview', ['slug' => $lastWatched->episodeRel->slug]) }}">
-                                {{ __('Više informacija') }}
+                                {{ __('Nazad na video') }}
                                 <i class="fi fi-br-arrow-small-right"></i>
                             </a>
                         </div>

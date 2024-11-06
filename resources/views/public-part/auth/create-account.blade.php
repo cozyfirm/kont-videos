@@ -125,10 +125,10 @@
 
                     <div class="row mt-3 pt-4 pb-4 back-next-btn-wrapper">
                         <div class="col-md-12 d-flex justify-content-end">
-                            <div class="button-wrapper create-profile-back-btn d-none">
+                            <div class="btn-primary create-profile-back-btn d-none">
                                 <b>{{__('Nazad')}}</b>
                             </div>
-                            <div class="button-wrapper create-profile-next-btn">
+                            <div class="btn-primary create-profile-next-btn">
                                 <b>{{__('Sljedeći korak')}}</b>
                             </div>
                         </div>

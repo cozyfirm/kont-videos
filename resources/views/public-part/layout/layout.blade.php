@@ -1,14 +1,13 @@
 <html>
     <head>
         <!-- Google tag (gtag.js) -->
-{{--        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CPMJW6YF5F"></script>--}}
-{{--        <script>--}}
-{{--            window.dataLayer = window.dataLayer || [];--}}
-{{--            function gtag(){dataLayer.push(arguments);}--}}
-{{--            gtag('js', new Date());--}}
-
-{{--            gtag('config', 'G-CPMJW6YF5F');--}}
-{{--        </script>--}}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DZ0X0J7MF"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2DZ0X0J7MF');
+        </script>
 
         <title> @yield('title', env('app_name')) </title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
