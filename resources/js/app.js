@@ -42,6 +42,9 @@ import './public-part/app/episodes/review.js';
 import './public-part/app/episodes/notes.js';
 import './public-part/app/episodes/trailer.js';
 
+// /* Mqtt scripts */
+// import './public-part/app/mqtt/live.js';
+
 /* Public app */
 import './public-part/app/blog/blog.js';
 import './public-part/app/pages/contact/contact-us.js';

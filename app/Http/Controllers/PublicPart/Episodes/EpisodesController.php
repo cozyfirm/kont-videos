@@ -56,7 +56,7 @@ class EpisodesController extends Controller{
             if(!$video) abort(404);
 
             /* Check for last watched video that is not finished */
-            $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('video_id', 'DESC')->first();
+            $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('updated_at', 'DESC')->first();
             if(!$activity){
                 EpisodeActivity::create([
                     'user_id' => Auth::user()->id,

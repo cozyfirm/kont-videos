@@ -76,6 +76,10 @@ $(document).ready(function (){
         let continueNewVideo = true;
         let intervalId;
 
+        /* Episodes at right side */
+        let videosWrapper = $(".ew__body");
+        let currentVideo = videosWrapper.find('.current');
+
         /* Round to 2 decimal points */
         function str_pad_left(string, pad, length) {
             return (new Array(length + 1).join(pad) + string).slice(-length);
@@ -87,7 +91,7 @@ $(document).ready(function (){
         }
 
         /**
-         * Start new video
+         * Start new video with time Delay
          * @param interval
          * @param isTerminate
          * @param proceed
@@ -111,6 +115,19 @@ $(document).ready(function (){
             }
         };
 
+        function scrollToCurrent() {
+            const $wrapper = $('.ew__body');
+            const $currentElement = $wrapper.find('.current');
+
+            if ($currentElement.length) {
+                // Scroll the wrapper so the current element is at the top
+                $wrapper.scrollTop($currentElement.position().top + $wrapper.scrollTop());
+            }
+        }
+
+        /**
+         *  Play new video, depending on is it clicked or autoloaded
+         */
         let playNewVideo = function (){
             let videoWrapper = $("#active-video");
 
@@ -193,6 +210,9 @@ $(document).ready(function (){
                 /* Video that is loaded after previous video */
                 if(mainDataResponse !== null) player.play();
                 else{
+                    /* Scroll to top */
+                    scrollToCurrent();
+
                     /* Initial load */
                     const currentTime = parseFloat($("#active-video").attr('current-time'));
                     setTimeout(() => {
@@ -337,6 +357,24 @@ $(document).ready(function (){
                     }
                 });
             }
+        });
+
+        // Set up a MutationObserver to watch for changes in the `current` class
+        const wrapper = document.getElementById('ew__body_wrapper');
+
+        const observer = new MutationObserver(function(mutationsList) {
+            mutationsList.forEach(mutation => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    scrollToCurrent(); // Call scroll function when class attribute changes
+                }
+            });
+        });
+
+        // Observe changes to class attributes within the scrollable wrapper
+        observer.observe(wrapper, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class']
         });
 
         /* On GET request, set initial data */

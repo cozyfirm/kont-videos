@@ -5,6 +5,7 @@ namespace App\Traits\Mqtt;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use PhpMqtt\Client\Facades\MQTT;
 
 trait MqttTrait{
@@ -12,6 +13,7 @@ trait MqttTrait{
     /**
      * @return void
      * Get an IP ADDR from HTTP Request
+     * Logs data on exception thrown
      */
     public function publishMessage($topic, $code, $data, $uri = null): void{
         try{
@@ -22,27 +24,9 @@ trait MqttTrait{
             ];
 
             MQTT::publish($topic, json_encode($message, JSON_UNESCAPED_UNICODE ));
-        }catch (\Exception $e){ throw $e; }
-    }
-
-    /**
-     * @param $chat -> Topic
-     * @param User | Auth $sender -> User object that sends message
-     * @param $message -> Message
-     * @return void
-     */
-    public function publishChatMessage($chat, User | Auth $sender, $message): void{
-        try{
-            $message = [
-                'code' => '2000',
-                'data' => [
-                    'sender' => $sender,
-                    'message' => $message
-                ]
-            ];
-
-            MQTT::publish($chat, json_encode($message, JSON_UNESCAPED_UNICODE ));
-        }catch (\Exception $e){ throw $e; }
+        }catch (\Exception $e){
+            Log::channel('mqtt')->info($e->getMessage());
+        }
     }
 
     /**
@@ -70,6 +54,8 @@ trait MqttTrait{
             ];
 
             MQTT::publish($topic, json_encode($message, JSON_UNESCAPED_UNICODE ));
-        }catch (\Exception $e){ throw $e; }
+        }catch (\Exception $e){
+            Log::channel('mqtt')->info($e->getMessage());
+        }
     }
 }

@@ -1,16 +1,17 @@
 <?php
 namespace App\Traits\Episodes;
 
-
 use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeVideo;
 use App\Models\Episodes\Review;
 use App\Traits\Common\CommonTrait;
+use App\Traits\Mqtt\MqttTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Log;
 
 trait EpisodeBaseTrait{
-    use CommonTrait;
+    use CommonTrait, MqttTrait;
 
     /**
      * Check does exist episode with the same title
@@ -149,15 +150,20 @@ trait EpisodeBaseTrait{
     /**
      * Increment loads (number when user opened or loaded video; Should be different from views)
      *
-     * @param $video_id
+     * @param int $video_id
+     * @param bool $broadcast = true
      * @return void
      */
-    public function updateVideoLoads($video_id): void{
+    public function updateVideoLoads(int $video_id, bool $broadcast = true): void{
         try{
             $video = EpisodeVideo::where('id', '=', $video_id)->first();
             $video->update(['total_loads' => ($video->total_loads + 1)]);
 
-            /* ToDo:: Broadcast over websockets */
+            if($broadcast){
+                $this->publishMessage(env('GLOBAL_EP_CH'), '20001', [
+                    'views' => $video->episodeRel->totalViews()
+                ]);
+            }
         }catch (\Exception  $e){}
     }
 

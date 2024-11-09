@@ -1,5 +1,7 @@
 @extends('public-part.layout.layout')
 
+@section('js-scripts') @vite(['resources/js/dedicated/episode.js']) @endsection
+
 @section('public-content')
     <!-- Review options -->
     @include('public-part.app.episodes.includes.add-review')
@@ -34,7 +36,7 @@
                 <h3>{{ $episode->title ?? '' }}</h3>
                 <i class="fas fa-times toggle-player"></i>
             </div>
-            <div class="ew__body">
+            <div class="ew__body" id="ew__body_wrapper">
                 @php $counter = 1; @endphp
                 @foreach($episode->videoContentRel as $content)
                     <div class="se__wrapper @if($video->id == $content->id) current @endif" video-id="{{ $content->id }}">
@@ -101,12 +103,10 @@
                     <p> {{ __('Zabilješke') }} </p>
                     <img src="{{ asset('files/images/default/icons/memo-pad-white.svg') }}" alt="">
                 </div>
-                @if($episode->totalReviews())
-                    <div class="inner__tab" ref-tag="reviews">
-                        <p> {{ __('Recenzije') }} </p>
-                        <img src="{{ asset('files/images/default/icons/review-white.svg') }}" alt="">
-                    </div>
-                @endif
+                <div class="inner__tab @if(!$episode->totalReviews()) d-none @endif" ref-tag="reviews">
+                    <p> {{ __('Recenzije') }} </p>
+                    <img src="{{ asset('files/images/default/icons/review-white.svg') }}" alt="">
+                </div>
                 <div class="inner__tab" ref-tag="rest_of_episodes">
                     <p> {{ __('Ostale epizode') }} </p>
                     <img src="{{ asset('files/images/default/icons/screen-play-white.svg') }}" alt="">
@@ -129,9 +129,7 @@
                 @include('public-part.app.episodes.sections.my__notes')
 
                 <!-- Reviews -->
-                @if($episode->totalReviews())
-                    @include('public-part.app.episodes.sections.reviews')
-                @endif
+                @include('public-part.app.episodes.sections.reviews')
 
                 <!-- Rest of episodes -->
                 @include('public-part.app.episodes.sections.rest_of_episodes')

@@ -1,7 +1,7 @@
 @component('mail::message')
 # {{ $_subject }}
 
-Ime i prezime: {{ $_name }},
+Ime i prezime: {{ $_name }},<br>
 Email: {{ $_email }}
 
 Poruka: {{ $_message }}

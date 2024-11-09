@@ -127,6 +127,14 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        /**
+         *  Mqtt Logs
+         */
+        'mqtt' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/mqtt.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];

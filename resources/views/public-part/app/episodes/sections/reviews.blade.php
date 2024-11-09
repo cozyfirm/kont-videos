@@ -1,4 +1,4 @@
-<div class="inner__element reviews ">
+<div class="inner__element reviews @if(!$episode->totalReviews()) d-none @endif">
     <div class="reviews__global">
         <div class="rg__wrapper rg__wrapper__small">
             <p class="description">{{ __('Ukupno ocjena') }}</p>

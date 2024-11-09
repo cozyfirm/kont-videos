@@ -12,7 +12,7 @@
         @endif
         <div class="number">
             <div class="number__header">
-                <h4> {{ $episode->totalViews() }} </h4>
+                <h4 class="episode-total-views"> {{ $episode->totalViews() }} </h4>
             </div>
             <p> {{ __('Pregleda') }} </p>
         </div>

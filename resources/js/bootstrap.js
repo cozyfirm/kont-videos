@@ -12,3 +12,5 @@ window.jQuery = window.$ = $;
 
 // import 'jquery-ui/ui/widgets/datepicker';
 // import 'jquery-ui/themes/base/theme.css'; // Optional: Include jQuery UI CSS
+
+import { MqttInit } from './mqtt/mqtt-init.ts';
