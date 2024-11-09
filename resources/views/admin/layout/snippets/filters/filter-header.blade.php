@@ -21,7 +21,6 @@
                             </div>
                         </div>
 
-
                         <button type="submit" class="btn btn-primary btn-xs mb-2 filter-btn">
                             <i class="fa fa-list fa-1x"></i>
                             <a class="ml-4 text-white"><b>{{__('Ažurirajte')}}</b></a>
