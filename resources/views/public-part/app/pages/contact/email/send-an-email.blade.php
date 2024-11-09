@@ -7,5 +7,5 @@ Email: {{ $_email }}
 Poruka: {{ $_message }}
 
 {{ __('Ugodan ostatak dana') }},<br>
-<a href="{{ env('APP_DOMAIN') }}"> {{ env('APP_NAME') }} </a>
+<a href="{{ env('APP_DOMAIN') }}"> {{ env('APP_NAME_LONG') }} </a>
 @endcomponent

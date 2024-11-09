@@ -23,23 +23,21 @@ class Filters extends Controller{
         $filter_values = request()->get('filter_values');
 
 
-
         $controller = self::class;
         if(request()->has('limit')){
             self::$limit = request()->get('limit');
 
-//            if($filter_values[0] == null or $filters[0] == null){
-//                return $query->paginate(self::$limit);
-//            }
+            if(empty($filter_values) || empty($filters)) {
+                return $query->paginate(self::$limit);
+            }
         }
 
         if(empty($filter_values) || empty($filters)) {
             return $query->paginate(self::$limit);
         }
-
-//        if($filter_values[0] == null or $filters[0] == null){
-//            return $query->paginate(self::$limit);
-//        }
+        //if($filter_values[0] == null or $filters[0] == null){
+        //    return $query->paginate(self::$limit);
+        //}
 
         foreach ($filters as $key => $value) {
             $temp = $value;
@@ -79,12 +77,9 @@ class Filters extends Controller{
                         $query = self::applyFilters($query, $key, $value);
                     });
                 }
-
-
-            } else {
+            }else {
                 $query = self::applyFilters($query, $key, $value);
             }
-
         }
 
         return $query->paginate(self::$limit);
@@ -95,7 +90,6 @@ class Filters extends Controller{
          * Extract operator
          */
         $operators = self::operators($value);
-
         $operator = '=';
 
         if (count($operators) > 0) {
@@ -159,8 +153,7 @@ class Filters extends Controller{
         return $query;
     }
 
-    public static function operators($string)
-    {
+    public static function operators($string){
         $c2 = null;
         $ops = ['>=', '<=', '>', '<', '='];
         foreach ($ops as $op) {
@@ -174,16 +167,13 @@ class Filters extends Controller{
     }
 
     public static function validateDate($date, $format = 'd.m.Y'){
-
         try {
             $d = Carbon::createFromFormat($format, $date);
         } catch (\InvalidArgumentException $e){
             return false;
         }
 
-
         return ($d && $d->format($format) == $date);
-
     }
 }
 

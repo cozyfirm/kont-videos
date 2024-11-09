@@ -24,13 +24,18 @@ $(document).ready(function () {
     }
 
     /**
-     *  Register yourself, but transfer email via POST request to register form
+     *  Register yourself, but transfer email via POST request to register form;
+     *  If email is empty, go to classic auth page
      */
     $(".register-hidden-trigger").click(function (e){
        let value = $("#input-hero").val();
 
        if(value !== ""){
            $("#register-hidden-email").val(value);
-       }else e.preventDefault();
+       }else {
+           e.preventDefault();
+
+           window.location = '/auth/create-account';
+       }
     });
 });
