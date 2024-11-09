@@ -359,9 +359,11 @@ $(document).ready(function (){
             }
         });
 
-        // Set up a MutationObserver to watch for changes in the `current` class
+        /**
+         * Set up a MutationObserver to watch for changes in the `current` class
+         * @type {HTMLElement}
+         */
         const wrapper = document.getElementById('ew__body_wrapper');
-
         const observer = new MutationObserver(function(mutationsList) {
             mutationsList.forEach(mutation => {
                 if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -370,7 +372,9 @@ $(document).ready(function (){
             });
         });
 
-        // Observe changes to class attributes within the scrollable wrapper
+        /**
+         * Observe changes to class attributes within the scrollable wrapper
+         */
         observer.observe(wrapper, {
             attributes: true,
             subtree: true,
