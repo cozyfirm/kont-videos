@@ -5,7 +5,7 @@
     @include('public-part.app.shared.trailer')
 
     <div class="hero-video">
-        <video autoplay loop muted preload playsinline src="{{ asset('files/videos/main-vdeo.mp4')}}"></video>
+        <video autoplay loop muted preload playsinline src="{{ asset('files/videos/main-video.mp4')}}"></video>
 
         <div class="hero-bunner">
             <div class="hero-bunner-content">
