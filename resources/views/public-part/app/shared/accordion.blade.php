@@ -2,7 +2,7 @@
     <div class="accordion-container">
         <div class="faq-heading">
             <h1>FAQ</h1>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
+            <p>{{ __('Često postavljena pitanja') }}</p>
         </div>
 
         @foreach($faqs as $faq)

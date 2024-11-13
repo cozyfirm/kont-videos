@@ -96,6 +96,13 @@
                     }
                     .col-md-6:first-child{ padding-left: 0px; }
                     .col-md-6:last-child{padding-right: 0px;}
+                    .col-md-12, .col-md-6{
+                        .form-group{
+                            display: flex; flex-wrap: wrap; gap: 4px;
+                            input{width: 100%;}
+                            // small{ margin-top: 8px !important; }
+                        }
+                    }
                 }
             }
             .form-control{

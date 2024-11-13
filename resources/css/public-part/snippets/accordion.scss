@@ -21,6 +21,7 @@
             h1, h2, h3, h4, h5, h6, p, span{
                 margin: 0px; padding: 0px !important; color: $color-white !important;
             }
+            color: $color-white !important;
         }
     }
 }
@@ -122,8 +123,9 @@ div.course-panel {
     letter-spacing: .4px;
     font-weight: 400;
     font-style: normal;
-    color: rgba(0, 0, 0, .88);;
+    // color: rgba(0, 0, 0, .88);;
 
+    color: $color-white;
     p {
         color: $color-white;
 

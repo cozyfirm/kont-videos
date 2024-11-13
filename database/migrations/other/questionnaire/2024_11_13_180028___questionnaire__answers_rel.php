@@ -26,6 +26,8 @@ return new class extends Migration
                 ->on('questionnaire')
                 ->onDelete('cascade');
 
+            $table->text('answer');
+
             $table->timestamps();
         });
     }

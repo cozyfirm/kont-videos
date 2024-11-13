@@ -43,14 +43,18 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-6">
-                                    <b>{{ html()->label(__('Adresa stanovanja'))->for('address')->class('bold') }}</b>
-                                    {{ html()->text('address')->class('form-control form-control-sm mt-2 required')->maxlength('100')->value(Auth::user()->address) }}
-                                    <small id="addressHelp" class="form-text text-muted">{{ __('Vaša adresa stanovanja') }}</small>
+                                    <div class="form-group">
+                                        <b>{{ html()->label(__('Adresa stanovanja'))->for('address')->class('bold') }}</b>
+                                        {{ html()->text('address')->class('form-control form-control-sm mt-2 required')->maxlength('100')->value(Auth::user()->address) }}
+                                        <small id="addressHelp" class="form-text text-muted">{{ __('Vaša adresa stanovanja') }}</small>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <b>{{ html()->label(__('Grad'))->for('city')->class('bold') }}</b>
-                                    {{ html()->text('city')->class('form-control form-control-sm mt-2 required')->maxlength('50')->value(Auth::user()->city) }}
-                                    <small id="living_placeHelp" class="form-text text-muted">{{ __('Grad u kojem trenutno živite') }}</small>
+                                    <div class="form-group">
+                                        <b>{{ html()->label(__('Grad'))->for('city')->class('bold') }}</b>
+                                        {{ html()->text('city')->class('form-control form-control-sm mt-2 required')->maxlength('50')->value(Auth::user()->city) }}
+                                        <small id="living_placeHelp" class="form-text text-muted">{{ __('Grad u kojem trenutno živite') }}</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mt-3">

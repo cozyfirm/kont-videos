@@ -57,7 +57,7 @@ class BlogController extends Controller{
             'popular' => Blog::take(4)->get(),
             'postTags' => $post->getAllTags(),
             'popularTags' => $this->popularTags('blog'),
-            'blog' => true
+            // 'blog' => true
         ]);
     }
 

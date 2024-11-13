@@ -1,7 +1,7 @@
 <section class="news">
     <div class="inner__wrapper">
         <div class="inner__header">
-            <h1>{{ __('Vijesti') }}</h1>
+            <h1>{{ __('Teme') }}</h1>
         </div>
 
         <div class="news__wrapper">

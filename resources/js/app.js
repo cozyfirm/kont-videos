@@ -41,6 +41,7 @@ import './admin/reviews/review.js';
 import './public-part/app/episodes/review.js';
 import './public-part/app/episodes/notes.js';
 import './public-part/app/episodes/trailer.js';
+import './public-part/app/episodes/questionnaire.js';
 
 // /* Mqtt scripts */
 // import './public-part/app/mqtt/live.js';

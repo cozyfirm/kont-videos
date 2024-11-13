@@ -29,10 +29,10 @@
         <p>{{ __('Zadnji put ažurirano') }} {{ $episode->lastUpdated() }} {{ __('godine') }} </p>
     </div>
 
-    <div class="o-row">
-        <img src="{{ asset('files/images/default/icons/globe.svg') }}" alt="">
-        <p>{{ $episode->languageRel->name ?? '' }} </p>
-    </div>
+{{--    <div class="o-row">--}}
+{{--        <img src="{{ asset('files/images/default/icons/globe.svg') }}" alt="">--}}
+{{--        <p>{{ $episode->languageRel->name ?? '' }} </p>--}}
+{{--    </div>--}}
 
     <div class="description">
         {!! nl2br($episode->description ?? '') !!}

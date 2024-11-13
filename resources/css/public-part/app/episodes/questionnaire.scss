@@ -1,0 +1,73 @@
+.questionnaire__wrapper{
+    position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; display: flex; align-items: flex-start; justify-content: center;
+    background: rgba(0,0,0,0.4); z-index: 100; padding: 64px 0px; overflow: auto; display: none;
+
+    @media screen and (max-width: 800px){
+        padding: 0px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0px; height:0px;
+    }
+
+    .questionnaire__inner{
+        width: 620px; display: flex; flex-wrap: wrap; gap: 32px; background: $color-white; padding: 64px; border-radius: 4px;
+
+        @media screen and (max-width: 800px){
+            width: 100%; padding: 32px 20px; gap: 20px;
+        }
+
+        .question__wrapper{
+            position: relative; width: 100%; display: flex; gap: 16px; flex-wrap: wrap;
+            .question{
+                position: relative; width: 100%; background: $color-primary-hover; padding: 16px 16px; border-radius: 4px;
+
+                p{ color:$color-white; margin: 0px; padding: 0px; font-size: 15px; }
+            }
+            .answer__wrapper{
+                position: relative; width: 100%; gap: 8px; display: flex; flex-wrap: wrap;
+                .aw__stars__wrapper{
+                    position: relative; width: 100%; display: flex; justify-content: center;
+                    .svg__wrapper{
+                        padding: 0px 4px;
+                        &:hover{cursor: pointer;}
+                        svg{
+                            height: 30px; width: 30px;
+                            path{
+                                fill: $color-secondary;
+                            }
+                        }
+                    }
+                }
+                @import "snippets/stars-colors";
+
+                .description__wrapper{
+                    position: relative; width: 100%; display: flex; justify-content: center;
+                    p{margin:0px; padding: 0px; color: $color-black; text-align: center; }
+                }
+                .textarea__wrapper{
+                    position: relative; width: 100%;
+                    textarea{
+                        position: relative; width: 100%; border-radius: 4px; border: none; padding: 16px; outline: none; resize: none; height: 120px; background: $color-primary-hover;
+                        color: $color-white;
+                        &:focus{
+                            outline: none; box-shadow: none;
+                        }
+                        &::placeholder {
+                            color: $color-white;
+                        }
+                        &::-webkit-scrollbar {
+                            width: 0px; height:0px;
+                        }
+                    }
+                }
+            }
+        }
+        .submit__it{
+            position: relative; width: 100%; display: flex; justify-content: center;
+            button{
+                padding: 8px 64px;
+            }
+        }
+    }
+}
