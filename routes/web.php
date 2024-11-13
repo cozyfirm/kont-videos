@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Other\FAQsController;
 use App\Http\Controllers\Admin\Other\Blog\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\Other\PagesController;
+use App\Http\Controllers\Admin\Other\Questionnaire\QuestionnaireController;
 use App\Http\Controllers\Admin\Users\UsersController;
 use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisodesController;
 use App\Http\Controllers\PublicPart\Blog\BlogController as PublicBlogController;
@@ -208,6 +209,19 @@ Route::prefix('system')->group(function () {
             Route::prefix('reviews')->group(function () {
                 Route::get ('/',                              [EpisodesController::class, 'allReviews'])->name('system.admin.episodes.reviews');
                 Route::post('/update-status',                 [EpisodesController::class, 'updateReviewStatus'])->name('system.admin.episodes.reviews.update-status');
+            });
+
+            /**
+             *  Questionnaire
+             */
+            Route::prefix('questionnaire')->group(function () {
+                Route::get ('/',                              [QuestionnaireController::class, 'index'])->name('system.admin.episodes.questionnaire');
+                Route::post('/save',                          [QuestionnaireController::class, 'save'])->name('system.admin.episodes.questionnaire.save');
+                Route::get ('/create',                        [QuestionnaireController::class, 'create'])->name('system.admin.episodes.questionnaire.create');
+                Route::get ('/preview/{id}',                  [QuestionnaireController::class, 'preview'])->name('system.admin.episodes.questionnaire.preview');
+                Route::get ('/edit/{id}',                     [QuestionnaireController::class, 'edit'])->name('system.admin.episodes.questionnaire.edit');
+                Route::post('/update',                        [QuestionnaireController::class, 'update'])->name('system.admin.episodes.questionnaire.update');
+                Route::get ('/delete/{id}',                   [QuestionnaireController::class, 'delete'])->name('system.admin.episodes.questionnaire.delete');
             });
         });
 

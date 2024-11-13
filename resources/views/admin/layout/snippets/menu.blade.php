@@ -147,6 +147,12 @@
                             <p> {{__('Recenzije')}} </p>
                         </div>
                     </a>
+                    <a href="{{ route('system.admin.episodes.questionnaire') }}">
+                        <div class="inside-lm-link">
+                            <div class="ilm-l"></div><div class="ilm-c"></div>
+                            <p> {{__('Ankete')}} </p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </a>
