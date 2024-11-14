@@ -20,7 +20,7 @@ class HomeController extends Controller{
 
     public function home(): View{
         return view($this->_path . 'home', [
-            'episodes' => Episode::orderBy('id', 'DESC')->take(6)->get(),
+            'episodes' => Episode::where('status', '!=', 2)->orderBy('id', 'DESC')->take(6)->get(),
             'faqs' => FAQ::get(),
             'posts' => Blog::where('published', '=', 1)->orderBy('id', 'DESC')->take($this->_number_of_posts)->get()
         ]);

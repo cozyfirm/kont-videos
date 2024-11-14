@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('short_description');
             $table->text('description');
 
+            $table->integer('status')->default(1);
+
             /* Basically user id */
             $table->integer('presenter_id');
 

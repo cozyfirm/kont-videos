@@ -1,6 +1,13 @@
 .single__episode{
     position: relative; width: calc(33% - 16px); min-height: 120px;
 
+    .soon{
+        position: absolute; right: 16px; top: 16px; z-index: 50; background: $color-secondary; padding: 6px 16px 4px 16px; border-radius: 4px;
+        p{
+            margin: 0px; padding: 0px; color: $color-white;
+        }
+    }
+
     &.se__small{
         width: calc(25% - 18px);
     }

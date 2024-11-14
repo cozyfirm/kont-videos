@@ -68,16 +68,24 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Kratki opis'))->for('short_description')->class('bold') }}
                                 {{ html()->text('short_description')->class('form-control form-control-sm')->required()->value((isset($episode) ? $episode->short_description : ''))->maxlength('200')->isReadonly(isset($preview)) }}
                             </div>
                         </div>
+                    </div>
+                    <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Jezik'))->for('language_id')->class('bold') }}
                                 {{ html()->select('language_id', $languages, isset($episode) ? $episode->language_id : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ html()->label(__('Status'))->for('status')->class('bold') }}
+                                {{ html()->select('status', $statuses, isset($episode) ? $episode->status : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>

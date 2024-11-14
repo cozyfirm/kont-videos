@@ -29,7 +29,7 @@ class EpisodesController extends Controller{
      */
     public function episodes(): View{
         return view($this->_path . 'preview-all', [
-            'episodes' => Episode::orderBy('id', 'DESC')->take($this->_total_episodes)->get(),
+            'episodes' => Episode::where('status', '!=', 2)->orderBy('id', 'DESC')->take($this->_total_episodes)->get(),
             'all_episodes' => true,
             'faqs' => FAQ::get()
         ]);
@@ -39,6 +39,7 @@ class EpisodesController extends Controller{
         if(!Auth::check()) return redirect()->route('auth');
         $episode = Episode::where('slug', '=', $slug)->first();
         if(!$episode) abort(404);
+        if($episode->status != 1) return redirect()->route('public.episodes');
 
         if($videoID){
             $video = EpisodeVideo::where('id', '=', $videoID)->first();
@@ -249,7 +250,7 @@ class EpisodesController extends Controller{
             if(isset($request->id)){
                 $fullStar = 1; $halfStar = 0;
 
-                $episode = Episode::where('id', '=', $request->id)->with('videoContentRel:id,episode_id,title,description,library_id,video_id,thumbnail,category,duration_sec', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description', 'stars']);
+                $episode = Episode::where('id', '=', $request->id)->with('videoContentRel:id,episode_id,title,description,library_id,video_id,thumbnail,category,duration_sec', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description', 'status', 'stars']);
                 foreach ($episode->videoContentRel as $content){
                     if($content->category != 2){
                         $content->img = $this->getThumbnailUri($content->video_id, $content->thumbnail);

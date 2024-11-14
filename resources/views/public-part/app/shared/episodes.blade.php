@@ -2,6 +2,12 @@
     <div class="inner__wrapper @isset($all_episodes) all-episodes @endisset">
         @foreach($episodes as $episode)
             <div class="single__episode @isset($all_episodes) se__small @endisset">
+                @if($episode->status == 3)
+                    <div class="soon">
+                        <p>{{ __('USKORO') }}</p>
+                    </div>
+                @endif
+
                 <img src="{{ asset($episode->imageRel->getFile()) }}" class="episode-img">
                 @if (!$browser->isMobile())
                     <video class="episode-hover-video" loop muted preload src="{{ asset($episode->videoRel->getFile()) }}"></video>
@@ -12,9 +18,11 @@
                     <p>{{ $episode->presenterRel->name ?? '' }}</p>
                     <div class="card-btns">
                         <button type="submit" class="btn-primary show__trailer" episode-id="{{ $episode->id }}"><i class="fi fi-bs-play-circle"></i>{{ __('Trailer') }}</button>
-                        <a href="{{ route('public.episodes.preview', ['slug' => $episode->slug]) }}">
-                            <button class="btn-primary"><i class="fi fi-bs-play-circle"></i>{{ __('Video') }}</button>
-                        </a>
+                        @if($episode->status == 1)
+                            <a href="{{ route('public.episodes.preview', ['slug' => $episode->slug]) }}">
+                                <button class="btn-primary"><i class="fi fi-bs-play-circle"></i>{{ __('Video') }}</button>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

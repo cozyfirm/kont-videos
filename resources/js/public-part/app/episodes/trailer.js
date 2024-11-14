@@ -42,7 +42,9 @@ $(document).ready(function (){
                                 if(chapters > 6) continue;
 
                                 episodeChapters.append(function (){
-                                    return $("<div>").attr('class', 'single__chapter go-to').attr('custom-uri', '/episodes/preview/' + episode['slug'] + '/' + video['id'])
+                                    let customUri = (episode['status'] === 1) ? '/episodes/preview/' + episode['slug'] + '/' + video['id'] : null;
+
+                                    return $("<div>").attr('class', (customUri) ? 'single__chapter go-to' : 'single__chapter').attr('custom-uri', customUri)
                                         .append(function (){
                                             return $("<div>").attr('class', 'no__part')
                                                 .append(function (){
@@ -76,8 +78,6 @@ $(document).ready(function (){
                             }
                         }
                     }
-
-                    console.log("Chapters: " + chapters);
 
                     let chapterText = "";
                     if(chapters === 0) chapterText = "0 cjelina";
@@ -115,7 +115,6 @@ $(document).ready(function (){
                         }
                     }
 
-                    console.log(stars);
                     $(".trailer__wrapper").addClass('trailer__wrapper__visible');
                 }else{
                     Notify.Me([response['message'], "danger"]);

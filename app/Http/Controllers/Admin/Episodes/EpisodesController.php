@@ -42,7 +42,8 @@ class EpisodesController extends Controller{
         return view($this->_path . 'create', [
             'create' => true,
             'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
-            'languages' => Keyword::getIt('languages')
+            'languages' => Keyword::getIt('languages'),
+            'statuses' => Keyword::getItByVal('episode_status')
         ]);
     }
     public function save(Request $request): RedirectResponse{
@@ -64,6 +65,7 @@ class EpisodesController extends Controller{
                 'slug' => $request->slug,
                 'short_description' => $request->short_description,
                 'description' => $request->description,
+                'status' => $request->status,
                 'presenter_id' => $request->presenter_id,
                 'image_id' => $image->id,
                 'video_id' => $video->id,
@@ -85,7 +87,8 @@ class EpisodesController extends Controller{
             'preview' => true,
             'episode' => Episode::where('slug', '=', $slug)->first(),
             'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
-            'languages' => Keyword::getIt('languages')
+            'languages' => Keyword::getIt('languages'),
+            'statuses' => Keyword::getItByVal('episode_status')
         ]);
     }
     public function edit ($slug): View{
@@ -93,7 +96,8 @@ class EpisodesController extends Controller{
             'edit' => true,
             'episode' => Episode::where('slug', '=', $slug)->first(),
             'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
-            'languages' => Keyword::getIt('languages')
+            'languages' => Keyword::getIt('languages'),
+            'statuses' => Keyword::getItByVal('episode_status')
         ]);
     }
     public function update(Request $request): RedirectResponse{
@@ -116,6 +120,7 @@ class EpisodesController extends Controller{
                 'presenter_id' => $request->presenter_id,
                 'short_description' => $request->short_description,
                 'description' => $request->description,
+                'status' => $request->status,
                 'image_id' => isset($image) ? $image->id : $episode->image_id,
                 'video_id' => isset($video) ? $video->id : $episode->video_id,
                 'language_id' => $request->language_id,
