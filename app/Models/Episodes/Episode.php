@@ -5,6 +5,8 @@ namespace App\Models\Episodes;
 use App\Models\Core\File;
 use App\Models\Core\Hashtags\Hashtag;
 use App\Models\Core\Keyword;
+use App\Models\Other\Questionnaire\Questionnaire;
+use App\Models\Other\Questionnaire\QuestionnaireAnswers;
 use App\Models\User;
 use App\Traits\Common\CommonTrait;
 use App\Traits\Episodes\EpisodeBaseTrait;
@@ -63,6 +65,9 @@ class Episode extends Model{
     }
     public function episodeActivity(): HasMany{
         return $this->hasMany(EpisodeActivity::class, 'episode_id', 'id');
+    }
+    public function questionnaireRel(): HasMany{
+        return $this->hasMany(QuestionnaireAnswers::class, 'episode_id', 'id')->orderBy('id');
     }
 
     /**

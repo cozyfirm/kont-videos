@@ -2,10 +2,21 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card p-0 m-0" title="#">
-                <div class="card-body d-flex justify-content-between">
+                <div class="card-body pb-1 d-flex justify-content-between">
                     <h5 class="p-0 m-0"> {{ __('Ostale informacije') }} </h5>
                     <i class="fas fa-info mt-1 mr-1"></i>
                 </div>
+
+                <div class="card-body pt-0 pb-0">
+                    <hr>
+                </div>
+
+                <a href="{{ route('system.admin.episodes.questionnaire.answers-per-episode', ['episode_id' => $episode->id ]) }}">
+                    <div class="card-body pt-0 pb-0 d-flex justify-content-between">
+                        <p class="p-0 ml-0"> {{ __('Questionnaires') }} </p>
+                        <p>({{ $episode->questionnaireRel->count() }})</p>
+                    </div>
+                </a>
             </div>
 
             <div class="card p-0 mt-3" title="#">

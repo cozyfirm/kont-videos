@@ -230,6 +230,12 @@ Route::prefix('system')->group(function () {
                 Route::get ('/edit/{id}',                     [QuestionnaireController::class, 'edit'])->name('system.admin.episodes.questionnaire.edit');
                 Route::post('/update',                        [QuestionnaireController::class, 'update'])->name('system.admin.episodes.questionnaire.update');
                 Route::get ('/delete/{id}',                   [QuestionnaireController::class, 'delete'])->name('system.admin.episodes.questionnaire.delete');
+
+                /**
+                 *  Answers for specific episode
+                 */
+                Route::get ('/answers-per-episode/{episode_id}',                  [QuestionnaireController::class, 'answersPerEpisode'])->name('system.admin.episodes.questionnaire.answers-per-episode');
+                Route::get ('/answers-per-episode-detailed/{id}',                 [QuestionnaireController::class, 'answersPerEpisodeDetailed'])->name('system.admin.episodes.questionnaire.answers-per-episode.detailed');
             });
         });
 
