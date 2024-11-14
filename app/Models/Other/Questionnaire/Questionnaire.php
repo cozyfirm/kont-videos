@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @method static where(string $string, string $string1, int $int)
  * @method static create(array $all)
+ * @method static get()
  */
 class Questionnaire extends Model{
     use HasFactory, SoftDeletes;

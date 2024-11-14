@@ -285,6 +285,13 @@ $(document).ready(function (){
 
                                 if(data['episodeFinished'] === true){
                                     finishEpisode();
+
+                                    /**
+                                     *  When episode is finished, and in a case when user did not complete survey, offer it a questionnaire
+                                     */
+                                    if(data['offerQuestionnaire'] === true){
+                                        $(".questionnaire__wrapper").addClass('d-flex');
+                                    }
                                 }
                             }else{
                                 Notify.Me([response['message'], "warn"]);

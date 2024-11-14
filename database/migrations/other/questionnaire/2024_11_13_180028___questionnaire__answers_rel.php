@@ -26,7 +26,8 @@ return new class extends Migration
                 ->on('questionnaire')
                 ->onDelete('cascade');
 
-            $table->text('answer');
+            /* Nullable only for text */
+            $table->text('answer')->nullable();
 
             $table->timestamps();
         });

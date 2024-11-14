@@ -12,6 +12,7 @@ use App\Http\Controllers\PublicPart\Episodes\EpisodesController as PublicEpisode
 use App\Http\Controllers\PublicPart\Blog\BlogController as PublicBlogController;
 use App\Http\Controllers\PublicPart\Episodes\NotesController;
 use App\Http\Controllers\PublicPart\Episodes\ReviewsController;
+use App\Http\Controllers\PublicPart\Episodes\QuestionnaireController as PublicQuestionnaireController;
 use App\Http\Controllers\PublicPart\HomeController as PublicHomeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PublicPart\MyProfile\MyProfileController;
@@ -101,6 +102,13 @@ Route::prefix('/')->group(function () {
             Route::post('/load',                          [NotesController::class, 'load'])->name('public.episodes.notes.load');
             Route::post('/update',                        [NotesController::class, 'update'])->name('public.episodes.notes.update');
             Route::post('/delete',                        [NotesController::class, 'delete'])->name('public.episodes.notes.delete');
+        });
+
+        /**
+         *  Questionnaire
+         */
+        Route::prefix('/questionnaire')->group(function () {
+            Route::post('/save',                          [PublicQuestionnaireController::class, 'save'])->name('public.episodes.questionnaire.save');
         });
     });
 

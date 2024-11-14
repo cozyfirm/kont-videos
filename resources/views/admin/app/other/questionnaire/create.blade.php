@@ -40,15 +40,21 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 {{ html()->label(__('Pitanje'))->for('question')->class('bold') }}
-                                {{ html()->textarea('question', $question->question ?? '' )->class('form-control form-control-sm textarea-120')->required()->value((isset($question) ? $question->question : ''))->isReadonly(isset($preview)) }}
+                                {{ html()->textarea('question', $question->question ?? '' )->class('form-control form-control-sm textarea-60')->required()->value((isset($question) ? $question->question : ''))->isReadonly(isset($preview)) }}
                             </div>
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 {{ html()->label(__('Kratki opis'))->for('description')->class('bold') }}
                                 {{ html()->text('description', $question->description ?? '' )->class('form-control form-control-sm')->required()->value((isset($question) ? $question->description : ''))->isReadonly(isset($preview)) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ html()->label(__('Vrsta'))->for('type')->class('bold') }}
+                                {{ html()->select('type', ['option' => 'Options', 'text' => 'Text'], isset($question) ? $question->type : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
                             </div>
                         </div>
                     </div>

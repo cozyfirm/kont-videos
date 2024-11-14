@@ -1,14 +1,14 @@
-<div class="questionnaire__wrapper">
+<div class="questionnaire__wrapper" episode-id="{{ $episode->id }}">
     <div class="questionnaire__inner">
-        @for($j=1; $j<=5; $j++)
-            <div class="question__wrapper" question-id="{{ $j }}">
+        @foreach($questions as $question)
+            <div class="question__wrapper" question-id="{{ $question->id }}" stars-selected="5" type="{{ $question->type }}">
                 <div class="question">
-                    <p>Koliko ste zadovoljni izborom predavača/predavačice za ovu temu?</p>
+                    <p>{{ $question->question }}</p>
                 </div>
                 <div class="answer__wrapper">
-                    @if($j == 5)
+                    @if($question->type == 'text')
                         <div class="textarea__wrapper">
-                            {{ html()->textarea('question')->class('form-control form-control-sm textarea-120')->required()->placeholder(__('Vaš odgovor...')) }}
+                            {{ html()->textarea('question')->class('form-control form-control-sm textarea-120 question-text')->required()->placeholder(__('Vaš odgovor...')) }}
                         </div>
                     @else
                         <div class="aw__stars__wrapper stars-5">
@@ -21,15 +21,15 @@
                             @endfor
                         </div>
                         <div class="description__wrapper">
-                            <p>(1 - Uopšte nisam zadovoljan/a, 5 - Potpuno sam zadovoljan/a)</p>
+                            <p>{{ $question->description }}</p>
                         </div>
                     @endif
                 </div>
             </div>
-        @endfor
+        @endforeach
 
         <div class="submit__it">
-            <button class="btn-tertiary">{{ __('Pošalji') }}</button>
+            <button class="btn-tertiary submit-questionnaire">{{ __('Pošalji') }}</button>
         </div>
     </div>
 </div>

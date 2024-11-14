@@ -7,6 +7,8 @@ use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeActivity;
 use App\Models\Episodes\EpisodeVideo;
 use App\Models\Other\FAQ;
+use App\Models\Other\Questionnaire\Questionnaire;
+use App\Models\Other\Questionnaire\QuestionnaireAnswers;
 use App\Traits\Episodes\EpisodeBaseTrait;
 use App\Traits\Http\ResponseTrait;
 use Illuminate\Http\JsonResponse;
@@ -77,7 +79,8 @@ class EpisodesController extends Controller{
             /* Replace menu links with episode title */
             'previewEpisode' => true,
             'reviewsByNumber' => $this->getEpisodeReviewsByNumber($episode->id),
-            'otherEpisodes' => Episode::where('id', '!=', $episode->id)->inRandomOrder()->take(4)->get()
+            'otherEpisodes' => Episode::where('id', '!=', $episode->id)->inRandomOrder()->take(4)->get(),
+            'questions' => Questionnaire::get()
         ]);
     }
 
@@ -95,6 +98,9 @@ class EpisodesController extends Controller{
      */
     public function updateActivity(Request $request): JsonResponse{
         try{
+            /* Offer questionnaire */
+            $offerQuestionnaire = false;
+
             $activity = EpisodeActivity::where('episode_id', '=', $request->episode_id)
                 ->where('video_id', '=', $request->video_id)
                 ->where('user_id', '=', Auth::user()->id)
@@ -146,10 +152,19 @@ class EpisodesController extends Controller{
                 }
             }
 
+            /**
+             *  When episode is finished, open Questionnaire form for user
+             */
+            if($episodeFinished){
+                $questionnaireAnswer = QuestionnaireAnswers::where('episode_id', '=', $request->episode_id)->where('user_id', '=', Auth::user()->id)->first();
+                if(!$questionnaireAnswer) $offerQuestionnaire = true;
+            }
+
             return $this->apiResponse('0000', __('Success'), [
                 'progress' => $progress,
                 'nextVideo' => $nextVideo,
-                'episodeFinished' => $episodeFinished
+                'episodeFinished' => $episodeFinished,
+                'offerQuestionnaire' => $offerQuestionnaire
             ]);
         }catch (\Exception $e){
             return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
