@@ -1,7 +1,7 @@
 <div class="s-top-menu">
     <div class="app-name">
         <a title="{{__('Naslovna strana')}}">
-            <h1 class="mt-3"> CozyFirm d.o.o </h1>
+            <img src="{{ asset('/files/images/logo-black.svg') }}" alt="">
         </a>
         <i class="fas fa-bars t-3 system-m-i-t" title="{{__('Otvorite / zatvorite MENU')}}"></i>
     </div>
@@ -20,15 +20,15 @@
 {{--                <div class="number-of"><p>3</p></div>--}}
 {{--            </div>--}}
 
-            <a href="#" target="_blank">
+            <a href="{{ route('public.home') }}" target="_blank">
                 <div class="single-li">
-                    <p> {{__('Blog')}} </p>
+                    <p> {{__('Homepage')}} </p>
                 </div>
             </a>
 
-            <a href="#">
+            <a href="{{ route('public.episodes') }}">
                 <div class="single-li">
-                    <p> {{__('WebShop')}} </p>
+                    <p> {{__('Epizode')}} </p>
                 </div>
             </a>
         </div>
@@ -39,12 +39,12 @@
                 <i class="fas fa-search main-search-t" title="{{__('Pretražite')}}"></i>
 {{--                @include('system.template.menu.menu-includes.search')--}}
             </div>
-            <div class="single-li m-show-notifications" title="Pregled obavijesti">
-                <i class="fas fa-bell"></i>
-                <div class="number-of"><p id="no-unread-notifications">12</p></div>
+{{--            <div class="single-li m-show-notifications" title="Pregled obavijesti">--}}
+{{--                <i class="fas fa-bell"></i>--}}
+{{--                <div class="number-of"><p id="no-unread-notifications">12</p></div>--}}
 
 {{--                @include('system.template.menu.menu-includes.notifications')--}}
-            </div>
+{{--            </div>--}}
             <div class="single-li main-search-w" title="">
                 <a href="{{ route('auth.logout') }}">
                     <i class="fas fa-power-off" title="{{__('Odjavite se')}}"></i>
