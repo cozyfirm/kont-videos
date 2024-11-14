@@ -60,6 +60,11 @@ $(document).ready(function (){
                 }
             }
         });
-        console.log(arrData);
+    });
+
+    $(".questionnaire__wrapper").click(function (event){
+        if($(event.target).hasClass('questionnaire__wrapper')){
+            $(".questionnaire__wrapper").removeClass('d-flex');
+        }
     });
 });
