@@ -70,7 +70,14 @@ $(document).ready(function (){
                                                 .append(function (){
                                                     return $("<div>").attr('class', 'text__part__body')
                                                         .append(function (){
-                                                            return $("<p>").html(video['description'].substring(0, 240) + ((video['description'].length > 240) ? "..." : ""))
+                                                            let description = video['description'];
+                                                            if(description !== null){
+                                                                if(description.length > 240){
+                                                                    description = description.substring(0, 240) + "...";
+                                                                }
+                                                            }
+                                                            // video['description'].substring(0, 240) + ((video['description'].length > 240) ? "..." : "")
+                                                            return $("<p>").html(description);
                                                         })
                                                 })
                                         })

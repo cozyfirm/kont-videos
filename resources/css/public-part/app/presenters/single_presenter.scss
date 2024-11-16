@@ -75,6 +75,9 @@
                             button{
                                 background-color: $color-dark-grey-hover !important; color: #FFF;
                             }
+                            .btn-tertiary{
+                                background-color: $color-secondary !important;
+                            }
                         }
                         h1{
                             color: $color-white; font-size: 40px; width: 100%; text-align: center;

@@ -28,9 +28,14 @@
                     <div class="episode__info">
                         <div class="ei__rest">
                             <div class="ei_r_data">
-                                @if($presenter->episodeRel->isNew())
+                                @if($presenter->episodeRel->isNew() and $presenter->episodeRel->status == 1)
                                     <div class="full-width d-center">
-                                        <button class="btn-light-grey">{{ __('NOVO') }}</button>
+                                        <button class="btn-tertiary">{{ __('NOVO') }}</button>
+                                    </div>
+                                @endif
+                                @if($presenter->episodeRel->status == 3)
+                                    <div class="full-width d-center">
+                                        <button class="btn-tertiary">{{ __('USKORO') }}</button>
                                     </div>
                                 @endif
                                 <div class="full-width d-center">
@@ -41,7 +46,7 @@
                                 </div>
                                 <div class="full-width d-center">
                                     <div class="btns__wrapper">
-                                        <button class="play-btn go-to" custom-uri="{{ route('public.episodes.preview', ['slug' => $presenter->episodeRel->slug]) }}">
+                                        <button class="play-btn @if($presenter->episodeRel->status == 1) go-to @endif" custom-uri="{{ route('public.episodes.preview', ['slug' => $presenter->episodeRel->slug]) }}">
                                             <i class="fi fi-br-play"></i>
                                             {{ __('PLAY') }}
                                         </button>

@@ -2,7 +2,7 @@
 
 Poštovani/a {{ $_name }},
 
-Uspješno ste kreirali profil na www.kont.com.
+Uspješno ste kreirali profil na www.kont.ba.
 
 Za verifikaciju Vašeg email-a, molimo kliknite <a href="{{ route('auth.verify-account', ['token' => $_token]) }}">ovdje</a>.
 

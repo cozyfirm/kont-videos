@@ -125,14 +125,14 @@ div.course-panel {
     font-style: normal;
     // color: rgba(0, 0, 0, .88);;
 
-    color: $color-white;
-    p {
-        color: $color-white;
-
-        padding: 16px 8px;
-        font-size: 14px;
-        letter-spacing: 0.4px;
-    }
+    color: $color-black;
+    //p {
+    //    color: $color-white;
+    //
+    //    padding: 16px 8px;
+    //    font-size: 14px;
+    //    letter-spacing: 0.4px;
+    //}
 
     h1, h2, h3, h4, h5, h6, p, span{
         margin: 0px; padding: 0px !important; color: $color-black !important;
