@@ -80,7 +80,7 @@
                 <a href="{{ route('auth') }}">
                     <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>{{ __('Odjavi se') }}</button>
                 </a>
-                <a href="{{ route('auth.create-account') }}">
+                <a href="{{ route('public.my-profile') }}">
                     <button class="btn-primary">{{ Auth()->user()->name }}</button>
                 </a>
             @else
