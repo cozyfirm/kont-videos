@@ -135,6 +135,14 @@ return [
             'path' => storage_path('logs/mqtt.log'),
             'level' => 'info',
         ],
+        /**
+         *  Cron Logs
+         */
+        'cron' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/cron.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];

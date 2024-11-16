@@ -5,6 +5,7 @@ namespace App\Console\Commands\Videos;
 use App\Models\Episodes\EpisodeVideo;
 use App\Traits\Episodes\EpisodeBaseTrait;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class updateVideoProgress extends Command{
     use EpisodeBaseTrait;
@@ -28,6 +29,8 @@ class updateVideoProgress extends Command{
      */
     public function handle(): void{
         $videos = EpisodeVideo::get();
+        $videosUpdated = 0;
+
         foreach ($videos as $video){
             $info = $this->getVideoInfo($video->library_id, $video->video_id);
 
@@ -42,8 +45,13 @@ class updateVideoProgress extends Command{
                         'average_watch_time' => $info->averageWatchTime,
                         'total_watch_time' => $info->totalWatchTime
                     ]);
-                }catch (\Exception $e){}
+                    $videosUpdated ++;
+                }catch (\Exception $e){
+                    Log::channel('mqtt')->info($e->getMessage());
+                }
             }
         }
+
+        Log::channel('cron')->info("Updated " . ($videosUpdated) . " of total " . $videos->count());
     }
 }
