@@ -105,12 +105,12 @@ $( document ).ready(function() {
                 return;
             }
             if(phone === ''){
-                Notify.Me(["Unesite Vaš broj telefona", "warn"]);
-                return;
+                // Notify.Me(["Unesite Vaš broj telefona", "warn"]);
+                // return;
             }
             if(!Validator.date($("#birth_date").val())) {
-                Notify.Me(["Molimo da odaberete datum Vašeg rođenja. Ispravan format je dd.mm.YYYY ", "warn"]);
-                return;
+                // Notify.Me(["Molimo da odaberete datum Vašeg rođenja. Ispravan format je dd.mm.YYYY ", "warn"]);
+                // return;
             }
             // if($("#gender").val() === ''){
             //     Notify.Me(["Molimo da odaberete Vaš spol", "warn"]);
@@ -118,16 +118,16 @@ $( document ).ready(function() {
             // }
         }else if(step === 2){
             if(address === ''){
-                notify.Me(["Molimo da unesete Vašu adresu stanovanja", "warn"]);
-                return;
+                // Notify.Me(["Molimo da unesete Vašu adresu stanovanja", "warn"]);
+                // return;
             }
             if(city === ''){
-                Notify.Me(["Molimo unesite grad u kojem živite", "warn"]);
-                return;
+                // Notify.Me(["Molimo unesite grad u kojem živite", "warn"]);
+                // return;
             }
             if(country === ''){
-                Notify.Me(["Molimo da odaberete državu u kojoj trenutno živite", "warn"]);
-                return;
+                // Notify.Me(["Molimo da odaberete državu u kojoj trenutno živite", "warn"]);
+                // return;
             }
             // if($("#citizenship").val() === ''){
             //     Notify.Me(["Molimo da odaberete Vaše državljanstvo", "warn"]);

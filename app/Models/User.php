@@ -82,7 +82,7 @@ class User extends Authenticatable{
         return isset($this->cover_photo_uri	) ? $this->cover_photo_uri : '';
     }
     public function birthDate(): string {
-        return Carbon::parse(isset($this->birth_date) ? $this->birth_date : date('Y-m-d'))->format('d.m.Y');
+        return isset($this->birth_date) ? Carbon::parse($this->birth_date)->format('d.m.Y') : "";
     }
     public function countryRel(): HasOne{
         return $this->hasOne(Country::class, 'id', 'country');
