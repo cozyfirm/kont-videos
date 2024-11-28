@@ -221,6 +221,7 @@ class EpisodesController extends Controller{
         $video = EpisodeVideo::where('id', '=', $id)->first();
         $episode = Episode::where('id', '=', $video->episode_id)->first();
 
+        /* ToDo:: Remove notes and activity */
         $video->delete();
         return redirect()->route('system.admin.episodes.preview', ['slug' => $episode->slug]);
     }

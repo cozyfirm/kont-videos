@@ -39,6 +39,11 @@ $(document).ready(function (){
 
         console.log($(this).attr('ref-tag'));
     });
+    /**
+     *  Right side (beyond videos / chapters):
+     *      - More about theme
+     *      - About presenter
+     */
     $(".show-more-about").click(function (){
         $(".inner__element").removeClass('active');
         $(".inner__tab").removeClass('active');
@@ -56,7 +61,43 @@ $(document).ready(function (){
 
     /* -------------------------------------------------------------------------------------------------------------- */
     /*
-     *  Player work
+     * Global functions used for all player data
+     */
+    function scrollToCurrent() {
+        const $wrapper = $('.ew__body');
+        const $currentElement = $wrapper.find('.current');
+
+        if ($currentElement.length) {
+            // Scroll the wrapper so the current element is at the top
+            $wrapper.scrollTop($currentElement.position().top + $wrapper.scrollTop());
+        }
+    }
+    /**
+     * Set up a MutationObserver to watch for changes in the `current` class
+     * @type {HTMLElement}
+     */
+    const wrapper = document.getElementById('ew__body_wrapper');
+    const observer = new MutationObserver(function(mutationsList) {
+        mutationsList.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                scrollToCurrent(); // Call scroll function when class attribute changes
+            }
+        });
+    });
+
+    /**
+     * Observe changes to class attributes within the scrollable wrapper
+     */
+    observer.observe(wrapper, {
+        attributes: true,
+        subtree: true,
+        attributeFilter: ['class']
+    });
+
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     *  Video player for episode with videos
      */
 
     if($("#active-video").length){
@@ -114,16 +155,6 @@ $(document).ready(function (){
                 console.log(counter);
             }
         };
-
-        function scrollToCurrent() {
-            const $wrapper = $('.ew__body');
-            const $currentElement = $wrapper.find('.current');
-
-            if ($currentElement.length) {
-                // Scroll the wrapper so the current element is at the top
-                $wrapper.scrollTop($currentElement.position().top + $wrapper.scrollTop());
-            }
-        }
 
         /**
          *  Play new video, depending on is it clicked or autoloaded
@@ -366,29 +397,12 @@ $(document).ready(function (){
             }
         });
 
-        /**
-         * Set up a MutationObserver to watch for changes in the `current` class
-         * @type {HTMLElement}
-         */
-        const wrapper = document.getElementById('ew__body_wrapper');
-        const observer = new MutationObserver(function(mutationsList) {
-            mutationsList.forEach(mutation => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                    scrollToCurrent(); // Call scroll function when class attribute changes
-                }
-            });
-        });
-
-        /**
-         * Observe changes to class attributes within the scrollable wrapper
-         */
-        observer.observe(wrapper, {
-            attributes: true,
-            subtree: true,
-            attributeFilter: ['class']
-        });
-
         /* On GET request, set initial data */
         handleVideo();
     }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /*
+     *  Video player for episode with chapters
+     */
 });

@@ -92,11 +92,17 @@ class Episode extends Model{
         return $duration;
     }
     /**
-     * Get total duration of Episode (based on video durations)
+     * Get total duration of Episode:
+     *  - based on video durations for type = 1
+     *  - based on single video (chapters) for type = 2
      * @return string
      */
     public function totalDuration(): string{
-        return $this->getDurationHelper($this->durationInSeconds());
+        if(isset($this->type) and $this->type == 0){
+            return $this->getDurationHelper($this->durationInSeconds());
+        }else{
+            return $this->getDurationHelper(isset($this->chapterVideoRel) ? $this->chapterVideoRel->duration_sec : 0);
+        }
     }
 
     /**
