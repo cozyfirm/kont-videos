@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
 
             $table->integer('status')->default(1);
+            $table->integer('type')->default(0);
 
             /* Basically user id */
             $table->integer('presenter_id');

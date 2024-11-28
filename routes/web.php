@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Core\KeywordsController;
 use App\Http\Controllers\Admin\Episodes\EpisodesController;
+use App\Http\Controllers\Admin\Episodes\VideoChaptersController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Other\FAQsController;
 use App\Http\Controllers\Admin\Other\Blog\BlogController as AdminBlogController;
@@ -205,6 +206,9 @@ Route::prefix('system')->group(function () {
             Route::post('/update',                    [EpisodesController::class, 'update'])->name('system.admin.episodes.update');
             Route::get ('/delete/{slug}',             [EpisodesController::class, 'delete'])->name('system.admin.episodes.delete');
 
+            /**
+             *  Videos that have real video content
+             */
             Route::prefix('video-content')->group(function () {
                 Route::get ('/add/{slug}',                    [EpisodesController::class, 'addVideo'])->name('system.admin.episodes.video-content.add');
                 Route::post('/save',                          [EpisodesController::class, 'saveVideo'])->name('system.admin.episodes.video-content.save');
@@ -212,6 +216,26 @@ Route::prefix('system')->group(function () {
                 Route::get ('/edit/{id}',                     [EpisodesController::class, 'editVideo'])->name('system.admin.episodes.video-content.edit');
                 Route::post('/update',                        [EpisodesController::class, 'updateVideo'])->name('system.admin.episodes.video-content.update');
                 Route::get ('/delete/{id}',                   [EpisodesController::class, 'deleteVideo'])->name('system.admin.episodes.video-content.delete');
+            });
+
+            /**
+             *  Videos with artificial chapters
+             */
+            Route::prefix('chapters-video-content')->group(function () {
+                Route::get ('/set/{slug}/{type}',             [VideoChaptersController::class, 'setVideo'])->name('system.admin.episodes.chapters-video-content.set');
+                Route::post('/update',                        [VideoChaptersController::class, 'updateVideo'])->name('system.admin.episodes.chapters-video-content.update');
+
+                /**
+                 *  Chapters CRUD
+                 */
+                Route::prefix('chapters')->group(function () {
+                    Route::get ('/create/{video_id}',             [VideoChaptersController::class, 'create'])->name('system.admin.episodes.chapters-video-content.chapters.create');
+                    Route::post('/save',                          [VideoChaptersController::class, 'save'])->name('system.admin.episodes.chapters-video-content.chapters.save');
+                    Route::get ('/preview/{id}',                  [VideoChaptersController::class, 'preview'])->name('system.admin.episodes.chapters-video-content.chapters.preview');
+                    Route::get ('/edit/{id}',                     [VideoChaptersController::class, 'edit'])->name('system.admin.episodes.chapters-video-content.chapters.edit');
+                    Route::post('/update',                        [VideoChaptersController::class, 'update'])->name('system.admin.episodes.chapters-video-content.chapters.update');
+                    Route::get ('/delete/{id}',                   [VideoChaptersController::class, 'delete'])->name('system.admin.episodes.chapters-video-content.chapters.delete');
+                });
             });
 
             Route::prefix('reviews')->group(function () {

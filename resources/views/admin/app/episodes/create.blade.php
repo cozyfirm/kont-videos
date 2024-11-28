@@ -93,6 +93,15 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group">
+                                {{ html()->label(__('Vrsta epizode'))->for('type')->class('bold') }}
+                                {{ html()->select('type', $types, isset($episode) ? $episode->type : '')->class('form-control form-control-sm mt-1')->required()->disabled(isset($preview)) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 {{ html()->label(__('Detaljan opis'))->for('description')->class('bold') }}
                                 {{ html()->textarea('description')->class('form-control form-control-sm mt-2 textarea-240 summernote')->value(isset($episode) ? $episode->description : '')->isReadonly(isset($preview)) }}
                             </div>

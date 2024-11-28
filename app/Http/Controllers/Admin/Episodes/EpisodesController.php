@@ -43,7 +43,8 @@ class EpisodesController extends Controller{
             'create' => true,
             'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
             'languages' => Keyword::getIt('languages'),
-            'statuses' => Keyword::getItByVal('episode_status')
+            'statuses' => Keyword::getItByVal('episode_status'),
+            'types' => Keyword::getItByVal('episode_type')
         ]);
     }
     public function save(Request $request): RedirectResponse{
@@ -66,6 +67,7 @@ class EpisodesController extends Controller{
                 'short_description' => $request->short_description,
                 'description' => $request->description,
                 'status' => $request->status,
+                'type' => $request->type,
                 'presenter_id' => $request->presenter_id,
                 'image_id' => $image->id,
                 'video_id' => $video->id,
@@ -88,7 +90,8 @@ class EpisodesController extends Controller{
             'episode' => Episode::where('slug', '=', $slug)->first(),
             'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
             'languages' => Keyword::getIt('languages'),
-            'statuses' => Keyword::getItByVal('episode_status')
+            'statuses' => Keyword::getItByVal('episode_status'),
+            'types' => Keyword::getItByVal('episode_type')
         ]);
     }
     public function edit ($slug): View{
@@ -97,7 +100,8 @@ class EpisodesController extends Controller{
             'episode' => Episode::where('slug', '=', $slug)->first(),
             'users' => User::where('role', '=', 'presenter')->pluck('name', 'id'),
             'languages' => Keyword::getIt('languages'),
-            'statuses' => Keyword::getItByVal('episode_status')
+            'statuses' => Keyword::getItByVal('episode_status'),
+            'types' => Keyword::getItByVal('episode_type')
         ]);
     }
     public function update(Request $request): RedirectResponse{
@@ -121,6 +125,7 @@ class EpisodesController extends Controller{
                 'short_description' => $request->short_description,
                 'description' => $request->description,
                 'status' => $request->status,
+                'type' => $request->type,
                 'image_id' => isset($image) ? $image->id : $episode->image_id,
                 'video_id' => isset($video) ? $video->id : $episode->video_id,
                 'language_id' => $request->language_id,

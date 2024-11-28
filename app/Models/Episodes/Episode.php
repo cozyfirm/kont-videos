@@ -71,6 +71,16 @@ class Episode extends Model{
     }
 
     /**
+     *  Episode chapters relationships
+     */
+    public function chapterVideoRel(): HasOne{
+        return $this->hasOne(ChapterVideo::class,'episode_id', 'id')->where('category', '=', '1');
+    }
+    public function chapterTrailerRel(): HasOne{
+        return $this->hasOne(ChapterVideo::class,'episode_id', 'id')->where('category', '=', '2');
+    }
+
+    /**
      * Get duration in seconds (based on video durations)
      * @return int
      */

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 trait CommonTrait{
     protected array $_months = ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Juni', 'Juli', 'August', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'];
     protected static array $_time_arr = [];
+    protected array $_n_arr = [];
     public static function formTimeArr() : array{
         for($i=0; $i<= 23; $i++){
             for($j=0; $j<60; $j+=15){
@@ -41,5 +42,11 @@ trait CommonTrait{
     }
     public function getYear($dateTime): int{
         return Carbon::parse($dateTime)->format('Y');
+    }
+    public function getNValues($start, $n): array{
+        for($i=$start; $i<=$n; $i++){
+            $this->_n_arr[$i] = $i;
+        }
+        return $this->_n_arr;
     }
 }
