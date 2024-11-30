@@ -20,7 +20,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <b>{{ html()->label(__('Ime i prezime'))->for('name')->class('bold') }}</b>
-                                        {{ html()->text('name')->class('form-control form-control-sm mt-1 required')->maxlength(100)->value(Auth::user()->name) }}
+                                        {{ html()->text('name')->class('form-control form-control-sm mt-1')->maxlength(100)->value(Auth::user()->name) }}
                                         <small id="nameHelp" class="form-text text-muted"> {{ __('Vaše puno ime i prezime') }} </small>
                                     </div>
                                 </div>
@@ -29,7 +29,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <b>{{ html()->label(__('Broj telefona'))->for('phone')->class('bold') }}</b>
-                                        {{ html()->text('phone')->class('form-control form-control-sm mt-1 required')->maxlength(13)->value(Auth::user()->phone) }}
+                                        {{ html()->text('phone')->class('form-control form-control-sm mt-1')->maxlength(13)->value(Auth::user()->phone) }}
                                         <small id="prefixHelp" class="form-text text-muted"> {{ __('Unesite Vaš broj telefona') }} </small>
                                     </div>
                                 </div>
