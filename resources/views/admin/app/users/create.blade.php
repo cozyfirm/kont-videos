@@ -7,7 +7,7 @@
     @if(!isset($user))
         <a href="#">{{ __('Unos') }}</a>
     @else
-        <a href="{{ route('system.admin.users.preview', ['username' => $user->username ]) }}">{{ $user->name }}</a>
+        <a href="{{ route('system.admin.users.preview', ['id' => $user->id ]) }}">{{ $user->name }}</a>
     @endif
 @endsection
 
@@ -20,7 +20,7 @@
     </a>
 
     @if(isset($preview))
-        <a href="{{ route('system.admin.users.edit', ['username' => $user->username ]) }}">
+        <a href="{{ route('system.admin.users.edit', ['id' => $user->id ]) }}">
             <button class="pm-btn btn pm-btn-edit">
                 <i class="fas fa-edit"></i>
             </button>

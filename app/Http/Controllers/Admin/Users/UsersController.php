@@ -74,17 +74,17 @@ class UsersController extends Controller{
         }
     }
 
-    public function preview ($username): View{
+    public function preview ($id): View{
         return view($this->_path . 'create', [
             'preview' => true,
-            'user' => User::where('username', '=', $username)->first(),
+            'user' => User::where('id', '=', $id)->first(),
             'countries' => Country::pluck('name_ba', 'id')
         ]);
     }
-    public function edit ($username): View{
+    public function edit ($id): View{
         return view($this->_path . 'create', [
             'edit' => true,
-            'user' => User::where('username', '=', $username)->first(),
+            'user' => User::where('id', '=', $id)->first(),
             'countries' => Country::pluck('name_ba', 'id')
         ]);
     }

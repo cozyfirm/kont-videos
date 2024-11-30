@@ -186,8 +186,8 @@ Route::prefix('system')->group(function () {
             Route::get ('/',                          [UsersController::class, 'index'])->name('system.admin.users');
             Route::get ('/create',                    [UsersController::class, 'create'])->name('system.admin.users.create');
             Route::post('/save',                      [UsersController::class, 'save'])->name('system.admin.users.save');
-            Route::get ('/preview/{username}',        [UsersController::class, 'preview'])->name('system.admin.users.preview');
-            Route::get ('/edit/{username}',           [UsersController::class, 'edit'])->name('system.admin.users.edit');
+            Route::get ('/preview/{id}',              [UsersController::class, 'preview'])->name('system.admin.users.preview');
+            Route::get ('/edit/{id}',                 [UsersController::class, 'edit'])->name('system.admin.users.edit');
             Route::post('/update',                    [UsersController::class, 'update'])->name('system.admin.users.update');
             Route::post('/update-profile-image',      [UsersController::class, 'updateProfileImage'])->name('system.admin.users.update-profile-image');
             Route::post('/update-cover-image',        [UsersController::class, 'updateCoverImage'])->name('system.admin.users.update-cover-image');

@@ -48,7 +48,7 @@
                     <td> {{ $user->countryRel->name_ba ?? ''}} </td>
 
                     <td class="text-center">
-                        <a href="{{route('system.admin.users.preview', ['username' => $user->username] )}}" title="{{ __('Više informacija') }}">
+                        <a href="{{route('system.admin.users.preview', ['id' => $user->id ] )}}" title="{{ __('Više informacija') }}">
                             <button class="btn btn-dark btn-xs">{{ __('Pregled') }}</button>
                         </a>
                     </td>
