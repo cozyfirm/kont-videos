@@ -35,8 +35,6 @@ $(document).ready(function (){
 
         $(this).addClass('active');
         $("." + $(this).attr('ref-tag')).addClass('active');
-
-        console.log($(this).attr('ref-tag'));
     });
     /**
      *  Right side (beyond videos / chapters):
@@ -77,27 +75,29 @@ $(document).ready(function (){
             }
         }
     }
-    /**
-     * Set up a MutationObserver to watch for changes in the `current` class
-     * @type {HTMLElement}
-     */
-    const wrapper = document.getElementById('ew__body_wrapper');
-    const observer = new MutationObserver(function(mutationsList) {
-        mutationsList.forEach(mutation => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                scrollToCurrent(); // Call scroll function when class attribute changes
-            }
+    if($("#active-video").length || $("#chapter-video").length){
+        /**
+         * Set up a MutationObserver to watch for changes in the `current` class
+         * @type {HTMLElement}
+         */
+        const wrapper = document.getElementById('ew__body_wrapper');
+        const observer = new MutationObserver(function(mutationsList) {
+            mutationsList.forEach(mutation => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    scrollToCurrent(); // Call scroll function when class attribute changes
+                }
+            });
         });
-    });
 
-    /**
-     * Observe changes to class attributes within the scrollable wrapper
-     */
-    observer.observe(wrapper, {
-        attributes: true,
-        subtree: true,
-        attributeFilter: ['class']
-    });
+        /**
+         * Observe changes to class attributes within the scrollable wrapper
+         */
+        observer.observe(wrapper, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class']
+        });
+    }
 
     /**
      * Round to 2 decimal points

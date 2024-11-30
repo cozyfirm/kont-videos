@@ -35,35 +35,37 @@
 
     <div class="single__reviews">
         @foreach($episode->approvedReviewsRel as $review)
-            <div class="single__review">
-                <div class="user__info">
-                    <div class="ui__img_w">
-                        @if(isset($review->userRel->photo_uri))
-                            <img src="{{ asset('files/images/public-part/users/' . ($review->userRel->photo_uri)) }}" alt="">
-                        @else
-                            <h2>{{ $review->userRel->getInitials() }}</h2>
-                        @endif
-                    </div>
-                    <div class="ui__info">
-                        <h2>{{ $review->userRel->name ?? '' }}</h2>
-                        <p>{{ __('Ukupno ocjena: ') }} {{ $review->userRel->totalReviews() }}</p>
-                    </div>
-                </div>
-                <div class="review__info">
-                    <div class="stars__and__date">
-                        <div class="stars">
-                            @include('public-part.app.shared.common.stars', ['stars' => $review->stars])
+            @isset($review->userRel->name)
+                <div class="single__review">
+                    <div class="user__info">
+                        <div class="ui__img_w">
+                            @if(isset($review->userRel->photo_uri))
+                                <img src="{{ asset('files/images/public-part/users/' . ($review->userRel->photo_uri)) }}" alt="">
+                            @else
+                                <h2>{{ $review->userRel->getInitials() }}</h2>
+                            @endif
                         </div>
-                        <div class="date">
-                            <p>{{ $review->createdAt() }}h</p>
+                        <div class="ui__info">
+                            <h2>{{ $review->userRel->name ?? '' }}</h2>
+                            <p>{{ __('Ukupno ocjena: ') }} {{ $review->userRel->totalReviews() }}</p>
                         </div>
                     </div>
+                    <div class="review__info">
+                        <div class="stars__and__date">
+                            <div class="stars">
+                                @include('public-part.app.shared.common.stars', ['stars' => $review->stars])
+                            </div>
+                            <div class="date">
+                                <p>{{ $review->createdAt() }}h</p>
+                            </div>
+                        </div>
 
-                    <div class="note">
-                        <p>{!! nl2br($review->note ?? '') !!}</p>
+                        <div class="note">
+                            <p>{!! nl2br($review->note ?? '') !!}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endisset
         @endforeach
     </div>
 </div>

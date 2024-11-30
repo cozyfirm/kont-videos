@@ -42,7 +42,7 @@
                     @endif
                 @endisset
                 <a href="{{ route('public.my-profile') }}" title="{{ __('Moj profil') }}">
-                    <button class="btn-primary">{{ Auth()->user()->name }}</button>
+                    <button class="btn-primary">{{ __('Moj profil') }}</button>
                 </a>
                 <a href="{{ route('auth.logout') }}" title="{{ __('Odjavi se') }}">
                     <button class="btn-primary btn-tertiary-color"><i class="fi fi-bs-sign-out-alt"></i></button>
@@ -85,7 +85,7 @@
                     <button target class="btn-secondary"><i class="fi fi-bs-sign-in-alt"></i>{{ __('Odjavi se') }}</button>
                 </a>
                 <a href="{{ route('public.my-profile') }}">
-                    <button class="btn-primary">{{ Auth()->user()->name }}</button>
+                    <button class="btn-primary">{{ __('Moj profil') }}</button>
                 </a>
             @else
                 <a href="{{ route('auth') }}">

@@ -236,7 +236,7 @@ class EpisodesController extends Controller{
 
         $filters = [
             'episodeRel.title' => __('Epizoda'),
-            'userRel.name' => __('Korisnik'),
+            'userRel.email' => __('Korisnik'),
             'stars' => __('Ocjena'),
             'note' => __('Poruka'),
             'statusRel.name' => __('Status')

@@ -33,7 +33,7 @@
                 <tr>
                     <td class="text-center">{{ $i++}}</td>
                     <td> {{ $review->episodeRel->title ?? ''}} </td>
-                    <td> {{ $review->userRel->name ?? ''}} </td>
+                    <td> {{ $review->userRel->email ?? ''}} </td>
                     <td> {{ $review->stars ?? ''}} </td>
                     <td> {{ $review->note ?? ''}} </td>
                     <td> {{ $review->statusRel->name ?? '' }} </td>
