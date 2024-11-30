@@ -110,7 +110,8 @@ class Episode extends Model{
      * @return int
      */
     public function totalViews(): int{
-        return EpisodeVideo::where('episode_id', '=', $this->id)->sum('total_loads');
+        if($this->type == 0) return EpisodeVideo::where('episode_id', '=', $this->id)->sum('total_loads');
+        else return ChapterVideo::where('episode_id', '=', $this->id)->sum('total_loads');
     }
 
     /**

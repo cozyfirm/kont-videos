@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PublicPart\Episodes;
 
 use App\Http\Controllers\Controller;
+use App\Models\Episodes\Chapter;
 use App\Models\Episodes\EpisodeVideo;
 use App\Models\Episodes\MyNote;
 use App\Traits\Episodes\EpisodeBaseTrait;
@@ -22,24 +23,42 @@ class NotesController extends Controller{
      */
     public function save(Request $request): JsonResponse | string | bool{
         try{
-            $note = MyNote::where('video_id', '=', $request->video_id)->where('user_id', '=', Auth::user()->id)->where('time', '=', $request->time)->first();
-            if($note){
-                $note->update(['note' => $request->note]);
+            if(isset($request->chapter_id)){
+                /* Note on chapter */
+                $note = MyNote::where('video_id', '=', $request->video_id)->where('chapter_id', '=', $request->chapter_id)->where('user_id', '=', Auth::user()->id)->where('time', '=', $request->time)->first();
+                if($note){
+                    $note->update(['note' => $request->note]);
+                }else{
+                    $note = MyNote::create([
+                        'episode_id' => $request->episode_id,
+                        'video_id' => $request->video_id,
+                        'chapter_id' => $request->chapter_id,
+                        'user_id' => Auth::user()->id,
+                        'time' => $request->time,
+                        'note' => $request->note
+                    ]);;
+                }
             }else{
-                $note = MyNote::create([
-                    'episode_id' => $request->episode_id,
-                    'video_id' => $request->video_id,
-                    'user_id' => Auth::user()->id,
-                    'time' => $request->time,
-                    'note' => $request->note
-                ]);;
+                /* Note on real video */
+                $note = MyNote::where('video_id', '=', $request->video_id)->where('user_id', '=', Auth::user()->id)->where('time', '=', $request->time)->first();
+                if($note){
+                    $note->update(['note' => $request->note]);
+                }else{
+                    $note = MyNote::create([
+                        'episode_id' => $request->episode_id,
+                        'video_id' => $request->video_id,
+                        'user_id' => Auth::user()->id,
+                        'time' => $request->time,
+                        'note' => $request->note
+                    ]);;
+                }
             }
 
             $note->createdAtDate = $note->createdAtDate();
 
             return $this->jsonResponse('0000', __('Uspješno sačuvano!'), [
                 'note' => $note,
-                'video' => EpisodeVideo::where('id', '=', $request->video_id)->first()
+                'video' => isset($request->chapter_id) ? Chapter::where('id', '=', $request->chapter_id)->first() : EpisodeVideo::where('id', '=', $request->video_id)->first()
             ]);
         }catch (\Exception $e){
             return $this->jsonError('0001', __('Desila se greška. Pokušajte ponovo!'));
@@ -62,7 +81,7 @@ class NotesController extends Controller{
 
             return $this->jsonResponse('0000', __('Uspješno sačuvano!'), [
                 'note' => $note,
-                'video' => EpisodeVideo::where('id', '=', $note->video_id)->first()
+                'video' => isset($note->chapter_id) ? Chapter::where('id', '=', $note->chapter_id)->first() : EpisodeVideo::where('id', '=', $note->video_id)->first()
             ]);
         }catch (\Exception $e){
             return $this->jsonError('0001', __('Desila se greška. Pokušajte ponovo!'));

@@ -99,6 +99,23 @@ $(document).ready(function (){
         attributeFilter: ['class']
     });
 
+    /**
+     * Round to 2 decimal points
+     * */
+    function str_pad_left(string, pad, length) {
+        return (new Array(length + 1).join(pad) + string).slice(-length);
+    }
+
+    /**
+     * Get time in minutes and seconds
+     * @param time
+     * @returns {string}
+     */
+    let getMinutesAndSeconds = function (time){
+        const minutes = Math.floor(time / 60);
+        const seconds = time - minutes * 60;
+        return str_pad_left(minutes, '0', 2) + ':' + str_pad_left(seconds, '0', 2);
+    }
 
     /* -------------------------------------------------------------------------------------------------------------- */
     /*
@@ -126,16 +143,6 @@ $(document).ready(function (){
         /* Episodes at right side */
         let videosWrapper = $(".ew__body");
         let currentVideo = videosWrapper.find('.current');
-
-        /* Round to 2 decimal points */
-        function str_pad_left(string, pad, length) {
-            return (new Array(length + 1).join(pad) + string).slice(-length);
-        }
-        let getMinutesAndSeconds = function (time){
-            const minutes = Math.floor(currentTime / 60);
-            const seconds = currentTime - minutes * 60;
-            return str_pad_left(minutes, '0', 2) + ':' + str_pad_left(seconds, '0', 2);
-        }
 
         /**
          * Start new video with time Delay
@@ -429,6 +436,11 @@ $(document).ready(function (){
         let setChapterAsCurrent = function (chapterID){
             $(".se__wrapper").removeClass('current');
             $(".se__wrapper[chapter-id='" + chapterID +"']").addClass('current');
+
+            /**
+             *  Set chapter ID for notes
+             */
+            $(".add__new_note").attr('chapter-id', chapterID);
         }
 
         let handleChapterVideo = function (){
@@ -450,7 +462,7 @@ $(document).ready(function (){
                     chapterVideoPlayer.setCurrentTime(currentTime);
 
                     /* Set my note starts at... */
-                    // $(".note__time").text(getMinutesAndSeconds(currentTime));
+                    $(".note__time").text(getMinutesAndSeconds(currentTime));
                 }, 200); // Adjust delay if necessary
             });
 
@@ -471,7 +483,7 @@ $(document).ready(function (){
                     }
 
                     /* Set my note starts at .. */
-                    // $(".note__time").text(getMinutesAndSeconds(ChapterCurrentTime));
+                    $(".note__time").text(getMinutesAndSeconds(chapterCurrentTime));
 
                     $.ajax({
                         url: updateChapterActivityUri,

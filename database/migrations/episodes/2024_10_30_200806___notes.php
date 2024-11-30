@@ -19,11 +19,10 @@ return new class extends Migration
                 ->references('id')
                 ->on('episodes')
                 ->onDelete('cascade');
+
             $table->unsignedBigInteger('video_id');
-            $table->foreign('video_id')
-                ->references('id')
-                ->on('episodes__videos')
-                ->onDelete('cascade');
+            $table->unsignedBigInteger('chapter_id');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')

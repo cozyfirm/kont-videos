@@ -2,7 +2,7 @@
     <div class="edit__note">
         <div class="en__header">
             <div class="time__badge">
-                <p class="edit__note_time_badge">03:15</p>
+                <p class="edit__note_time_badge">00:00</p>
             </div>
             <img src="{{ asset('files/images/default/icons/cross-small.svg') }}" alt="">
         </div>

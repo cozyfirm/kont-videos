@@ -31,7 +31,8 @@ $(document).ready(function (){
                 time: $(".note__time").text(),
                 note: $("#new_note").val(),
                 episode_id: noteWrapper.attr('episode-id'),
-                video_id: noteWrapper.attr('video-id')
+                video_id: noteWrapper.attr('video-id'),
+                chapter_id: noteWrapper.attr('chapter-id')
             },
             success: function success(response) {
                 let code = response['code'];

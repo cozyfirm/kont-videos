@@ -25,4 +25,7 @@ class MyNote extends Model{
     public function videoRel(): HasOne{
         return $this->hasOne(EpisodeVideo::class, 'id', 'video_id');
     }
+    public function chapterRel(): HasOne{
+        return $this->hasOne(Chapter::class, 'id', 'chapter_id');
+    }
 }

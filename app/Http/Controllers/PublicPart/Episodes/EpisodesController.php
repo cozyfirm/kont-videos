@@ -81,6 +81,8 @@ class EpisodesController extends Controller{
                 ->where('category', '=', 1)
                 ->first();
 
+            $video->update(['total_loads' => ($video->total_loads + 1)]);
+
             if(!$video) abort(404);
 
             $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('updated_at', 'DESC')->first();

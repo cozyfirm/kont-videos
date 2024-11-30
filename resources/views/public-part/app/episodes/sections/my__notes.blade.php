@@ -1,10 +1,10 @@
 <div class="inner__element my__notes">
     <div class="add__note___wrapper">
         <!-- ToDo:: On change video, replace this video ID -->
-        <div class="add__new_note" video-id="{{ $video->id }}" episode-id="{{ $episode->id }}">
+        <div class="add__new_note" video-id="{{ $video->id }}" episode-id="{{ $episode->id }}" chapter-id="{{ $activity->chapter_id ?? '' }}">
             <div class="add__new__note_text">
                 <p>{{ __('Dodaj novu zabilješku u ') }} </p>
-                <p class="note__time"> 03:12 </p>
+                <p class="note__time"> 00:00 </p>
             </div>
             <div class="add__new__note_icon">
                 <svg id="Layer_1" height="32"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,13 @@
                     </div>
                 </div>
                 <div class="note__body">
-                    <h2> {{ $note->videoRel->title ?? '' }} </h2>
+                    <h2>
+                        @if($episode->type == 0)
+                            {{ $note->videoRel->title ?? '' }}
+                        @else
+                        {{ $note->chapterRel->title ?? '' }}
+                        @endif
+                    </h2>
                     <p class="note__body__value"> {{ $note->note ?? '' }} </p>
                 </div>
                 <div class="note__footer">
