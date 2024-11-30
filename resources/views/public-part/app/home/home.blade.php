@@ -10,8 +10,8 @@
         <div class="hero-bunner">
             <div class="hero-bunner-content">
                 <div class="hero-bunner-content-left">
-                    <h1>{{ __('KONT masterclass video predavanja') }}</h1>
-                    <p>{{ __('Istražite uzbudljive teme od mode i muzike do ekonomije i ratne analitike. Registrujte se gledajte predavanja vodećih stručnjaka!') }}</p>
+                    <h1>{{ __('KONT - prva regionalna masterclass platforma') }}</h1>
+                    <p>{{ __('Istražite uzbudljive teme od mode i muzike do ekonomije i ratne analitike. Registrujte se besplatno i gledajte predavanja vodećih stručnjaka!') }}</p>
                     <div class="hero-bunner-left">
                         @if(!Auth()->check())
                             <div class="hero-action-btns">

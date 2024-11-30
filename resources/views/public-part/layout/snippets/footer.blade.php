@@ -41,11 +41,11 @@
             </div>
         </div>
         <div class="social">
-            <a href="#"><i class="fi fi-brands-twitter-alt-circle"></i></a>
-            <a href="#"> <i class="fi fi-brands-facebook"></i></a>
-            <a href="#"><i class="fi fi-brands-instagram"></i></a>
-            <a href="#"><i class="fi fi-brands-tik-tok"> </i></a>
-            <a href="#"><i class="fi fi-brands-youtube"></i></a>
+            <a href="https://x.com/KONTMasterclass"><i class="fi fi-brands-twitter-alt-circle"></i></a>
+            <a href="https://www.facebook.com/people/KONT-Masterclass/61569370957608/"> <i class="fi fi-brands-facebook"></i></a>
+            <a href="https://www.instagram.com/kont.masterclass/?igsh=bjd1NGFjZGkzOGMw&utm_source=qr#"><i class="fi fi-brands-instagram"></i></a>
+            <a href="https://www.tiktok.com/@kont.masterclass?_t=8rkRtVDhgJT&_r=1"><i class="fi fi-brands-tik-tok"> </i></a>
+            <a href="https://www.youtube.com/@KONT_Masterclass/videos"><i class="fi fi-brands-youtube"></i></a>
         </div>
         <div class="copy">
             <p>
