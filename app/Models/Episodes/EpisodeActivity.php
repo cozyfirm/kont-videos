@@ -16,6 +16,9 @@ class EpisodeActivity extends Model{
     protected $table = 'episodes__activity';
     protected $guarded = ['id'];
 
+    public function episodeRel(): HasOne{
+        return $this->hasOne(Episode::class, 'id', 'episode_id');
+    }
     public function chapterRel(): HasOne{
         return $this->hasOne(Chapter::class, 'id', 'chapter_id');
     }

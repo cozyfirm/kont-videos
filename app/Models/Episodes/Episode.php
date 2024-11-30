@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static get()
  * @method static orderBy(string $string, string $string1)
  * @method static find(mixed $id)
+ * @method static whereHas(string $string, \Closure $param)
  * @property mixed $stars
  * @property mixed $videoContentRel
  */
@@ -86,8 +87,12 @@ class Episode extends Model{
      */
     public function durationInSeconds(): int{
         $duration = 0;
-        foreach ($this->videoContentRel as $video){
-            $duration += $video->duration_sec;
+        if($this->type == 0){
+            foreach ($this->videoContentRel as $video){
+                $duration += $video->duration_sec;
+            }
+        }else{
+            $duration = $this->chapterVideoRel->duration_sec ?? 0;
         }
         return $duration;
     }

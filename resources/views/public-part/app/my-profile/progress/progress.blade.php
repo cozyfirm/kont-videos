@@ -8,12 +8,12 @@
         <div class="profile__wrapper profile__wrapper_wrap">
             <div class="last__watched">
                 <div class="episode__image">
-                    <img src="{{ asset($lastWatched->episodeRel->imageRel->getFile()) }}" class="episode-img">
+                    <img src="{{ asset($lastActivity->episodeRel->imageRel->getFile()) }}" class="episode-img">
                 </div>
                 <div class="episode__details">
                     <div class="text__wrapper">
                         <div class="mp-width-100 episode__title">
-                            <h1>{{ $lastWatched->episodeRel->title ?? '' }}</h1>
+                            <h1>{{ $lastActivity->episodeRel->title ?? '' }}</h1>
                         </div>
                         <div class="mp-width-100">
                             <button class="btn-primary">{{ __('POSLJEDNJE GLEDANO') }}</button>
@@ -22,7 +22,7 @@
                             <h2>{{ $lastWatched->title ?? '' }}</h2>
                         </div>
                         <div class="mp-width-100 description">
-                            {!! nl2br(substr(($lastWatched->episodeRel->description ?? ''), 0 , 560)) !!} ...
+                            {!! nl2br(substr(($lastActivity->episodeRel->description ?? ''), 0 , 560)) !!} ...
                         </div>
 {{--                        <div class="mp-width-100 tags">--}}
 {{--                            <button class="btn-dark-grey">{{ __('Moda') }}</button>--}}
@@ -31,18 +31,18 @@
 {{--                        </div>--}}
                         <div class="mp-width-100 details">
                             <div class="details__inner">
-                                <p>{{ EpisodeHelper::getNumberOfChapters($lastWatched->episodeRel->totalChapters()) }}</p>
+                                <p>{{ EpisodeHelper::getNumberOfChapters($lastActivity->episodeRel->totalChapters()) }}</p>
                                 <span>|</span>
-                                <p>{{ $lastWatched->episodeRel->getCreationYear() }}</p>
+                                <p>{{ $lastActivity->episodeRel->getCreationYear() }}</p>
                                 <span>|</span>
                                 <div class="icon_btn">
                                     <i class="fi fi-bs-clock"></i>
-                                    <p>{{ $lastWatched->episodeRel->totalDuration() }}</p>
+                                    <p>{{ $lastActivity->episodeRel->totalDuration() }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="mp-width-100 more-info">
-                            <a href="{{ route('public.episodes.preview', ['slug' => $lastWatched->episodeRel->slug]) }}">
+                            <a href="{{ route('public.episodes.preview', ['slug' => $lastActivity->episodeRel->slug]) }}">
                                 {{ __('Nazad na video') }}
                                 <i class="fi fi-br-arrow-small-right"></i>
                             </a>
