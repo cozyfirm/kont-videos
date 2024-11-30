@@ -203,6 +203,11 @@ class EpisodesController extends Controller{
         }
     }
 
+    /**
+     * On every second, update chapter activity ...
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function updateChapterActivity(Request $request): JsonResponse{
         try{
             /* Offer questionnaire */
@@ -344,21 +349,42 @@ class EpisodesController extends Controller{
             if(isset($request->id)){
                 $fullStar = 1; $halfStar = 0;
 
-                $episode = Episode::where('id', '=', $request->id)->with('videoContentRel:id,episode_id,title,description,library_id,video_id,thumbnail,category,duration_sec', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description', 'status', 'stars']);
-                foreach ($episode->videoContentRel as $content){
-                    if($content->category != 2){
-                        $content->img = $this->getThumbnailUri($content->video_id, $content->thumbnail);
-                        $content->duration = $content->getDuration();
+                $episode = Episode::where('id', '=', $request->id)->first();
+                if($episode->type == 0){
+                    /* Episode with videos */
+                    $episode = Episode::where('id', '=', $request->id)->with('videoContentRel:id,episode_id,title,description,library_id,video_id,thumbnail,category,duration_sec', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description', 'status', 'type', 'stars']);
+                    foreach ($episode->videoContentRel as $content){
+                        if($content->category != 2){
+                            $content->img = $this->getThumbnailUri($content->video_id, $content->thumbnail);
+                            $content->duration = $content->getDuration();
+                        }
+                    }
+                }else{
+                    /* Episode with chapters */
+                    $episode = Episode::where('id', '=', $request->id)->with('chapterVideoRel.chaptersRel', 'presenterRel:id,name')->first(['id', 'presenter_id', 'slug', 'title', 'description', 'status', 'type', 'stars']);
+                    foreach($episode->chapterVideoRel->chaptersRel as $chapter){
+                        $chapter->img = $this->getThumbnailUri($episode->chapterVideoRel->video_id, $episode->chapterVideoRel->thumbnail);
+                        $chapter->duration = $chapter->getDuration();
                     }
                 }
+
                 $episode->duration = $episode->totalDuration();
 
                 /* Get stars info */
                 // $this->getReviewsInfo($starIndex, $index, $episode->stars);
                 ReviewHelper::getRawData($episode->stars ?? '1', $fullStar, $halfStar);
 
-                $trailer = EpisodeVideo::where('episode_id', '=', $episode->id)->where('category', '=', 2)->first(['id', 'title', 'library_id', 'video_id', 'thumbnail']);
-                $trailer->uri = $trailer->getIframeUri($trailer->library_id, $trailer->video_id);
+                if($episode->type == 0){
+                    /* Episode with videos */
+                    $trailer = EpisodeVideo::where('episode_id', '=', $episode->id)->where('category', '=', 2)->first(['id', 'title', 'library_id', 'video_id', 'thumbnail']);
+                    $trailer->uri = $trailer->getIframeUri($trailer->library_id, $trailer->video_id);
+
+                }else{
+                    /* Episode with chapters */
+                    $trailer = ChapterVideo::where('episode_id', '=', $episode->id)->where('category', '=', 2)->first();
+                    $trailer->title = "Trailer";
+                    $trailer->uri = $trailer->getIframeUri($trailer->library_id, $trailer->video_id);
+                }
 
                 return $this->apiResponse('0000', __('Success'), [
                     'episode' => $episode,
