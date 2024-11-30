@@ -148,13 +148,13 @@
                                 font-size:12px; margin:0px; padding:0px;
                             }
                         }
-                        .play_w{
+                        .play_btn_w{
                             position: relative; background: $color-primary; padding: 3px 12px; border-radius:3px; opacity: 0; transition: 0.75s all;
                             span{
                                 color: $color-white; font-size:12px; margin:0px; padding:0px;
                             }
                         }
-                        .play_w:hover{cursor:pointer;}
+                        .play_btn_w:hover{cursor:pointer;}
                     }
                 }
             }
@@ -162,7 +162,7 @@
                 background: #d1d7dc;
                 .se__w__data{
                     .rest__of_data{
-                        .play_w{opacity: 1;}
+                        .play_btn_w{opacity: 1;}
                     }
                 }
             }

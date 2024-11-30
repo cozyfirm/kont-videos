@@ -88,6 +88,30 @@ class VideoChaptersController extends Controller{
      *  Real chapters CRUD
      */
 
+    /**
+     * Update end time of chapter, according to start of next chapter or if it's last, duration of main video
+     *
+     * @param $video_id
+     * @return void
+     */
+    public function updateEndTime($video_id): void{
+        $chapters = Chapter::where('video_id', '=', $video_id)->orderBy('id')->get();
+
+        $order = 1;
+        foreach ($chapters as $chapter){
+            $nextChapter = Chapter::where('id', '>', $chapter->id)->orderBy('id')->first();
+
+            if($nextChapter){
+                $chapter->update(['time_end' => ($nextChapter->time - 1), 'no' => $order++, 'last' => false]);
+            }else{
+                $video = ChapterVideo::where('id', '=', $chapter->video_id)->first();
+                if($video){
+                    $chapter->update(['time_end' => $video->duration_sec, 'no' => $order++, 'last' => true]);
+                }
+            }
+        }
+    }
+
     public function create($videoId): View{
         $chapterVideo = ChapterVideo::where('id', '=', $videoId)->first();
         $episode = Episode::where('id', '=', $chapterVideo->episode_id)->first();
@@ -104,6 +128,8 @@ class VideoChaptersController extends Controller{
         try{
             $request['time'] = ($request->hour * 3600) + ($request->min * 60) + $request->sec;
             $chapter = Chapter::create($request->except(['_token', 'undefined', 'files']));
+
+            if(isset($request->video_id)) $this->updateEndTime($request->video_id);
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.episodes.chapters-video-content.chapters.preview', ['id' => $chapter->id]));
         }catch (\Exception $e){}
@@ -133,6 +159,8 @@ class VideoChaptersController extends Controller{
         try{
             $request['time'] = ($request->hour * 3600) + ($request->min * 60) + $request->sec;
             Chapter::where('id', '=', $request->id)->update($request->except(['_token', 'undefined', 'files', 'id', 'episode_id']));
+
+            if(isset($request->video_id)) $this->updateEndTime($request->video_id);
 
             return $this->jsonSuccess(__('Uspješno ste ažurirali podatke!'), route('system.admin.episodes.chapters-video-content.chapters.preview', ['id' => $request->id]));
         }catch (\Exception $e){}

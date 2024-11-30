@@ -1,7 +1,6 @@
 import {Notify} from "../../../style/layout/notify.ts";
 
 $(document).ready(function (){
-
     /**
      *  Toggle full screen and normal screen mode
      */
@@ -63,13 +62,19 @@ $(document).ready(function (){
     /*
      * Global functions used for all player data
      */
+    let autoScrollEnabled = false;
+
     function scrollToCurrent() {
         const $wrapper = $('.ew__body');
         const $currentElement = $wrapper.find('.current');
 
         if ($currentElement.length) {
             // Scroll the wrapper so the current element is at the top
-            $wrapper.scrollTop($currentElement.position().top + $wrapper.scrollTop());
+            if(autoScrollEnabled) {
+                $wrapper.scrollTop($currentElement.position().top + $wrapper.scrollTop());
+
+                autoScrollEnabled = false;
+            }
         }
     }
     /**
@@ -102,6 +107,7 @@ $(document).ready(function (){
 
     if($("#active-video").length){
         /* We are currently at active player */
+        console.log("Episode with video sections!")
 
         let player;
         let currentVideoID = $("#active-video").attr('video-id'); let mainDataResponse = null;
@@ -405,4 +411,132 @@ $(document).ready(function (){
     /*
      *  Video player for episode with chapters
      */
+    if($("#chapter-video").length){
+        console.log("Episode with chapters!")
+
+        let chapterVideoPlayer;
+        let currentVideoID = $("#chapter-video").attr('video-id');
+        let chapterCurrentTime = 0, chapterFinishedVideo = false;
+        let currentChapterID = 0, lastChapterID = 0;
+
+        let updateChapterActivityUri = '/episodes/activity/update-chapter-activity';
+
+        let currentChapter = function (){
+            return $(".ew__body").find('.current').attr('chapter-id');
+        }
+        let markCurrentAsFinished = function (){ return $(".ew__body").find('.current').find('.checkbox_w').addClass('checked'); }
+        let markCurrentAsWatching = function (){ return $(".ew__body").find('.current').find('.checkbox_w').removeClass('checked'); }
+        let setChapterAsCurrent = function (chapterID){
+            $(".se__wrapper").removeClass('current');
+            $(".se__wrapper[chapter-id='" + chapterID +"']").addClass('current');
+        }
+
+        let handleChapterVideo = function (){
+            let videoWrapper = $("#chapter-video");
+            currentVideoID = videoWrapper.attr('video-id');
+
+            /* Set wrapper as not finished */
+            // videoWrapper.attr('finished', 0);
+
+            chapterVideoPlayer = new playerjs.Player(document.getElementById("chapter-video"));
+
+            chapterVideoPlayer.on('ready', () => {
+                /* Scroll to top */
+                scrollToCurrent();
+
+                /* Initial load */
+                const currentTime = parseFloat($("#chapter-video").attr('current-time'));
+                setTimeout(() => {
+                    chapterVideoPlayer.setCurrentTime(currentTime);
+
+                    /* Set my note starts at... */
+                    // $(".note__time").text(getMinutesAndSeconds(currentTime));
+                }, 200); // Adjust delay if necessary
+            });
+
+
+            // Event handler when time is updated
+            chapterVideoPlayer.on('timeupdate', (data) => {
+                /* Update every second, not more often */
+                if(chapterCurrentTime !== parseInt(data['seconds'])){
+                    chapterCurrentTime = parseInt(data['seconds']);
+
+                    videoWrapper.attr('current-time', parseInt(data['seconds']));
+
+                    if(chapterCurrentTime === parseInt(data['duration'])){
+                        /* End of the video, go to another video */
+                        chapterFinishedVideo = true;
+                    }else{
+                        chapterFinishedVideo = false;
+                    }
+
+                    /* Set my note starts at .. */
+                    // $(".note__time").text(getMinutesAndSeconds(ChapterCurrentTime));
+
+                    $.ajax({
+                        url: updateChapterActivityUri,
+                        method: "POST",
+                        dataType: "json",
+                        data: {
+                            time : chapterCurrentTime,
+                            duration: parseInt(data['duration']),
+                            // finished: finishedVideo,
+                            video_id: videoWrapper.attr('video-id'),
+                            episode_id: videoWrapper.attr('episode-id'),
+                            current_chapter: currentChapter()
+                        },
+                        success: function success(response) {
+                            let code = response['code'];
+
+                            if(code === '0000'){
+                                let data = response['data'];
+
+                                console.log(data);
+
+                                if(parseInt(data['progress']) === 100){
+                                    /* Mark current chapter as finished */
+                                    markCurrentAsFinished();
+                                }
+
+                                currentChapterID = data['currentChapter']['id'];
+                                if(lastChapterID !== currentChapterID){
+                                    /* Auto scroll when new chapter is started */
+                                    lastChapterID = currentChapterID;
+                                    autoScrollEnabled = true;
+                                }
+
+                                setChapterAsCurrent(data['currentChapter']['id']);
+                                // if(data['episodeFinished'] === true){
+                                //     finishEpisode();
+                                //
+                                //     /**
+                                //      *  When episode is finished, and in a case when user did not complete survey, offer it a questionnaire
+                                //      */
+                                //     if(data['offerQuestionnaire'] === true){
+                                //         $(".questionnaire__wrapper").addClass('d-flex');
+                                //     }
+                                // }
+                            }else{
+                                Notify.Me([response['message'], "warn"]);
+                            }
+                        }
+                    });
+                }
+            });
+        };
+
+        /**
+         *  Start new chapter on play btn
+         */
+        $(".play_chapter").click(function (){
+            setChapterAsCurrent($(this).attr('chapter-id'));
+            markCurrentAsWatching();
+
+            chapterVideoPlayer.setCurrentTime(parseFloat($(this).attr('time')));
+            chapterVideoPlayer.play();
+        });
+
+        /* On GET request, set initial data */
+        handleChapterVideo();
+    }
 });

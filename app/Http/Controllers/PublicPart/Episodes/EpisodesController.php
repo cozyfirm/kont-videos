@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PublicPart\Episodes;
 
 use App\Http\Controllers\Controller;
+use App\Models\Episodes\Chapter;
 use App\Models\Episodes\ChapterVideo;
 use App\Models\Episodes\Episode;
 use App\Models\Episodes\EpisodeActivity;
@@ -80,7 +81,25 @@ class EpisodesController extends Controller{
                 ->where('category', '=', 1)
                 ->first();
 
+            if(!$video) abort(404);
 
+            $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('updated_at', 'DESC')->first();
+            $chapter  = Chapter::where('id', '=', $activity->chapter_id)->orderBy('id')->first();
+
+            if(!$activity){
+                /* Let's find first chapter */
+                $chapter = Chapter::where('video_id', '=', $video->id)->orderBy('id')->first();
+                if(!$chapter) abort(404);
+
+                $activity = EpisodeActivity::create([
+                    'user_id' => Auth::user()->id,
+                    'episode_id' => $episode->id,
+                    'video_id' => $video->id,
+                    'chapter_id' => $chapter->id
+                ]);
+            }
+
+            $video->starts_at = $activity->time + $chapter->time;
         }
 
         return view($this->_path . 'preview', [
@@ -90,7 +109,8 @@ class EpisodesController extends Controller{
             'previewEpisode' => true,
             'reviewsByNumber' => $this->getEpisodeReviewsByNumber($episode->id),
             'otherEpisodes' => Episode::where('id', '!=', $episode->id)->inRandomOrder()->take(4)->get(),
-            'questions' => Questionnaire::get()
+            'questions' => Questionnaire::get(),
+            'activity' => $activity ?? null
         ]);
     }
 
@@ -173,6 +193,69 @@ class EpisodesController extends Controller{
             return $this->apiResponse('0000', __('Success'), [
                 'progress' => $progress,
                 'nextVideo' => $nextVideo,
+                'episodeFinished' => $episodeFinished,
+                'offerQuestionnaire' => $offerQuestionnaire
+            ]);
+        }catch (\Exception $e){
+            return $this->jsonError('0001', __('Greška. Molimo kontaktirajte administratore!'));
+        }
+    }
+
+    public function updateChapterActivity(Request $request): JsonResponse{
+        try{
+            /* Offer questionnaire */
+            $offerQuestionnaire = false;
+            /* Check if episode is finished */
+            $episodeFinished = false;
+
+            /* Let's first find the current chapter */
+            $chapter = Chapter::where('video_id', '=', $request->video_id)
+                ->where('time', '<=', $request->time)->where('time_end', '>=', $request->time)
+                ->first();
+
+            $activity = EpisodeActivity::where('episode_id', '=', $request->episode_id)
+                ->where('video_id', '=', $request->video_id)
+                ->where('chapter_id', '=', $chapter->id)
+                ->where('user_id', '=', Auth::user()->id)
+                ->first();
+
+            /* Select time from beginning of chapter */
+            $chapterTime = $request->time - $chapter->time;
+            /* Duration of chapter, according to start and end time */
+            $chapterDuration = $chapter->time_end - $chapter->time;
+            /* Progress of chapter */
+            $progress = (int) (($chapterTime / $chapterDuration) * 100);
+            /* Check if chapter is finished */
+            $finished = ($request->time >= ($chapter->time_end));
+
+            if($activity){
+                $activity->update([
+                    'time' => $chapterTime,
+                    'progress' => $progress,
+                    'finished' => $finished
+                ]);
+            }else{
+                EpisodeActivity::create([
+                    'user_id' => Auth::user()->id,
+                    'episode_id' => $request->episode_id,
+                    'video_id' => $request->video_id,
+                    'chapter_id' => $chapter->id
+                ]);
+            }
+
+            /**
+             *  When episode is finished, open Questionnaire form for user
+             */
+            if($chapter->last and $finished){
+                $questionnaireAnswer = QuestionnaireAnswers::where('episode_id', '=', $request->episode_id)->where('user_id', '=', Auth::user()->id)->first();
+                if(!$questionnaireAnswer) $offerQuestionnaire = true;
+
+                $episodeFinished = true;
+            }
+
+            return $this->apiResponse('0000', __('Success'), [
+                'progress' => $progress,
+                'currentChapter' => $chapter,
                 'episodeFinished' => $episodeFinished,
                 'offerQuestionnaire' => $offerQuestionnaire
             ]);

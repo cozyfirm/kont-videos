@@ -23,6 +23,11 @@ return new class extends Migration
             $table->integer('min');
             $table->integer('sec');
             $table->integer('time');
+            $table->integer('time_end')->default(0);
+
+            /* Additional info */
+            $table->integer('no')->default(1);
+            $table->boolean('last')->default(false);
 
             $table->timestamps();
             $table->softDeletes();

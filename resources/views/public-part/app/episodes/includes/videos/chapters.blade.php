@@ -1,7 +1,7 @@
 @foreach($episode->chapterVideoRel->chaptersRel as $chapter)
-    <div class="se__wrapper" video-id="{{ $chapter->id }}">
+    <div class="se__wrapper @if($activity->chapter_id == $chapter->id) current @endif" chapter-id="{{ $chapter->id }}">
         <div class="se__w__no">
-            <div class="checkbox_w mark-video-as-watched" video-id="{{ $chapter->id }}">
+            <div class="checkbox_w @if($chapter->activityRel->finished ?? 0) checked @endif mark-video-as-watched" chapter-id="{{ $chapter->id }}">
                 <img src="{{ asset('files/images/default/icons/check.svg') }}" alt="">
             </div>
         </div>
@@ -16,9 +16,9 @@
             <div class="rest__of_data">
                 <div class="duration_w">
                     <img src="{{ asset('files/images/default/icons/video.svg') }}" alt="">
-                    <span> 1m12s</span>
+                    <span> {{ $chapter->getDuration() }} </span>
                 </div>
-                <div class="play_w" video-id="{{ $chapter->id }}">
+                <div class="play_btn_w play_chapter" chapter-id="{{ $chapter->id }}" time="{{ $chapter->time }}">
                     <span>{{ __('Play') }}</span>
                 </div>
             </div>

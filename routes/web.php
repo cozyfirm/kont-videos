@@ -77,6 +77,7 @@ Route::prefix('/')->group(function () {
          */
         Route::prefix('/activity')->group(function () {
             Route::post('/update-activity',               [PublicEpisodesController::class, 'updateActivity'])->name('public.episodes.update-activity');
+            Route::post('/update-chapter-activity',       [PublicEpisodesController::class, 'updateChapterActivity'])->name('public.episodes.update-chapter-activity');
 
             /* Play specific video */
             Route::post('/play-video',                    [PublicEpisodesController::class, 'playVideo'])->name('public.episodes.play-video');

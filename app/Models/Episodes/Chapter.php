@@ -2,19 +2,27 @@
 
 namespace App\Models\Episodes;
 
+use App\Traits\Episodes\EpisodeBaseTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @method static create(array $except)
  * @method static where(string $string, string $string1, $id)
  */
 class Chapter extends Model{
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, EpisodeBaseTrait;
 
     protected $table = 'episodes__chapters';
     protected $guarded = ['id'];
 
-
+    public function activityRel(): HasOne{
+        return $this->hasOne(EpisodeActivity::class, 'chapter_id', 'id')->where('user_id', '=', Auth::user()->id);
+    }
+    public function getDuration(): string{
+        return $this->getDurationHelper($this->time_end - $this->time);
+    }
 }

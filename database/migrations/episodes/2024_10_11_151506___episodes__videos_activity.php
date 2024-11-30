@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->integer('episode_id');
             $table->integer('video_id');
+            $table->integer('chapter_id')->nullable();
             $table->integer('user_id');
             $table->tinyInteger('finished')->default(0);
             $table->integer('time')->default(0);
