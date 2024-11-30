@@ -168,7 +168,8 @@ class Episode extends Model{
      * @return int
      */
     public function totalChapters(): int{
-        return isset($this->videoContentRel) ? $this->videoContentRel->count() : 0;
+        if($this->type == 0) return isset($this->videoContentRel) ? $this->videoContentRel->count() : 0;
+        else return isset($this->chapterVideoRel->chaptersRel) ? $this->chapterVideoRel->chaptersRel->count() : 0;
     }
 
     /**

@@ -95,7 +95,7 @@ $(document).ready(function (){
                                 let chapter = episode['chapter_video_rel']['chapters_rel'][i];
 
                                 episodeChapters.append(function (){
-                                    let customUri = (episode['status'] === 1) ? '/episodes/preview/' + episode['slug'] + '/' + chapters['id'] : null;
+                                    let customUri = (episode['status'] === 1) ? '/episodes/preview/' + episode['slug'] + '/' + chapter['id'] : null;
 
                                     return $("<div>").attr('class', (customUri) ? 'single__chapter go-to' : 'single__chapter').attr('custom-uri', customUri)
                                         .append(function (){

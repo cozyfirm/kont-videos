@@ -76,29 +76,46 @@ class EpisodesController extends Controller{
 
             /* Increment number of video loads */
             $this->updateVideoLoads($video->id);
-        }else{
-            $video = ChapterVideo::where('episode_id', '=', $episode->id)
-                ->where('category', '=', 1)
-                ->first();
+        }
+        else{
+            if($videoID){
+                $chapter = Chapter::where('id', '=', $videoID)->first();
+                $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('chapter_id', '=', $chapter->id)->first();
+                if(!$activity){
+                    $activity = EpisodeActivity::create([
+                        'user_id' => Auth::user()->id,
+                        'episode_id' => $episode->id,
+                        'video_id' => $chapter->video_id,
+                        'chapter_id' => $chapter->id
+                    ]);
+                }
 
-            $video->update(['total_loads' => ($video->total_loads + 1)]);
+                $video = ChapterVideo::where('id', '=', $chapter->video_id)->first();
+            }else{
+                $video = ChapterVideo::where('episode_id', '=', $episode->id)
+                    ->where('category', '=', 1)
+                    ->first();
 
-            if(!$video) abort(404);
+                $video->update(['total_loads' => ($video->total_loads + 1)]);
 
-            $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('updated_at', 'DESC')->first();
-            $chapter  = Chapter::where('id', '=', $activity->chapter_id)->orderBy('id')->first();
+                if(!$video) abort(404);
 
-            if(!$activity){
-                /* Let's find first chapter */
-                $chapter = Chapter::where('video_id', '=', $video->id)->orderBy('id')->first();
-                if(!$chapter) abort(404);
+                $activity = EpisodeActivity::where('user_id', '=', Auth::user()->id)->where('episode_id', '=', $episode->id)->orderBy('updated_at', 'DESC')->first();
 
-                $activity = EpisodeActivity::create([
-                    'user_id' => Auth::user()->id,
-                    'episode_id' => $episode->id,
-                    'video_id' => $video->id,
-                    'chapter_id' => $chapter->id
-                ]);
+                if(!$activity){
+                    /* Let's find first chapter */
+                    $chapter = Chapter::where('video_id', '=', $video->id)->orderBy('id')->first();
+                    if(!$chapter) abort(404);
+
+                    $activity = EpisodeActivity::create([
+                        'user_id' => Auth::user()->id,
+                        'episode_id' => $episode->id,
+                        'video_id' => $video->id,
+                        'chapter_id' => $chapter->id
+                    ]);
+                }
+
+                $chapter  = Chapter::where('id', '=', $activity->chapter_id)->orderBy('id')->first();
             }
 
             $video->starts_at = $activity->time + $chapter->time;

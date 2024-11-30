@@ -515,6 +515,8 @@ $(document).ready(function (){
                                     /* Auto scroll when new chapter is started */
                                     lastChapterID = currentChapterID;
                                     autoScrollEnabled = true;
+
+                                    $(".menu-chapter-title").text(data['currentChapter']['title']);
                                 }
 
                                 setChapterAsCurrent(data['currentChapter']['id']);

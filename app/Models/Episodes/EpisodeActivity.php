@@ -4,6 +4,7 @@ namespace App\Models\Episodes;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @method static where(string $string, string $string1, $id)
@@ -15,4 +16,7 @@ class EpisodeActivity extends Model{
     protected $table = 'episodes__activity';
     protected $guarded = ['id'];
 
+    public function chapterRel(): HasOne{
+        return $this->hasOne(Chapter::class, 'id', 'chapter_id');
+    }
 }

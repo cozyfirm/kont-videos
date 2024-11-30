@@ -9,7 +9,11 @@
                     <li class="episode-title">
                         <a href="{{ route('public.episodes') }}" title="{{ __('Epizoda') }}">{{ $episode->title ?? '' }}</a>
                         <i class="fi fi-br-angle-small-right"></i>
-                        <a class="menu-video-title" title="{{ __('Video') }}">{{ $video->title ?? '' }}</a>
+                        @if($episode->type == 0)
+                            <a class="menu-video-title" title="{{ __('Video') }}">{{ $video->title ?? '' }}</a>
+                        @else
+                            <a class="menu-chapter-title" title="{{ __('Cjelina') }}">{{ $activity->chapterRel->title ?? '' }}</a>
+                        @endif
                     </li>
                 @else
                     <li><a href="{{ route('public.episodes') }}">{{ __('Epizode') }}</a></li>
