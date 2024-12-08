@@ -18,7 +18,7 @@
                         {{ $episode->videoContentRel->count() }}
                     @else
                         <!-- Episode with chapters -->
-                        {{ $episode->chapterVideoRel->count() }}
+                        {{ $episode->chapterVideoRel->chaptersRel->count() }}
                     @endif
                 </h4>
             </div>
