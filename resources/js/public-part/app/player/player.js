@@ -548,6 +548,13 @@ $(document).ready(function (){
 
             chapterVideoPlayer.setCurrentTime(parseFloat($(this).attr('time')));
             chapterVideoPlayer.play();
+
+            /**
+             *  On mobile version, when chapter is played, hide chapters menu
+             */
+            if(window.innerWidth <= 1000){
+                togglePlayer();
+            }
         });
 
         /* On GET request, set initial data */

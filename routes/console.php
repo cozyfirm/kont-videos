@@ -11,3 +11,8 @@ Artisan::command('video:update-video-progress', function () {
     // You can call the handle method of your command class
     (new \App\Console\Commands\Videos\updateVideoProgress)->handle();
 })->purpose('Update video progress');
+
+Artisan::command('users:generate-usernames', function () {
+    // You can call the handle method of your command class
+    (new \App\Console\Commands\Users\GenerateUsernames())->handle();
+})->purpose('Generate usernames from emails');

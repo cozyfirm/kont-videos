@@ -68,7 +68,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <b>{{ html()->label(__('Država'))->for('country')->class('bold') }}</b>
-                                        {{ html()->select('country', $countries, Auth::user()->country ?? 21)->class('form-control form-control-sm mt-2')->options([]) }}
+                                        {{ html()->select('country', $countries, Auth::user()->country ?? '')->class('form-control form-control-sm mt-2')->options([]) }}
                                         <small id="countryHelp" class="form-text text-muted"> {{ __('Odaberite državu u kojoj trenutno živite') }} </small>
                                     </div>
                                 </div>

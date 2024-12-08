@@ -12,9 +12,17 @@
         @endif
         <div class="number">
             <div class="number__header">
-                <h4 class="episode-total-views"> {{ $episode->totalViews() }} </h4>
+                <h4 class="episode-total-views">
+                    @if($episode->type == 0)
+                        <!-- Episode with videos -->
+                        {{ $episode->videoContentRel->count() }}
+                    @else
+                        <!-- Episode with chapters -->
+                        {{ $episode->chapterVideoRel->count() }}
+                    @endif
+                </h4>
             </div>
-            <p> {{ __('Pregleda') }} </p>
+            <p> {{ __('Cjelina') }} </p>
         </div>
         <div class="number">
             <div class="number__header">

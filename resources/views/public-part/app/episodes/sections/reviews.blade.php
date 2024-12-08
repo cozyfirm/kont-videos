@@ -35,7 +35,7 @@
 
     <div class="single__reviews">
         @foreach($episode->approvedReviewsRel as $review)
-            @isset($review->userRel->name)
+            @isset($review->userRel->username)
                 <div class="single__review">
                     <div class="user__info">
                         <div class="ui__img_w">
@@ -46,7 +46,7 @@
                             @endif
                         </div>
                         <div class="ui__info">
-                            <h2>{{ $review->userRel->name ?? '' }}</h2>
+                            <h2>{{ $review->userRel->username ?? '' }}</h2>
                             <p>{{ __('Ukupno ocjena: ') }} {{ $review->userRel->totalReviews() }}</p>
                         </div>
                     </div>

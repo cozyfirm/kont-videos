@@ -88,7 +88,7 @@ class User extends Authenticatable{
         return $this->hasOne(Country::class, 'id', 'country');
     }
     public function getInitials(): string{
-        $name = explode(' ', $this->name);
+        $name = explode('.', $this->username);
         return substr($name[0] ?? '', 0, 1) . (isset($name[1]) ? ' ' . substr($name[1] ?? '', 0, 1) : '');
     }
     public function totalReviews(): int{

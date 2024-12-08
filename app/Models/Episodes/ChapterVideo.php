@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @method static create(array $except)
  * @method static where(string $string, string $string1, $id)
+ * @method static get()
  */
 class ChapterVideo extends Model{
     use HasFactory, SoftDeletes, EpisodeBaseTrait;
