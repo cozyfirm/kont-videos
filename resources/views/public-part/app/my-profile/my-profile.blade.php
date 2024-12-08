@@ -17,11 +17,18 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <b>{{ html()->label(__('Ime i prezime'))->for('name')->class('bold') }}</b>
                                         {{ html()->text('name')->class('form-control form-control-sm mt-1')->maxlength(100)->value(Auth::user()->name) }}
                                         <small id="nameHelp" class="form-text text-muted"> {{ __('Vaše puno ime i prezime') }} </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <b>{{ html()->label(__('Korisničko ime'))->for('name')->class('bold') }}</b>
+                                        {{ html()->text('username')->class('form-control form-control-sm mt-1')->maxlength(100)->value(Auth::user()->username) }}
+                                        <small id="usernameHelp" class="form-text text-muted"> {{ __('Korisničko ime za prikaz') }} </small>
                                     </div>
                                 </div>
                             </div>

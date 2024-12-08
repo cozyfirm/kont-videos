@@ -117,7 +117,7 @@ class AuthController extends Controller{
             if($user) return $this->jsonResponse('1002', __('Odabrani email se već koristi'));
 
             /* Add username to request */
-            $request['username'] = $this->getSlug($request->name);
+            // $request['username'] = $this->getSlug($request->name);
 
             /* Hash password and add token */
             $request['password'] = Hash::make($request->password);

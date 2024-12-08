@@ -15,7 +15,7 @@
 <body>
     <!-- Main loading bar -->
     <div class="loading-gif d-none">
-        <img src="{{ asset('files/images/default/loading-cubes.gif') }}" alt="">
+        <img src="{{ asset('files/images/default/loading.gif') }}" alt="">
     </div>
 
     <!-- Yield content of pages -->

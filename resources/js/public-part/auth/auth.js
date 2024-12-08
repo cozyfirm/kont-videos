@@ -82,6 +82,7 @@ $( document ).ready(function() {
     $(".create-profile-next-btn").click(function () {
         let email  = $("#email").val();
         let password   = $("#password").val();
+        let username   = $("#username").val();
 
         if(!Validator.email(email)) {
             Notify.Me(["Molimo da unesete validnu email adresu !", "warn"]);
@@ -91,6 +92,12 @@ $( document ).ready(function() {
             Notify.Me(["Molimo da unesete Vašu šifru", "warn"]);
             return;
         }
+        if(username === ''){
+            Notify.Me(["Molimo da unesete Vaše korisničko ime", "warn"]);
+            return;
+        }
+
+        $(".loading-gif").removeClass('d-none');
 
         $.ajax({
             url: saveAccUri,
@@ -98,7 +105,8 @@ $( document ).ready(function() {
             dataType: "json",
             data: {
                 email: email,
-                password: password
+                password: password,
+                username: username
             },
             success: function success(response) {
                 $(".loading-gif").addClass('d-none');
@@ -115,6 +123,25 @@ $( document ).ready(function() {
                     Notify.Me([response['message'], "warn"]);
                 }
             }
+        });
+    });
+
+    /**
+     *  Create username
+     */
+    $(document).ready(function () {
+        $('.register-email').on('input', function () {
+            // Get the current email value
+            let email = $(this).val();
+
+            // Extract the username (part before @)
+            let username = email.split('@')[0];
+
+            // Allow only English characters (a-z, A-Z) and dots
+            username = username.replace(/[^a-zA-Z.]/g, '');
+
+            // Display the live username
+            $('.register-username').val(username);
         });
     });
 

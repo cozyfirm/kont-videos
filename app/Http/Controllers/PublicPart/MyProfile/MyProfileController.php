@@ -20,7 +20,7 @@ class MyProfileController extends Controller{
 
     public function profile(): View{
         return view($this->_path . 'my-profile', [
-            'countries' => Country::orderBy('name_ba')->get()->pluck('name_ba', 'id'),
+            'countries' => Country::orderBy('name_ba')->get()->pluck('name_ba', 'id')->prepend('Odaberite državu', ''),
             'myProfile' => true
         ]);
     }
@@ -35,6 +35,7 @@ class MyProfileController extends Controller{
         try{
             Auth::user()->update([
                 'name' => $request->name,
+                'username' => $request->username,
                 'phone' => $request->phone,
                 'birth_date' => Carbon::parse($request->birth_date)->format('Y-m-d'),
                 'address' => $request->address,

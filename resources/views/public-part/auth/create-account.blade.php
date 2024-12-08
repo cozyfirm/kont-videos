@@ -44,21 +44,11 @@
 
                 <div class="rf-f-body">
                     <div class="rf-body-element rf-body-element-1 ">
-{{--                        <div class="row">--}}
-{{--                            <div class="col-md-12">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    {{ html()->label(__('Ime i prezime'))->for('name')->class('bold') }}--}}
-{{--                                    {{ html()->text('name')->class('form-control form-control-sm mt-2')->maxlength(100)->value('') }}--}}
-{{--                                    <small id="nameHelp" class="form-text text-muted">{{ __('Unesite Vaše ime prezime (obavezno polje)') }}</small>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{ html()->label(__('Email adresa'))->for('email')->class('bold') }}
-                                    {{ html()->email('email')->class('form-control form-control-sm mt-2')->maxlength(50)->value(isset($email) ? $email : '') }}
+                                    {{ html()->email('email')->class('form-control form-control-sm mt-2 register-email')->maxlength(50)->value(isset($email) ? $email : '') }}
                                     <small id="emailHelp" class="form-text text-muted">{{ __('Unesite Vašu email adresu (obavezno polje)') }}</small>
                                 </div>
                             </div>
@@ -67,6 +57,15 @@
                                     {{ html()->label(__('Šifra'))->for('password')->class('bold') }}
                                     {{ html()->password('password')->class('form-control form-control-sm mt-2')->value('') }}
                                     <small id="passwordHelp" class="form-text text-muted">{{ __('Unesite Vašu korisničku šifru (obavezno polje)') }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ html()->label(__('Korisničko ime'))->for('username')->class('bold') }}
+                                    {{ html()->text('username')->class('form-control form-control-sm mt-2 register-username')->maxlength(100)->value('') }}
+                                    <small id="usernameHelp" class="form-text text-muted">{{ __('Molimo da unesete vaše korisničko ime') }}</small>
                                 </div>
                             </div>
                         </div>

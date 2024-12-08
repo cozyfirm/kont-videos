@@ -22,7 +22,7 @@
                             <h2>{{ $lastWatched->title ?? '' }}</h2>
                         </div>
                         <div class="mp-width-100 description">
-                            {!! nl2br(substr(($lastActivity->episodeRel->description ?? ''), 0 , 560)) !!} ...
+                            {!! strip_tags((substr(($lastActivity->episodeRel->description ?? ''), 0 , 400)), '<b>') !!}...
                         </div>
 {{--                        <div class="mp-width-100 tags">--}}
 {{--                            <button class="btn-dark-grey">{{ __('Moda') }}</button>--}}
