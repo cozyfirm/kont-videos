@@ -76,6 +76,15 @@
                     </div>
                 @endif
             @endif
+
+            <div class="card pb-3 pt-1 m-0 mt-3" title="{{ __('Pošalji email obavijesti svim korisnicima za novu epizodu') }}">
+                <a href="{{ route('system.admin.episodes.notifications.notify-users', ['slug' => $episode->slug ]) }}">
+                    <div class="card-body pb-1 d-flex justify-content-between">
+                        <h5 class="p-0 m-0"> {{ __('Email obavijesti') }} </h5>
+                        <i class="fas fa-bell mt-1 mr-1"></i>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

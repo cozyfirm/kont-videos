@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Core\KeywordsController;
 use App\Http\Controllers\Admin\Episodes\EpisodesController;
+use App\Http\Controllers\Admin\Episodes\Notifications\EpisodeNotificationsController;
 use App\Http\Controllers\Admin\Episodes\VideoChaptersController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Other\FAQsController;
@@ -206,6 +207,14 @@ Route::prefix('system')->group(function () {
             Route::get ('/edit/{slug}',               [EpisodesController::class, 'edit'])->name('system.admin.episodes.edit');
             Route::post('/update',                    [EpisodesController::class, 'update'])->name('system.admin.episodes.update');
             Route::get ('/delete/{slug}',             [EpisodesController::class, 'delete'])->name('system.admin.episodes.delete');
+
+            /**
+             *  Episode notifications
+             */
+            Route::prefix('notifications')->group(function () {
+                /** Send email about episode to all users */
+                Route::get ('/notify-users/{slug}',           [EpisodeNotificationsController::class, 'notifyUsers'])->name('system.admin.episodes.notifications.notify-users');
+            });
 
             /**
              *  Videos that have real video content
