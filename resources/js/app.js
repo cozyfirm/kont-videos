@@ -20,6 +20,7 @@ import './admin/layout/filters.js';
 /* Import Submit script */
 import "./style/submit.js";
 import "./public-part/app/users/profile-photo.js";
+import "./public-part/app/users/profile.js";
 
 /**
  *  Import public scripts such as:

@@ -34,6 +34,13 @@
 
         <hr>
 
+        <div class="text__wrapper text__wrapper_flex" title="{{ __('Broj epizoda koje ste gledali') }}">
+            <label class="noselect" for="user-notifications">{{ __('Email obavijesti ') }}</label>
+            <input type="checkbox" name="user-notifications" id="user-notifications" class="user-notifications form-check-label" @if(Auth()->user()->notifications) checked @endif>
+        </div>
+
+        <hr>
+
         <a href="{{ route('public.my-profile.change-password') }}" class="change-psw-link">
             <div class="change-password-btn">
                 <p class="text-white">{{ __('Izmijenite šifru') }}</p>

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use const http\Client\Curl\AUTH_ANY;
 
 class MyProfileController extends Controller{
     use ResponseTrait;
@@ -90,6 +91,19 @@ class MyProfileController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ažurirano!'), route('public.my-profile'));
         }catch (\Exception $e){
+            return $this->jsonError('3000', __('Greška prilikom ažuriranja podataka'));
+        }
+    }
+
+    public function updateNotificationsStatus(Request $request){
+        try{
+            User::where('id', '=', Auth::user()->id)->update([
+                'notifications' => ($request->status == 'true')
+            ]);
+
+            return $this->jsonSuccess(__('Uspješno ažurirano!'), route('public.my-profile'));
+        }catch (\Exception $e){
+            dd($e);
             return $this->jsonError('3000', __('Greška prilikom ažuriranja podataka'));
         }
     }

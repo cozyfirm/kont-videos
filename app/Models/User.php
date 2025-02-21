@@ -50,7 +50,8 @@ class User extends Authenticatable{
         'facebook',
         'twitter',
         'linkedin',
-        'web'
+        'web',
+        'notifications'
     ];
 
     /**

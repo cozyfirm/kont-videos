@@ -49,8 +49,18 @@
                 }
                 .text__wrapper{
                     position: relative; width: 100%; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; padding: 6px 16px;
+                    &.text__wrapper_flex{
+                        display: flex; justify-content: space-between;
+                    }
                     p{
                         color: $color-black; margin: 0px; padding: 0px;
+                    }
+                    label{
+                        &:hover{cursor: pointer;}
+                        color: $color-black; margin: 0px; padding: 0px;
+                    }
+                    input[type="checkbox"] {
+                        accent-color: $color-primary; padding: 10px !important;
                     }
                 }
                 .social_network_wrapper{

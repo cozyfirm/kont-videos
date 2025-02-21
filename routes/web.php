@@ -140,6 +140,10 @@ Route::prefix('/')->group(function () {
 
         Route::get ('/change-password',               [MyProfileController::class, 'changePassword'])->name('public.my-profile.change-password');
         Route::post('/update-password',               [MyProfileController::class, 'updatePassword'])->name('public.my-profile.update-password');
+
+        /** Notifications */
+        Route::post('/update-notifications-status',   [MyProfileController::class, 'updateNotificationsStatus'])->name('public.my-profile.update-notifications-status');
+
         /**
          *  My progress
          */
