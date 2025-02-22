@@ -32,11 +32,11 @@ class SendQueuedNotifications extends Command{
         foreach ($queue as $q){
             if($q->sent == 0){
                 /** First user */
-                $user = User::where('role', '=', 'user')->orderBy('id')->first();
+                $user = User::where('role', '=', 'user')->where('notifications', '=', 1)->orderBy('id')->first();
             }else{
                 $lastUser = NotificationQueueUsers::where('queue_id', '=', $q->id)->orderBy('id', 'DESC')->first();
                 if($lastUser){
-                    $user = User::where('id', '>', $lastUser->user_id)->where('role', '=', 'user')->orderBy('id')->first();
+                    $user = User::where('id', '>', $lastUser->user_id)->where('role', '=', 'user')->where('notifications', '=', 1)->orderBy('id')->first();
                 }else $user = null;
             }
 

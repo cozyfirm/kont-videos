@@ -220,7 +220,9 @@ Route::prefix('system')->group(function () {
              */
             Route::prefix('notifications')->group(function () {
                 /** Send email about episode to all users */
+                Route::get ('/preview-queue',                 [EpisodeNotificationsController::class, 'previewQueue'])->name('system.admin.episodes.notifications.preview-queue');
                 Route::get ('/notify-users/{slug}',           [EpisodeNotificationsController::class, 'notifyUsers'])->name('system.admin.episodes.notifications.notify-users');
+                Route::get ('/delete-queue/{id}',             [EpisodeNotificationsController::class, 'deleteQueue'])->name('system.admin.episodes.notifications.delete-queue');
             });
 
             /**
