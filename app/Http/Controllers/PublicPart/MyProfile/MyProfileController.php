@@ -4,6 +4,9 @@ namespace App\Http\Controllers\PublicPart\MyProfile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Core\Country;
+use App\Models\Episodes\EpisodeActivity;
+use App\Models\Episodes\MyNote;
+use App\Models\Episodes\Review;
 use App\Models\User;
 use App\Traits\Http\ResponseTrait;
 use Carbon\Carbon;
@@ -95,7 +98,11 @@ class MyProfileController extends Controller{
         }
     }
 
-    public function updateNotificationsStatus(Request $request){
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateNotificationsStatus(Request $request): JsonResponse{
         try{
             User::where('id', '=', Auth::user()->id)->update([
                 'notifications' => ($request->status == 'true')
@@ -103,8 +110,27 @@ class MyProfileController extends Controller{
 
             return $this->jsonSuccess(__('Uspješno ažurirano!'), route('public.my-profile'));
         }catch (\Exception $e){
-            dd($e);
             return $this->jsonError('3000', __('Greška prilikom ažuriranja podataka'));
         }
+    }
+
+    /**
+     * Remove user profile and all other user data
+     *
+     * @return RedirectResponse
+     */
+    public function removeProfile(): RedirectResponse{
+        $user_id = Auth::user()->id;
+
+        $user = User::where('id', '=', $user_id)->first();
+        EpisodeActivity::where('user_id', '=', $user_id)->delete();
+        Review::where('user_id', '=', $user_id)->delete();
+        MyNote::where('user_id', '=', $user_id)->delete();
+
+        Auth::logout();
+
+        $user->delete();
+
+        return redirect()->route('public.home');
     }
 }

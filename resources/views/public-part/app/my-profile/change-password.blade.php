@@ -3,6 +3,7 @@
 @section('public-content')
     <!-- Include menu -->
     {{--@include('public-part.app.my-profile.snippets.inner-menu')--}}
+    @include('public-part.app.my-profile.snippets.remove-profile')
 
     <div class="main__profile__wrapper white__wrapper">
         <div class="profile__wrapper">

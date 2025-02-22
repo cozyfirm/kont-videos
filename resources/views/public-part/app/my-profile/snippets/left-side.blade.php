@@ -46,5 +46,11 @@
                 <p class="text-white">{{ __('Izmijenite šifru') }}</p>
             </div>
         </a>
+
+        <hr>
+
+        <div class="remove-profile-btn">
+            <p class="text-white">{{ __('Obrišite profil') }}</p>
+        </div>
     </div>
 </div>

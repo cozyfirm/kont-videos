@@ -22,4 +22,19 @@ $(document).ready(function (){
             }
         });
     });
+
+    /**
+     *  Remove profile
+     */
+
+    $(".remove-profile-btn").click(function (){
+        $(".remove__profile__wrapper").addClass('d-flex');
+    });
+    $(".close-remove-profile").click(function (){
+        $(".remove__profile__wrapper").removeClass('d-flex');
+    });
+
+    $(".remove-user-profile").click(function (){
+        window.location = '/my-profile/remove-profile';
+    });
 });

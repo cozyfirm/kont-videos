@@ -78,11 +78,18 @@
                 }
                 .change-psw-link{
                     width: 100%;
-                    .change-password-btn{
+                    .change-password-btn, .remove-profile-btn{
                         position: relative; width: 100%; background: $color-primary; text-align: center; padding: 6px 0px; border-radius: 4px;
                         p{
                             margin: 0px; padding: 0px; color: #FFFFFF;
                         }
+                    }
+                }
+                .remove-profile-btn{
+                    &:hover{cursor: pointer; }
+                    position: relative; width: 100%; background: $color-secondary; text-align: center; padding: 6px 0px; border-radius: 4px;
+                    p{
+                        margin: 0px; padding: 0px; color: #FFFFFF;
                     }
                 }
             }

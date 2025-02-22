@@ -144,6 +144,9 @@ Route::prefix('/')->group(function () {
         /** Notifications */
         Route::post('/update-notifications-status',   [MyProfileController::class, 'updateNotificationsStatus'])->name('public.my-profile.update-notifications-status');
 
+        /** Remove profile */
+        Route::get ('/remove-profile',                [MyProfileController::class, 'removeProfile'])->name('public.remove-profile');
+
         /**
          *  My progress
          */

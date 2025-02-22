@@ -25,6 +25,7 @@
                 <th scope="col" style="text-align:center;">#</th>
                 @include('admin.layout.snippets.filters.filters_header')
                 <th width="120p" class="akcije text-center">{{__('Procentualno')}}</th>
+                <th width="120p" class="akcije text-center">{{__('Preostalo sati')}}</th>
                 <th width="120p" class="akcije text-center">{{__('Akcije')}}</th>
             </tr>
             </thead>
@@ -37,6 +38,7 @@
                     <td> {{ $q->sent ?? ''}} </td>
                     <td> {{ $q->total ?? ''}} </td>
                     <td> {{ (int)(($q->sent / $q->total) * 100) }}% </td>
+                    <td>{{ $q->leftHours() }}</td>
 
                     <td class="text-center">
                         <a href="{{ route('system.admin.episodes.notifications.delete-queue', ['id' => $q->id ]) }}" title="{{ __('Više informacija') }}">

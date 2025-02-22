@@ -21,4 +21,13 @@ class NotificationQueue extends Model{
     public function episodeRel(): HasOne{
         return $this->hasOne(Episode::class, 'id', 'model_id');
     }
+
+    public function leftHours(): string{
+        $left = $this->total - $this->sent;
+
+        $hours = (int)($left / 60);
+        $minutes = $left - ($hours * 60);
+
+        return $hours . 'h i '. $minutes .'m';
+    }
 }
