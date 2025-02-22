@@ -51,7 +51,7 @@ class SendQueuedNotifications extends Command{
                     $episode = Episode::where('id', '=', $q->model_id)->first();
 
                     /** Send an email */
-                    Mail::to($user->email)->send(new NotifyUser($user->username, $episode->slug, $episode->title, $episode->description, $episode->presenterRel->name, $episode->presenterRel->about));
+                    Mail::to($user->email)->send(new NotifyUser($user->username, $user->api_token, $episode->slug, $episode->title, $episode->description, $episode->presenterRel->name, $episode->presenterRel->about));
 
                     /** Create history info */
                     NotificationQueueUsers::create([

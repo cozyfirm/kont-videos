@@ -224,4 +224,20 @@ class AuthController extends Controller{
             ]);
         }
     }
+
+    /**
+     * Unsubscribe users from email notifications
+     *
+     * @param $token
+     * @return RedirectResponse
+     */
+    public function unsubscribe($token): RedirectResponse{
+        try{
+            $user = User::where('api_token', '=', $token)->first();
+            $user->update(['notifications' => 0]);
+            Auth::login($user);
+        }catch (\Exception $e){ }
+
+        return redirect()->route('public.my-profile');
+    }
 }

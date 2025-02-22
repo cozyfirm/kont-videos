@@ -14,13 +14,14 @@ class NotifyUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public string $_username, $_slug, $_episode_title, $_episode_description, $_presenter, $_presenter_description;
+    public string $_username, $_api_token, $_slug, $_episode_title, $_episode_description, $_presenter, $_presenter_description;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($username, $slug, $episode_title, $episode_description, $presenter, $presenter_description){
+    public function __construct($username, $api_token, $slug, $episode_title, $episode_description, $presenter, $presenter_description){
         $this->_username = $username;
+        $this->_api_token = $api_token;
         $this->_slug = $slug;
         $this->_episode_title = $episode_title;
         $this->_episode_description = $episode_description;

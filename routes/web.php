@@ -173,6 +173,9 @@ Route::prefix('auth')->group(function () {
     Route::post('/generate-restart-token',        [AuthController::class, 'generateRestartToken'])->name('auth.generate-restart-token');
     Route::get ('/new-password/{token}',          [AuthController::class, 'newPassword'])->name('auth.new-password');
     Route::post('/generate-new-password',         [AuthController::class, 'generateNewPassword'])->name('auth.generate-new-password');
+
+    /* Unsubscribe from emails */
+    Route::get ('/unsubscribe/{token}',           [AuthController::class, 'unsubscribe'])->name('auth.unsubscribe');
 });
 
 
