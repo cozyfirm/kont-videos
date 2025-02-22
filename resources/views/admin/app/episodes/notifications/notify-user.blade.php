@@ -9,9 +9,7 @@ Vaš novi predavač je {{ $_presenter }}, a predavanje nosi naslov <b>"{{ $_epis
 
 {!! nl2br($_presenter_description) !!}
 
-Da biste pogledali najnoviju epizodu, jednostavno kliknite na donji link:
-
-<a href="{{route('public.episodes.preview', ['slug' => $_slug ] )}}">Pogledajte novu epizodu</a>
+Da biste pogledali najnoviju epizodu, jednostavno kliknite na <a href="{{route('public.episodes.preview', ['slug' => $_slug ] )}}">ovaj link</a>.
 
 <a href="{{ env('APP_DOMAIN') }}"> {{ env('APP_NAME_LONG') }} </a>
 @endcomponent

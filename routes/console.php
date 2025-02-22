@@ -16,3 +16,8 @@ Artisan::command('users:generate-usernames', function () {
     // You can call the handle method of your command class
     (new \App\Console\Commands\Users\GenerateUsernames())->handle();
 })->purpose('Generate usernames from emails');
+
+Artisan::command('queue:send-queued-notifications', function () {
+    // You can call the handle method of your command class
+    (new \App\Console\Commands\Queue\SendQueuedNotifications())->handle();
+})->purpose('Send queued notifications to users over email');
