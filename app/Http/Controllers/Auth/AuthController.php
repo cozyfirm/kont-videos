@@ -136,6 +136,8 @@ class AuthController extends Controller{
     public function verifyAccount($token): RedirectResponse{
         try{
             $user = User::where('api_token', '=', $token)->first();
+            if(!$user) return redirect()->route('public.home');
+
             $user->update(['email_verified_at' => Carbon::now()]);
             Auth::login($user);
         }catch (\Exception $e){ }
