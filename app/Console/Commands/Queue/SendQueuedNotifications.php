@@ -41,7 +41,7 @@ class SendQueuedNotifications extends Command{
             }
 
             /** @var $user; Test email sending on specific user */
-            $user = User::where('id', '=', 1)->first();
+            // $user = User::where('id', '=', 1)->first();
 
             if(!$user){
                 $q->update(['finished' => 1]);
