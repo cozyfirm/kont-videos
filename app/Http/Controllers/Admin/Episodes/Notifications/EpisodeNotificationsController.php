@@ -26,7 +26,8 @@ class EpisodeNotificationsController extends Controller{
         try{
             $episode = Episode::where('slug', '=', $slug)->with('presenterRel')->first();
 
-            $total = User::where('role', '=', 'user')->where('notifications', '=', 1)->count();
+            /* where('role', '=', 'user')-> */
+            $total = User::where('notifications', '=', 1)->count();
 
             /**
              *  Create scheduled job
