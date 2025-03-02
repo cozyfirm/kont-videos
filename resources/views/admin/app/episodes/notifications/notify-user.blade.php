@@ -2,7 +2,7 @@
 
 Poštovani/a {{ $_username }},
 
-S veseljem vas obavještavamo da je nova epizoda KONT Masterclass serijala upravo objavljena na našoj platformi!
+Želimo Vas obavijestiti da je nova epizoda KONT Masterclass serijala upravo objavljena na našoj platformi!
 Vaš novi predavač je {{ $_presenter }}, a predavanje nosi naslov <b>"{{ $_episode_title }}"</b>.
 
 {!! nl2br($_episode_description) !!}
