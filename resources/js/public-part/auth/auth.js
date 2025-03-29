@@ -114,11 +114,14 @@ $( document ).ready(function() {
                 let code = response['code'];
 
                 if(code === '0000'){
-                    $('.rf-body-element-1').addClass('d-none');
-                    $('.rf-body-element-2').removeClass('d-none');
-                    $(".create-profile-next-btn").addClass('d-none');
+                    window.location = '/episodes';
 
-                    $(".pl-e-bar-fill").css('width', '83.3%');
+
+                    // $('.rf-body-element-1').addClass('d-none');
+                    // $('.rf-body-element-2').removeClass('d-none');
+                    // $(".create-profile-next-btn").addClass('d-none');
+                    //
+                    // $(".pl-e-bar-fill").css('width', '83.3%');
                 }else{
                     Notify.Me([response['message'], "warn"]);
                 }

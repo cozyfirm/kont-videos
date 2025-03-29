@@ -123,10 +123,14 @@ class AuthController extends Controller{
             $request['password'] = Hash::make($request->password);
             $request['api_token'] = hash('sha256', $request->email. '+'. time());
             $request['birth_date'] = Carbon::parse($request->birth_date)->format('Y-m-d');
+            $request['email_verified_at'] = Carbon::now();
 
             /* When user is created, UserObserver is called and email was sent */
             /* Note: Data is logged into laravel.log */
             $user = User::create($request->all());
+
+            /* Temp : Login user and redirect to episodes */
+            Auth::login($user);
 
             if($user) return $this->jsonSuccess(__('Uspješno ste se kreirali korisnički račun!'), route('auth'));
         }catch (\Exception $e){
