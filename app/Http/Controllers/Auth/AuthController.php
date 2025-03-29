@@ -35,13 +35,13 @@ class AuthController extends Controller{
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
 
-            if($user->email_verified_at == null){
-                Auth::logout();
-                return json_encode([
-                    'code' => '1102',
-                    'message' => __('Molimo Vas da verifikujete Vaš račun!!')
-                ]);
-            }
+//            if($user->email_verified_at == null){
+//                Auth::logout();
+//                return json_encode([
+//                    'code' => '1102',
+//                    'message' => __('Molimo Vas da verifikujete Vaš račun!!')
+//                ]);
+//            }
 
             $uri = route('system.home');
             if($user->role == 'user') $uri = route('public.my-profile.progress');
