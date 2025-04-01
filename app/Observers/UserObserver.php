@@ -17,7 +17,7 @@ class UserObserver{
     public function created(User $user): void {
         $message = "Email to " . ($user->name);
         try{
-            // Mail::to($user->email)->send(new ConfirmEmail($user->email, $user->name, $user->api_token));
+            Mail::to($user->email)->send(new ConfirmEmail($user->email, $user->name, $user->api_token));
 
             $message .= " is successfully sent!";
         }catch (\Exception $e){
