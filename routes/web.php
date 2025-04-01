@@ -226,6 +226,10 @@ Route::prefix('system')->group(function () {
                 Route::get ('/preview-queue',                 [EpisodeNotificationsController::class, 'previewQueue'])->name('system.admin.episodes.notifications.preview-queue');
                 Route::get ('/notify-users/{slug}',           [EpisodeNotificationsController::class, 'notifyUsers'])->name('system.admin.episodes.notifications.notify-users');
                 Route::get ('/delete-queue/{id}',             [EpisodeNotificationsController::class, 'deleteQueue'])->name('system.admin.episodes.notifications.delete-queue');
+
+                /** Queue messages */
+                Route::get ('/new-message',                   [EpisodeNotificationsController::class, 'newMessage'])->name('system.admin.episodes.notifications.new-message');
+                Route::post('/save-message',                  [EpisodeNotificationsController::class, 'saveMessage'])->name('system.admin.episodes.notifications.save-message');
             });
 
             /**

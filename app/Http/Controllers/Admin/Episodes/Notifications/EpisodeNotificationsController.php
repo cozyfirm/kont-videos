@@ -7,13 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Mail\Episodes\NotifyUser;
 use App\Models\Episodes\Episode;
 use App\Models\User;
+use App\Models\Users\Notifications\NotificationMessage;
 use App\Models\Users\Notifications\NotificationQueue;
+use App\Traits\Http\ResponseTrait;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class EpisodeNotificationsController extends Controller{
+    use ResponseTrait;
     protected string $_path = 'admin.app.episodes.notifications.';
 
     /**
@@ -65,6 +69,31 @@ class EpisodeNotificationsController extends Controller{
             'queue' => $queue,
             'filters' => $filters
         ]);
+    }
+
+    public function newMessage(): View{
+        return view($this->_path . 'new-message');
+    }
+    public function saveMessage(Request $request): JsonResponse{
+        try{
+            $message = NotificationMessage::create([
+                'title' => $request->title,
+                'body' => $request->body
+            ]);
+
+            /* where('role', '=', 'user')-> */
+            $total = User::where('notifications', '=', 1)->count();
+
+            NotificationQueue::create([
+                'model_id' => $message->id,
+                'type' => 'message',
+                'total' => $total
+            ]);
+
+            return $this->jsonSuccess(__('Uspješno spašeno!'), route('system.admin.episodes.notifications.preview-queue'));
+        }catch (\Exception $e){
+
+        }
     }
 
     public function deleteQueue($id): RedirectResponse{

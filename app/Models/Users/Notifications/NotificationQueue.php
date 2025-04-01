@@ -21,6 +21,9 @@ class NotificationQueue extends Model{
     public function episodeRel(): HasOne{
         return $this->hasOne(Episode::class, 'id', 'model_id');
     }
+    public function messageRel(): HasOne{
+        return $this->hasOne(NotificationMessage::class, 'id', 'model_id');
+    }
 
     public function leftHours(): string{
         $left = $this->total - $this->sent;

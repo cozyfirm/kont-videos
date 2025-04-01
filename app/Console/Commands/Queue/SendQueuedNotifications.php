@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands\Queue;
 
+use App\Mail\Episodes\MessageUser;
 use App\Mail\Episodes\NotifyUser;
 use App\Models\Episodes\Episode;
 use App\Models\User;
+use App\Models\Users\Notifications\NotificationMessage;
 use App\Models\Users\Notifications\NotificationQueue;
 use App\Models\Users\Notifications\NotificationQueueUsers;
 use Illuminate\Console\Command;
@@ -27,7 +29,8 @@ class SendQueuedNotifications extends Command{
 
     protected function episodeNotifications(): void{
         // $queue = NotificationQueue::where('type', '=', 'new_episode')->whereColumn('sent', '!=', 'total')->get();
-        $queue = NotificationQueue::where('type', '=', 'new_episode')->where('finished', '=', 0)->get();
+        // $queue = NotificationQueue::where('type', '=', 'new_episode')->where('finished', '=', 0)->get();
+        $queue = NotificationQueue::where('finished', '=', 0)->get();
 
         foreach ($queue as $q){
             if($q->sent == 0){
@@ -41,17 +44,23 @@ class SendQueuedNotifications extends Command{
             }
 
             /** @var $user; Test email sending on specific user */
-            // $user = User::where('id', '=', 1)->first();
+            $user = User::where('id', '=', 1)->first();
 
             if(!$user){
                 $q->update(['finished' => 1]);
             }else{
                 try{
-                    /** Send an email */
-                    $episode = Episode::where('id', '=', $q->model_id)->first();
+                    if($q->type == 'new_episode'){
+                        /** Send an email */
+                        $episode = Episode::where('id', '=', $q->model_id)->first();
 
-                    /** Send an email */
-                    Mail::to($user->email)->send(new NotifyUser($user->username, $user->api_token, $episode->slug, $episode->title, $episode->description, $episode->presenterRel->name, $episode->presenterRel->about));
+                        /** Send an email */
+                        Mail::to($user->email)->send(new NotifyUser($user->username, $user->api_token, $episode->slug, $episode->title, $episode->description, $episode->presenterRel->name, $episode->presenterRel->about));
+                    }else if($q->type == 'message'){
+                        $message = NotificationMessage::where('id', '=', $q->model_id)->first();
+
+                        Mail::to($user->email)->send(new MessageUser($message->title, $message->body, $user->api_token));
+                    }
 
                     /** Create history info */
                     NotificationQueueUsers::create([

@@ -8,6 +8,12 @@
     <a href="{{ route('system.admin.episodes') }}">
         <button class="pm-btn btn btn-dark"> <i class="fas fa-star"></i> </button>
     </a>
+    <a href="{{ route('system.admin.episodes.notifications.new-message') }}">
+        <button class="pm-btn btn pm-btn-success">
+            <i class="fas fa-plus"></i>
+            <span>{{ __('Nova poruka') }}</span>
+        </button>
+    </a>
 @endsection
 
 @section('content')
@@ -34,7 +40,11 @@
             @foreach($queue as $q)
                 <tr>
                     <td class="text-center">{{ $i++}}. </td>
-                    <td> {{ $q->episodeRel->title ?? ''}} </td>
+                    @if($q->type == 'new_episode')
+                        <td> {{ $q->episodeRel->title ?? ''}} </td>
+                    @else
+                        <td> {{ $q->messageRel->title ?? ''}} </td>
+                    @endif
                     <td> {{ $q->sent ?? ''}} </td>
                     <td> {{ $q->total ?? ''}} </td>
                     <td> {{ (int)(($q->sent / $q->total) * 100) }}% </td>
